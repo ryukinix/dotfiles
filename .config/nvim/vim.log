@@ -1,0 +1,131 @@
+
+
+times in msec
+ clock   self+sourced   self:  sourced script
+ clock   elapsed:              other lines
+
+000.021  000.021: --- NVIM STARTING ---
+000.552  000.531: locale set
+001.604  001.052: inits 1
+001.633  000.029: window checked
+002.058  000.425: parsing arguments
+002.065  000.007: expanding arguments
+002.161  000.096: inits 2
+002.445  000.284: init highlight
+004.025  000.672  000.672: sourcing /usr/share/nvim/runtime/syntax/syncolor.vim
+146.899  144.185  143.513: sourcing /home/lerax/.config/nvim/colors/Tomorrow-Night-Eighties.vim
+148.493  000.531  000.531: sourcing /usr/share/nvim/runtime/syntax/syncolor.vim
+275.346  128.286  127.755: sourcing /home/lerax/.config/nvim/colors/Tomorrow-Night-Eighties.vim
+279.727  004.162  004.162: sourcing /home/lerax/.config/nvim/autoload/plug.vim
+288.849  000.066  000.066: sourcing /usr/share/nvim/runtime/ftoff.vim
+324.907  030.521  030.521: sourcing /usr/share/nvim/runtime/filetype.vim
+325.468  000.100  000.100: sourcing /usr/share/nvim/runtime/ftplugin.vim
+325.973  000.087  000.087: sourcing /usr/share/nvim/runtime/indent.vim
+328.117  000.574  000.574: sourcing /usr/share/nvim/runtime/syntax/syncolor.vim
+329.363  000.508  000.508: sourcing /usr/share/nvim/runtime/syntax/syncolor.vim
+457.057  130.365  129.283: sourcing /home/lerax/.config/nvim/colors/Tomorrow-Night-Eighties.vim
+457.302  130.720  000.355: sourcing /usr/share/nvim/runtime/syntax/synload.vim
+457.384  131.268  000.548: sourcing /usr/share/nvim/runtime/syntax/syntax.vim
+458.221  000.066  000.066: sourcing /home/lerax/.vimrc.local
+458.241  455.643  016.903: sourcing /home/lerax/.config/nvim/init.vim
+458.251  000.163: sourcing vimrc file(s)
+459.725  001.264  001.264: sourcing /home/lerax/.vim/plugged/vim-surround/plugin/surround.vim
+463.098  002.779  002.779: sourcing /home/lerax/.vim/plugged/supertab/plugin/supertab.vim
+463.428  000.087  000.087: sourcing /home/lerax/.vim/plugged/deoplete.nvim/plugin/deoplete.vim
+463.721  000.152  000.152: sourcing /home/lerax/.vim/plugged/deoplete-clang/plugin/deoplete-clang.vim
+464.022  000.132  000.132: sourcing /home/lerax/.vim/plugged/deoplete-go/plugin/deoplete-go.vim
+464.235  000.072  000.072: sourcing /home/lerax/.vim/plugged/vim-dasht/plugin/dasht.vim
+464.930  000.551  000.551: sourcing /home/lerax/.vim/plugged/vim-signify/plugin/signify.vim
+465.715  000.590  000.590: sourcing /home/lerax/.vim/plugged/vim-autoformat/plugin/autoformat.vim
+467.054  001.293  001.293: sourcing /home/lerax/.vim/plugged/vim-autoformat/plugin/defaults.vim
+468.120  000.877  000.877: sourcing /home/lerax/.vim/plugged/vim-better-whitespace/plugin/better-whitespace.vim
+533.802  000.835  000.835: sourcing /home/lerax/.vim/plugged/vim-wakatime/plugin/wakatime.vim
+535.495  000.847  000.847: sourcing /home/lerax/.vim/plugged/unite.vim/autoload/unite/custom.vim
+535.783  001.600  000.753: sourcing /home/lerax/.vim/plugged/unite.vim/plugin/unite/bookmark.vim
+536.078  000.242  000.242: sourcing /home/lerax/.vim/plugged/unite.vim/plugin/unite/buffer.vim
+536.291  000.170  000.170: sourcing /home/lerax/.vim/plugged/unite.vim/plugin/unite/window.vim
+536.783  000.452  000.452: sourcing /home/lerax/.vim/plugged/unite.vim/plugin/unite.vim
+537.698  000.384  000.384: sourcing /home/lerax/.vim/plugged/vim-airline/autoload/airline.vim
+538.622  000.228  000.228: sourcing /home/lerax/.vim/plugged/vim-airline/autoload/airline/init.vim
+539.876  000.249  000.249: sourcing /home/lerax/.vim/plugged/vim-airline/autoload/airline/parts.vim
+541.438  004.487  003.626: sourcing /home/lerax/.vim/plugged/vim-airline/plugin/airline.vim
+541.680  000.050  000.050: sourcing /home/lerax/.vim/plugged/vim-airline-themes/plugin/airline-themes.vim
+546.799  000.896  000.896: sourcing /home/lerax/.vim/plugged/unite.vim/autoload/unite.vim
+547.516  000.456  000.456: sourcing /home/lerax/.vim/plugged/unite.vim/autoload/unite/variables.vim
+549.325  000.865  000.865: sourcing /home/lerax/.vim/plugged/unite.vim/autoload/vital/unite.vim
+550.584  000.868  000.868: sourcing /home/lerax/.vim/plugged/unite.vim/autoload/vital/_unite/Prelude.vim
+551.796  003.968  002.236: sourcing /home/lerax/.vim/plugged/unite.vim/autoload/unite/util.vim
+553.147  011.321  006.001: sourcing /home/lerax/.vim/plugged/vim-devicons/plugin/webdevicons.vim
+553.595  000.287  000.287: sourcing /home/lerax/.vim/plugged/vim-obsession/plugin/obsession.vim
+554.197  000.463  000.463: sourcing /home/lerax/.vim/plugged/vim-prosession/plugin/prosession.vim
+556.361  002.028  002.028: sourcing /home/lerax/.vim/plugged/tagbar/plugin/tagbar.vim
+556.574  000.048  000.048: sourcing /home/lerax/.vim/plugged/tmuxline.vim/plugin/tmuxline.vim
+558.091  001.397  001.397: sourcing /home/lerax/.fzf/plugin/fzf.vim
+558.963  000.717  000.717: sourcing /home/lerax/.vim/plugged/vim-buffergator/plugin/buffergator.vim
+561.454  002.336  002.336: sourcing /home/lerax/.vim/plugged/vim-sneak/plugin/sneak.vim
+562.467  000.833  000.833: sourcing /home/lerax/.vim/plugged/vim-multiple-cursors/plugin/multiple_cursors.vim
+563.528  000.354  000.354: sourcing /usr/share/nvim/runtime/plugin/gzip.vim
+563.585  000.021  000.021: sourcing /usr/share/nvim/runtime/plugin/health.vim
+563.754  000.135  000.135: sourcing /usr/share/nvim/runtime/plugin/man.vim
+565.129  001.336  001.336: sourcing /usr/share/nvim/runtime/plugin/matchit.vim
+565.596  000.428  000.428: sourcing /usr/share/nvim/runtime/plugin/matchparen.vim
+566.700  001.065  001.065: sourcing /usr/share/nvim/runtime/plugin/netrwPlugin.vim
+566.858  000.100  000.100: sourcing /usr/share/nvim/runtime/plugin/rplugin.vim
+566.937  000.032  000.032: sourcing /usr/share/nvim/runtime/plugin/rrhelper.vim
+567.190  000.206  000.206: sourcing /usr/share/nvim/runtime/plugin/shada.vim
+567.319  000.053  000.053: sourcing /usr/share/nvim/runtime/plugin/spellfile.vim
+567.683  000.315  000.315: sourcing /usr/share/nvim/runtime/plugin/tarPlugin.vim
+568.032  000.285  000.285: sourcing /usr/share/nvim/runtime/plugin/tohtml.vim
+568.138  000.047  000.047: sourcing /usr/share/nvim/runtime/plugin/tutor.vim
+568.584  000.397  000.397: sourcing /usr/share/nvim/runtime/plugin/zipPlugin.vim
+568.724  070.639: loading plugins
+569.109  000.385: loading packages
+569.122  000.013: inits 3
+572.662  003.540: reading ShaDa
+574.991  002.329: clearing screen
+577.708  000.674  000.674: sourcing /usr/share/nvim/runtime/autoload/remote/host.vim
+579.286  000.482  000.482: sourcing /usr/share/nvim/runtime/autoload/remote/define.vim
+579.494  001.350  000.868: sourcing /home/lerax/.local/share/nvim/rplugin.vim
+580.331  000.532  000.532: sourcing /home/lerax/.vim/plugged/vim-airline/autoload/airline/extensions.vim
+580.825  000.127  000.127: sourcing /home/lerax/.vim/plugged/vim-airline/autoload/airline/extensions/quickfix.vim
+581.354  000.078  000.078: sourcing /home/lerax/.vim/plugged/vim-airline/autoload/airline/extensions/unite.vim
+581.870  000.111  000.111: sourcing /home/lerax/.vim/plugged/vim-airline/autoload/airline/extensions/netrw.vim
+582.411  000.084  000.084: sourcing /home/lerax/.vim/plugged/vim-airline/autoload/airline/extensions/undotree.vim
+583.010  000.207  000.207: sourcing /home/lerax/.vim/plugged/vim-airline/autoload/airline/extensions/hunks.vim
+583.560  000.148  000.148: sourcing /home/lerax/.vim/plugged/vim-airline/autoload/airline/extensions/tagbar.vim
+584.551  000.429  000.429: sourcing /home/lerax/.vim/plugged/vim-airline/autoload/airline/extensions/whitespace.vim
+585.195  000.098  000.098: sourcing /home/lerax/.vim/plugged/vim-airline/autoload/airline/extensions/po.vim
+585.730  000.123  000.123: sourcing /home/lerax/.vim/plugged/vim-airline/autoload/airline/extensions/wordcount.vim
+586.582  000.414  000.414: sourcing /home/lerax/.vim/plugged/vim-airline/autoload/airline/extensions/tabline.vim
+589.260  000.206  000.206: sourcing /home/lerax/.vim/plugged/vim-airline/autoload/airline/extensions/tabline/autoshow.vim
+590.421  000.591  000.591: sourcing /home/lerax/.vim/plugged/vim-airline/autoload/airline/extensions/tabline/tabs.vim
+592.609  001.652  001.652: sourcing /home/lerax/.vim/plugged/vim-airline/autoload/airline/extensions/tabline/buffers.vim
+593.766  000.577  000.577: sourcing /home/lerax/.vim/plugged/vim-airline/autoload/airline/extensions/tabline/ctrlspace.vim
+594.505  000.202  000.202: sourcing /home/lerax/.vim/plugged/vim-airline/autoload/airline/extensions/tmuxline.vim
+595.107  000.153  000.153: sourcing /home/lerax/.vim/plugged/vim-airline/autoload/airline/extensions/obsession.vim
+599.935  000.367  000.367: sourcing /home/lerax/.vim/plugged/vim-airline/autoload/airline/section.vim
+601.227  000.784  000.784: sourcing /home/lerax/.vim/plugged/vim-airline/autoload/airline/highlighter.vim
+606.948  000.271  000.271: sourcing /home/lerax/.vim/plugged/vim-airline/autoload/airline/themes.vim
+607.712  001.392  001.121: sourcing /home/lerax/.vim/plugged/vim-airline-themes/autoload/airline/themes/raven.vim
+634.052  000.479  000.479: sourcing /home/lerax/.vim/plugged/vim-airline/autoload/airline/util.vim
+640.113  000.154  000.154: sourcing /home/lerax/.vim/plugged/tmuxline.vim/autoload/tmuxline/api.vim
+641.345  000.864  000.864: sourcing /home/lerax/.vim/plugged/tmuxline.vim/autoload/tmuxline/util.vim
+642.572  000.777  000.777: sourcing /home/lerax/.vim/plugged/tmuxline.vim/autoload/tmuxline.vim
+643.138  000.098  000.098: sourcing /home/lerax/.vim/plugged/tmuxline.vim/autoload/tmuxline/presets/powerline.vim
+643.964  000.441  000.441: sourcing /home/lerax/.vim/plugged/tmuxline.vim/autoload/tmuxline/builder.vim
+683.334  000.817  000.817: sourcing /home/lerax/.vim/plugged/vim-airline/autoload/airline/builder.vim
+684.758  000.398  000.398: sourcing /home/lerax/.vim/plugged/vim-airline/autoload/airline/extensions/default.vim
+718.777  129.461: opening buffers
+720.465  001.688: BufEnter autocommands
+720.484  000.019: editing files in windows
+722.698  000.224  000.224: sourcing /home/lerax/.vim/plugged/vim-airline/autoload/airline/extensions/tabline/buflist.vim
+723.743  000.227  000.227: sourcing /home/lerax/.vim/plugged/unite.vim/autoload/unite/sources/buffer/variables.vim
+734.244  009.167  009.167: sourcing /home/lerax/.vim/plugged/tagbar/autoload/tagbar.vim
+734.472  012.820  003.201: sourcing /home/lerax/.vim/session/%home%lerax%.config%nvim.vim
+736.032  002.728: VimEnter autocommands
+736.042  000.010: before starting main loop
+738.190  000.089  000.089: sourcing /home/lerax/.vim/plugged/vim-devicons/autoload/airline/extensions/tabline/formatters/webdevicons.vim
+738.738  000.151  000.151: sourcing /home/lerax/.vim/plugged/vim-airline/autoload/airline/extensions/tabline/formatters/default.vim
+753.677  000.306  000.306: sourcing /home/lerax/.vim/plugged/vim-signify/autoload/sy.vim
+845.766  109.177: first screen update
+845.788  000.022: --- NVIM STARTED ---
