@@ -1,0 +1,2 @@
+#/bin/bash
+nohup conky-startup &> /dev/null&

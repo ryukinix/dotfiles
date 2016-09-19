@@ -1,0 +1,2 @@
+#!/usr/bin/bash
+exec ip link show | grep -E $1.*: -o | sed 's/://g'

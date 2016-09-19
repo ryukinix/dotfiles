@@ -1,0 +1,56 @@
+#!/bin/bash
+
+#
+# =>     Script for install conky custom scripts 
+#
+# ===>      With network adress fix for manjaro
+#
+# =====>     Copyright © Manoel Vilela
+#
+
+# THIS SHIT WAS DEPRECATED, DON'T WORKS!!!
+#
+# SO DON'T TRY AND BLAME ME LATER!
+# PS.: Actually now are working, forgot it whose I said before.
+
+# verify the user it's root
+if [ "$EUID" -ne 0 ]
+  then echo "Please run as root"
+  exit
+fi
+
+
+
+
+function link-files {
+    cd /usr/bin
+    for fname in conky-startup conky-update-network get-network conkyn
+    do
+        fpath=$OLDPWD/$fname
+        sudo ln -s -v -f $fpath
+    done
+}
+
+# autostart function for conky script files
+function auto-start {
+    entry="""[Desktop Entry]\n\
+Encoding=UTF-8\n\
+Version=0.9.4\n\
+Type=Application\n\
+Name=Conky Startup\n\
+Comment=Start all my conkys\n\
+Exec=conky-startup\n\
+OnlyShowIn=XFCE;\n\
+StartupNotify=false\n\
+Terminal=false\n\
+Hidden=false\n"""
+    printf $entry > ~/.config/autostart/conky-startup.desktop
+    echo "Created a entry startup conky on ~/.config/autostart/"
+}
+
+# Main program
+echo 'Linking files...'
+link-files
+echo 'Setup the configuration for conky startup with the system'
+auto-start
+echo 'Every finished! Try reboot the system or call "conky-startup" on terminal'

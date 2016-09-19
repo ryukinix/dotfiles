@@ -1,0 +1,14 @@
+.config/Atom/
+.config/Franz/
+.config/Fritzing/
+.config/Messenger/
+.config/Skype*
+.config/Slack/
+.config/google-chrome/
+.config/mal/
+.config/opera/
+.config/spotify/
+.config/sublime-text*
+
+# for now
+.config**

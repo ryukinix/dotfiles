@@ -1,0 +1,11 @@
+pkill -9 conky
+conky-update-network $1
+cd "/home/`whoami`/.conky/themes/Gold&Grey"
+conky -c "/home/`whoami`/.conky/themes/Gold&Grey/config/net" &
+cd "/home/`whoami`/.conky/themes/LSD"
+conky -c "/home/`whoami`/.conky/themes/LSD/config/LSD" &
+# cd "/home/`whoami`/.conky/themes/RSS"
+# conky -c "/home/`whoami`/.conky/themes/RSS/rss_conky" &
+cd "/home/`whoami`/.conky/themes/Email"
+conky -c "/home/`whoami`/.conky/themes/Email/email_conky" &
+exit
