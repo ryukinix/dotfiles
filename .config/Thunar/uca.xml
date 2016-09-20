@@ -1,0 +1,76 @@
+<?xml encoding="UTF-8" version="1.0"?>
+<actions>
+<action>
+	<icon>Terminal</icon>
+	<name>Terminal</name>
+	<unique-id>1460294441033134-2</unique-id>
+	<command>exo-open --working-directory %f --launch TerminalEmulator</command>
+	<description>Open a terminal on the working directory</description>
+	<patterns>*</patterns>
+	<directories/>
+</action>
+<action>
+	<icon>stock_folder</icon>
+	<name>Thunar Root</name>
+	<unique-id>1463458149239655-8</unique-id>
+	<command>pkexec thunar %f</command>
+	<description>Thunar Root</description>
+	<patterns>*</patterns>
+	<directories/>
+</action>
+<action>
+	<icon>system-search</icon>
+	<name>Search</name>
+	<unique-id>1367866030392913-3</unique-id>
+	<command>catfish %f</command>
+	<description>find files and folders</description>
+	<patterns>*</patterns>
+	<directories/>
+</action>
+<action>
+	<icon>63EE_sublime_text.0</icon>
+	<name>Sublime Text3</name>
+	<unique-id>1445582322433372-1</unique-id>
+	<command>subl3 -n -a %f</command>
+	<description>Open with Sublime Text3</description>
+	<patterns>*</patterns>
+	<directories/>
+</action>
+<action>
+	<icon>utilities-terminal-symbolic</icon>
+	<name>Execute command</name>
+	<unique-id>1463324407068516-7</unique-id>
+	<command>chmod +x %f; xfce4-terminal -e %f --hold</command>
+	<description>Execute command in terminal</description>
+	<patterns>*.sh;*.py</patterns>
+	<startup-notify/>
+	<text-files/>
+</action>
+<action>
+	<icon>gpicview</icon>
+	<name>Send to Imgur</name>
+	<unique-id>1465189473946686-1</unique-id>
+	<command>notify-send &quot;Sending to Imgur&quot; %F -i gpicview; imgurbash2 %F &amp;&amp; notify-send &quot;Imgur Copied&quot; &quot;%F: `xclip-output`&quot; -i gpicview || notify-send &quot;Imgur Failed&quot; %F -i gpicview</command>
+	<description>Send image to imgur and copy to clipboard</description>
+	<patterns>*</patterns>
+	<image-files/>
+</action>
+<action>
+	<icon>retext</icon>
+	<name>Send to sprunge</name>
+	<unique-id>1465617141606559-1</unique-id>
+	<command>notify-send &quot;Sending to Sprunge&quot; %F -i retext; cat %F | sprunge | xclip -selection clipboard &amp;&amp; notify-send &quot;Sprunge copied&quot; &quot;%F: `xclip-output`&quot; -i retext || notify-send &quot;Sprunge fails&quot; %F -i retext</command>
+	<description>Send files to sprunge and copy link to clipboard: a online file view</description>
+	<patterns>*</patterns>
+	<other-files/>
+	<text-files/>
+</action>
+<action>
+	<icon>abrt</icon>
+	<name>Sudo delete</name>
+	<unique-id>1467097196775073-3</unique-id>
+	<command>rm -rf %F</command>
+	<description>Fucking delete mode</description>
+	<patterns>*</patterns>
+</action>
+</actions>
