@@ -1,0 +1,10 @@
+CXX = <compiler>
+LFLAGS = -lm -Wall -o
+TARGET =  <solution-name>
+
+all: 
+	$(CXX) $(LFLAGS) $(TARGET).out $(TARGET).c
+clean: 
+	rm -v *.out
+run:
+	./$(TARGET).out

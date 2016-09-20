@@ -1,0 +1,8 @@
+# feature request  vs tasks to do
+ ☐ basic setup of the repository tree
+ ☐ add tests
+ ☐ setup CI configuration
+ ☐ allow coverage report
+ ☐ provide a wheel package
+ ☐ write the docstrings for all functions
+ ☐ write a properly readme.md
