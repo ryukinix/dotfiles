@@ -16,7 +16,7 @@ autocmd InsertLeave * :set relativenumber
 :set list
 
 set shiftwidth=4
-set listchars=tab:-\ ,eol:¬
+set listchars=tab:-\
 highlight Normal ctermbg=none
 highlight NonText ctermbg=none
 highlight NonText ctermfg=5
