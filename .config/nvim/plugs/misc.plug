@@ -1,0 +1,12 @@
+Plug 'neomake/neomake'
+Plug 'airblade/vim-gitgutter'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'sheerun/vim-polyglot'
+Plug 'godlygeek/tabular'
+Plug 'wakatime/vim-wakatime'
+Plug 'tpope/vim-fugitive'
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'tomtom/tlib_vim'
+Plug 'garbas/vim-snipmate'
+

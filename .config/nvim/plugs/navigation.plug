@@ -1,0 +1,12 @@
+" Motions
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'easymotion/vim-easymotion'
+Plug 'scrooloose/nerdtree'
+Plug 'christoomey/vim-tmux-navigator'
+
+" Windows
+Plug 'ap/vim-buftabline'
+Plug 'romgrk/winteract.vim'
+Plug 'spolu/dwm.vim'
+Plug 'justincampbell/vim-eighties'
+

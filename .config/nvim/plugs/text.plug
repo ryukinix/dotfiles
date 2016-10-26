@@ -1,0 +1,8 @@
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+Plug 'ReplaceWithRegister'
+Plug 'christoomey/vim-titlecase'
+Plug 'christoomey/vim-system-copy'
+Plug 'michaeljsmith/vim-indent-object'
+Plug 'wellle/targets.vim'
+Plug 'ntpeters/vim-better-whitespace'
