@@ -1,3 +1,8 @@
+(require 'erc)
+(require 'intero)
+(require 'org)
+(require 'python)
+
 ;; My modes
 (print "Modos do Manoel")
 
@@ -19,24 +24,12 @@
 (setq org-todo-keywords
       '((sequence "TODO" "IN-PROGRESS" "WAITING" "DONE")))
 
-;; Smart compile command hook for C++ and C
-(require 'compile)
-(require 'cc-mode)
-(add-hook 'prelude-c-mode-common-hook
-          (lambda ()
-            (define-key (current-local-map) "\C-c\C-c" 'compile )
-            (unless (or (file-exists-p "Makefile") (file-exists-p "makefile"))
-              (set (make-local-variable 'compile-command)
-                   ;; emulate make's .c.o implicit pattern rule, but with
-                   ;; different defaults for the CC, CPPFLAGS, and CFLAGS
-                   ;; variables:
-                   ;; $(CC) -c -o $@ $(CPPFLAGS) $(CFLAGS) $<
-                   (let ((file (file-name-nondirectory buffer-file-name)))
-                     (format "%s -c -o %s.o %s %s %s"
-                             (or (getenv "CC") (if c-buffer-is-cc-mode
-                                                   "g++ -std=c++14"
-                                                 "gcc"))
-                             (file-name-sans-extension file)
-                             (or (getenv "CPPFLAGS") "-DDEBUG=9")
-                             (or (getenv "CFLAGS") "-ansi -pedantic -Wall -g")
-                             file))))))
+;; disable gdb because is buggy using from windows
+(when (eq system-type 'windows-nt)
+  (put 'gdb 'disabled t))
+
+;; itero mode set to global
+(intero-global-mode)
+
+;; setup irc autologin channels
+(setq erc-autojoin-channels-alist '(("freenode.net" "#haskell" "#python" "#lisp")))

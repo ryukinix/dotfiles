@@ -1,2 +1,2 @@
-(require 'prelude-packages)
-(prelude-require-package 'ox-gfm)
+;;; Nothing to see here
+(prelude-require-package 'intero)

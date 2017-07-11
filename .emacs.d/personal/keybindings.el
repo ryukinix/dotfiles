@@ -28,23 +28,28 @@
     ;;close a child frame
     (delete-frame (selected-frame))))
 
-(+ 1 2)
 ;; some functions and useful macros
 (defmacro favorite-dir (path)
   `(lambda ()
      (interactive)
      (find-file ,path)))
 
-(defun replace-last-sexp ()
+(defun eval-and-replace-last-sexp ()
   (interactive)
   (let ((value (eval (elisp--preceding-sexp))))
     (kill-sexp -1)
     (insert (format "%S" value))))
 
-(defvar personal-dir "C:/Users/lerax/.emacs.d/personal")
-(defvar dropbox-dir "D:/Users/Manoel/Dropbox")
-(defvar desktop-dir "D:/Users/Manoel/Desktop")
-(defvar langs-dir "D:/Users/Manoel/Dropbox/Programming/Langs")
+(when (eq system-type 'windows-nt)
+  (let ((personal-dir "C:/Users/lerax/.emacs.d/personal")
+        (dropbox-dir "D:/Users/Manoel/Dropbox")
+        (desktop-dir "D:/Users/Manoel/Desktop")
+        (langs-dir "D:/Users/Manoel/Dropbox/Programming/Langs"))
+    ;; favorite directories
+    (global-set-key (kbd "<f5>") (favorite-dir dropbox-dir))
+    (global-set-key (kbd "<f6>") (favorite-dir desktop-dir))
+    (global-set-key (kbd "<f7>") (favorite-dir langs-dir))
+    (global-set-key (kbd "<f8>") (favorite-dir personal-dir))))
 
 ;; spacemacs habits...
 (global-set-key (kbd "M-1") 'other-window)
@@ -53,17 +58,30 @@
 ;; neotree feels
 (global-set-key (kbd "C-x t") 'neotree-toggle)
 
-;; favorite directories
-(global-set-key (kbd "<f5>") (favorite-dir dropbox-dir))
-(global-set-key (kbd "<f6>") (favorite-dir desktop-dir))
-(global-set-key (kbd "<f7>") (favorite-dir langs-dir))
-(global-set-key (kbd "<f8>") (favorite-dir personal-dir))
-
 ;; universal compile command
 (global-set-key (kbd "<f9>") 'compile)
-(global-set-key (kbd "C-M-S-x") 'replace-last-sexp)
+(global-set-key (kbd "C-M-S-x") 'eval-and-replace-last-sexp)
+(global-set-key (kbd "<C-f9>") 'flyspell-buffer)
 
 ;; killing emacs: daemon, frame and just closing
 (global-set-key (kbd "<C-M-f4>") 'save-buffers-kill-emacs)
-(global-set-key (kbd "<C-f4>") (lambda () (interactive) (kill-buffer (current-buffer))))
+(global-set-key (kbd "<C-f4>") (lambda () (interactive)
+                                 (if (> (length (window-list)) 1)
+                                     (kill-buffer-and-window)
+                                   (kill-buffer (current-buffer)))))
+
 (global-set-key (kbd "<M-f4>") 'intelligent-close)
+
+(global-set-key [M-f1] 'linum-mode)
+
+;; ispell changing dictionaries when need
+(global-set-key [C-f8] (let ((dict (if (eq system-type 'windows-nt)
+                                       "brasileiro"
+                                     "pt_BR")))
+                           (lambda ()
+                             (interactive)
+                             (ispell-change-dictionary dict))))
+
+(global-set-key [C-f7] (lambda ()
+                         (interactive)
+                         (ispell-change-dictionary "english")))
