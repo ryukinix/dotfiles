@@ -31,5 +31,13 @@
   (require 'intero)
   (intero-global-mode))
 
+;; this avoid crash on daemon-mode at linux when
+;; a frame is closed
+;; more info on:
+;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Clipboard.html
+(when (eq system-type 'gnu/linux)
+  (setq x-select-enable-clipboard-manager nil))
+
+
 ;; setup irc autologin channels
 (setq erc-autojoin-channels-alist '(("freenode.net" "#haskell" "#python" "#lisp")))
