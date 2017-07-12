@@ -1,2 +1,5 @@
 ;;; Nothing to see here
-(prelude-require-package 'intero)
+(require 'prelude-packages)
+
+(when (eq system-type 'windows-nt )
+  (prelude-require-package 'intero))

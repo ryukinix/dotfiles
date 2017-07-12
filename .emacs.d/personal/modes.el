@@ -1,5 +1,4 @@
 (require 'erc)
-(require 'intero)
 (require 'org)
 (require 'python)
 
@@ -24,12 +23,13 @@
 (setq org-todo-keywords
       '((sequence "TODO" "IN-PROGRESS" "WAITING" "DONE")))
 
-;; disable gdb because is buggy using from windows
+;; windows mode section
 (when (eq system-type 'windows-nt)
-  (put 'gdb 'disabled t))
-
-;; itero mode set to global
-(intero-global-mode)
+  ;; disable gdb because is buggy using from windows
+  ;; use gud-gdb instead
+  (put 'gdb 'disabled t)
+  (require 'intero)
+  (intero-global-mode))
 
 ;; setup irc autologin channels
 (setq erc-autojoin-channels-alist '(("freenode.net" "#haskell" "#python" "#lisp")))
