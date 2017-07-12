@@ -1,5 +1,7 @@
 ;; My Personal Keybindings
 
+(require 'cl)
+
 (print "Personal keybindings loading...")
 
 ;; i don't know if this is will wrap another key-bind
@@ -41,10 +43,10 @@
     (insert (format "%S" value))))
 
 (when (eq system-type 'windows-nt)
-  (let ((personal-dir "C:/Users/lerax/.emacs.d/personal")
-        (dropbox-dir "D:/Users/Manoel/Dropbox")
-        (desktop-dir "D:/Users/Manoel/Desktop")
-        (langs-dir "D:/Users/Manoel/Dropbox/Programming/Langs"))
+  (lexical-let ((personal-dir "C:/Users/lerax/.emacs.d/personal")
+                (dropbox-dir "D:/Users/Manoel/Dropbox")
+                (desktop-dir "D:/Users/Manoel/Desktop")
+                (langs-dir "D:/Users/Manoel/Dropbox/Programming/Langs"))
     ;; favorite directories
     (global-set-key (kbd "<f5>") (favorite-dir dropbox-dir))
     (global-set-key (kbd "<f6>") (favorite-dir desktop-dir))
@@ -75,12 +77,12 @@
 (global-set-key [M-f1] 'linum-mode)
 
 ;; ispell changing dictionaries when need
-(global-set-key [C-f8] (let ((dict (if (eq system-type 'windows-nt)
-                                       "brasileiro"
-                                     "pt_BR")))
-                           (lambda ()
-                             (interactive)
-                             (ispell-change-dictionary dict))))
+(global-set-key [C-f8] (lexical-let ((dict (if (eq system-type 'windows-nt)
+                                               "brasileiro"
+                                             "pt_BR")))
+                         (lambda ()
+                           (interactive)
+                           (ispell-change-dictionary dict))))
 
 (global-set-key [C-f7] (lambda ()
                          (interactive)
