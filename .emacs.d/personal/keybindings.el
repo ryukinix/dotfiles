@@ -2,7 +2,7 @@
 
 (require 'cl)
 
-(print "Personal keybindings loading...")
+(message "Personal keybindings loading...")
 
 ;; i don't know if this is will wrap another key-bind
 ;; (global-set-key (kbd "C-;") 'comment-or-uncomment-region)

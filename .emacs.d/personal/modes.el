@@ -3,7 +3,7 @@
 (require 'python)
 
 ;; My modes
-(print "Modos do Manoel")
+(message "Modos do Manoel")
 
 ;; wakatime on all files
 (global-wakatime-mode)

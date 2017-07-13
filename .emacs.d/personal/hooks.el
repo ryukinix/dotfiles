@@ -53,7 +53,7 @@
 
 
 ;; can create files on C-c p h
-(require 'helm)
+(require 'helm-projectile)
 (with-eval-after-load 'helm-projectile
   (defvar helm-source-file-not-found
     (helm-build-dummy-source
