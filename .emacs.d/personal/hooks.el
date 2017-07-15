@@ -40,9 +40,10 @@
 (defun setup-python-pdb-command ()
   "Set gud-pdb-command-name variable according the file buffer name"
   (define-key (current-local-map) [M-f9] 'pdb)
-  (set (make-local-variable 'gud-pdb-command-name)
-       (let ((file (file-name-nondirectory buffer-file-name)))
-         (format "python -m pdb %s" file))))
+  (when buffer-file-name
+    (set (make-local-variable 'gud-pdb-command-name)
+         (let ((file (file-name-nondirectory buffer-file-name)))
+           (format "python -m pdb %s" file)))))
 
 ;; add commands for build and debug to C++ and C
 (add-hook 'prelude-c-mode-common-hook 'setup-c-and-cpp-compiler-with-gdb)
