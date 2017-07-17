@@ -12,7 +12,7 @@
 
 (defun setup-c-and-cpp-compiler-with-gdb ()
   "Generate strings for 'compile and 'gud-gdb commands on C/C++ mode"
-  (define-key (current-local-map) "\C-c\C-c" 'compile)
+  (define-key (current-local-map) [C-c C-c] 'compile)
   (define-key (current-local-map) [M-f9] 'gud-gdb)
   (let* ((file (file-name-nondirectory buffer-file-name))
          (file-basename (file-name-sans-extension file))
@@ -47,7 +47,6 @@
 
 ;; add commands for build and debug to C++ and C
 (add-hook 'prelude-c-mode-common-hook 'setup-c-and-cpp-compiler-with-gdb)
-
 
 ;; add commands for debug Python code
 (add-hook 'python-mode-hook 'setup-python-pdb-command)

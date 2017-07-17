@@ -1,6 +1,8 @@
 (require 'erc)
 (require 'org)
 (require 'python)
+(require 'company)
+(require 'slime)
 
 ;; My modes
 (message "Modos do Manoel")
@@ -38,6 +40,11 @@
 (when (eq system-type 'gnu/linux)
   (setq x-select-enable-clipboard-manager nil))
 
+;; add company tooltip align annotations
+(setq company-tooltip-align-annotations t)
+
+;; add slime-company completion tool to slime-contribs
+(push 'slime-company slime-contribs)
 
 ;; setup irc autologin channels
 (setq erc-autojoin-channels-alist '(("freenode.net" "#haskell" "#python" "#lisp")))
