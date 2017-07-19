@@ -62,3 +62,9 @@
 
 
   (add-to-list 'helm-projectile-sources-list helm-source-file-not-found t))
+
+
+;; add ghc-mod init
+(autoload 'ghc-init "ghc" nil t)
+(autoload 'ghc-debug "ghc" nil t)
+(add-hook 'haskell-mode-hook (lambda () (ghc-init)))

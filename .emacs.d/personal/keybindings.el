@@ -2,6 +2,7 @@
 
 (require 'cl)
 (require 'company)
+(require 'prelude-custom)
 
 (message "Personal keybindings loading...")
 
@@ -44,16 +45,15 @@
     (insert (format "%S" value))))
 
 (when (eq system-type 'windows-nt)
-  (lexical-let ((personal-dir "C:/Users/lerax/.emacs.d/personal")
-                (dropbox-dir "D:/Users/Manoel/Dropbox")
+  (lexical-let ((dropbox-dir "D:/Users/Manoel/Dropbox")
                 (desktop-dir "D:/Users/Manoel/Desktop")
                 (langs-dir "D:/Users/Manoel/Dropbox/Programming/Langs"))
     ;; favorite directories
     (global-set-key (kbd "<f5>") (favorite-dir dropbox-dir))
     (global-set-key (kbd "<f6>") (favorite-dir desktop-dir))
-    (global-set-key (kbd "<f7>") (favorite-dir langs-dir))
-    (global-set-key (kbd "<f8>") (favorite-dir personal-dir))))
+    (global-set-key (kbd "<f7>") (favorite-dir langs-dir))))
 
+(global-set-key [f8] (favorite-dir prelude-user-init-file))
 ;; spacemacs habits...
 (global-set-key (kbd "M-1") 'other-window)
 (global-set-key (kbd "M-2") 'other-window)
@@ -90,7 +90,8 @@
                          (ispell-change-dictionary "english")))
 
 ;; company-mode additional keybindings
-(define-key company-mode-map [C-tab] 'company-indent-or-complete-common)
+(define-key company-mode-map [C-tab] 'company-complete)
+(define-key company-active-map [C-tab] 'company-complete-common-or-cycle)
 (define-key company-active-map [tab] 'company-complete-selection)
 (define-key company-active-map (kbd "\C-n") 'company-select-next)
 (define-key company-active-map (kbd "\C-p") 'company-select-previous)
