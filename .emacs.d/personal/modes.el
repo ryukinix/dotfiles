@@ -48,7 +48,3 @@
 
 ;; setup irc autologin channels
 (setq erc-autojoin-channels-alist '(("freenode.net" "#haskell" "#python" "#lisp")))
-
-;; add company backend company-ghc
-;; need ghc-mod installed system-wide
-(add-to-list 'company-backends '(company-ghc :with company-dabbrev-code))

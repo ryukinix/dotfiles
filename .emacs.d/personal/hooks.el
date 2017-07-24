@@ -23,7 +23,7 @@
            ;; different defaults for the CC, CPPFLAGS, and CFLAGS
            ;; variables:
            ;; $(CC) -c -o $@ $(CPPFLAGS) $(CFLAGS) $<
-           (format "%s -o %s.%s %s %s %s"
+           (format "%s -o '%s.%s' %s %s '%s'"
                    (or (getenv "CC") (if c-buffer-is-cc-mode
                                          "g++"
                                        "gcc"))
@@ -31,10 +31,10 @@
                    (or (getenv "CPPFLAGS") "-DDEBUG=9")
                    (or (getenv "CFLAGS") "-ansi -pedantic -Wall -g")
                    file))
-      (push (format "gdb --fullname %s.%s" file-basename extension)
+      (push (format "gdb --fullname '%s.%s'" file-basename extension)
             gud-gud-gdb-history)
       (set (make-local-variable 'gud-gdb-command-name)
-           (format "gdb -i=mi %s.%s" file-basename extension)))))
+           (format "gdb -i=mi '%s.%s'" file-basename extension)))))
 
 
 (defun setup-python-pdb-command ()
@@ -64,7 +64,21 @@
   (add-to-list 'helm-projectile-sources-list helm-source-file-not-found t))
 
 
-;; add ghc-mod init
-(autoload 'ghc-init "ghc" nil t)
-(autoload 'ghc-debug "ghc" nil t)
-(add-hook 'haskell-mode-hook (lambda () (ghc-init)))
+;;; Enable helm-gtags-mode
+(add-hook 'prelude-c-mode-common-hook 'helm-gtags-mode)
+
+;; customize
+(custom-set-variables
+ '(helm-gtags-path-style 'relative)
+ '(helm-gtags-ignore-case t)
+ '(helm-gtags-auto-update t))
+
+;; key bindings
+(with-eval-after-load 'helm-gtags
+  (define-key helm-gtags-mode-map (kbd "M-t") 'helm-gtags-find-tag)
+  (define-key helm-gtags-mode-map (kbd "M-r") 'helm-gtags-find-rtag)
+  (define-key helm-gtags-mode-map (kbd "M-s") 'helm-gtags-find-symbol)
+  (define-key helm-gtags-mode-map (kbd "M-g M-p") 'helm-gtags-parse-file)
+  (define-key helm-gtags-mode-map (kbd "C-c <") 'helm-gtags-previous-history)
+  (define-key helm-gtags-mode-map (kbd "C-c >") 'helm-gtags-next-history)
+  (define-key helm-gtags-mode-map (kbd "M-,") 'helm-gtags-pop-stack))

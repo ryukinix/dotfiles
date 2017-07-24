@@ -5,4 +5,3 @@
   (prelude-require-package 'intero))
 
 (prelude-require-package 'slime-company)
-(prelude-require-package 'company-ghc) ;; for haskell code completion
