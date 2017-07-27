@@ -1,7 +1,9 @@
 (require 'org)
 (require 'org2jekyll)
+(require 'prelude-packages)
 
 (prelude-require-package 'org2jekyll)
+(prelude-require-package 'toc-org)
 ;; setup of org2jekyll
 (setq org2jekyll-blog-author "Manoel Vilela"
       org2jekyll-source-directory (expand-file-name "~/Dropbox/Programming/Projects/Website/Org")
@@ -56,3 +58,6 @@
          :publishing-function org-publish-attachment
          :recursive t)
         ("web" :components ("images" "js" "css"))))
+
+;; active toc-org when open a buffer with org-mode enabled
+(add-hook 'org-mode-hook 'toc-org-enable)
