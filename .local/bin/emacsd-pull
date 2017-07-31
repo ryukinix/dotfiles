@@ -1,0 +1,20 @@
+#!/bin/bash
+
+GREEN="\e[32m"
+BLUE="\e[34m"
+STOP="\e[0m"
+DOTFILES=~/.dotfiles
+SOURCE=~/.emacs.d/personal/
+REPOSITORY=~/.dotfiles/.emacs.d/personal/
+IGNORE_CUSTOM=custom.el
+
+
+cd $DOTFILES
+echo -e "$GREEN:: Diffing $STOP"
+git fetch origin
+git --no-pager diff origin/master
+read -p "Press enter to sync this changes..."
+git merge origin/master
+echo -e "$GREEN:: Syncing $REPOSITORY => $SOURCE $STOP"
+rsync -rv $REPOSITORY $SOURCE --exclude $IGNORE_CUSTOM
+echo -e "$GREEN:: DONE! $STOP"
