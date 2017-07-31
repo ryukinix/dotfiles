@@ -8,6 +8,9 @@
 #      @email: manoel_vilela@engineer.com
 #
 
+# WARNING: this script is deprecated and no longer supported, try it by yourself. 
+#          If you found some bugs and fuckup your system let me be clear: you're alone.
+
 FOLDERS=( .fonts .emacs.d .conky .config
           .irssi .lein .jupyter )
 FILES=( .viminfo .bashrc .vimrc.local .emacs-live.el 
