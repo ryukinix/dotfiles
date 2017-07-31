@@ -5,3 +5,4 @@
   (prelude-require-package 'intero))
 
 (prelude-require-package 'slime-company)
+(prelude-require-package 'multiple-cursors)

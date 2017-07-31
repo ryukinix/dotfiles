@@ -1,8 +1,9 @@
+;;; -*- lexical-binding: t -*-
 ;; My Personal Keybindings
 
-(require 'cl)
 (require 'company)
 (require 'prelude-custom)
+(require 'multiple-cursors)
 
 (message "Personal keybindings loading...")
 
@@ -44,14 +45,15 @@
     (kill-sexp -1)
     (insert (format "%S" value))))
 
-(when (eq system-type 'windows-nt)
-  (lexical-let ((dropbox-dir "D:/Users/Manoel/Dropbox")
-                (desktop-dir "D:/Users/Manoel/Desktop")
-                (langs-dir "D:/Users/Manoel/Dropbox/Programming/Langs"))
-    ;; favorite directories
-    (global-set-key (kbd "<f5>") (favorite-dir dropbox-dir))
-    (global-set-key (kbd "<f6>") (favorite-dir desktop-dir))
-    (global-set-key (kbd "<f7>") (favorite-dir langs-dir))))
+
+(let ((dropbox-dir (expand-file-name "~/Dropbox"))
+      (desktop-dir (expand-file-name"~/Desktop"))
+      (langs-dir (expand-file-name "~/Dropbox/Programming/Langs")))
+  ;; favorite directories
+  (global-set-key (kbd "<f5>") (favorite-dir dropbox-dir))
+  (global-set-key (kbd "<f6>") (favorite-dir desktop-dir))
+  (global-set-key (kbd "<f7>") (favorite-dir langs-dir)))
+
 
 (global-set-key [f8] (favorite-dir prelude-user-init-file))
 ;; spacemacs habits...
@@ -98,3 +100,35 @@
 (define-key company-active-map (kbd "\C-p") 'company-select-previous)
 (define-key company-active-map (kbd "\C-d") 'company-show-doc-buffer)
 (define-key company-active-map (kbd "M-.") 'company-show-location)
+
+;; reset scale
+(defun text-scale-reset ()
+  (interactive)
+  (text-scale-set 0))
+
+;; multiple-cursors
+(global-set-key (kbd "C-S-<mouse-1>") 'mc/add-cursor-on-click)
+
+;; HACK: yes, windows and linux has different keybinding names!!!
+;; gnu/linux -> windows-nt
+;; mouse-4 -> wheel-up
+;; mouse-5 -> wheel-down
+;; mouse-8 -> mouse-4
+;; mouse-9 -> mouse-5
+(labels ((meta-kbd (meta bind &optional (key "@key"))
+                   (kbd (replace-regexp-in-string key bind meta))))
+  (let* ((windows-p (eq system-name 'windows-nt))
+         (wheel-up (if windows-p "wheel-up" "mouse-4"))
+
+         (wheel-down (if windows-p "wheel-down" "mouse-5"))
+         (mouse-forward (if windows-p "mouse-5" "mouse-9"))
+         (mouse-backforward (if windows-p "mouse-4" "mouse-8")))
+    ;; mouse text scale keybindings
+    (global-set-key (meta-kbd "<C-M-@key>" wheel-down) 'text-scale-decrease)
+    (global-set-key (meta-kbd "<C-M-@key>" wheel-up) 'text-scale-increase)
+    (global-set-key (meta-kbd "<@key>" mouse-forward) 'text-scale-increase)
+    (global-set-key (meta-kbd "<@key>" mouse-backforward) 'text-scale-decrease)
+    (global-set-key (kbd "C-*") 'text-scale-reset)
+    (global-set-key (kbd "<C-pause>") 'text-scale-decrease)
+    (global-set-key (meta-kbd "<C-M-@key>" mouse-forward) 'text-scale-reset)
+    (global-set-key (meta-kbd "<C-M-@key>" mouse-backforward) 'text-scale-reset)))

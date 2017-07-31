@@ -2,8 +2,9 @@
 ;; Author: Manoel Vilela
 
 ;; just on case of running on Windows
+(require 'server)
+
 (when (eq system-type 'windows-nt)
-  (require 'server)
   (load "server")
   (setq server-name "lerax")
   (unless (server-running-p server-name)

@@ -46,5 +46,8 @@
 ;; add slime-company completion tool to slime-contribs
 (push 'slime-company slime-contribs)
 
+;; this works to use git on command line with core.editor=emacs
+(global-git-commit-mode +1)
+
 ;; setup irc autologin channels
 (setq erc-autojoin-channels-alist '(("freenode.net" "#haskell" "#python" "#lisp")))

@@ -5,10 +5,12 @@
 (require 'gud)
 (require 'compile)
 (require 'gdb-mi)
+(require 'helm-projectile)
 
 ;; this fucking variable is created on the fly for gud,
 ;; so I need declare here to avoid warnings
 (defvar gud-gud-gdb-history nil)
+
 
 (defun setup-c-and-cpp-compiler-with-gdb ()
   "Generate strings for 'compile and 'gud-gdb commands on C/C++ mode"
@@ -46,15 +48,8 @@
          (let ((file (file-name-nondirectory buffer-file-name)))
            (format "python -m pdb %s" file)))))
 
-;; add commands for build and debug to C++ and C
-(add-hook 'prelude-c-mode-common-hook 'setup-c-and-cpp-compiler-with-gdb)
-
-;; add commands for debug Python code
-(add-hook 'python-mode-hook 'setup-python-pdb-command)
-
 
 ;; can create files on C-c p h
-(require 'helm-projectile)
 (with-eval-after-load 'helm-projectile
   (defvar helm-source-file-not-found
     (helm-build-dummy-source
@@ -63,3 +58,19 @@
 
 
   (add-to-list 'helm-projectile-sources-list helm-source-file-not-found t))
+
+;; disable tabs visualization on with-editor mode used to do commits
+;; by command line
+(with-eval-after-load 'with-editor
+  (add-hook 'with-editor-mode-hook (lambda () (whitespace-toggle-options 'tabs))))
+
+;; to avoid scale problems
+(with-eval-after-load 'linum
+  (set-face-attribute 'linum nil :height 100))
+
+
+;; add commands for build and debug to C++ and C
+(add-hook 'prelude-c-mode-common-hook 'setup-c-and-cpp-compiler-with-gdb)
+
+;; add commands for debug Python code
+(add-hook 'python-mode-hook 'setup-python-pdb-command)
