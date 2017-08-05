@@ -2,7 +2,8 @@
 ;; My Personal Keybindings
 
 (require 'company)
-(require 'prelude-custom)
+(require 'fsharp-mode)
+(require 'prelude-custom) ;; definition of prelude-user-init-file
 (require 'multiple-cursors)
 
 (message "Personal keybindings loading...")
@@ -132,3 +133,5 @@
     (global-set-key (kbd "<C-pause>") 'text-scale-decrease)
     (global-set-key (meta-kbd "<C-M-@key>" mouse-forward) 'text-scale-reset)
     (global-set-key (meta-kbd "<C-M-@key>" mouse-backforward) 'text-scale-reset)))
+
+(define-key fsharp-mode-map (kbd "C-c C-z") 'fsharp-show-subshell)

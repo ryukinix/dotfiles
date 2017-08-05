@@ -47,9 +47,8 @@
 
 ;; let's go autocomplete FAST
 (setq company-quickhelp-delay 0.1)
-(setq company-idle-delay 0.1)
+(setq company-idle-delay 0.3)
 (setq company-tooltip-idle-delay 0.1)
-
 
 ;; add slime-company completion tool to slime-contribs
 (push 'slime-company slime-contribs)

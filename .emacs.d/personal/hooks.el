@@ -76,9 +76,3 @@
 
 ;; add commands for debug Python code
 (add-hook 'python-mode-hook 'setup-python-pdb-command)
-
-;; company backend for fsharp
-(prelude-require-package 'fsharp-mode) ;; install fsharp-mode
-(with-eval-after-load 'company
-  (require 'fsharp-mode-completion) ;; load symbol fsharp-ac/company-backend
-  (add-to-list 'company-backends 'fsharp-ac/company-backend))
