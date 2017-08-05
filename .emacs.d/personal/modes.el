@@ -2,6 +2,7 @@
 (require 'org)
 (require 'python)
 (require 'company)
+(require 'company-quickhelp)
 (require 'slime)
 
 ;; My modes
@@ -29,9 +30,7 @@
 (when (eq system-type 'windows-nt)
   ;; disable gdb because is buggy using from windows
   ;; use gud-gdb instead
-  (put 'gdb 'disabled t)
-  (require 'intero)
-  (intero-global-mode))
+  (put 'gdb 'disabled t))
 
 ;; this avoid crash on daemon-mode at linux when
 ;; a frame is closed
@@ -42,6 +41,15 @@
 
 ;; add company tooltip align annotations
 (setq company-tooltip-align-annotations t)
+
+;; add company quickhelp mode
+(company-quickhelp-mode +1)
+
+;; let's go autocomplete FAST
+(setq company-quickhelp-delay 0.1)
+(setq company-idle-delay 0.1)
+(setq company-tooltip-idle-delay 0.1)
+
 
 ;; add slime-company completion tool to slime-contribs
 (push 'slime-company slime-contribs)

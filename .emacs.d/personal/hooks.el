@@ -6,6 +6,8 @@
 (require 'compile)
 (require 'gdb-mi)
 (require 'helm-projectile)
+(require 'company)
+(require 'prelude-packages)
 
 ;; this fucking variable is created on the fly for gud,
 ;; so I need declare here to avoid warnings
@@ -74,3 +76,9 @@
 
 ;; add commands for debug Python code
 (add-hook 'python-mode-hook 'setup-python-pdb-command)
+
+;; company backend for fsharp
+(prelude-require-package 'fsharp-mode) ;; install fsharp-mode
+(with-eval-after-load 'company
+  (require 'fsharp-mode-completion) ;; load symbol fsharp-ac/company-backend
+  (add-to-list 'company-backends 'fsharp-ac/company-backend))
