@@ -1,3 +1,7 @@
+;; fetching personal defined packages
+(prelude-require-packages '(slime-company ssh-agency))
+
+
 (require 'erc)
 (require 'org)
 (require 'org-mouse) ;; enable mouse features on org-mode
@@ -6,6 +10,7 @@
 (require 'company-quickhelp)
 (require 'slime)
 (require 'ssh-agency)
+
 
 ;; My modes
 (message "Modos do Manoel")

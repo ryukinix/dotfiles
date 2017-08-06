@@ -1,6 +1,8 @@
 ;;; -*- lexical-binding: t -*-
 ;; My Personal Keybindings
 
+(prelude-require-packages '(multiple-cursors fsharp-mode))
+
 (require 'company)
 (require 'fsharp-mode)
 (require 'prelude-custom) ;; definition of prelude-user-init-file
