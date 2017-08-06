@@ -5,6 +5,7 @@
 (require 'company)
 (require 'company-quickhelp)
 (require 'slime)
+(require 'ssh-agency)
 
 ;; My modes
 (message "Modos do Manoel")
@@ -59,3 +60,6 @@
 
 ;; setup irc autologin channels
 (setq erc-autojoin-channels-alist '(("freenode.net" "#haskell" "#python" "#lisp")))
+
+;; ensure that all the ssh keys was loaded
+(ssh-agency-ensure)

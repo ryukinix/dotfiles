@@ -6,3 +6,4 @@
 
 (prelude-require-package 'slime-company)
 (prelude-require-package 'multiple-cursors)
+(prelude-require-package 'ssh-agency)
