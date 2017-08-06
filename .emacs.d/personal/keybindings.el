@@ -135,3 +135,6 @@
     (global-set-key (meta-kbd "<C-M-@key>" mouse-backforward) 'text-scale-reset)))
 
 (define-key fsharp-mode-map (kbd "C-c C-z") 'fsharp-show-subshell)
+
+;; lisp interaction keybinds
+(define-key lisp-interaction-mode-map (kbd "C-c C-z") 'prelude-visit-ielm)

@@ -76,3 +76,7 @@
 
 ;; add commands for debug Python code
 (add-hook 'python-mode-hook 'setup-python-pdb-command)
+
+
+(add-hook 'org-mode-hook (lambda ()
+                           (whitespace-toggle-options 'lines-tail)))
