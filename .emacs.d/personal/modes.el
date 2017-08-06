@@ -1,5 +1,6 @@
 (require 'erc)
 (require 'org)
+(require 'org-mouse) ;; enable mouse features on org-mode
 (require 'python)
 (require 'company)
 (require 'company-quickhelp)
