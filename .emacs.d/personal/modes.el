@@ -1,4 +1,5 @@
 ;; fetching personal defined packages
+(require 'prelude-packages)
 (prelude-require-packages '(slime-company ssh-agency))
 
 
