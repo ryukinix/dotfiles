@@ -16,6 +16,7 @@
 
 (defun setup-c-and-cpp-compiler-with-gdb ()
   "Generate strings for 'compile and 'gud-gdb commands on C/C++ mode"
+  (interactive)
   (define-key (current-local-map) [C-c C-c] 'compile)
   (define-key (current-local-map) [M-f9] 'gud-gdb)
   (when buffer-file-name
@@ -29,12 +30,12 @@
             ;; variables:
             ;; $(CC) -c -o $@ $(CPPFLAGS) $(CFLAGS) $<
             (format "%s -o '%s.%s' %s %s '%s'"
-                    (or (getenv "CC") (if c-buffer-is-cc-mode
-                                          "g++"
-                                        "gcc"))
+                    (or (getenv "CC") (case c-buffer-is-cc-mode
+                                        ('c++-mode "g++")
+                                        ('c-mode "gcc")))
                     file-basename extension
                     (or (getenv "CPPFLAGS") "-DDEBUG=9")
-                    (or (getenv "CFLAGS") "-ansi -pedantic -Wall -g")
+                    (or (getenv "CFLAGS") "-pedantic -Wall -g")
                     file))
        (push (format "gdb --fullname '%s.%s'" file-basename extension)
              gud-gud-gdb-history)
@@ -72,7 +73,7 @@
 
 
 ;; add commands for build and debug to C++ and C
-(add-hook 'prelude-c-mode-common-hook 'setup-c-and-cpp-compiler-with-gdb)
+(add-hook 'c-mode-common-hook 'setup-c-and-cpp-compiler-with-gdb)
 
 ;; add commands for debug Python code
 (add-hook 'python-mode-hook 'setup-python-pdb-command)
