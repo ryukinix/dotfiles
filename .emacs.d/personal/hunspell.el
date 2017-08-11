@@ -18,7 +18,7 @@
                          ("pt_BR" "[[:alpha:]]" "[^[:alpha:]]" "[']" t ("-d" "pt_BR") nil utf-8)
                          ("brasileiro" "[[:alpha:]]" "[^[:alpha:]]" "[']" t ("-d" "pt_BR") nil utf-8)
                          ("dev" "[[:alpha:]]" "[^[:alpha:]]" "[']" t ("-d" "pt_BR,en_US") nil utf-8)))
-                 (setq ispell-dictionary "dev") ;; english and portuguese
+                 (ispell-change-dictionary "dev") ;; english and portuguese
                  (setq ispell-dictionary-alist ispell-hunspell-dictionary-alist))
 
 ;; only available for hunspell
@@ -33,6 +33,6 @@
                          (interactive)
                          (message "Ispell program set to: %s"
                                   (if (equal ispell-program-name hunspell-name)
-                                      (prog1 (setq ispell-program-name aspell-name)
-                                             (ispell-change-dictionary "english"))
+                                      (progn (ispell-change-dictionary "english")
+                                             (setq ispell-program-name aspell-name))
                                     (setq ispell-program-name hunspell-name)))))
