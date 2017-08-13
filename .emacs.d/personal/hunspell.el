@@ -21,21 +21,26 @@
             ("pt_BR" "[[:alpha:]]" "[^[:alpha:]]" "[']" t ("-d" "pt_BR") nil utf-8)
             ("brasileiro" "[[:alpha:]]" "[^[:alpha:]]" "[']" t ("-d" "pt_BR") nil utf-8)
             ("dev" "[[:alpha:]]" "[^[:alpha:]]" "[']" t ("-d" "pt_BR,en_US") nil utf-8)))
-    (setq ispell-dictionary "dev")
+    (setq ispell-dictionary "dev") ;; default dictionary for hunspell
     (setq ispell-dictionary-alist ispell-hunspell-dictionary-alist))
 
   ;; only available for hunspell
-  (global-set-key [C-f6] (lambda ()
-                           (interactive)
-                           (when (not (equal ispell-program-name hunspell-name))
-                             (setq ispell-program-name hunspell-name))
-                           (ispell-change-dictionary "dev")))
+  (global-set-key [C-f6]
+                  (lambda ()
+                    (interactive)
+                    (when (not (equal ispell-program-name hunspell-name))
+                      (setq ispell-program-name hunspell-name))
+                    (ispell-change-dictionary "dev")))
 
   ;; toggle program for ispell: aspell/hunspell
-  (global-set-key [C-f5] (lambda ()
-                           (interactive)
-                           (message "Ispell program set to: %s"
-                                    (if (equal ispell-program-name hunspell-name)
-                                        (progn (ispell-change-dictionary "english")
-                                               (setq ispell-program-name aspell-name))
-                                      (setq ispell-program-name hunspell-name))))))
+  (global-set-key [C-f5]
+                  (lambda ()
+                    (interactive)
+                    (message "Ispell program set to: %s"
+                             (if (equal ispell-program-name hunspell-name)
+                                 ;; default for aspell
+                                 (progn (setq ispell-dictionary "english")
+                                        (setq ispell-program-name aspell-name))
+                               ;; default dictionary for hunspell
+                               (setq ispell-dictionary "dev")
+                               (setq ispell-program-name hunspell-name))))))
