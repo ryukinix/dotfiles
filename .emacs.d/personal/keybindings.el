@@ -112,9 +112,21 @@
 ;; multiple-cursors
 (global-set-key (kbd "C-S-<mouse-1>") 'mc/add-cursor-on-click)
 (global-set-key (kbd "C-M->") 'mc/mark-next-like-this)
-(global-set-key (kbd "C-M-<") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-M-<") 'mc/mark-previous-like-this)
 (global-set-key (kbd "C->") 'mc/mark-next-like-this-word)
 (global-set-key (kbd "C-<") 'mc/mark-previous-like-this-word)
+(global-set-key (kbd "C-S-l") 'mc/edit-lines) ;; mortal-mode from sublime
+
+;; setup for commands which always run for all cursors
+(setq mc/always-run-for-all '(crux-kill-whole-line
+                              forward-sentence
+                              sp-backward-delete-char
+                              sp-delete-char
+                              sp-forward-sexp
+                              sp-kill-word))
+
+;; this commands below should run only once
+(setq mc/cmds-to-run-once '(helm-M-x))
 
 ;; HACK: yes, windows and linux has different keybinding names!!!
 ;; gnu/linux -> windows-nt
