@@ -81,3 +81,6 @@
 
 (add-hook 'org-mode-hook (lambda ()
                            (whitespace-toggle-options 'lines-tail)))
+
+;; force xml-mode to msbuild project files
+(add-to-list 'auto-mode-alist '("\\.\\(c\\|f\\)sproj\\'" . xml-mode))

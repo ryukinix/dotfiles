@@ -94,7 +94,7 @@
                          (interactive)
                          (ispell-change-dictionary "english")))
 
-;; company-mode additional keybindings
+;; company-ode additional keybindings
 (define-key company-mode-map [C-tab] 'company-complete)
 (define-key company-mode-map [C-return] 'company-complete)
 (define-key company-active-map [C-tab] 'company-complete-common-or-cycle)
@@ -111,6 +111,10 @@
 
 ;; multiple-cursors
 (global-set-key (kbd "C-S-<mouse-1>") 'mc/add-cursor-on-click)
+(global-set-key (kbd "C-M->") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-M-<") 'mc/mark-next-like-this)
+(global-set-key (kbd "C->") 'mc/mark-next-like-this-word)
+(global-set-key (kbd "C-<") 'mc/mark-previous-like-this-word)
 
 ;; HACK: yes, windows and linux has different keybinding names!!!
 ;; gnu/linux -> windows-nt
