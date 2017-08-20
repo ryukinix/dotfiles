@@ -1,0 +1,38 @@
+#!/bin/bash
+# Author: Manoel Vilela
+
+function usage {
+    echo "usage: $0 audios..."
+    echo
+    echo "Description: "
+    echo "            try convert all the audio-like files passed as argument"
+}
+
+function mp3 {
+    file="$1"
+    output=${file%.*}.mp3
+    ffmpeg -i "$file" -v error -ar 44100 -ac 2 -ab 192k -f mp3 "$output"
+    echo "$file -> $output"
+}
+
+# handle Ctrl-C (just exit)
+trap exit SIGINT
+
+case $# in
+    0)
+        usage
+        exit 1
+        ;;
+    *)
+        if [ $1 = -h -o $1 = --help ]; then
+            usage
+            exit 1
+        fi
+
+        for f in "$@";
+        do
+            mp3 "$f"
+        done
+        ;;
+
+esac
