@@ -1,0 +1,45 @@
+#!/bin/bash
+
+# this file ensure that all process given by regex [process-name] will be killed
+
+function usage {
+    echo "usage: $0 [-l] process-name"
+    echo
+    echo "Description:"
+    echo "            kill al the process-name instances"
+    echo
+    echo "Options: "
+    echo "      -l    onlyshow the process, not killing them"
+}
+
+function search-process {
+    ps -Ao pid,command | grep -v grep | grep -v kill-chrome | grep -v $0 | grep $1
+}
+
+function collect-pid {
+    search-process $1 | awk "{print \$1}"
+}
+
+function kill-this-shit {
+     collect-pid $1 | xargs -l kill -9 &> /dev/null
+}
+
+case $# in
+    0)
+        usage
+        ;;
+    1)
+        if [ $1 = -h -o $1 = --help ]; then
+            usage
+        else
+            kill-this-shit $1
+        fi
+        ;;
+    2)
+        if [ $1 = "-l" ]; then
+            search-process $2
+        else
+            echo "Flag $1 is unknown."
+            usage
+        fi
+esac

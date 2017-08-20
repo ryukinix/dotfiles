@@ -1,0 +1,8 @@
+#!/bin/bash
+
+export PATH=~/.local/bin:$PATH
+
+n_process=`kill-fucking-all -l chrome | wc -l`
+kill-fucking-all chrome
+
+notify-send "Kill fucking all" "chrome: $n_process process was fucking killed"

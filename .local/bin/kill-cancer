@@ -1,0 +1,12 @@
+#!/bin/bash
+
+cancer=`ps -Ao pid --sort=-pmem --no-headers| head -n 1`
+cancer_name=`ps -p ${cancer} -o comm=`
+
+kill -9 $cancer
+
+if [ $? == 0 ]; then
+    notify-send "Killing the cancer" "${cancer_name} was killed"
+else
+    notify-send "Killing the cancer" "${cancer_name} cannot be killed"
+fi
