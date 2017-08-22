@@ -156,3 +156,7 @@
 
 ;; lisp interaction keybinds
 (define-key lisp-interaction-mode-map (kbd "C-c C-z") 'prelude-visit-ielm)
+
+;; clojure repl improvements
+(with-eval-after-load 'cider
+  (define-key cider-repl-mode-map (kbd "C-c C-k") 'cider-repl-clear-buffer))
