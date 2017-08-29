@@ -1,7 +1,7 @@
 ;;; -*- lexical-binding: t -*-
 ;; My Personal Keybindings
 
-(prelude-require-packages '(multiple-cursors fsharp-mode))
+(prelude-require-packages '(multiple-cursors fsharp-mode neotree))
 
 (require 'company)
 (require 'fsharp-mode)
@@ -42,18 +42,12 @@
      (interactive)
      (find-file ,path)))
 
-(defun eval-and-replace-last-sexp ()
-  (interactive)
-  (let ((value (eval (elisp--preceding-sexp))))
-    (kill-sexp -1)
-    (insert (format "%S" value))))
 
-
-(let ((dropbox-dir (expand-file-name "~/Dropbox"))
+(let ((courses-dir (expand-file-name "~/Dropbox/University/Courses/UFC/2017.2"))
       (desktop-dir (expand-file-name"~/Desktop"))
       (langs-dir (expand-file-name "~/Dropbox/Programming/Langs")))
   ;; favorite directories
-  (global-set-key (kbd "<f5>") (favorite-dir dropbox-dir))
+  (global-set-key (kbd "<f5>") (favorite-dir courses-dir))
   (global-set-key (kbd "<f6>") (favorite-dir desktop-dir))
   (global-set-key (kbd "<f7>") (favorite-dir langs-dir)))
 
@@ -68,7 +62,7 @@
 
 ;; universal compile command
 (global-set-key (kbd "<f9>") 'compile)
-(global-set-key (kbd "C-M-S-x") 'eval-and-replace-last-sexp)
+(global-set-key (kbd "C-M-S-x") 'crux-eval-and-replace)
 (global-set-key (kbd "<C-f9>") 'flyspell-buffer)
 
 ;; killing emacs: daemon, frame and just closing

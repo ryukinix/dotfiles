@@ -16,8 +16,12 @@
 ;; My modes
 (message "Modos do Manoel")
 
-;; wakatime on all files
-(global-wakatime-mode)
+;; only activate global-wakatime-mode if the user
+;; specifically installed this
+(when (package-installed-p 'wakatime-mode)
+  ;; wakatime on all files
+  (global-wakatime-mode))
+
 ;; move to trash on deleting
 (setq delete-by-moving-to-trash t)
 
@@ -81,4 +85,9 @@
 ")
 
 ;; ensure that all the ssh keys was loaded
-(ssh-agency-ensure)
+(require 'manoel)
+(let ((ssh "ssh"))
+  (when-system 'windows
+               (setq ssh (concatenate 'string ssh ".exe")))
+  (when (executable-find ssh)
+    (ssh-agency-ensure)))
