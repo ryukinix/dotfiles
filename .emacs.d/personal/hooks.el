@@ -23,24 +23,24 @@
     (let* ((file (file-name-nondirectory buffer-file-name))
           (file-basename (file-name-sans-extension file))
           (extension (if (eq system-type 'windows-nt) "exe" "out")))
-     (unless (or (file-exists-p "Makefile") (file-exists-p "makefile"))
-       (set (make-local-variable 'compile-command)
-            ;; emulate make's .c.o implicit pattern rule, but with
-            ;; different defaults for the CC, CPPFLAGS, and CFLAGS
-            ;; variables:
-            ;; $(CC) -c -o $@ $(CPPFLAGS) $(CFLAGS) $<
-            (format "%s -o '%s.%s' %s %s '%s'"
-                    (or (getenv "CC") (case c-buffer-is-cc-mode
-                                        ('c++-mode "g++")
-                                        ('c-mode "gcc")))
-                    file-basename extension
-                    (or (getenv "CPPFLAGS") "-DDEBUG=9")
-                    (or (getenv "CFLAGS") "-pedantic -Wall -g")
-                    file))
-       (push (format "gdb --fullname \"%s.%s\"" file-basename extension)
-             gud-gud-gdb-history)
-       (set (make-local-variable 'gud-gdb-command-name)
-            (format "gdb -i=mi \"%s.%s\"" file-basename extension))))))
+      (unless (or (file-exists-p "Makefile") (file-exists-p "makefile"))
+        (set (make-local-variable 'compile-command)
+             ;; emulate make's .c.o implicit pattern rule, but with
+             ;; different defaults for the CC, CPPFLAGS, and CFLAGS
+             ;; variables:
+             ;; $(CC) -c -o $@ $(CPPFLAGS) $(CFLAGS) $<
+             (format "%s -o '%s.%s' %s %s '%s'"
+                     (or (getenv "CC") (case c-buffer-is-cc-mode
+                                         ('c++-mode "g++")
+                                         ('c-mode "gcc")))
+                     file-basename extension
+                     (or (getenv "CPPFLAGS") "-DDEBUG=9")
+                     (or (getenv "CFLAGS") "-pedantic -Wall -g")
+                     file)))
+      (push (format "gdb --fullname \"%s.%s\"" file-basename extension)
+            gud-gud-gdb-history)
+      (set (make-local-variable 'gud-gdb-command-name)
+           (format "gdb -i=mi \"%s.%s\"" file-basename extension)))))
 
 
 (defun setup-python-pdb-command ()

@@ -1,11 +1,19 @@
 ;; this enable syntax highlight on org-mode org |> latex |> pdf
+(require 'ox-latex)
 (with-eval-after-load 'ox-latex
   (setq org-latex-listings 'minted
         org-latex-packages-alist '(("" "minted"))
+        org-latex-minted-options '(("frame" "lines") ("linenos" "true"))
         org-latex-pdf-process
         '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
-          "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f")))
+          "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f")
+        org-latex-create-formula-image-program 'imagemagick))
 
-(defun clean-export-pdf ()
+;; just increase the preview image
+(plist-put org-format-latex-options :scale 1.2)
+
+(defun clean-export-pdf (&rest _)
   (interactive)
-  (async-shell-command "rm -rfv *.tex _minted*"))
+  (shell-command "rm -rf *.tex _minted* > /dev/null"))
+
+(advice-add 'org-latex-compile :after #'clean-export-pdf)
