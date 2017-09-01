@@ -91,3 +91,6 @@
                (setq ssh (concatenate 'string ssh ".exe")))
   (when (executable-find ssh)
     (ssh-agency-ensure)))
+
+;; set tab size to 4 (I don't like it 8, very big for me)
+(setq-default tab-width 4)
