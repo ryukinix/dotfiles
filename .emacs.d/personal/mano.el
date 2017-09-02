@@ -1,4 +1,4 @@
-;;; mano.el -- useful macros made by me, Manoel
+;;; mano.el -- useful macros and functions made by me, Manoel
 
 ;; Copyright © 2017 Manoel Vilela
 ;;
@@ -73,6 +73,15 @@ BODY is the rest of eval forms to be used FUNC memoized."
        (setf (symbol-function ',func) #',func)
        (prog1 ,@body
          (setf (symbol-function ',func) old-func)))))
+
+(defun tab-mode ()
+  "Toggle `indent-tabs-mode'."
+  (interactive)
+  (progn (setq-local indent-tabs-mode (not indent-tabs-mode))
+         (message "%s" indent-tabs-mode))
+  (if indent-tabs-mode
+      (setq-local backward-delete-char-untabify-method 'hungry)
+    (setq-local backward-delete-char-untabify-method 'untabify)))
 
 
 (provide 'manoel)
