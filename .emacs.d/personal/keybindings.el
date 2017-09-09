@@ -1,7 +1,7 @@
 ;;; -*- lexical-binding: t -*-
 ;; My Personal Keybindings
 
-(prelude-require-packages '(multiple-cursors fsharp-mode neotree))
+(prelude-require-packages '(multiple-cursors fsharp-mode neotree linum-relative))
 
 (require 'company)
 (require 'fsharp-mode)
@@ -75,6 +75,7 @@
 (global-set-key (kbd "<M-f4>") 'intelligent-close)
 
 (global-set-key [M-f1] 'linum-mode)
+(global-set-key (kbd "<M-S-f1>") 'linum-relative-mode)
 
 ;; ispell changing dictionaries when need
 (global-set-key [C-f8] (lexical-let ((dict (if (eq system-type 'windows-nt)
@@ -154,3 +155,7 @@
 ;; clojure repl improvements
 (with-eval-after-load 'cider
   (define-key cider-repl-mode-map (kbd "C-c C-k") 'cider-repl-clear-buffer))
+
+
+(with-eval-after-load 'org
+  (define-key org-mode-map (kbd "<f9>") 'org-latex-export-to-pdf))

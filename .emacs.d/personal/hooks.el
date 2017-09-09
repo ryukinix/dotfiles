@@ -84,3 +84,12 @@
 
 ;; force xml-mode to msbuild project files
 (add-to-list 'auto-mode-alist '("\\.\\(c\\|f\\)sproj\\'" . xml-mode))
+
+
+(defun emacsd-push()
+  (interactive)
+  (shell-command "emacsd-push"))
+
+(defun emacsd-pull()
+  (interactive)
+  (shell-command "emacsd-pull"))
