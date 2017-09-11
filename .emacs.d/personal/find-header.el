@@ -1,4 +1,5 @@
-;; Author:Tatsuhiko Kubo
+;;; find-header.el --- Find header of C/C++ files
+;; Author: Tatsuhiko Kubo
 ;; This elisp can open header file on current line.
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -6,16 +7,26 @@
 ;; the Free Software Foundation; either version 2, or (at your option)
 ;; any later version.
 
+
+;;; Commentary:
+;; This is useful as fuck, but would be nice bind the M-, to go back
+;; on stack pointer cursor.  That way calling nested find-header
+;; would not be messy.
+
 (require 'cc-mode)
-(defvar find-header-file-header-file-prefixes (list "/usr/include/"
-                                                    "/usr/local/include/"
-                                                    "/usr/include/c++/7.1.1/"
-                                                    "/usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/include/"))
+;;; Code:
+
+(setq-default find-header-file-header-file-prefixes (list "/usr/include/"
+                                                          "/usr/local/include/"
+                                                          "/usr/include/c++/7.1.1/"
+                                                          "/usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/include/"))
 
 (defun find-header-file-current-char ()
+  "Get the next char after point and return as string."
   (char-to-string (char-after (point))))
 
 (defun find-header-file-current-line-string ()
+  "Get current line as string."
   (let ((line-string ""))
     (save-excursion
       (while (not (bolp))
@@ -26,6 +37,7 @@
     line-string))
 
 (defun find-header-file-buffer-on-path (prefix-list filename)
+  "Get path of the header from PREFIX-LIST paths based on FILENAME string."
   (if (null (car prefix-list))
       nil
     (if (file-exists-p (concat (car prefix-list) filename))
@@ -33,6 +45,7 @@
       (find-header-file-buffer-on-path (cdr prefix-list) filename))))
 
 (defun find-header-file ()
+  "Open the buffer of the current cursor line header."
   (interactive)
   (let ((current-line-string (find-header-file-current-line-string))
         (header-file-buffer nil))
@@ -58,3 +71,7 @@
 ;; binding keys for C and C++ to C-c C-. on `find-header-file' function
 (define-key c++-mode-map (kbd "C-c C-.") 'find-header-file)
 (define-key c-mode-map (kbd "C-c C-.") 'find-header-file)
+
+(provide 'find-header)
+
+;;; find-header.el ends here

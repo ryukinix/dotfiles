@@ -1,7 +1,8 @@
 ;;; -*- lexical-binding: t -*-
 ;; My Personal Keybindings
 
-(prelude-require-packages '(multiple-cursors fsharp-mode neotree linum-relative))
+(prelude-require-packages '(multiple-cursors fsharp-mode neotree linum-relative
+                                             darkroom))
 
 (require 'company)
 (require 'fsharp-mode)
@@ -159,3 +160,7 @@
 
 (with-eval-after-load 'org
   (define-key org-mode-map (kbd "<f9>") 'org-latex-export-to-pdf))
+
+
+;; set darkroom for non-distract mode keybinding
+(global-set-key (kbd "<S-f11>") 'darkroom-tentative-mode)
