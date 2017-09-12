@@ -8,6 +8,7 @@
 (require 'fsharp-mode)
 (require 'prelude-custom) ;; definition of prelude-user-init-file
 (require 'multiple-cursors)
+(require 'darkroom)
 
 (message "Personal keybindings loading...")
 
