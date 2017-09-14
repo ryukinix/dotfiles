@@ -2,13 +2,15 @@
 ;; My Personal Keybindings
 
 (prelude-require-packages '(multiple-cursors fsharp-mode neotree linum-relative
-                                             darkroom))
+                                             darkroom speedbar sr-speedbar
+                                             projectile-speedbar))
 
 (require 'company)
 (require 'fsharp-mode)
 (require 'prelude-custom) ;; definition of prelude-user-init-file
 (require 'multiple-cursors)
 (require 'darkroom)
+(require 'sr-speedbar)
 
 (message "Personal keybindings loading...")
 
@@ -61,6 +63,8 @@
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 ;; neotree feels
 (global-set-key (kbd "C-x t") 'neotree-toggle)
+(global-set-key (kbd "C-x y") 'projectile-speedbar-toggle)
+
 
 ;; universal compile command
 (global-set-key (kbd "<f9>") 'compile)

@@ -37,19 +37,22 @@
                      (or (getenv "CPPFLAGS") "-DDEBUG=9")
                      (or (getenv "CFLAGS") "-pedantic -Wall -g")
                      file)))
-      (push (format "gdb --fullname \"%s.%s\"" file-basename extension)
-            gud-gud-gdb-history)
-      (set (make-local-variable 'gud-gdb-command-name)
-           (format "gdb -i=mi \"%s.%s\"" file-basename extension)))))
+      (set (make-local-variable 'gud-gud-gdb-history)
+           (cons (format "gdb --fullname \"%s.%s\"" file-basename extension)
+                 gud-gud-gdb-history))
+      (set (make-local-variable 'gud-gdb-history)
+           (cons (format "gdb -i=mi \"%s.%s\"" file-basename extension)
+                 gud-gdb-history)))))
 
 
 (defun setup-python-pdb-command ()
   "Set gud-pdb-command-name variable according the file buffer name"
   (define-key (current-local-map) [M-f9] 'pdb)
   (when buffer-file-name
-    (set (make-local-variable 'gud-pdb-command-name)
+    (set (make-local-variable 'gud-pdb-history)
          (let ((file (file-name-nondirectory buffer-file-name)))
-           (format "python -m pdb %s" file)))))
+           (cons (format "python -m pdb %s" file)
+                 gud-pdb-history)))))
 
 
 ;; can create files on C-c p h
