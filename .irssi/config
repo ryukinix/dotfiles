@@ -102,11 +102,6 @@ chatnets = {
   Ubuntu = { type = "IRC"; };
 
 
-  #lerax_here
-  freenode = {
-    type = "IRC";
-    autosendcmd = "/msg NickServ identify ***REMOVED***";
-  };
 };
 
 channels = (
