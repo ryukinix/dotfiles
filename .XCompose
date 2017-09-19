@@ -1,0 +1,71 @@
+# PKGW customizations
+# Greek ambiguities: epsilon/eta, theta/tau, pi/phi/psi, omega/omicron
+
+include "/usr/share/X11/locale/pt_BR.UTF-8/Compose"
+
+<Multi_key> <backslash> <comma> : " " U202F # thin nonbreaking space
+
+<Multi_key> <g> <a> : "α"
+<Multi_key> <g> <b> : "β"
+<Multi_key> <g> <g> : "γ"
+<Multi_key> <g> <d> : "δ"
+<Multi_key> <g> <3> : "ε" # note! 
+<Multi_key> <g> <z> : "ζ"
+<Multi_key> <g> <e> : "η"
+<Multi_key> <g> <h> : "θ" # note!
+<Multi_key> <g> <i> : "ι"
+<Multi_key> <g> <k> : "κ"
+<Multi_key> <g> <l> : "λ"
+<Multi_key> <g> <m> : "μ"
+<Multi_key> <g> <n> : "ν"
+<Multi_key> <g> <x> : "ξ"
+# note: no omicron
+<Multi_key> <g> <p> : "π"
+<Multi_key> <g> <r> : "ρ"
+<Multi_key> <g> <s> : "σ"
+<Multi_key> <g> <t> : "τ"
+<Multi_key> <g> <u> : "ψ"
+<Multi_key> <g> <f> : "φ" # note!
+<Multi_key> <g> <c> : "χ"
+<Multi_key> <g> <o> : "ω"
+
+<Multi_key> <g> <G> : "Γ"
+<Multi_key> <g> <D> : "Δ"
+<Multi_key> <g> <H> : "Θ"
+<Multi_key> <g> <L> : "Λ"
+<Multi_key> <g> <X> : "Ξ"
+<Multi_key> <g> <P> : "Π"
+<Multi_key> <g> <S> : "Σ"
+<Multi_key> <g> <F> : "Φ"
+<Multi_key> <g> <U> : "Ψ"
+<Multi_key> <g> <O> : "Ω"
+
+<Multi_key> <B> <A> : "𝔸"
+<Multi_key> <B> <B> : "𝔹"
+<Multi_key> <B> <C> : "ℂ"
+<Multi_key> <B> <D> : "𝔻"
+<Multi_key> <B> <E> : "𝔼"
+<Multi_key> <B> <F> : "𝔽"
+<Multi_key> <B> <G> : "𝔾"
+<Multi_key> <B> <H> : "ℍ"
+<Multi_key> <B> <I> : "𝕀"
+<Multi_key> <B> <J> : "𝕁"
+<Multi_key> <B> <K> : "𝕂"
+<Multi_key> <B> <L> : "𝕃"
+<Multi_key> <B> <M> : "𝕄"
+<Multi_key> <B> <N> : "ℕ"
+<Multi_key> <B> <O> : "𝕆"
+<Multi_key> <B> <P> : "ℙ"
+<Multi_key> <B> <Q> : "ℚ"
+<Multi_key> <B> <R> : "ℝ"
+<Multi_key> <B> <S> : "𝕊"
+<Multi_key> <B> <T> : "𝕋"
+<Multi_key> <B> <U> : "𝕌"
+<Multi_key> <B> <V> : "𝕍"
+<Multi_key> <B> <W> : "𝕎"
+<Multi_key> <B> <X> : "𝕏"
+<Multi_key> <B> <Y> : "𝕐"
+<Multi_key> <B> <Z> : "ℤ"
+
+
+
