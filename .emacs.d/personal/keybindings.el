@@ -137,7 +137,7 @@
 ;; mouse-9 -> mouse-5
 (labels ((meta-kbd (meta bind &optional (key "@key"))
                    (kbd (replace-regexp-in-string key bind meta))))
-  (let* ((windows-p (eq system-name 'windows-nt))
+  (let* ((windows-p (eq system-type 'windows-nt))
          (wheel-up (if windows-p "wheel-up" "mouse-4"))
 
          (wheel-down (if windows-p "wheel-down" "mouse-5"))
