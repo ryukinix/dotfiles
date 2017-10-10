@@ -169,3 +169,8 @@
 
 ;; set darkroom for non-distract mode keybinding
 (global-set-key (kbd "<S-f11>") 'darkroom-tentative-mode)
+
+;; disable mouse-start-secondary (selection)
+;; this avoid weird highlights when I try just copy and paste with a mouse
+;; selection
+(global-unset-key (kbd "<M-mouse-1>"))
