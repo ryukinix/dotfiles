@@ -93,7 +93,7 @@
     (ssh-agency-ensure)
     (when hardcoded-auth
         (setenv "SSH_AUTH_SOCK_BACK" (getenv "SSH_AUTH_SOCK"))
-        (setenv "SSH_AUTH_SOCK" hardcode-auth))))
+        (setenv "SSH_AUTH_SOCK" hardcoded-auth))))
 
 ;; set tab size to 4 (I don't like it 8, very big for me)
 (setq-default tab-width 4)
