@@ -83,14 +83,17 @@
 ;; ░  ░       ░         ░  ░░ ░            ░
 
 ")
-
 ;; ensure that all the ssh keys was loaded
 (require 'manoel)
-(let ((ssh "ssh"))
-  (when-system 'windows
-               (setq ssh (concatenate 'string ssh ".exe")))
-  (when (executable-find ssh)
-    (ssh-agency-ensure)))
+(when (executable-find ssh-agency-agent-executable)
+  ;; this will not work if the SSH_AUTH_SOCK was not opened yet
+  ;; On my setup I rely on gnome-keyring to open this shit on XFCE startup
+  ;; so then on a running without X this will not work
+  (let ((hardcoded-auth (getenv "SSH_AUTH_SOCK")))
+    (ssh-agency-ensure)
+    (when hardcoded-auth
+        (setenv "SSH_AUTH_SOCK_BACK" (getenv "SSH_AUTH_SOCK"))
+        (setenv "SSH_AUTH_SOCK" hardcode-auth))))
 
 ;; set tab size to 4 (I don't like it 8, very big for me)
 (setq-default tab-width 4)
