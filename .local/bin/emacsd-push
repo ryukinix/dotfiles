@@ -16,6 +16,7 @@ echo -e "$GREEN:: Diffing $STOP"
 git add -A
 git --no-pager diff @
 read -p "Press enter to commit this changes"
-git commit -m "Update emacs.d on STARFOX by emacsd-push script"
+git pull --rebase # try fetch the changes
+git commit -m "Update emacs.d on $(hostname)t by emacsd-push script"
 git push # allow try git push always
 echo -e "$GREEN:: DONE! $STOP"
