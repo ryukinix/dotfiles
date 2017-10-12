@@ -95,5 +95,17 @@
         (setenv "SSH_AUTH_SOCK_BACK" (getenv "SSH_AUTH_SOCK"))
         (setenv "SSH_AUTH_SOCK" hardcoded-auth))))
 
+(defun ssh-agency-auth-sock-restore ()
+  "Restore SSH_AUTH_SOCK_BACK and SSH_AUTH_SOCK"
+  (interactive)
+  (let* ((ssh "SSH_AUTH_SOCK")
+         (ssh-back "SSH_AUTH_SOCK_BACK")
+         (current (getenv ssh))
+         (back (getenv ssh-back)))
+    (when back
+      (setenv ssh-back current)
+      (setenv ssh back))
+    (message (getenv ssh))))
+
 ;; set tab size to 4 (I don't like it 8, very big for me)
 (setq-default tab-width 4)
