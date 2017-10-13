@@ -1,127 +1,118 @@
-";         Everybody is connected
-"; : - ) ( - :   : - ) ( - :   : - ) ( - :
-"; ^        . .  ^        . .  ^        . .
-"; |    ☺️    |   |    ☺️    |   |    ☺️    |
-";. .        v  . .        v  . .        v
-"; ( - : : - )   ( - : : - )   ( - : : - )
-";               \    |    /
-"; : - ) ( - :     \  |  /     : - ) ( - :
-"; ^        . .      +-+       ^        . .
-"; |    ☺️    | ------|☺️|------ |    ☺️    |
-";. .        v       +-+      . .        v
-"; ( - : : - )     /  |  \     ( - : : - )
-";               /    |    \ 
-"; : - ) ( - :   : - ) ( - :   : - ) ( - :
-"; ^        . .  ^        . .  ^        . .
-"; |    ☺️    |   |    ☺️    |   |    ☺️    |
-";. .        v  . .        v  . .        v
-"; ( - : : - )   ( - : : - )   ( - : : - )
-
-" Manoel Machado
-" ---------- VERY IMPORTANT -----------
-" To install plugin the first time:
-" > vim +PlugInstall +qall
-" -------------------------------------
-
-call plug#begin('~/.vim/plugged')
-
-" Distraction Free Writting
-Plug 'junegunn/goyo.vim'
-
-" completion during typing
-Plug 'neocomplcache'
-" Right way to handle trailing-whitespace
-Plug 'bronson/vim-trailing-whitespace'
-" NERDTree
-Plug 'scrooloose/nerdtree'
-Plug 'Shougo/vimproc.vim'
-" GIT
-" show which line changed using git
-Plug 'airblade/vim-gitgutter'
-" Align code
-Plug 'junegunn/vim-easy-align'
-
-Plug 'wakatime/vim-wakatime'
-
-call plug#end()
-
+" Don't try to be vi compatible
 set nocompatible
 
-" ###################
-" ### Plugin conf ###
-" ###################
+" Helps force plugins to load correctly when it is turned back on below
+filetype off
 
+" TODO: Load plugins here (pathogen or vundle)
 
-" ----------------
-"       GIT
-" ----------------
+" Turn on syntax highlighting
+syntax on
 
-" -- vim-gitgutter
-highlight clear SignColumn
-highlight SignColumn ctermbg=0
-nmap gn <Plug>GitGutterNextHunk
-nmap gN <Plug>GitGutterPrevHunk
+" For plugins to load correctly
+filetype plugin indent on
 
-" -----------------
-"       THEME
-" -----------------
+" TODO: Pick a leader key
+" let mapleader = ","
 
-" -- monokai
+" Security
+set modelines=0
 
-syntax enable
-set background=dark
-try
-    colorscheme monokai
-catch
-endtry
+" Show line numbers
+set number
 
+" Show file stats
+set ruler
 
-" #####################
-" ### Personal conf ###
-" #####################
+" Blink cursor on error instead of beeping (grr)
+" set visualbell
 
-" Use Vim settings, rather then Vi settings (much better!).
-" This must be first, because it changes other options as a side effect.
-set nocompatible
-set bs=2		        " allow backspacing over everything in insert mode
-set viminfo='20,\"50    " read/write a .viminfo file, don't store more
-			            " than 50 lines of registers
-set history=10000	    " keep 100000 lines of command line history
-set ruler		        " show the cursor position all the time
+" Encoding
+set encoding=utf-8
 
-set hlsearch " highlight searches
-
-
-" move between splits
-noremap <C-h> <C-w>h
-noremap <C-j> <C-w>j
-noremap <C-k> <C-w>k
-noremap <C-l> <C-w>l
-
-" -- sudo save
-cmap w!! w !sudo tee >/dev/null %
-
-" Tabulation management
+" Whitespace
+set wrap
+set textwidth=79
+set formatoptions=tcqrn1
 set tabstop=4
-set softtabstop=4
 set shiftwidth=4
+set softtabstop=4
 set expandtab
-set autoindent
-set smartindent
-set cindent
-set cinoptions=(0,u0,U0
+set noshiftround
 
-" Easy align interactive
-vnoremap <silent> <Enter> :EasyAlign<cr>
+" Cursor motion
+set scrolloff=3
+set backspace=indent,eol,start
+set matchpairs+=<:> " use % to jump between pairs
+runtime! macros/matchit.vim
 
-" ========
-" Personal
-" ========
+" Move up/down editor lines
+nnoremap j gj
+nnoremap k gk
 
-" Python execute
-autocmd FileType python nnoremap <buffer> <F8> :exec '!clear; python "%"' <cr>
-" C execute
-autocmd FileType c nnoremap <buffer> <F8> :exec '!clear; gcc "%" -o temp.out && ./temp.out && rm temp.out' <cr>
-" Clojure execute
-autocmd FileType clojure nnoremap <buffer> <F8> :exec '%Eval' <cr>
-autocmd BufRead * nnoremap <buffer> <F5> :exec ':w' <cr>
+" Allow hidden buffers
+set hidden
+
+" Rendering
+set ttyfast
+
+" Status bar
+set laststatus=2
+
+" Last line
+set showmode
+set showcmd
+
+" Searching
+nnoremap / /\v
+vnoremap / /\v
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
+set showmatch
+map <leader><space> :let @/=''<cr> " clear search
+
+" Remap help key.
+inoremap <F1> <ESC>:set invfullscreen<CR>a
+nnoremap <F1> :set invfullscreen<CR>
+vnoremap <F1> :set invfullscreen<CR>
+
+" Textmate holdouts
+
+" Formatting
+map <leader>q gqip
+
+" Visualize tabs and newlines
+set listchars=tab:▸\ ,eol:¬
+" Uncomment this to enable by default:
+" set list " To enable by default
+" Or use your leader key + l to toggle on/off
+map <leader>l :set list!<CR> " Toggle tabs and EOL
+
+" Color scheme (terminal)
+set t_Co=256
+set background=dark
+let g:solarized_termcolors=256
+let g:solarized_termtrans=1
+" put https://raw.github.com/altercation/vim-colors-solarized/master/colors/solarized.vim
+" in ~/.vim/colors/ and uncomment:
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'wakatime/vim-wakatime'
+
+call vundle#end()
+
+" remapping for hotfix problems
+:command WQ wq
+:command Wq wq
+:command W w
+:command Q q
+
+:command Xclip :call system('xclip -sel clipboard', @0)
+
+:noremap <C-c> y :Xclip<CR>
