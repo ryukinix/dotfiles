@@ -1,2 +1,2 @@
 #!/usr/bin/bash
-exec ip link show | grep -E $1.*: -o | sed 's/://g'
+ip addr | grep global | grep -E -o \[a-z0-9\]+$

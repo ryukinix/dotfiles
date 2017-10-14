@@ -1,33 +1,27 @@
 #!/usr/bin/bash
-wireless=wlp
+wireless="(wlp|wlan)"
 wired=enp
-base=$wired
-
-if [ -n $1 ]; then
-	base=$1
-fi
-
 
 # I THINK THE ALGORITHM IS FUCKED
 
 # get a new wlp0 network
-network=`get-network $base`
-echo "network: $base"
+network=`get-network`
+echo "network: $network"
 
 if [ "$network" != "" ]; then
-	# a regex expression for search the old address
-	search="s/\(\(?$wired\)|\(?$wireless\)[a-z0-9]*\)/"
+        # a regex expression for search the old address
+        search="s/\(\(?$wired\)|\(?$wireless\)[a-z0-9]*\)/"
 
-	# add to code the new adress network
-	search+=$network/g
+        # add to code the new adress network
+        search+=$network/g
 
-	# path of conky to replace old => new address
-	file=~/.conky/themes/Gold\&Grey/config/net
-	# command to do that replace
-	sed -i "$search" "$file"
-	echo "Base: $base"
-	echo "sed -i $search $file"
-	echo "Update conky adress network!"
-else 
-	echo "Not found wireless network. Abort update!"
-fi 
+        # path of conky to replace old => new address
+        file=~/.conky/themes/Gold\&Grey/config/net
+        # command to do that replace
+        sed -i "$search" "$file"
+        echo "Base: $base"
+        echo "sed -i $search $file"
+        echo "Update conky adress network!"
+else
+        echo "Not found wireless network. Abort update!"
+fi
