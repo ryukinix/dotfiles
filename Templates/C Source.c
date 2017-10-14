@@ -1,11 +1,18 @@
-/*
- * =====================================================================================
+/**
+ * ================================================
  *
- *                      Copyright 2016 Manoel Vilela
+ *         Copyright 2017 Manoel Vilela
  *
  *         Author: Manoel Vilela
  *        Contact: manoel_vilela@engineer.com
- *   Organization: UFPA
+ *   Organization: UFC
  *
- * =====================================================================================
-**/
+ * ===============================================
+ */
+
+#include <stdio.h>
+
+int main(void) {
+    printf("Hello, World!\n");
+    return 0;
+}

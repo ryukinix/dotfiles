@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
-#    Copyright © <owner> <year>
+#    Copyright © 2017 Manoel Vilela
 #
-#       @team: <team>
 #    @project: <project>
 #     @author: Manoel Vilela
 #      @email: manoel_vilela@engineer.com

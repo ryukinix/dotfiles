@@ -1,14 +1,12 @@
 #!/usr/bin/env python3
 #
-#    Copyright © Manoel Vilela
+#    Copyright © Nexus Edge
 #
-#       @team: Limbocode
-#    @project: Python Project Template
-#     @author: Manoel Vilela
-#      @email: manoel_vilela@engineer.com
+#       @team: Data Science & Artificial Intelligence
+#    @project: Television Content Recognition
+#     @author: Marcellus Amadeus & Manoel Vilela
+#      @email: {marcellus, manoel.vilela}@nexusedge.com.br
 #
-
-
 
 import unittest
 
@@ -17,15 +15,15 @@ class TestModule(unittest.TestCase):
 
     def test_colorize(self):
         ...
-        self.assertNotEqual('a', 'b', "Assert message")
+        self.assertNotEqual('obj1', 'obj2', "Assert message")
 
     def test_running(self):
         ...
-        self.assertEqual('a', 'a', "Assert message")
+        self.assertEqual('obj1', 'obj2', "Assert message")
 
     def test_failing(self):
         ...
-        self.assertTrue(True, "Assert message")
+        self.assertTrue('obj1', 'obj2', "Assert message")
 
 
 if __name__ == '__main__':

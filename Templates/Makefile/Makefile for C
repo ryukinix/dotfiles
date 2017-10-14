@@ -1,0 +1,32 @@
+ifeq ($(OS),Windows_NT)
+	EXTENSION := exe
+	REMOVE := del \P \Q \F
+else
+	EXTENSION := out
+	REMOVE := rm -rfv
+endif
+
+CC = gcc
+CFLAGS = -g -pedantic -Wall -Wextra -Wshadow
+LDFLAGS = -lm
+TARGET = solution-name
+
+all: compile
+
+$(TARGET:=.o): $(TARGET:=.c)
+	$(CC) -c $(CFLAGS) $?
+
+$(TARGET:=.$(EXTENSION)): $(TARGET:=.o)
+	$(CC) $(CFLAGS) $? -o $@ $(LDFLAGS)
+
+compile: $(TARGET:=.o)
+
+binary: $(TARGET:=.$(EXTENSION))
+
+clean:
+	$(REMOVE) *.o *.$(EXTENSION)
+
+run: binary
+	./$(TARGET).$(EXTENSION)
+
+.PHONY: clean
