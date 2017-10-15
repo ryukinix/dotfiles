@@ -1,10 +1,15 @@
+PACKAGES=(zsh vim conky emacs tmux)
+DEFAULT_SHELL=zsh
+
 # install main packages
 if [ -f /usr/bin/pacman ]; then
-    sudo pacman -Sy \
-         zsh \
-         vim \
-         conky \
-         emacs && chsh -s /bin/zsh
+    echo "Arch Linux based. Installing: $PACKAGES."
+    sudo pacman -Sy ${PACKAGES[@]} && chsh -s $DEFAULT_SHELL
+elif [ -f /usr/bin/apt-get ]; then
+    echo "Debian based. Installing: $PACKAGES."
+    sudo apt-get update && \
+         sudo apt-get install ${PACKAGES[@]} && \
+         cshs -s $DEFAULT_SHELL
 fi
 
 # install prelude for emacs
