@@ -1,5 +1,5 @@
 # install main packages
-if [ -f /usr/bin/pacman]; then
+if [ -f /usr/bin/pacman ]; then
     sudo pacman -Sy \
          zsh \
          vim \
