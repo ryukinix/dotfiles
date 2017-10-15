@@ -36,8 +36,8 @@ function install-vim-deps {
 }
 
 printf "Installing packages..."
-install-packages && echo "done." || echo "fail."
+install-packages && echo "done." || echo "fail or skipped."
 printf "Installing prelude for emacs..."
 install-prelude && echo "done." || echo "fail."
-echo "Installing vim deps..."
+printf "Installing vim deps..."
 install-vim-deps && echo "done." || echo "fail."

@@ -24,8 +24,6 @@ function clone-repo {
 
     printf "Cloning $DOT_URL..."
     git clone --bare $DOT_URL $HOME/.dot --quiet && echo "done." || echo "fail."
-    echo "Initializing submodules... "
-    dot submodule update --init --recursive &&  echo "done." || echo "fail."
 }
 
 
@@ -58,8 +56,7 @@ function install-dotfiles {
 
     clone-repo
 
-
-    dot checkout &> /dev/null
+    dot checkout > /dev/null
 
     if [ $? != '0' ]; then
         backup-dotfiles
@@ -68,6 +65,9 @@ function install-dotfiles {
     dot reset HEAD . > /dev/null
     dot checkout . > /dev/null
     dot config status.showUntrackedFiles no
+
+    printf "Initializing submodules... "
+    dot submodule update --init --recursive &&  echo "done." || echo "fail."
 }
 
 function post-install {
