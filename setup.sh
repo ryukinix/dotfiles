@@ -37,13 +37,16 @@ function backup-dotfiles {
         dot checkout 2>&1 \
             | egrep "^\s+" \
             | awk '{$1=$1;print}' \
-            | xargs -d '\n' -I{in} ls --directory --escape "{in}" 2> /dev/null \
+            | xargs -d '\n' -I{in} ls -d -b "{in}" 2> /dev/null \
             | cat
     }
+
     # popule dirs
-    conflict-files | xargs -d '\n' dirname | uniq | xargs -L 1 -d '\n' -I{in} mkdir -p "$BACKUP_DIR/{in}"
+    conflict-files | xargs dirname | sort | uniq \
+                   | sed 's/^/$BACKUP_DIR\//' | xargs mkdir -p
+
     # mv files
-    conflict-files | xargs -L 1 -d '\n' -I{in} mv "{in}" "$BACKUP_DIR/{in}"
+    conflict-files | xargs mv -t $BACKUP_DIR
 }
 
 if [ -d .dot ]; then
