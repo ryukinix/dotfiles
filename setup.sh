@@ -35,18 +35,20 @@ mkdir -p .dot-backup
 
 dot checkout
 
-if [ $? = 0 ]; then
-    echo "Checked out dot."
-else
-    echo "Backing up pre-existing dot files."
+if [ $? != '0' ]; then
+    echo "Backing up pre-existing dot files on ~/.dot.backup."
 
     rm -rf .dot-backup
+    touch .dot.log
     for file in $(dot checkout 2>&1 | egrep "^\s+" | awk {'print $1'})
     do
         mkdir -p $(dirname .dot-backup/$file)
-        echo "Backup $file => .dot-backup/$file"
+        echo "Backup $file => .dot-backup/$file" >> .dot.log
         mv $file .dot-backup/$file
     done
+    echo "Backup finished. Look into .dot.log."
+
+
 fi
 
 dot reset HEAD . > /dev/null
