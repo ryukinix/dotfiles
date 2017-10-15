@@ -22,10 +22,12 @@ function clone-repo {
         DOT_URL=https://github.com/$REPO_NAME.git
     fi
 
-    echo "Cloning $DOT_URL."
-    git clone --bare $DOT_URL $HOME/.dot --recursive --quiet
-
+    printf "Cloning $DOT_URL..."
+    git clone --bare $DOT_URL $HOME/.dot --quiet echo "done." || echo "fail."
+    echo "Initializing submodules... "
+    dot submodule update --init --recursive &&  echo "done." || echo "fail."
 }
+
 
 
 function backup-dotfiles {
@@ -48,34 +50,39 @@ function backup-dotfiles {
     done
 }
 
-if [ -d .dot ]; then
-    echo "Already installed dotfiles"
-    exit 1
-fi
+function install-dotfiles {
+    if [ -d .dot ]; then
+        echo "Already installed dotfiles"
+        exit 1
+    fi
 
-clone-repo
+    clone-repo
 
 
-dot checkout &> /dev/null
+    dot checkout &> /dev/null
 
-if [ $? != '0' ]; then
-    backup-dotfiles
-fi
+    if [ $? != '0' ]; then
+        backup-dotfiles
+    fi
 
-dot reset HEAD . > /dev/null
-dot checkout . > /dev/null
-dot config status.showUntrackedFiles no
+    dot reset HEAD . > /dev/null
+    dot checkout . > /dev/null
+    dot config status.showUntrackedFiles no
+}
 
-echo "Dotfiles installed."
+function post-install {
+    # install hook for deleting useless file on git pull
+    cp ~/post-merge-hook.sh ~/.dot/hooks/post-merge
+    cp ~/post-merge-hook.sh ~/.dot/hooks/post-rebase
 
+    # ignore loop (remove files which don't belong to dotfiles)
+    rm -rf ${IGNORED_FILES[@]}
+    dot update-index --assume-unchanged ${IGNORED_FILES[@]}
+
+    source ~/.bashrc
+}
+
+# main installation
+install-dotfiles && echo "Dotfiles installed."
 bash install.sh
-
-# install hook for deleting useless file on git pull
-cp ~/post-merge-hook.sh ~/.dot/hooks/post-merge
-cp ~/post-merge-hook.sh ~/.dot/hooks/post-rebase
-
-# ignore loop (remove files which don't belong to dotfiles)
-rm -rf ${IGNORED_FILES[@]}
-dot update-index --assume-unchanged ${IGNORED_FILES[@]}
-
-source ~/.bashrc
+post-install
