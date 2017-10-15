@@ -2,8 +2,8 @@
 
 cd ~/
 
-source conf.sh
-source lib.sh
+source <(curl -s https://raw.githubusercontent.com/ryukinix/dotfiles/master/lib.sh) # sorry
+source <(curl -s https://raw.githubusercontent.com/ryukinix/dotfiles/master/conf.sh) # sorry again
 
 function clone-repo {
     if [ ! -f /usr/bin/git ]; then
