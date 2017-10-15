@@ -1,0 +1,19 @@
+#!/bin/bash
+
+function has-frame {
+    emacsclient -n -e "(if (> (length (frame-list)) 1) 't)"
+}
+
+function new-frame {
+    emacsclient -c -n -a "" "$@"
+}
+
+function open-frame {
+    emacsclient -n -a "" "$@"
+}
+
+if [ `has-frame` == "t" ]; then
+    open-frame "$@" 2> /dev/null || open-frame -e '(progn (raise-frame) (switch-to-buffer "*scratch*"))'
+else
+    new-frame "$@"
+fi
