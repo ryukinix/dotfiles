@@ -44,7 +44,7 @@ function backup-dotfiles {
     conflict-files | while read file; do
         dest="$BACKUP_DIR/$file"
         mkdir -p "$(dirname "$dest")"
-        [[ -f "$file" ]] && mv -f "$(ls -d -b "$file")" "$(ls -d -b "$dest")"
+        [[ -f "$file" ]] && mv -f "$file" "$dest"
     done
 }
 
