@@ -4,3 +4,7 @@
 [submodule ".zprezto"]
 	path = .zprezto
 	url = https://github.com/sorin-ionescu/prezto.git
+
+[submodule ".conky/themes/RSS"]
+	path = .conky/themes/RSS
+	url = https://gist.github.com/4bdd0eafb26c3073d0b5111c42ea8ec5.git
