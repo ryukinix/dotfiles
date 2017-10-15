@@ -3,7 +3,7 @@
 # just ignore all shit files after `git pull`
 #
 
-ignore=(~/install.sh ~/README.md ~/setup.sh ~/dotdumper.sh ~/post-merge-hook.sh)
+ignore=(~/install.sh ~/README.md ~/setup.sh  ~/post-merge-hook.sh)
 
 mkdir -p ~/.dot-backup/
 mv ${ignore[@]} ~/.dot-backup/ 2> /dev/null || true

@@ -3,7 +3,7 @@
 cd ~/
 
 REPO_NAME=ryukinix/dotfiles
-IGNORED_FILES=(README.md setup.sh install.sh dotdumper.sh post-merge-hook.sh)
+IGNORED_FILES=(README.md setup.sh install.sh post-merge-hook.sh)
 BACKUP_DIR=.dot-backup/$(date -Ihours)
 
 function dot {
