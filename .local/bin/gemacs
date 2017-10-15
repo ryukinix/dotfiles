@@ -13,7 +13,11 @@ function open-frame {
 }
 
 if [ `has-frame` == "t" ]; then
-    open-frame "$@" 2> /dev/null || open-frame -e '(progn (raise-frame) (switch-to-buffer "*scratch*"))'
+    open-frame "$@" 2> /dev/null \
+        || open-frame \
+               -e '(raise-frame)' \
+               1> /dev/null
+
 else
     new-frame "$@"
 fi
