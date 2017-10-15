@@ -72,6 +72,7 @@
 ; (gtk_accel_path "<Actions>/ThunarActions/uca-action-1508025149558628-2" "")
 ; (gtk_accel_path "<Actions>/ThunarWindow/open-trash" "")
 ; (gtk_accel_path "<Actions>/ThunarActions/Tap::extract-to" "")
+; (gtk_accel_path "<Actions>/ThunarActions/uca-action-1468509136669190-2" "")
 ; (gtk_accel_path "<Actions>/ThunarActions/Tdp::comment\n" "")
 ; (gtk_accel_path "<Actions>/ThunarStandardView/properties" "<Alt>Return")
 ; (gtk_accel_path "<Actions>/ThunarActions/Tdp::share" "")
