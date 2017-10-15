@@ -37,7 +37,7 @@ function backup-dotfiles {
         dot checkout 2>&1 \
             | egrep "^\s+" \
             | awk '{$1=$1;print}' \
-            | xargs -d '\n' -I{in} ls --directory --escape "{in}" 2> /dev/null
+            | xargs -d '\n' -I{in} ls --directory --escape "{in}" 2> /dev/null \
             | cat
     }
     # popule dirs
