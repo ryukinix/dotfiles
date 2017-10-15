@@ -2,9 +2,18 @@
 LastActiveMode=THUNAR_RENAMER_MODE_BOTH
 LastActiveRenamer=ThunarSbrReplaceRenamer
 
+[ThunarSbrCaseRenamer]
+Mode=THUNAR_SBR_CASE_RENAMER_MODE_LOWER
+
+[ThunarSbrRemoveRenamer]
+EndOffsetMode=THUNAR_SBR_OFFSET_MODE_RIGHT
+StartOffset=1
+EndOffset=0
+StartOffsetMode=THUNAR_SBR_OFFSET_MODE_RIGHT
+
 [ThunarSbrReplaceRenamer]
-Regexp=FALSE
-Replacement=mmx
+Regexp=TRUE
+Replacement=id
 CaseSensitive=FALSE
-Pattern=ios_rx
+Pattern=ida
 
