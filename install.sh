@@ -4,9 +4,7 @@ if [ -f /usr/bin/pacman ]; then
          zsh \
          vim \
          conky \
-         emacs
-
-    chsh -s /bin/zsh
+         emacs && chsh -s /bin/zsh
 fi
 
 # install prelude for emacs
