@@ -72,6 +72,7 @@ bash install.sh
 
 # install hook for deleting useless file on git pull
 cp ~/post-merge-hook.sh ~/.dot/hooks/post-merge
+cp ~/post-merge-hook.sh ~/.dot/hooks/post-rebase
 
 # ignore loop (remove files which don't belong to dotfiles)
 rm -rf ${IGNORED_FILES[@]}
