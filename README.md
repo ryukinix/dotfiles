@@ -5,5 +5,5 @@ Be careful.
 ## Installing
 
 ``` bash
-bash <(curl -s https://raw.githubusercontent.com/ryukinix/dotfiles/master/setup.sh)
+bash <(curl -s -L dotfiles.lerax.me)
 ```
