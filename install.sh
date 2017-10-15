@@ -3,10 +3,10 @@ DEFAULT_SHELL=zsh
 
 # install main packages
 if [ -f /usr/bin/pacman ]; then
-    echo "Arch Linux based. Installing: $PACKAGES."
+    echo "Arch Linux based. Installing: ${PACKAGES[@]}."
     sudo pacman -Sy ${PACKAGES[@]} && chsh -s $DEFAULT_SHELL
 elif [ -f /usr/bin/apt-get ]; then
-    echo "Debian based. Installing: $PACKAGES."
+    echo "Debian based. Installing: ${PACKAGES[@]}."
     sudo apt-get update && \
          sudo apt-get install ${PACKAGES[@]} && \
          chsh -s $DEFAULT_SHELL
