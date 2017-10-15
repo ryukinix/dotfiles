@@ -47,7 +47,7 @@ if [ $? != '0' ]; then
     # popule dirs
     conflict-files | xargs -d '\n' dirname | uniq | xargs -L 1 -d '\n' -I{in} mkdir -p "$BACKUP_DIR/{in}"
     # mv files
-    conflict-files | xargs -L 1 -d '\n' -I{in} mv -v "{in}" "$BACKUP_DIR/{in}"
+    conflict-files | xargs -L 1 -d '\n' -I{in} mv "{in}" "$BACKUP_DIR/{in}"
 fi
 
 dot reset HEAD . > /dev/null
