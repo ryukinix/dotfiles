@@ -1,0 +1,3 @@
+[submodule ".quicklisp/local-projects/lisp-chat"]
+	path = .quicklisp/local-projects/lisp-chat
+	url = git@github.com:ryukinix/lisp-chat.git
