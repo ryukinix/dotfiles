@@ -33,7 +33,7 @@ git clone --bare $DOT_URL $HOME/.dot --recursive --quiet
 
 mkdir -p .dot-backup
 
-dot checkout
+dot checkout &> /dev/null
 
 if [ $? != '0' ]; then
     echo "Backing up pre-existing dot files on ~/.dot.backup."
@@ -66,3 +66,5 @@ cp ~/post-merge-hook.sh ~/.dot/hooks/post-merge
 echo "Removing useless files..."
 rm -rf ${IGNORED_FILES[@]}
 dot update-index --assume-unchanged ${IGNORED_FILES[@]}
+
+source ~/.bashrc
