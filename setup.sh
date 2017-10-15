@@ -21,7 +21,7 @@ if [ ! -f /usr/bin/git ]; then
 fi
 
 
-if [ ! -f /usr/bin/ssh ]; then
+if [ -f /usr/bin/ssh ]; then
     DOT_URL=git@github.com:$REPO_NAME.git
 else
     DOT_URL=https://github.com/$REPO_NAME.git
