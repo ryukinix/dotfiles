@@ -7,7 +7,7 @@ source <(curl -s https://raw.githubusercontent.com/ryukinix/dotfiles/master/conf
 
 function clone-repo {
     if [ ! -f /usr/bin/git ]; then
-        echo-error "error" "Please install git and try again."
+        echo_error "error" "Please install git and try again."
         exit 1
     fi
 
@@ -17,14 +17,14 @@ function clone-repo {
         DOT_URL=https://github.com/$REPO_NAME.git
     fi
 
-    echo-info "git" "Cloning $DOT_URL..."
+    echo_info "git" "Cloning $DOT_URL..."
     git clone --bare $DOT_URL $HOME/.dot --quiet
 }
 
 
 
 function backup-dotfiles {
-    echo-info "backup" "Backing up pre-existing dot files on $BACKUP_DIR."
+    echo_info "backup" "Backing up pre-existing dot files on $BACKUP_DIR."
 
     rm -rf $BACKUP_DIR && mkdir -p $BACKUP_DIR
     # get conflict files (only if really exists)
@@ -45,7 +45,7 @@ function backup-dotfiles {
 
 function install-dotfiles {
     if [ -d .dot ]; then
-        echo-info "info" "Already installed dotfiles. do 'rm -rf ~/.dot' to a fresh install."
+        echo_info "info" "Already installed dotfiles. do 'rm -rf ~/.dot' to a fresh install."
         exit 1
     fi
 
@@ -61,14 +61,14 @@ function install-dotfiles {
     dot checkout . > /dev/null
     dot config status.showUntrackedFiles no
 
-    echo-info "git" "Initializing submodules... just wait."
+    echo_info "git" "Initializing submodules... just wait."
     dot submodule update --init --recursive --quiet &&  echo "done." || echo "fail."
 }
 
 function post-install {
     # install hook for deleting useless file on git pull
     cat conf.sh lib.sh post-hook | tee ~/.dot/hooks/post-merge \
-                                       ~/.dot/hooks/post-rebase \
+                                       ~/.dot/hooks/post-rewrite \
                                        1> /dev/null
     source post-hook # execute post-hook (remove useless files)
 }
@@ -77,4 +77,4 @@ function post-install {
 install-dotfiles
 bash install.sh
 post-install
-echo-info "info" "Dotfiles installation finished."
+echo_info "info" "Dotfiles installation finished."

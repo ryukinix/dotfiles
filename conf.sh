@@ -1,3 +1,4 @@
+#!/bin/bash
 REPO_NAME=ryukinix/dotfiles
 IGNORED_FILES=(README.md # these files will be removed
                setup.sh

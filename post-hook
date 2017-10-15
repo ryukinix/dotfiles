@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # just ignore all shit files after `git pull`
 #

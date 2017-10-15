@@ -1,3 +1,4 @@
+#!/bin/bash
 source lib.sh
 source conf.sh
 
@@ -9,10 +10,10 @@ function install-packages {
 
     # install main packages
     if [ -f /usr/bin/pacman ]; then
-        echo-info info "Arch Linux based: using pacman."
+        echo_info info "Arch Linux based: using pacman."
         sudo pacman -Sy --needed ${PACKAGES[@]} && chsh -s $DEFAULT_SHELL
     elif [ -f /usr/bin/apt-get ]; then
-        echo-info info "Debian based: using apt-get."
+        echo_info info "Debian based: using apt-get."
         sudo apt-get update && \
              sudo apt-get install ${PACKAGES[@]} && \
              chsh -s $DEFAULT_SHELL
@@ -39,9 +40,9 @@ function install-vim-deps {
                                                     ~/.vim/bundle/Vundle.vim --quiet
 }
 
-echo-info installing "system packages: ${PACKAGES[@]}"
+echo_info installing "system packages: ${PACKAGES[@]}"
 install-packages
-echo-info installing "prelude for emacs..."
+echo_info installing "prelude for emacs..."
 install-prelude
-echo-info installing "vim deps..."
+echo_info installing "vim deps..."
 install-vim-deps
