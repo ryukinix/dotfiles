@@ -3,16 +3,16 @@ source conf.sh
 
 function install-packages {
     # if no sudo installed, just evaluate the expression
-    if [! -f /bin/sudo]; then
+    if [ ! -f /bin/sudo ]; then
         alias sudo=eval
     fi
 
     # install main packages
     if [ -f /usr/bin/pacman ]; then
-        echo-info info "Arch Linux based. Installing: ${PACKAGES[@]}."
+        echo-info info "Arch Linux based: using pacman."
         sudo pacman -Sy --needed ${PACKAGES[@]} && chsh -s $DEFAULT_SHELL
     elif [ -f /usr/bin/apt-get ]; then
-        echo-info info "Debian based. Installing: ${PACKAGES[@]}."
+        echo-info info "Debian based: using apt-get."
         sudo apt-get update && \
              sudo apt-get install ${PACKAGES[@]} && \
              chsh -s $DEFAULT_SHELL
@@ -39,7 +39,7 @@ function install-vim-deps {
                                                     ~/.vim/bundle/Vundle.vim --quiet
 }
 
-echo-info installing "system packages..."
+echo-info installing "system packages: ${PACKAGES[@]}"
 install-packages
 echo-info installing "prelude for emacs..."
 install-prelude
