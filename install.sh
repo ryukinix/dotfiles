@@ -10,7 +10,7 @@ fi
 # install prelude for emacs
 function install-prelude {
     cd ~/.emacs.d/
-    if [ -d .git ]; then
+    if [ ! -d .git ]; then
         git clone --bare https://github.com/bbatsov/prelude.git .git --quiet
         git config --unset core.bare
         git reset --hard @ --quiet
