@@ -1,0 +1,7 @@
+python-daemon
+python-dateutil
+imapclient
+tabulate
+humanize
+pygobject
+-e git://git.gnome.org/browse/pygobject#egg=pygobject

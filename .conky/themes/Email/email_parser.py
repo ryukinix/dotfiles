@@ -18,6 +18,7 @@ import subprocess
 import json
 import email
 import gi
+import os
 gi.require_version('Notify', '0.7')
 from gi.repository import GObject  # noqa
 from gi.repository import Notify   # noqa
@@ -50,7 +51,7 @@ class EmailNotifier(GObject.Object):
 
     def open_mailbrowser(self, n, arg):
         # print(':: webbrowse opening')
-        subprocess.Popen(['thunderbird'], stdout=subprocess.PIPE)
+        subprocess.Popen(['geary'], stdout=subprocess.PIPE)
 
     def close_notification(self, n, arg):
         self.notifications.remove(n)
@@ -67,9 +68,9 @@ class EmailNotifier(GObject.Object):
 example = 'Wed, 11 May 2016 16:35:54 -0300'
 date_format = "%a, %d %b %Y %H:%M:%S %z"
 
-HOST = 'imap.mail.com'
-USERNAME = 'manoel_vilela@engineer.com'
-PASSWORD = '---------'
+HOST = os.environ.get('EMAIL_HOST') or 'imap.mail.com'
+USERNAME = os.environ.get('EMAIL')
+PASSWORD = os.environ.get('EMAIL_PASSWORD')
 CACHE_FILE = '.cache.json'
 ssl = False
 
@@ -153,6 +154,6 @@ if __name__ == '__main__':
         print(tabulate(prepared_emails, headers=['SUBJECT', 'FROM', 'DATE']))
 
     put_cache(emails)
-    # if any(new_emails):
-    #     with DaemonContext():
-    notify(new_emails)
+    if any(new_emails):
+        with DaemonContext():
+            notify(new_emails)
