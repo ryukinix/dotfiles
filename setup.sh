@@ -51,7 +51,7 @@ function install-dotfiles {
 
     clone-repo
 
-    dot checkout > /dev/null
+    dot checkout &> /dev/null
 
     if [ $? != '0' ]; then
         backup-dotfiles
