@@ -1,6 +1,6 @@
 [submodule ".quicklisp/local-projects/lisp-chat"]
 	path = .quicklisp/local-projects/lisp-chat
-	url = git@github.com:ryukinix/lisp-chat.git
+	url = https://github.com/ryukinix/lisp-chat.git
 [submodule "/home/lerax/.zprezto"]
 	path = /home/lerax/.zprezto
-	url = git@github.com:sorin-ionescu/prezto.git
+	url = https://github.com/sorin-ionescu/prezto.git
