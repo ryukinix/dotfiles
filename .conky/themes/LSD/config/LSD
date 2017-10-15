@@ -7,16 +7,18 @@ imlib_cache_size	0
 double_buffer 		yes
 no_buffers		yes
 use_xft 		yes
-xftfont Zekton:		size=9
+xftfont 		Zekton:size=9
 override_utf8_locale 	yes
 text_buffer_size 	2048
 
 # — WINDOW — #
-own_window 		yes
-own_window_type 	desktop
-own_window_argb_visual 	yes
-own_window_transparent 	yes
-own_window_hints 	undecorated,below,sticky,skip_taskbar,skip_pager
+own_window             yes
+own_window_type        desktop
+own_window_transparent no
+own_window_hints       undecorated,below,sticky,skip_taskbar,skip_pager
+own_window_argb_visual yes
+own_window_argb_value  89
+own_window_colour      000000
 
 
 
@@ -47,8 +49,8 @@ ${font}${color}${goto 60}${uptime}
 ${goto 85}${color1}${font Zekton:style=Bold:size=9}${color1}${sysname}${color}${font}
 ${voffset 80}${goto 20}${font Zekton:style=bold:size=30}${time %H:%M}${font}${goto 175}${font Zekton:style=Bold:size=9}CPU 
 ${goto 175}${font Zekton:style=Bold:size=9}${color1}${cpu cpu0}%
-${voffset 40}${goto 35}/home${color1}${goto 128}SWAP
-${goto 38}${font Zekton:style=Bold:size=9}${fs_used /home}${goto 134}${swapperc}${font Zekton:style=Bold:size=9}${color1}${font}%
+${voffset 40}${goto 35}/home${color1}${goto 120}SWAP
+${goto 38}${font Zekton:style=Bold:size=9}${fs_used /home}${goto 135}${swapperc} %${font Zekton:style=Bold:size=9}${color1}${font}
 ${font Zekton:style=Bold:size=9}${font}
 ${voffset 10}${goto 90}${font Zekton:style=Bold:size=9}RAM
 ${goto 90}${font Zekton:style=Bold:size=9}${memperc}%
