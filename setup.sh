@@ -4,6 +4,7 @@ cd ~/
 
 REPO_NAME=ryukinix/dotfiles
 IGNORED_FILES=(README.md setup.sh install.sh dotdumper.sh post-merge-hook.sh)
+BACKUP_DIR=.dot-backup
 
 function dot {
   git --git-dir=$HOME/.dot/ --work-tree=$HOME $@
@@ -36,19 +37,15 @@ mkdir -p .dot-backup
 dot checkout &> /dev/null
 
 if [ $? != '0' ]; then
-    echo "Backing up pre-existing dot files on ~/.dot.backup."
+    echo "Backing up pre-existing dot files on ~/.dot-backup."
 
-    rm -rf .dot-backup
-    touch .dot.log
-    for file in $(dot checkout 2>&1 | egrep "^\s+" | awk '{$1=$1;print}')
-    do
-        back=".dot-backup/$file"
-        mkdir -p $(dirname "$back")
-        mv -v "$file" "$back" >> .dot.log
-    done
-    echo "Backup finished. Look into .dot.log."
-
-
+    rm -rf $BACKUP_DIR
+    # get conflict files
+    conflict_files=`dot checkout 2>&1 | egrep "^\s+" | awk '{$1=$1;print}'`
+    # popule dirs
+    echo $conflict_files | xargs -d '\n' dirname | uniq | xargs -d '\n' -I{in} mkdir -p "$BACKUP_DIR/{in}"
+    # mv files
+    echo $conflict_files | xargs -L 1 -d '\n' -I{in} mv \"{in}\" \"$BACKUP_DIR/{in}\"
 fi
 
 dot reset HEAD . > /dev/null
