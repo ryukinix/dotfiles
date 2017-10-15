@@ -1,0 +1,22 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Emacs
+GenericName=Text Editor
+Comment=A powerful extensbile editor written in Lisp
+Icon=emacs
+Exec=/home/lerax/.local/bin/gemacs %F
+NoDisplay=false
+Categories=Development;TextEditor;
+Keywords=Text;Editor;
+MimeType=text/english;text/plain;text/x-makefile;text/x-c++hdr;text/x-c++src;text/x-chdr;text/x-csrc;text/x-java;text/x-moc;text/x-pascal;text/x-tcl;text/x-tex;application/x-shellscript;text/x-c;text/x-c++;
+StartupWMClass=Emacs
+StartupNotify=false
+Terminal=false
+
+Actions=NewShortcut;
+
+[Desktop Action NewShortcut]
+Name=New Frame
+Exec=/home/lerax/.local/bin/gemacs -c
+OnlyShowIn=Unity
