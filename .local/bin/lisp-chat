@@ -1,0 +1,5 @@
+#!/usr/bin/sbcl --script
+
+(load "~/quicklisp/setup.lisp")
+(require :lisp-chat)
+(lisp-chat-client:main)
