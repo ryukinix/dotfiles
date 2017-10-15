@@ -42,7 +42,8 @@ echo "Dotfiles installed"
 bash install.sh
 
 # ignore loop (remove files which don't belong to dotfiles)
+echo "Removing useless files..."
 for i in README.md setup.sh install.sh dotdumper.sh; do
-    git rm
+    rm -rfv $i
     git update-index --assume-unchanged $i
 done
