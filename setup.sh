@@ -10,20 +10,20 @@ if [ -d .dot ]; then
     exit 1
 fi
 
-if [ ! -f /usr/bin/git]; then
+if [ ! -f /usr/bin/git ]; then
     echo "Please install git and try again."
     exit 1
 fi
 
 
-if [ ! -f /usr/bin/ssh]; then
+if [ ! -f /usr/bin/ssh ]; then
     DOT_URL=git@github.com:$REPO_NAME.git
 else
     DOT_URL=https://github.com/$REPO_NAME.git
 fi
 
 
-git clone --bare $DOT_URL $HOME/.dot --recursive
+git clone --bare $DOT_URL $HOME/.dot --recursive --quiet
 
 function dot {
   git --git-dir=$HOME/.dot/ --work-tree=$HOME $@
