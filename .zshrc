@@ -11,5 +11,5 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # Customize to your needs...
-source ~/.zshrc.local
+source ~/.aliases.sh
 source ~/.sudo.plugin.zsh
