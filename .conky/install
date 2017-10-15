@@ -8,26 +8,26 @@
 # =====>     Copyright © Manoel Vilela
 #
 
-# THIS SHIT WAS DEPRECATED, DON'T WORKS!!!
-#
-# SO DON'T TRY AND BLAME ME LATER!
-# PS.: Actually now are working, forgot it whose I said before.
-
 # verify the user it's root
 if [ "$EUID" -ne 0 ]
   then echo "Please run as root"
   exit
 fi
 
-
+files=('conky-startup' 'conky-update-network' 'get-network')
 
 
 function link-files {
-    cd /usr/bin
-    for fname in conky-startup conky-update-network get-network conkyn
+    f=$1
+    x=0
+    while [ $x -lt ${#f[@]} ] 
     do
-        fpath=$OLDPWD/$fname
-        sudo ln -s -v -f $fpath
+        link=${f[$x]}
+        new_path=`pwd`/$link
+        final=/usr/bin/$link
+        sudo ln -s -v $new $final
+        sudo chmod +x -v $final
+        let "x = x + 1" 
     done
 }
 
