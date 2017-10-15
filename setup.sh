@@ -45,5 +45,7 @@ bash install.sh
 echo "Removing useless files..."
 for i in README.md setup.sh install.sh dotdumper.sh; do
     rm -rfv $i
-    git update-index --assume-unchanged $i
+    dot update-index --assume-unchanged $i
 done
+
+cp ~/post-merge-hook.sh ~/.dot/hooks/post-merge
