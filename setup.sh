@@ -60,7 +60,7 @@ echo "Dotfiles installed."
 bash install.sh
 
 # install hook for deleting useless file on git pull
-cp -v ~/post-merge-hook.sh ~/.dot/hooks/post-merge
+cp ~/post-merge-hook.sh ~/.dot/hooks/post-merge
 
 # ignore loop (remove files which don't belong to dotfiles)
 echo "Removing useless files..."
