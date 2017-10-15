@@ -67,7 +67,9 @@ function install-dotfiles {
 
 function post-install {
     # install hook for deleting useless file on git pull
-    cat conf.sh lib.sh post-hook | tee ~/.dot/hooks/post-merge ~/.dot/hooks/post-rebase
+    cat conf.sh lib.sh post-hook | tee ~/.dot/hooks/post-merge \
+                                       ~/.dot/hooks/post-rebase \
+                                       1> /dev/null
     source post-hook # execute post-hook (remove useless files)
 }
 
