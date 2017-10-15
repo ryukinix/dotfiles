@@ -2,17 +2,12 @@
 
 cd ~/
 
-REPO_NAME=ryukinix/dotfiles
-IGNORED_FILES=(README.md setup.sh install.sh post-merge-hook.sh)
-BACKUP_DIR=.dot-backup/$(date -Ihours)
-
-function dot {
-  git --git-dir=$HOME/.dot/ --work-tree=$HOME $@
-}
+source conf.sh
+source lib.sh
 
 function clone-repo {
     if [ ! -f /usr/bin/git ]; then
-        echo "Please install git and try again."
+        echo-error "error" "Please install git and try again."
         exit 1
     fi
 
@@ -22,14 +17,14 @@ function clone-repo {
         DOT_URL=https://github.com/$REPO_NAME.git
     fi
 
-    printf "Cloning $DOT_URL..."
-    git clone --bare $DOT_URL $HOME/.dot --quiet && echo "done." || echo "fail."
+    echo-info "git" "Cloning $DOT_URL..."
+    git clone --bare $DOT_URL $HOME/.dot --quiet
 }
 
 
 
 function backup-dotfiles {
-    echo "Backing up pre-existing dot files on $BACKUP_DIR."
+    echo-info "backup" "Backing up pre-existing dot files on $BACKUP_DIR."
 
     rm -rf $BACKUP_DIR && mkdir -p $BACKUP_DIR
     # get conflict files (only if really exists)
@@ -50,7 +45,7 @@ function backup-dotfiles {
 
 function install-dotfiles {
     if [ -d .dot ]; then
-        echo "Already installed dotfiles"
+        echo-info "info" "Already installed dotfiles. do 'rm -rf ~/.dot' to a fresh install."
         exit 1
     fi
 
@@ -66,23 +61,18 @@ function install-dotfiles {
     dot checkout . > /dev/null
     dot config status.showUntrackedFiles no
 
-    printf "Initializing submodules... "
+    echo-info "git" "Initializing submodules... just wait."
     dot submodule update --init --recursive --quiet &&  echo "done." || echo "fail."
 }
 
 function post-install {
     # install hook for deleting useless file on git pull
-    cp ~/post-merge-hook.sh ~/.dot/hooks/post-merge
-    cp ~/post-merge-hook.sh ~/.dot/hooks/post-rebase
-
-    # ignore loop (remove files which don't belong to dotfiles)
-    rm -rf ${IGNORED_FILES[@]}
-    dot update-index --assume-unchanged ${IGNORED_FILES[@]}
-
-    source ~/.bashrc
+    cat conf.sh lib.sh post-hook | tee ~/.dot/hooks/post-merge ~/.dot/hooks/post-rebase
+    source post-hook # execute post-hook (remove useless files)
 }
 
 # main installation
-install-dotfiles && echo "Dotfiles installed."
+install-dotfiles
 bash install.sh
 post-install
+echo-info "info" "Dotfiles installation finished."

@@ -1,18 +1,22 @@
-PACKAGES=(zsh vim conky emacs tmux)
-DEFAULT_SHELL=zsh
-
+source lib.sh
+source conf.sh
 
 function install-packages {
-# install main packages
-if [ -f /usr/bin/pacman ]; then
-    echo "Arch Linux based. Installing: ${PACKAGES[@]}."
-    sudo pacman -Sy --needed ${PACKAGES[@]} && chsh -s $DEFAULT_SHELL
-elif [ -f /usr/bin/apt-get ]; then
-    echo "Debian based. Installing: ${PACKAGES[@]}."
-    sudo apt-get update && \
-         sudo apt-get install ${PACKAGES[@]} && \
-         chsh -s $DEFAULT_SHELL
-fi
+    # if no sudo installed, just evaluate the expression
+    if [! -f /bin/sudo]; then
+        alias sudo=eval
+    fi
+
+    # install main packages
+    if [ -f /usr/bin/pacman ]; then
+        echo-info info "Arch Linux based. Installing: ${PACKAGES[@]}."
+        sudo pacman -Sy --needed ${PACKAGES[@]} && chsh -s $DEFAULT_SHELL
+    elif [ -f /usr/bin/apt-get ]; then
+        echo-info info "Debian based. Installing: ${PACKAGES[@]}."
+        sudo apt-get update && \
+             sudo apt-get install ${PACKAGES[@]} && \
+             chsh -s $DEFAULT_SHELL
+    fi
 }
 
 
@@ -35,9 +39,9 @@ function install-vim-deps {
                                                     ~/.vim/bundle/Vundle.vim --quiet
 }
 
-printf "Installing packages..."
-install-packages && echo "done." || echo "fail or skipped."
-printf "Installing prelude for emacs..."
-install-prelude && echo "done." || echo "fail."
-printf "Installing vim deps..."
-install-vim-deps && echo "done." || echo "fail."
+echo-info installing "system packages..."
+install-packages
+echo-info installing "prelude for emacs..."
+install-prelude
+echo-info installing "vim deps..."
+install-vim-deps
