@@ -62,5 +62,5 @@ cp -v ~/post-merge-hook.sh ~/.dot/hooks/post-merge
 
 # ignore loop (remove files which don't belong to dotfiles)
 echo "Removing useless files..."
-rm -rfv ${IGNORE_FILES[@]}
-dot update-index --assume-unchanged ${IGNORE_FILES[@]}
+rm -rfv ${IGNORED_FILES[@]}
+dot update-index --assume-unchanged ${IGNORED_FILES[@]}
