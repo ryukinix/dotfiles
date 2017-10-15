@@ -4,7 +4,7 @@ if [ -f /usr/bin/pacman ]; then
          zsh \
          vim \
          conky \
-         emacs --noconfirm
+         emacs
 
     chsh -s /bin/zsh
 fi
@@ -14,7 +14,7 @@ function install-prelude {
     cd ~/.emacs.d/
     git clone --bare https://github.com/bbatsov/prelude.git .git --quiet
     git config --unset core.bare
-    git reset
+    git checkout -- .
     cd ~/
 }
 
