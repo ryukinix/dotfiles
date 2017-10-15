@@ -23,7 +23,7 @@ function clone-repo {
     fi
 
     printf "Cloning $DOT_URL..."
-    git clone --bare $DOT_URL $HOME/.dot --quiet echo "done." || echo "fail."
+    git clone --bare $DOT_URL $HOME/.dot --quiet && echo "done." || echo "fail."
     echo "Initializing submodules... "
     dot submodule update --init --recursive &&  echo "done." || echo "fail."
 }
