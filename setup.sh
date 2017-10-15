@@ -27,7 +27,7 @@ else
     DOT_URL=https://github.com/$REPO_NAME.git
 fi
 
-echo "Cloning $REPO_NAME"
+echo "Cloning $DOT_URL."
 git clone --bare $DOT_URL $HOME/.dot --recursive --quiet
 
 
