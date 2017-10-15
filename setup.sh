@@ -41,11 +41,13 @@ if [ $? != '0' ]; then
 
     rm -rf $BACKUP_DIR
     # get conflict files
-    conflict_files=`dot checkout 2>&1 | egrep "^\s+" | awk '{$1=$1;print}'`
+    function conflict-files {
+        dot checkout 2>&1 | egrep "^\s+" | awk '{$1=$1;print}'
+    }
     # popule dirs
-    echo $conflict_files | xargs -d '\n' dirname | uniq | xargs -L 1 -d '\n' -I{in} mkdir -p "$BACKUP_DIR/{in}"
+    conflict-files | xargs -d '\n' dirname | uniq | xargs -L 1 -d '\n' -I{in} mkdir -p "$BACKUP_DIR/{in}"
     # mv files
-    echo $conflict_files | xargs -L 1 -d '\n' -I{in} mv -v "{in}" "$BACKUP_DIR/{in}"
+    conflict-files | xargs -L 1 -d '\n' -I{in} mv -v "{in}" "$BACKUP_DIR/{in}"
 fi
 
 dot reset HEAD . > /dev/null
