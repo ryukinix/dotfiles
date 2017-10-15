@@ -41,12 +41,10 @@ function backup-dotfiles {
             | cat
     }
 
-    # popule dirs
-    conflict-files | xargs dirname | sort | uniq \
-                   | sed "s/^/$BACKUP_DIR\//" | xargs mkdir -p
-
-    # mv files
-    conflict-files | xargs -L 1 -I{in} mv -fv "{in}" "$BACKUP_DIR/{in}" 2> /dev/null # sorry
+    conflict-files | while read file; do
+        mkdir -p $(dirname "$BACKUP_DIR/$file")
+        [[ -f "$file" ]] && mv "$file" "$BACKUP_DIR/$file"
+    done
 }
 
 if [ -d .dot ]; then
