@@ -42,9 +42,8 @@ if [ $? != '0' ]; then
     touch .dot.log
     for file in $(dot checkout 2>&1 | egrep "^\s+" | awk '{$1=$1;print}')
     do
-        back='.dot-backup/$file'
-        dir=`dirname "$back"`
-        mkdir -p "$dir"
+        back=".dot-backup/$file"
+        mkdir -p $(dirname "$back")
         mv -v "$file" "$back" >> .dot.log
     done
     echo "Backup finished. Look into .dot.log."
