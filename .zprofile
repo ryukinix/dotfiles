@@ -1,0 +1,1 @@
+/home/lerax/.zprezto/runcoms/zprofile
