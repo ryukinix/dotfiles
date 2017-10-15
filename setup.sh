@@ -40,11 +40,10 @@ if [ $? != '0' ]; then
 
     rm -rf .dot-backup
     touch .dot.log
-    for file in $(dot checkout 2>&1 | egrep "\s+\." | awk {'print $1'})
+    for file in $(dot checkout 2>&1 | egrep "^\s+" | awk '{$1=$1;print}')
     do
         mkdir -p $(dirname ".dot-backup/$file")
-        echo "Backup $file => .dot-backup/$file" >> .dot.log
-        mv "$file" ".dot-backup/$file"
+        mv -v "$file" ".dot-backup/$file" >> .dot.log
     done
     echo "Backup finished. Look into .dot.log."
 
