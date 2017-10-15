@@ -12,7 +12,7 @@ function install-prelude {
     cd ~/.emacs.d/
     git clone --bare https://github.com/bbatsov/prelude.git .git --quiet
     git config --unset core.bare
-    git checkout -- .
+    git reset --hard @
     cd ~/
 }
 
