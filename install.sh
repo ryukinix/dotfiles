@@ -9,7 +9,7 @@ elif [ -f /usr/bin/apt-get ]; then
     echo "Debian based. Installing: $PACKAGES."
     sudo apt-get update && \
          sudo apt-get install ${PACKAGES[@]} && \
-         cshs -s $DEFAULT_SHELL
+         chsh -s $DEFAULT_SHELL
 fi
 
 # install prelude for emacs
