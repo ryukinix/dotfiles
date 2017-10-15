@@ -1,6 +1,8 @@
 PACKAGES=(zsh vim conky emacs tmux)
 DEFAULT_SHELL=zsh
 
+
+function install-packages {
 # install main packages
 if [ -f /usr/bin/pacman ]; then
     echo "Arch Linux based. Installing: ${PACKAGES[@]}."
@@ -11,6 +13,8 @@ elif [ -f /usr/bin/apt-get ]; then
          sudo apt-get install ${PACKAGES[@]} && \
          chsh -s $DEFAULT_SHELL
 fi
+}
+
 
 # install prelude for emacs
 function install-prelude {
@@ -23,6 +27,7 @@ function install-prelude {
     cd ~/
 }
 
+
 # install vim Vundle to handle plugins
 function install-vim-deps {
     mkdir -p ~/.vim/bundle/
@@ -30,7 +35,9 @@ function install-vim-deps {
                                                     ~/.vim/bundle/Vundle.vim --quiet
 }
 
-echo "Installing prelude for emacs..."
-install-prelude
+printf "Installing packages..."
+install-packages && echo "done." || echo "fail."
+printf "Installing prelude for emacs..."
+install-prelude && echo "done." || echo "fail."
 echo "Installing vim deps..."
-install-vim-deps
+install-vim-deps && echo "done." || echo "fail."
