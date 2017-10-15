@@ -31,10 +31,14 @@ function clone-repo {
 function backup-dotfiles {
     echo "Backing up pre-existing dot files on $BACKUP_DIR."
 
-    mkdir -p $BACKUP_DIR
+    rm -rf $BACKUP_DIR && mkdir -p $BACKUP_DIR
     # get conflict files (only if really exists)
     function conflict-files {
-        dot checkout 2>&1 | egrep "^\s+" | awk '{$1=$1;print}' | xargs -d '\n' ls -d | cat
+        dot checkout 2>&1 \
+            | egrep "^\s+" \
+            | awk '{$1=$1;print}' \
+            | xargs -d '\n' -I{in} ls --directory --escape "{in}" 2> /dev/null
+            | cat
     }
     # popule dirs
     conflict-files | xargs -d '\n' dirname | uniq | xargs -L 1 -d '\n' -I{in} mkdir -p "$BACKUP_DIR/{in}"
