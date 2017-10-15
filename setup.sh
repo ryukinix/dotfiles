@@ -67,7 +67,7 @@ function install-dotfiles {
     dot config status.showUntrackedFiles no
 
     printf "Initializing submodules... "
-    dot submodule update --init --recursive &&  echo "done." || echo "fail."
+    dot submodule update --init --recursive --quiet &&  echo "done." || echo "fail."
 }
 
 function post-install {
