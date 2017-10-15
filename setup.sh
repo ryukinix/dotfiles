@@ -5,10 +5,15 @@ cd ~/
 REPO_NAME=ryukinix/dotfiles
 IGNORED_FILES=(README.md setup.sh install.sh dotdumper.sh post-merge-hook.sh)
 
+function dot {
+  git --git-dir=$HOME/.dot/ --work-tree=$HOME $@
+}
+
 if [ -d .dot ]; then
     echo "Already installed dotfiles"
     exit 1
 fi
+
 
 if [ ! -f /usr/bin/git ]; then
     echo "Please install git and try again."
@@ -22,12 +27,9 @@ else
     DOT_URL=https://github.com/$REPO_NAME.git
 fi
 
-
+echo "Cloning $REPO_NAME"
 git clone --bare $DOT_URL $HOME/.dot --recursive --quiet
 
-function dot {
-  git --git-dir=$HOME/.dot/ --work-tree=$HOME $@
-}
 
 mkdir -p .dot-backup
 
@@ -51,8 +53,6 @@ dot reset HEAD . > /dev/null
 dot checkout . > /dev/null
 dot config status.showUntrackedFiles no
 
-
-
 echo "Dotfiles installed."
 
 bash install.sh
@@ -62,5 +62,5 @@ cp -v ~/post-merge-hook.sh ~/.dot/hooks/post-merge
 
 # ignore loop (remove files which don't belong to dotfiles)
 echo "Removing useless files..."
-rm -rfv ${IGNORED_FILES[@]}
+rm -rf ${IGNORED_FILES[@]}
 dot update-index --assume-unchanged ${IGNORED_FILES[@]}
