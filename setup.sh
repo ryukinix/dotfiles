@@ -59,6 +59,10 @@ function install_dotfiles {
 
     if [ $? != '0' ]; then
         backup_dotfiles
+        # remove git submodules
+        dot config --file .gitmodules --get-regexp path \
+            | awk '{ print $2 }' \
+            | xargs rm -rfv
     fi
 
     dot reset HEAD . > /dev/null
@@ -66,9 +70,7 @@ function install_dotfiles {
     dot config status.showUntrackedFiles no
 
     echo_info "git" "Initializing submodules... just wait."
-    # force deinit of git submodules first (avoid error when installing again)
-    dot submodule deinit --all -q -f
-    dot submodule update --init --recursive --quiet &&  echo "done." || echo "fail."
+    dot submodule update --init --recursive --force --quiet
 }
 
 function post_install {
