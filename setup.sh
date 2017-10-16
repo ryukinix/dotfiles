@@ -41,6 +41,7 @@ function backup-dotfiles {
         mkdir -p "$(dirname "$dest")"
         [[ -f "$file" ]] && mv -f "$file" "$dest"
     done
+
 }
 
 function install-dotfiles {
@@ -62,6 +63,8 @@ function install-dotfiles {
     dot config status.showUntrackedFiles no
 
     echo_info "git" "Initializing submodules... just wait."
+    # force deinit of git submodules first (avoid error when installing again)
+    dot submodule deinit --all -q -f
     dot submodule update --init --recursive --quiet &&  echo "done." || echo "fail."
 }
 
