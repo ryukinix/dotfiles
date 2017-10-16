@@ -75,7 +75,7 @@ function post-install {
            ~/.dot/hooks/post-merge)
     cat conf.sh lib.sh post-hook | tee ${hooks[@]} 1> /dev/null
     chmod +x ${hooks[@]}
-    bash post-hook # execute post-hook (remove useless files)
+    source post-hook # execute post-hook (remove useless files)
 }
 
 # main installation
