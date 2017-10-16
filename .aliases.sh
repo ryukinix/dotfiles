@@ -15,3 +15,4 @@ alias starfox='ssh lerax@starfox'
 alias deadstar='ssh lerax@deadstar'
 
 alias dot='/usr/bin/git --git-dir=$HOME/.dot/ --work-tree=$HOME'
+alias dot-tig='GIT_DIR=$HOME/.dot/ tig'
