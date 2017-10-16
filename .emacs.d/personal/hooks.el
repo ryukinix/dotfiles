@@ -1,5 +1,8 @@
 ;; set of hooks made to keep the life more easy
 
+(require 'prelude-packages)
+(prelude-require-packages '(xclip))
+
 (require 'python)
 (require 'cc-mode)
 (require 'gud)
@@ -97,3 +100,18 @@
 (defun emacsd-pull()
   (interactive)
   (shell-command "emacsd-pull"))
+
+(defun enable-xclip ()
+  (require 'xclip)
+  (xclip-mode +1))
+
+(defun disable-xclip ()
+  (require 'xclip)
+  (xclip-mode -1))
+
+;; to enable xclip-mode on terminal mode
+(add-hook 'after-init-hook
+           (lambda ()
+             (unless window-system
+               (when (executable-find "xclip")
+                 (enable-xclip)))))
