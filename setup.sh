@@ -24,6 +24,10 @@ function clone_repo {
     git clone --bare $DOT_URL $HOME/.dot --quiet
 }
 
+function list_submodules {
+    dot reset -q @ .gitmodules; dot checkout -q .gitmodules;
+    dot config --file .gitmodules --get-regexp path | awk '{ print $2 }'
+}
 
 
 function backup_dotfiles {
@@ -45,12 +49,15 @@ function backup_dotfiles {
         [[ -f "$file" ]] && mv -f "$file" "$dest"
     done
 
+    # remove git submodules HACK HACK HACK
+    list_submodules | exists | xargs rm -rf
+
 
 }
 
 function install_dotfiles {
     if [ -d .dot ]; then
-        echo_info "info" "Already installed dotfiles. do 'rm -rf ~/.dot' to a fresh install."
+        echo_info "info" "Already installed dotfiles. Call before 'rm -rf ~/.dot' to a fresh install."
         exit 1
     fi
 
@@ -67,8 +74,17 @@ function install_dotfiles {
     dot config status.showUntrackedFiles no
 
     echo_info "git" "Initializing submodules... just wait."
-    dot submodule deinit -q --force --all
     dot submodule update --init --recursive --force --quiet
+    if [[ $? != '0' ]]; then
+        echo_error "git" "probably some submodule failed to fetch, fallback all to master."
+        list_submodules | while read f; do
+            echo_info "git" "set submodule $f to master."
+            cd $f
+            git reset -q master --hard;
+            cd $OLDPWD
+        done
+    fi
+
 }
 
 function post_install {
@@ -84,5 +100,6 @@ function post_install {
 # main installation
 install_dotfiles
 bash install.sh
+echo_info "post_install" "Removing $IGNORED_FILES[@] and installing hooks."
 post_install
 echo_info "info" "Dotfiles installation finished."
