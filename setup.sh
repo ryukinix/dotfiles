@@ -100,6 +100,6 @@ function post_install {
 # main installation
 install_dotfiles
 bash install.sh
-echo_info "post_install" "Removing $IGNORED_FILES[@] and installing hooks."
+echo_info "post_install" "Removing ${IGNORED_FILES[@]} and installing hooks."
 post_install
 echo_info "info" "Dotfiles installation finished."
