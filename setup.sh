@@ -5,7 +5,7 @@ cd ~/
 source <(curl -s https://raw.githubusercontent.com/ryukinix/dotfiles/master/lib.sh) # sorry
 source <(curl -s https://raw.githubusercontent.com/ryukinix/dotfiles/master/conf.sh) # sorry again
 
-function clone-repo {
+function clone_repo {
     if [ ! -f /usr/bin/git ]; then
         echo_error "error" "Please install git and try again."
         exit 1
@@ -23,12 +23,12 @@ function clone-repo {
 
 
 
-function backup-dotfiles {
+function backup_dotfiles {
     echo_info "backup" "Backing up pre-existing dot files on $BACKUP_DIR."
 
     rm -rf $BACKUP_DIR && mkdir -p $BACKUP_DIR
     # get conflict files (only if really exists)
-    function conflict-files {
+    function conflict_files {
         dot checkout 2>&1 \
             | egrep "^\s+" \
             | awk '{$1=$1;print}' \
@@ -36,7 +36,7 @@ function backup-dotfiles {
             | cat
     }
 
-    conflict-files | while read file; do
+    conflict_files | while read file; do
         dest="$BACKUP_DIR/$file"
         mkdir -p "$(dirname "$dest")"
         [[ -f "$file" ]] && mv -f "$file" "$dest"
@@ -44,18 +44,18 @@ function backup-dotfiles {
 
 }
 
-function install-dotfiles {
+function install_dotfiles {
     if [ -d .dot ]; then
         echo_info "info" "Already installed dotfiles. do 'rm -rf ~/.dot' to a fresh install."
         exit 1
     fi
 
-    clone-repo
+    clone_repo
 
     dot checkout &> /dev/null
 
     if [ $? != '0' ]; then
-        backup-dotfiles
+        backup_dotfiles
     fi
 
     dot reset HEAD . > /dev/null
@@ -68,7 +68,7 @@ function install-dotfiles {
     dot submodule update --init --recursive --quiet &&  echo "done." || echo "fail."
 }
 
-function post-install {
+function post_install {
     # install hook for deleting useless file on git pull
     hooks=(~/.dot/hooks/post-checkout
            ~/.dot/hooks/post-rewrite
@@ -79,7 +79,7 @@ function post-install {
 }
 
 # main installation
-install-dotfiles
+install_dotfiles
 bash install.sh
-post-install
+post_install
 echo_info "info" "Dotfiles installation finished."
