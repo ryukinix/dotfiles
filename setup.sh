@@ -45,6 +45,7 @@ function backup_dotfiles {
         [[ -f "$file" ]] && mv -f "$file" "$dest"
     done
 
+
 }
 
 function install_dotfiles {
@@ -59,10 +60,6 @@ function install_dotfiles {
 
     if [ $? != '0' ]; then
         backup_dotfiles
-        # remove git submodules
-        dot config --file .gitmodules --get-regexp path \
-            | awk '{ print $2 }' \
-            | xargs rm -rf
     fi
 
     dot reset HEAD . > /dev/null
@@ -70,6 +67,7 @@ function install_dotfiles {
     dot config status.showUntrackedFiles no
 
     echo_info "git" "Initializing submodules... just wait."
+    dot submodule deinit -q --force --all
     dot submodule update --init --recursive --force --quiet
 }
 
