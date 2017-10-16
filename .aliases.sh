@@ -14,5 +14,5 @@ alias deadstar-bind-down='ssh -Y lerax@deadstar -t "x2x -south -to :0.0"'
 alias starfox='ssh lerax@starfox'
 alias deadstar='ssh lerax@deadstar'
 
-alias dot='/usr/bin/git --git-dir=$HOME/.dot/ --work-tree=$HOME'
+alias dot='GIT_DIR=$HOME/.dot GIT_WORK_TREE=$HOME git '
 alias dot-tig='GIT_DIR=$HOME/.dot/ tig'
