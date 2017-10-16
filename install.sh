@@ -5,7 +5,10 @@ source conf.sh
 function install_packages {
     # if no sudo installed, just evaluate the expression
     if [ ! -f /bin/sudo ]; then
-        alias sudo=eval
+        # creating a alias don't will work
+        function sudo {
+            eval "$@"
+        }
     fi
 
     # install main packages
