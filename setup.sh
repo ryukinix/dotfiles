@@ -62,7 +62,7 @@ function install_dotfiles {
         # remove git submodules
         dot config --file .gitmodules --get-regexp path \
             | awk '{ print $2 }' \
-            | xargs rm -rfv
+            | xargs rm -rf
     fi
 
     dot reset HEAD . > /dev/null
