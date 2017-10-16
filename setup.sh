@@ -81,6 +81,7 @@ function install_dotfiles {
             echo_info "git" "set submodule $f to master."
             cd $f
             git reset -q master --hard;
+            git submodule update --init --recursive --force --quiet
             cd $OLDPWD
         done
     fi
