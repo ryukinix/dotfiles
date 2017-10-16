@@ -5,6 +5,9 @@
 
 # you should concatenate cat conf.sh lib.sh <this> | tee hook
 
+# ignore this hook if this is applied as a file checkout
+[[ "$3" == "0" ]] && exit 0
+
 mkdir -p $BACKUP_DIR
 mv ${IGNORED_FILES[@]} $BACKUP_DIR 2> /dev/null || true
 dot update-index --assume-unchanged ${IGNORED_FILES[@]}
