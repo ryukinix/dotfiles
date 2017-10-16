@@ -14,7 +14,7 @@ function clone_repo {
     # if the host has ssh, so has ssh-add and if ssh-add
     # can connect to agent, probably is a proper ssh setup
     # clone with ssh so then.
-    if [ -f /usr/bin/ssh-add && `ssh-add -L &> /dev/null` ]; then
+    if [[ -f /usr/bin/ssh-add && `ssh-add -L &> /dev/null` ]]; then
         DOT_URL=git@github.com:$REPO_NAME.git
     else
         DOT_URL=https://github.com/$REPO_NAME.git
