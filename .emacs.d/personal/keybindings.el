@@ -106,7 +106,7 @@
 (define-key company-active-map (kbd "M-.") 'company-show-location)
 
 
-(global-set-key (kbd "C-x M-M") 'term)
+(global-set-key (kbd "C-x M") 'term)
 
 ;; reset scale
 (defun text-scale-reset ()
