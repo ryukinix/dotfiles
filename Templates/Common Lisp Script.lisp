@@ -1,2 +1,2 @@
-;; Common Lisp Script
+;; -*- common-lisp -*-
 ;; Manoel Vilela
