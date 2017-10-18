@@ -1,6 +1,6 @@
 ;; fetching personal defined packages
 (require 'prelude-packages)
-(prelude-require-packages '(slime-company ssh-agency))
+(prelude-require-packages '(slime-company ssh-agency xclip))
 
 
 (require 'erc)
@@ -109,3 +109,7 @@
 
 ;; set tab size to 4 (I don't like it 8, very big for me)
 (setq-default tab-width 4)
+
+(when (executable-find "xclip")
+  (require 'xclip)
+  (xclip-mode +1))

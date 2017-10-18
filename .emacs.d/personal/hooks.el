@@ -1,8 +1,5 @@
 ;; set of hooks made to keep the life more easy
 
-(require 'prelude-packages)
-(prelude-require-packages '(xclip))
-
 (require 'python)
 (require 'cc-mode)
 (require 'gud)
@@ -101,17 +98,10 @@
   (interactive)
   (shell-command "emacsd-pull"))
 
-(defun enable-xclip ()
-  (require 'xclip)
-  (xclip-mode +1))
 
-(defun disable-xclip ()
-  (require 'xclip)
-  (xclip-mode -1))
+(defun setup-terminal-session (frame)
+  (when (null (window-system frame))
+    (set-face-attribute 'helm-selection frame :background "#ff0000")))
 
 ;; to enable xclip-mode on terminal mode
-(add-hook 'after-init-hook
-           (lambda ()
-             (unless window-system
-               (when (executable-find "xclip")
-                 (enable-xclip)))))
+(add-hook 'after-make-frame-functions 'setup-terminal-session)
