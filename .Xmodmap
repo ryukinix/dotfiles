@@ -1,2 +1,2 @@
 clear Lock
-keycode 66 = F9 Caps_Lock NoSymbol NoSymbol
+keycode 66 = F9 Caps_Lock
