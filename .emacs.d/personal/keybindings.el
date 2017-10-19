@@ -120,6 +120,11 @@
 (global-set-key (kbd "C->") 'mc/mark-next-like-this-word)
 (global-set-key (kbd "C-<") 'mc/mark-previous-like-this-word)
 (global-set-key (kbd "C-S-l") 'mc/edit-lines) ;; mortal-mode from sublime
+(global-set-key (kbd "C-ç") 'mc/skip-to-next-like-this)
+(global-set-key (kbd "C-M-ç") 'mc/skip-to-previous-like-this)
+(global-set-key (kbd "C-c C->") 'mc/mark-all-like-this)
+(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+
 
 ;; setup for commands which always run for all cursors
 (setq mc/always-run-for-all '(crux-kill-whole-line
