@@ -16,5 +16,7 @@ alias deadstar-bind-down='ssh -Y lerax@deadstar -t "x2x -south -to :0.0"'
 alias starfox='ssh lerax@starfox'
 alias deadstar='ssh lerax@deadstar'
 
-alias dot='GIT_DIR=$HOME/.dot GIT_WORK_TREE=$HOME git '
+# save definition of dot (graphviz language)
+alias dot-graph='/bin/dot'
+alias dot='GIT_DIR=$HOME/.dot GIT_WORK_TREE=$HOME /usr/bin/git '
 alias dot-tig='GIT_DIR=$HOME/.dot/ tig'
