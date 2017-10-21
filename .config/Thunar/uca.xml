@@ -88,8 +88,8 @@
 <action>
 	<icon>emacs</icon>
 	<name>Emacs</name>
-	<unique-id>1507973097940637-3</unique-id>
-	<command>gemacs %F</command>
+	<unique-id>1508566555116235-3</unique-id>
+	<command>/home/lerax/.local/bin/gemacs %F</command>
 	<description>Emacs</description>
 	<patterns>*</patterns>
 	<directories/>
