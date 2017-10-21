@@ -81,7 +81,6 @@
 (global-set-key (kbd "<M-f4>") 'intelligent-close)
 
 (global-set-key (kbd "<M-f1>") 'linum-mode) ;; don't work on terminal
-(global-set-key (kbd "M-n") 'linum-mode)
 (global-set-key (kbd "<M-S-f1>") 'linum-relative-mode)
 
 ;; ispell changing dictionaries when need
@@ -106,7 +105,7 @@
 (define-key company-active-map (kbd "\C-d") 'company-show-doc-buffer)
 (define-key company-active-map (kbd "M-.") 'company-show-location)
 
-
+;; open a terminal full-featured on emacs
 (global-set-key (kbd "C-x M") 'term)
 
 ;; reset scale
