@@ -83,6 +83,17 @@ BODY is the rest of eval forms to be used FUNC memoized."
       (setq-local backward-delete-char-untabify-method 'hungry)
     (setq-local backward-delete-char-untabify-method 'untabify)))
 
+(defun c-reformat-region (&optional b e)
+  "Format the region selected with clang-format -style=LLVM"
+  (interactive "r")
+  (when (not (buffer-file-name))
+    (error "A buffer must be associated with a file in order to use REFORMAT-REGION."))
+  (when (not (executable-find "clang-format"))
+    (error "clang-format not found."))
+  (shell-command-on-region b e
+                           "clang-format -style=LLVM"
+                           (current-buffer) t)
+  (indent-region b e))
 
 (provide 'manoel)
 ;;; mano.el ends here
