@@ -83,6 +83,7 @@ BODY is the rest of eval forms to be used FUNC memoized."
       (setq-local backward-delete-char-untabify-method 'hungry)
     (setq-local backward-delete-char-untabify-method 'untabify)))
 
+;;;###autoload
 (defun c-reformat-region (&optional b e)
   "Format the region selected with clang-format -style=LLVM"
   (interactive "r")
