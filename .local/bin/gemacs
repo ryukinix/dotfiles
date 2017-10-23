@@ -27,7 +27,7 @@ function if-crashed-restart-emacs {
         gksudo -m "Need your password to restart emacs daemon." rc-service emacs.lerax restart
     }
 
-    [[ `rc-status --crashed` == *emacs.lerax* ]] && restart-emacs
+    [[ `rc-status --crashed` == *emacs.lerax* || ! `pgrep emacs` ]] && restart-emacs
 }
 
 if-crashed-restart-emacs
