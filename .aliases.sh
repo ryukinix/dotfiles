@@ -18,5 +18,7 @@ alias deadstar='ssh lerax@deadstar'
 
 # save definition of dot (graphviz language)
 alias dot-graph='/bin/dot'
-alias dot='GIT_DIR=$HOME/.dot GIT_WORK_TREE=$HOME /usr/bin/git '
+function dot {
+    GIT_DIR=$HOME/.dot GIT_WORK_TREE=$HOME git $@
+}
 alias dot-tig='GIT_DIR=$HOME/.dot/ tig'
