@@ -13,3 +13,4 @@ fi
 # Customize to your needs...
 source ~/.aliases.sh
 source ~/.sudo.plugin.zsh
+source ~/.emacs.git.sh
