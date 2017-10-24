@@ -1,4 +1,4 @@
-killall conky
+pgrep conky | xargs kill -9
 # conky-update-network $1
 cd ~/.conky/themes/Gold\&Grey && conky -q -c ~/.conky/themes/Gold\&Grey/config/net &
 cd ~/.conky/themes/LSD && conky -q -c ~/.conky/themes/LSD/config/LSD &
