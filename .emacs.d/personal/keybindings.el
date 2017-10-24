@@ -81,6 +81,8 @@
 (global-set-key (kbd "<M-f4>") 'intelligent-close)
 
 (global-set-key (kbd "<M-f1>") 'linum-mode) ;; don't work on terminal
+(global-set-key (kbd "M-N") 'linum-mode)
+(global-set-key (kbd "M-R") 'linum-relative-mode)
 (global-set-key (kbd "<M-S-f1>") 'linum-relative-mode)
 
 ;; ispell changing dictionaries when need
