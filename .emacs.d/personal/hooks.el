@@ -101,7 +101,12 @@
 
 (defun setup-terminal-session (frame)
   (when (null (window-system frame))
-    (set-face-attribute 'helm-selection frame :background "#ff0000")))
+    (set-face-attribute 'helm-selection frame
+                        :background "red"
+                        :foreground "black")
+    (set-face-attribute 'region frame
+                        :background "red"
+                        :foreground "black")))
 
 ;; to enable xclip-mode on terminal mode
 (add-hook 'after-make-frame-functions 'setup-terminal-session)
