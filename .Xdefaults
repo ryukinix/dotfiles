@@ -17,6 +17,10 @@ xterm.vt100.faceSize: 12
 Emacs.font:             Monoid-10
 UXTerm*metaSendsEscape: true
 XTerm*metaSendsEscape: true
+! setting that C-h on emacs works, but backspace not
+! XTerm*ptyInitialErase: true
+! UXTerm*ptyInitialErase: true
+
 ! ^ The above lines are no comments!
 ! ! Leave them as they are if a file ~/.extend.Xresources is being used on your
 ! system.
