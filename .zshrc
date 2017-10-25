@@ -14,3 +14,4 @@ fi
 source ~/.aliases.sh
 source ~/.sudo.plugin.zsh
 source ~/.emacs.git.sh
+[[ `which fzf` ]] && source ~/.fzf.sh
