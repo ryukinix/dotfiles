@@ -1,3 +1,4 @@
+! my initial setup
 xterm*dynamicColors:    true
 xterm*background:      black
 xterm*foreground:      white
@@ -15,11 +16,6 @@ xterm.vt100.faceName: Fixed
 xterm.vt100.faceSize: 12
 
 Emacs.font:             Monoid-10
-UXTerm*metaSendsEscape: true
-XTerm*metaSendsEscape: true
-! setting that C-h on emacs works, but backspace not
-! XTerm*ptyInitialErase: true
-! UXTerm*ptyInitialErase: true
 
 ! ^ The above lines are no comments!
 ! ! Leave them as they are if a file ~/.extend.Xresources is being used on your
@@ -33,7 +29,7 @@ XTerm*metaSendsEscape: true
 Xft.dpi: 96
 Xft.antialias: true
 Xft.hinting: true
-Xft.rgba: rgb
+! Xft.rgba: rgb
 Xft.autohint: false
 Xft.hintstyle: hintslight
 Xft.lcdfilter: lcddefault
@@ -66,3 +62,20 @@ XTerm*faceSize: 11
 
 ! THEME STUFF END HERE
 
+! Emacs fixes
+
+! C-h key
+*VT100.Translations: #override \
+              <Key>BackSpace: string(0x7F)\n\
+              <Key>Delete:    string("\033[3~")\n\
+              <Key>Home:      string("\033[1~")\n\
+              <Key>End:       string("\033[4~")
+*ttyModes: erase ^?
+
+! Meta key
+UXTerm*metaSendsEscape: true
+XTerm*metaSendsEscape: true
+
+! setting that C-h on emacs works, but backspace not
+! XTerm*ptyInitialErase: true
+! UXTerm*ptyInitialErase: true
