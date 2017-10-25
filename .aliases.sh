@@ -30,3 +30,5 @@ alias dot-tig='GIT_DIR=$HOME/.dot/ tig'
 # xclipboard
 alias xcopy='xclip -selection clipboard'
 alias xpaste='xclip -o -selection clipboard'
+
+alias ufc='cd ~/Dropbox/University/Courses/UFC/2017.2/'
