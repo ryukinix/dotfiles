@@ -17,7 +17,7 @@
 (defun setup-c-and-cpp-compiler-with-gdb ()
   "Generate strings for 'compile and 'gud-gdb commands on C/C++ mode"
   (interactive)
-  (define-key (current-local-map) [C-c C-c] 'compile)
+  (define-key (current-local-map) (kbd "\C-c C-c") 'compile)
   (define-key (current-local-map) [M-f9] 'gud-gdb)
   (when buffer-file-name
     (let* ((file (file-name-nondirectory buffer-file-name))
