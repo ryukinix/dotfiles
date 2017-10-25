@@ -1,6 +1,6 @@
 ;; fetching personal defined packages
 (require 'prelude-packages)
-(prelude-require-packages '(slime-company ssh-agency xclip))
+(prelude-require-packages '(slime-company ssh-agency xclip spacemacs-theme))
 
 
 (require 'erc)
@@ -84,7 +84,6 @@
 
 ")
 ;; ensure that all the ssh keys was loaded
-(require 'manoel)
 (when (executable-find ssh-agency-agent-executable)
   ;; this will not work if the SSH_AUTH_SOCK was not opened yet
   ;; On my setup I rely on gnome-keyring to open this shit on XFCE startup
@@ -106,6 +105,9 @@
       (setenv ssh-back current)
       (setenv ssh back))
     (message (getenv ssh))))
+
+;; use spacemacs theme for now... tired from zenburn and yellow colors.
+(load-theme 'spacemacs-dark)
 
 ;; set tab size to 4 (I don't like it 8, very big for me)
 (setq-default tab-width 4)
