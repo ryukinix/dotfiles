@@ -99,7 +99,8 @@
   (shell-command "emacsd-pull"))
 
 
-(defun setup-terminal-session (frame)
+(defun setup-terminal-session (&optional frame)
+  (interactive) ;; make callable as command by M-x
   (when (null (window-system frame))
     (set-face-attribute 'helm-selection frame
                         :background "red"
@@ -108,5 +109,5 @@
                         :background "red"
                         :foreground "black")))
 
-;; to enable xclip-mode on terminal mode
-(add-hook 'after-make-frame-functions 'setup-terminal-session)
+;; [disabled] fix theme color issues on terminal session (do that manually, instead)
+;; (add-hook 'after-make-frame-functions 'setup-terminal-session)
