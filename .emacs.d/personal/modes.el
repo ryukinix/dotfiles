@@ -69,7 +69,8 @@
 (global-git-commit-mode +1)
 
 ;; setup irc autologin channels
-(setq erc-autojoin-channels-alist '(("freenode.net" "#haskell" "#python" "#lisp")))
+(setq erc-autojoin-channels-alist '(("freenode.net" "#artix")))
+(setq erc-prompt "λ>")
 
 (setq initial-scratch-message
 ";; ▓█████  ███▄ ▄███▓ ▄▄▄       ▄████▄    ██████
@@ -81,7 +82,6 @@
 ;; ░ ░  ░░  ░      ░  ▒   ▒▒ ░  ░  ▒   ░ ░▒  ░ ░
 ;; ░   ░      ░     ░   ▒   ░        ░  ░  ░
 ;; ░  ░       ░         ░  ░░ ░            ░
-
 ")
 ;; ensure that all the ssh keys was loaded
 (when (executable-find ssh-agency-agent-executable)
