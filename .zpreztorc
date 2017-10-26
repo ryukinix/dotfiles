@@ -213,7 +213,11 @@ zstyle ':prezto:module:tmux:auto-start' local 'yes'
 # Set the default session name:
 zstyle ':prezto:module:tmux:session' name $HOST
 
-source ~/.zprezto/modules/tmux/init.zsh
+# HACK: sorry, awful workaround here
+# alias tmux='tmux -2' doesn't fix properly
+# -2 argument force 256 color support on tmux initialization
+# this fix weird usage of emacs through tmux + xterm
+source <(sed "s/\stmux\s/ tmux -2 /" ~/.zprezto/modules/tmux/init.zsh)
 
 #
 # Utility

@@ -98,16 +98,12 @@
   (interactive)
   (shell-command "emacsd-pull"))
 
-
 (defun setup-terminal-session (&optional frame)
   (interactive) ;; make callable as command by M-x
-  (when (null (window-system frame))
+  (when (and (null (window-system frame))
+             (< (tty-display-color-cells frame) 256))
     (set-face-attribute 'helm-selection frame
-                        :background "red"
-                        :foreground "black")
-    (set-face-attribute 'region frame
-                        :background "red"
+                        :background "yellow"
                         :foreground "black")))
 
-;; [disabled] fix theme color issues on terminal session (do that manually, instead)
-;; (add-hook 'after-make-frame-functions 'setup-terminal-session)
+(add-hook 'after-make-frame-functions 'setup-terminal-session)
