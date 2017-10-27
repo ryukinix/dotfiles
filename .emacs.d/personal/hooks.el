@@ -1,5 +1,8 @@
 ;; set of hooks made to keep the life more easy
 
+(require 'prelude-packages)
+(prelude-require-package 'geiser)
+
 (require 'python)
 (require 'cc-mode)
 (require 'gud)
@@ -7,7 +10,8 @@
 (require 'gdb-mi)
 (require 'helm-projectile)
 (require 'company)
-(require 'prelude-packages)
+(require 'geiser)
+(require 'geiser-impl)
 
 ;; this fucking variable is created on the fly for gud,
 ;; so I need declare here to avoid warnings
@@ -107,3 +111,14 @@
                         :foreground "black")))
 
 (add-hook 'after-make-frame-functions 'setup-terminal-session)
+
+
+;; make flycheck on racket less agressive
+(defun cooldown-flycheck-on-racket (&rest _)
+   (message "%s" geiser-impl--implementation)
+   (if (eq geiser-impl--implementation 'racket)
+       (setq-local flycheck-check-syntax-automatically '(save mode-enabled))
+     (setq flycheck-check-syntax-automatically (default-value 'flycheck-check-syntax-automatically))))
+
+(advice-add 'geiser-set-scheme :after 'cooldown-flycheck-on-racket)
+(add-hook 'geiser-mode-hook 'cooldown-flycheck-on-racket)
