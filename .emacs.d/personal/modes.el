@@ -64,6 +64,7 @@
 
 ;; add slime-company completion tool to slime-contribs
 (push 'slime-company slime-contribs)
+(push 'slime-asdf slime-contribs)
 
 ;; this works to use git on command line with core.editor=emacs
 (global-git-commit-mode +1)
