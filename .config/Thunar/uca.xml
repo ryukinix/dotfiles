@@ -76,9 +76,9 @@
 	<image-files/>
 </action>
 <action>
-	<icon>code-context</icon>
+	<icon>accessories-text-editor-symbolic</icon>
 	<name>Send to pastebin</name>
-	<unique-id>1507022906847010-2</unique-id>
+	<unique-id>1509153702275979-1</unique-id>
 	<command>notify-send &quot;Sending to ix&quot; %F -i retext; cat %F | ix | xclip -selection clipboard &amp;&amp; notify-send &quot;ix copied&quot; &quot;%F: `xclip-output`&quot; -i retext || notify-send &quot;ix fails&quot; %F -i retext</command>
 	<description>Send files to pastebin and copy link to clipboard: a online file view</description>
 	<patterns>*</patterns>
