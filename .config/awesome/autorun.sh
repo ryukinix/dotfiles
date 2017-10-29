@@ -70,6 +70,5 @@ function autorun {
     (xfdesktop > /dev/null &)&
 }
 
-export CANCER="asdfasdfasdf"
 
 autorun
