@@ -175,7 +175,7 @@ beautiful.init(theme_path)
 -- {{{ Menu
 local myawesomemenu = {
    { "hotkeys", function() return false, hotkeys_popup.show_help end },
-   { "manual", terminal .. " -e man awesome" },
+   { "manual", terminal .. " -e 'man awesome'" },
    { "edit config", string.format("%s %s", gui_editor, awesome.conffile) },
    { "restart", awesome.restart },
    { "quit", function() awesome.quit() end }
