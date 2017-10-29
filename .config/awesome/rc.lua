@@ -229,8 +229,13 @@ globalkeys = awful.util.table.join(
    awful.key({altkey}, "Print", function() awful.util.spawn("xfce4-screenshooter -w") end),
 
    -- Applications
-   awful.key({modkey}, "h", function() awful.util.spawn("thunar") end,
+   -- d... dired?
+   awful.key({modkey}, "d", function() awful.util.spawn("thunar") end,
       {description = "open file manager", group = "applications"}),
+
+   awful.key({modkey}, "g",
+      function() awful.util.spawn("/home/lerax/.Telegram/Telegram") end,
+      {description = "open telegram", group = "applications"}),
 
    -- Open the rc config on the default gui_editor
    awful.key({modkey, "Shift"}, "e",
@@ -264,13 +269,13 @@ globalkeys = awful.util.table.join(
       {description = "view  previous nonempty", group = "tag"}),
 
    -- Default client focus
-   awful.key({ modkey, altkey,           }, "j",
+   awful.key({ modkey, altkey,           }, "n",
       function ()
          awful.client.focus.byidx( 1)
       end,
       {description = "focus next by index", group = "client"}
    ),
-   awful.key({ modkey, altkey,           }, "k",
+   awful.key({ modkey, altkey,           }, "p",
       function ()
          awful.client.focus.byidx(-1)
       end,
@@ -302,13 +307,13 @@ globalkeys = awful.util.table.join(
       {description = "show main menu", group = "awesome"}),
 
    -- Layout manipulation
-   awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end,
+   awful.key({ modkey, altkey  }, "f", function () awful.client.swap.byidx(  1)    end,
       {description = "swap with next client by index", group = "client"}),
-   awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx( -1)    end,
+   awful.key({ modkey, altkey   }, "b", function () awful.client.swap.byidx( -1)    end,
       {description = "swap with previous client by index", group = "client"}),
-   awful.key({ modkey, "Control" }, "j", function () awful.screen.focus_relative( 1) end,
+   awful.key({ modkey, "Control" }, "f", function () awful.screen.focus_relative( 1) end,
       {description = "focus the next screen", group = "screen"}),
-   awful.key({ modkey, "Control" }, "k", function () awful.screen.focus_relative(-1) end,
+   awful.key({ modkey, "Control" }, "b", function () awful.screen.focus_relative(-1) end,
       {description = "focus the previous screen", group = "screen"}),
    awful.key({ modkey,           }, "u", awful.client.urgent.jumpto,
       {description = "jump to urgent client", group = "client"}),
@@ -425,39 +430,39 @@ globalkeys = awful.util.table.join(
             beautiful.volume.update()
       end),
 
-      -- MPD control
-      awful.key({ altkey, "Control" }, "Up",
-         function ()
-            awful.spawn.with_shell("mpc toggle")
-            beautiful.mpd.update()
-      end),
-      awful.key({ altkey, "Control" }, "Down",
-         function ()
-            awful.spawn.with_shell("mpc stop")
-            beautiful.mpd.update()
-      end),
-      awful.key({ altkey, "Control" }, "Left",
-         function ()
-            awful.spawn.with_shell("mpc prev")
-            beautiful.mpd.update()
-      end),
-      awful.key({ altkey, "Control" }, "Right",
-         function ()
-            awful.spawn.with_shell("mpc next")
-            beautiful.mpd.update()
-      end),
-      awful.key({ altkey }, "0",
-         function ()
-            local common = { text = "MPD widget ", position = "top_middle", timeout = 2 }
-            if beautiful.mpd.timer.started then
-               beautiful.mpd.timer:stop()
-               common.text = common.text .. lain.util.markup.bold("OFF")
-            else
-               beautiful.mpd.timer:start()
-               common.text = common.text .. lain.util.markup.bold("ON")
-            end
-            naughty.notify(common)
-      end),
+      -- -- MPD control
+      -- awful.key({ altkey, "Control" }, "Up",
+      --    function ()
+      --       awful.spawn.with_shell("mpc toggle")
+      --       beautiful.mpd.update()
+      -- end),
+      -- awful.key({ altkey, "Control" }, "Down",
+      --    function ()
+      --       awful.spawn.with_shell("mpc stop")
+      --       beautiful.mpd.update()
+      -- end),
+      -- awful.key({ altkey, "Control" }, "Left",
+      --    function ()
+      --       awful.spawn.with_shell("mpc prev")
+      --       beautiful.mpd.update()
+      -- end),
+      -- awful.key({ altkey, "Control" }, "Right",
+      --    function ()
+      --       awful.spawn.with_shell("mpc next")
+      --       beautiful.mpd.update()
+      -- end),
+      -- awful.key({ altkey }, "0",
+      --    function ()
+      --       local common = { text = "MPD widget ", position = "top_middle", timeout = 2 }
+      --       if beautiful.mpd.timer.started then
+      --          beautiful.mpd.timer:stop()
+      --          common.text = common.text .. lain.util.markup.bold("OFF")
+      --       else
+      --          beautiful.mpd.timer:start()
+      --          common.text = common.text .. lain.util.markup.bold("ON")
+      --       end
+      --       naughty.notify(common)
+      -- end),
 
       -- Copy primary to clipboard (terminals to gtk)
       awful.key({ modkey }, "c", function () awful.spawn("xclip | xclip -i -b") end),
@@ -486,7 +491,7 @@ globalkeys = awful.util.table.join(
                history_path = awful.util.get_cache_dir() .. "/history_eval"
             }
          end,
-         {description = "lua execute prompt", group = "awesome"}),
+         {description = "lua execute prompt", group = "awesome"})
 
 )
 
