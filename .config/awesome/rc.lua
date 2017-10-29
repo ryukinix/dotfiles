@@ -1,12 +1,12 @@
 --[[
 
-     Awesome WM configuration template
-     github.com/copycat-killer
-     Which was stole by @lubien initially
-     And stole from @lubien by @ryukinix (the owner now)
-     Nested steals.
-     You need install: awesome, lain and awesome-freedesktop-git and luaposix (sorry).
-     TIP: sudo pacman -S awesome --noconfirm; yaourt -S lain awesome-freedesktop-git --noconfirm
+   Awesome WM configuration template
+   github.com/copycat-killer
+   Which was stole by @lubien initially
+   And stole from @lubien by @ryukinix (the owner now)
+   Nested steals.
+   You need install: awesome, lain and awesome-freedesktop-git and luaposix (sorry).
+   TIP: sudo pacman -S awesome --noconfirm; yaourt -S lain awesome-freedesktop-git --noconfirm
 --]]
 
 -- {{{ Required libraries
@@ -28,9 +28,9 @@ local cyclefocus    = require('cyclefocus')
 
 -- {{{ Error handling
 if awesome.startup_errors then
-    naughty.notify({ preset = naughty.config.presets.critical,
-                     title = "Oops, there were errors during startup!",
-                     text = awesome.startup_errors })
+   naughty.notify({ preset = naughty.config.presets.critical,
+                    title = "Oops, there were errors during startup!",
+                    text = awesome.startup_errors })
 end
 
 do
@@ -223,9 +223,13 @@ root.buttons(awful.util.table.join(
 globalkeys = awful.util.table.join(
     -- Take a screenshot
     -- https://github.com/copycat-killer/dots/blob/master/bin/screenshot
-    -- awful.key({ altkey }, "p", function() os.execute("screenshot") end),
+   awful.key({ }, "Print", function() awful.util.spawn("xfce4-screenshooter") end),
+   awful.key({"Ctrl", altkey}, "Print", function() awful.util.spawn("xfce4-screenshooter -f") end),
+   awful.key({"Ctrl"}, "Print", function() awful.util.spawn("xfce4-screenshooter -r") end),
+   awful.key({altkey}, "Print", function() awful.util.spawn("xfce4-screenshooter -w") end),
+
     -- Menubar
-    awful.key({ modkey }, "p", function() menubar.show() end,
+   awful.key({ modkey }, "p", function() menubar.show() end,
               {description = "show the menubar", group = "launcher"}),
     -- Hotkeys
     awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
