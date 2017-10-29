@@ -37,11 +37,16 @@ autostart=(~/.config/autostart/Compton.desktop
            /etc/xdg/autostart/pamac-tray.desktop
            ~/.config/autostart/dropbox.desktop
            ~/.config/autostart/volumeicon.desktop
-           /usr/share/applications/xfce4-clipman.desktop)
+           /usr/share/applications/xfce4-clipman.desktop
+          )
+
+function notify-dont-exists {
+    notify-send "[autoruns.sh] Not found file" `printf "%s" $1`
+}
 
 function filter-exists {
     while read line; do
-        [[ -f $line ]] && echo $line
+        [[ -f $line ]] && echo $line || notify-send $line
     done
 }
 
