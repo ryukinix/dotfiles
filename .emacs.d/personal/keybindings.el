@@ -71,13 +71,17 @@
 (global-set-key (kbd "C-M-S-x") 'crux-eval-and-replace)
 (global-set-key (kbd "<C-f9>") 'flyspell-buffer)
 
+(defun kill-this-buffer-and-window ()
+  (interactive)
+  (if (> (length (window-list)) 1)
+      (kill-buffer-and-window)
+    (kill-buffer (current-buffer))))
+
 ;; killing emacs: daemon, frame and just closing
 (global-set-key (kbd "<C-M-f4>") 'save-buffers-kill-emacs)
-(global-set-key (kbd "<C-f4>") (lambda () (interactive)
-                                 (if (> (length (window-list)) 1)
-                                     (kill-buffer-and-window)
-                                   (kill-buffer (current-buffer)))))
 
+(global-set-key (kbd "<C-f4>") 'kill-this-buffer-and-window)
+(global-set-key (kbd "C-M-S-k") 'kill-this-buffer-and-window)
 (global-set-key (kbd "<M-f4>") 'intelligent-close)
 
 (global-set-key (kbd "<M-f1>") 'linum-mode) ;; don't work on terminal
