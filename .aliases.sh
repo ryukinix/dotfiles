@@ -35,9 +35,9 @@ alias ufc='cd ~/Dropbox/University/Courses/UFC/2017.2/'
 
 
 function ixx {
-    link=`ix $@ 2> /dev/null`
-    if [ $? == '0' ]; then
-        echo $link | xclip -sel clipboard
+    link=`ix "${@:1}" 2> /dev/null`
+    if [ $? -eq '0' ]; then
+        echo $link | xclip -selection clipboard
         printf "Copied '%s' to X clipboard.\n" $link
     fi
 }
