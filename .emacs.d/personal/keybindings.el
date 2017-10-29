@@ -218,3 +218,11 @@
 (global-set-key (kbd "C-x /") 'toggle-window-split)
 (global-set-key (kbd "C-x |") 'split-window-horizontally)
 (global-set-key (kbd "C-x _") 'split-window-vertically)
+
+;; alternative keybinding because C-x C-; doesnt't works on terminal
+(global-set-key (kbd "C-x M-;") 'comment-line)
+
+
+;; prelude fullscreen
+(global-unset-key (kbd "<f11>"))
+(global-set-key (kbd "<f11>") 'prelude-fullscreen)
