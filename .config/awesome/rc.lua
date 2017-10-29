@@ -238,7 +238,7 @@ globalkeys = awful.util.table.join(
       {description = "open telegram", group = "applications"}),
 
    -- Open the rc config on the default gui_editor
-   awful.key({modkey, "Shift"}, "e",
+   awful.key({modkey, "Control"}, "e",
       function () awful.util.spawn(string.format("%s %s", gui_editor, awesome.conffile)) end,
       {description = "open file config of awesome", group = "applications"}),
 
