@@ -10,8 +10,13 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
+function safe-source {
+    [[ -f $1 ]] && source $1
+}
+
 # Customize to your needs...
-source ~/.aliases.sh
-source ~/.sudo.plugin.zsh
-source ~/.emacs.git.sh
-[[ `which fzf` ]] && source ~/.fzf.sh
+safe-source ~/.aliases.sh
+safe-source ~/.sudo.plugin.zsh
+safe-source ~/.emacs.git.sh
+safe-source ~/.tmate.sh
+[[ `which fzf` ]] && safe-source ~/.fzf.sh
