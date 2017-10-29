@@ -71,4 +71,4 @@ function autorun {
 }
 
 
-autorun
+autorun&
