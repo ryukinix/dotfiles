@@ -38,7 +38,6 @@ autostart=(
     ~/.config/autostart/Compton.desktop
     ~/.config/autostart/Zeal.desktop
     ~/.config/autostart/volumeicon.desktop
-    ~/.config/autostart/geary-autostart.desktop
     ~/.config/autostart/dropbox.desktop
     ~/.config/autostart/fluxgui.desktop
 )
@@ -74,7 +73,7 @@ function autorun {
         | filter-exists \
         | parse-desktop \
         | filter-not-running \
-        | xargs -L 1 -P $tasks bash -c "({in} &> /dev/null &) ; exit 0"
+        | xargs -L 1 -I{in} -P $tasks bash -c "({in} &> /dev/null &) ; exit 0"
 
     (xfdesktop > /dev/null &)&
 }
