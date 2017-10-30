@@ -7,6 +7,7 @@
    Nested steals.
    You need install: awesome, lain and awesome-freedesktop-git and luaposix (sorry).
    TIP: sudo pacman -S awesome --noconfirm; yaourt -S lain awesome-freedesktop-git --noconfirm
+   TIP2: sudo pacman -S rofi
 --]]
 
 -- {{{ Required libraries
@@ -246,8 +247,11 @@ globalkeys = awful.util.table.join(
       { description = "open editor", group = "applications"}),
 
    -- Menubar
-   awful.key({ modkey }, "p", function() menubar.show() end,
+   awful.key({ modkey }, "p", function() awful.spawn("rofi -show drun") end,
       {description = "show the menubar", group = "launcher"}),
+   -- Rofi client
+   awful.key({ modkey, "Ctrl" }, "p", function() awful.spawn("rofi -show window") end,
+      {description = "show the window menu", group = "client"}),
    -- Hotkeys
    awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
       {description="show help", group="awesome"}),
@@ -476,7 +480,7 @@ globalkeys = awful.util.table.join(
       --
 
       -- Prompt
-      awful.key({ modkey }, "r", function () awful.screen.focused().mypromptbox:run() end,
+      awful.key({ modkey }, "r", function () awful.spawn("rofi -show run") end,
          {description = "run prompt", group = "launcher"}),
 
       awful.key({ modkey }, "x",
