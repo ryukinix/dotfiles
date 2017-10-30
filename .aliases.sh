@@ -41,3 +41,6 @@ function ixx {
         printf "Copied '%s' to X clipboard.\n" $link
     fi
 }
+
+# you need tmate to use that
+alias ssh-share='tmux detach -E "tmate && zsh"'
