@@ -57,9 +57,6 @@ local function run_once(cmd_arr)
       end
       awful.spawn.with_shell(string.format("pgrep -u $USER -x %s > /dev/null || (%s)", findme, cmd))
       awful.spawn.with_shell("exec ~/.config/awesome/autorun.sh &")
-      awful.spawn.with_shell("nm-applet &")
-      awful.spawn.with_shell("blueman-applet &")
-      awful.spawn.with_shell("thunar --daemon &")
    end
 end
 -- manoel stuff here, fix of the fix from fixed fix
