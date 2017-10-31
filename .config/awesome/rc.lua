@@ -704,3 +704,12 @@ client.connect_signal("focus",
     end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
+
+-- make rofi possible to access minimized clients
+client.connect_signal("request::activate",
+                      function(c, context, hints)
+                         if c.minimized then
+                            c.minimized = false
+                         end
+                         awful.ewmh.activate(c, context, hints)
+                      end)
