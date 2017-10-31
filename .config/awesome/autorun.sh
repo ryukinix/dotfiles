@@ -43,10 +43,12 @@ autostart=(
 )
 
 commands=(
+    "xfdesktop --disable-wm-check"
     "nm-applet"
     "thunar --daemon"
-    "xfdesktop --disable-wm-check"
+    "geary --hidden"
 )
+
 
 # notify if file dont-exists
 function notify-dont-exists {
@@ -86,7 +88,7 @@ function array-to-lines {
 
 # first arg is the size of pool
 function execution-pool {
-    xargs -L 1 -I{in} -P $1 bash -c "({in} &> /dev/null &) ; exit 0"
+    xargs -L 1 -I{in} -P $1 bash -c "({in} &> /dev/null &)"
 }
 
 function autorun {
@@ -101,7 +103,7 @@ function autorun {
     array-to-lines "${commands[@]}" \
         | filter-exists \
         | filter-not-running \
-        | execution-pool $tasks
+        | execution-pool 1
 
 }
 
