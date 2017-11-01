@@ -225,7 +225,10 @@ globalkeys = awful.util.table.join(
    awful.key({ }, "Print", function() awful.util.spawn("xfce4-screenshooter") end),
    awful.key({"Ctrl", altkey}, "Print", function() awful.util.spawn("xfce4-screenshooter -f") end),
    awful.key({"Ctrl"}, "Print", function() awful.util.spawn("xfce4-screenshooter -r") end),
+   awful.key({"Ctrl", "Shift", altkey}, "Print", function() awful.util.spawn("xfce4-screenshooter -f -c") end),
+   awful.key({"Ctrl", "Shift"}, "Print", function() awful.util.spawn("xfce4-screenshooter -r -c") end),
    awful.key({altkey}, "Print", function() awful.util.spawn("xfce4-screenshooter -w") end),
+   awful.key({altkey, "Shift"}, "Print", function() awful.util.spawn("xfce4-screenshooter -w -c") end),
 
    -- Applications
    -- d... dired?
@@ -475,7 +478,15 @@ globalkeys = awful.util.table.join(
          function ()
             awful.spawn("rhythmbox")
          end,
-         {description = "Open media play", group = "applications"}
+         {description = "open media player", group = "applications"}
+      ),
+
+      -- Geary
+      awful.key({modkey}, "a",
+         function ()
+            awful.spawn("geary")
+         end,
+         {description = "open email client", group = "applications"}
       ),
 
       -- Copy primary to clipboard (terminals to gtk)
