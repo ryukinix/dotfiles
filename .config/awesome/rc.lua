@@ -467,6 +467,14 @@ globalkeys = awful.util.table.join(
       --       naughty.notify(common)
       -- end),
 
+      -- Rhythmbox
+      awful.key({modkey},  "XF86AudioPlay",
+         function ()
+            awful.spawn("rhythmbox")
+         end,
+         {description = "Open media play", group = "applications"}
+      ),
+
       -- Copy primary to clipboard (terminals to gtk)
       awful.key({ modkey }, "c", function () awful.spawn("xclip | xclip -i -b") end),
       -- Copy clipboard to primary (gtk to terminals)
