@@ -73,7 +73,8 @@ run_once({ "unclutter -root" }) -- entries must be comma-separated
 local chosen_theme = "multicolor"
 local modkey       = "Mod4"
 local altkey       = "Mod1"
-local terminal     = "xfce4-terminal" -- "uxterm"
+local terminal     = "xfce4-terminal"
+local alt_terminal = "xterm"
 local editor       = "emacsclient"
 local gui_editor   = "/home/lerax/.local/bin/gemacs"
 local browser      = "firefox-nightly"
@@ -361,6 +362,8 @@ globalkeys = awful.util.table.join(
    -- Standard program
    awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end,
       {description = "open a terminal", group = "launcher"}),
+      awful.key({ modkey,   "Ctrl"  }, "Return", function () awful.spawn(alt_terminal) end,
+      {description = "open a alternative terminal", group = "launcher"}),
    awful.key({ modkey, "Control" }, "r", awesome.restart,
       {description = "reload awesome", group = "awesome"}),
    awful.key({ modkey, "Shift"   }, "q", awesome.quit,
@@ -514,6 +517,14 @@ clientkeys = awful.util.table.join(
          c:raise()
       end,
       {description = "toggle fullscreen", group = "client"}),
+
+   awful.key({ altkey,           }, "F11",
+      function (c)
+         c.fullscreen = not c.fullscreen
+         c:raise()
+      end,
+      {description = "toggle fullscreen", group = "client"}),
+
    awful.key({ modkey, "Shift"   }, "c",      function (c) c:kill()                         end,
       {description = "close", group = "client"}),
    awful.key({ altkey}, "F4",      function (c) c:kill()                         end,
