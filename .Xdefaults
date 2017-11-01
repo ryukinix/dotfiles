@@ -1,19 +1,24 @@
 ! my initial setup
-xterm*dynamicColors:    true
-xterm*background:      black
-xterm*foreground:      white
-xterm*utf8:             3
-xterm*eightBitInput:    true
-xterm*saveLines:        32767
-xterm*scrollTtyKeypress: true
-xterm*scrollTtyOutput:  false
-xterm*scrollBar:        false
-xterm*loginShell:       true
-xterm*jumpScroll:       true
-xterm*multiScroll:      true
-xterm*toolBar:          false
-xterm.vt100.faceName: Fixed
-xterm.vt100.faceSize: 12
+XTerm*dynamicColors:     true
+! XTerm*background:        black
+! XTerm*foreground:        white
+XTerm*utf8:              2
+XTerm*eightBitInput:     true
+XTerm*saveLines:         32767
+XTerm*scrollTtyKeypress: true
+XTerm*scrollTtyOutput:   false
+XTerm*scrollBar:         false
+XTerm*loginShell:        true
+XTerm*jumpScroll:        true
+XTerm*multiScroll:       true
+XTerm*toolBar:           false
+
+! font hell
+XTerm*faceName: monospace
+XTerm*faceNameDoublesize: -misc-fixed-medium-r-semicondensed--13-120-75-75-c-60-iso8859-?
+XTerm*faceSize: 11
+XTerm*font:     -misc-fixed-medium-r-normal--18-120-100-100-c-90-iso10646-1
+XTerm*wideFont: -misc-fixed-medium-r-normal-ja-18-120-100-100-c-180-iso10646-1
 
 Emacs.font:             Monoid-10
 
@@ -37,8 +42,6 @@ Xft.lcdfilter: lcddefault
 XTerm*background: #282A36
 XTerm*foreground: #F8F8F2
 XTerm*pointerColor: #16A085
-XTerm*faceName: Fixed
-XTerm*faceSize: 11
 
 ! Dracula Xresources palette
 *.background: #282A36
@@ -73,9 +76,14 @@ XTerm*faceSize: 11
 *ttyModes: erase ^?
 
 ! Meta key
-UXTerm*metaSendsEscape: true
 XTerm*metaSendsEscape: true
 
 ! setting that C-h on emacs works, but backspace not
-! XTerm*ptyInitialErase: true
-! UXTerm*ptyInitialErase: true
+XTerm*ptyInitialErase: true
+
+! sendo extra non-emulated keys
+XTerm*vt100.formatOtherKeys: 1
+XTerm*vt100.modifyOtherKeys: 1
+
+! blink cursor, yes i like it.
+XTerm*cursorBlink: true
