@@ -17,6 +17,6 @@ function safe-source {
 # Customize to your needs...
 safe-source ~/.aliases.sh
 safe-source ~/.sudo.plugin.zsh
-safe-source ~/.emacs.git.sh
+safe-source ~/.emacs.fixes.sh
 safe-source ~/.tmate.sh
 [[ `which fzf` ]] && safe-source ~/.fzf.sh
