@@ -1,24 +1,40 @@
 ! my initial setup
 XTerm*dynamicColors:     true
+UXTerm*dynamicColors:     true
 ! XTerm*background:        black
 ! XTerm*foreground:        white
 XTerm*utf8:              2
+UXTerm*utf8:              2
 XTerm*eightBitInput:     true
+UXTerm*eightBitInput:     true
 XTerm*saveLines:         32767
+UXTerm*saveLines:         32767
 XTerm*scrollTtyKeypress: true
+UXTerm*scrollTtyKeypress: true
 XTerm*scrollTtyOutput:   false
+UXTerm*scrollTtyOutput:   false
 XTerm*scrollBar:         false
+UXTerm*scrollBar:         false
 XTerm*loginShell:        true
+UXTerm*loginShell:        true
 XTerm*jumpScroll:        true
+UXTerm*jumpScroll:        true
 XTerm*multiScroll:       true
+UXTerm*multiScroll:       true
 XTerm*toolBar:           false
+UXTerm*toolBar:           false
 
 ! font hell
 XTerm*faceName: monospace
+UXTerm*faceName: monospace
 XTerm*faceNameDoublesize: -misc-fixed-medium-r-semicondensed--13-120-75-75-c-60-iso8859-?
+UXTerm*faceNameDoublesize: -misc-fixed-medium-r-semicondensed--13-120-75-75-c-60-iso8859-?
 XTerm*faceSize: 11
+UXTerm*faceSize: 11
 XTerm*font:     -misc-fixed-medium-r-normal--18-120-100-100-c-90-iso10646-1
+UXTerm*font:     -misc-fixed-medium-r-normal--18-120-100-100-c-90-iso10646-1
 XTerm*wideFont: -misc-fixed-medium-r-normal-ja-18-120-100-100-c-180-iso10646-1
+UXTerm*wideFont: -misc-fixed-medium-r-normal-ja-18-120-100-100-c-180-iso10646-1
 
 Emacs.font:             Monoid-10
 
@@ -40,8 +56,12 @@ Xft.hintstyle: hintslight
 Xft.lcdfilter: lcddefault
 
 XTerm*background: #282A36
+UXTerm*background: #282A36
 XTerm*foreground: #F8F8F2
+UXTerm*foreground: #F8F8F2
 XTerm*pointerColor: #16A085
+UXTerm*pointerColor: #16A085
+
 
 ! Dracula Xresources palette
 *.background: #282A36
@@ -77,13 +97,18 @@ XTerm*pointerColor: #16A085
 
 ! Meta key
 XTerm*metaSendsEscape: true
+UXTerm*metaSendsEscape: true
 
 ! setting that C-h on emacs works, but backspace not
 XTerm*ptyInitialErase: true
+UXTerm*ptyInitialErase: true
 
 ! sendo extra non-emulated keys
 XTerm*vt100.formatOtherKeys: 1
+UXTerm*vt100.formatOtherKeys: 1
 XTerm*vt100.modifyOtherKeys: 1
+UXTerm*vt100.modifyOtherKeys: 1
 
 ! blink cursor, yes i like it.
 XTerm*cursorBlink: true
+UXTerm*cursorBlink: true
