@@ -15,10 +15,7 @@ function open-frame {
 }
 
 function raise-frames {
-    open-frame \
-        -e "(mapcar #'raise-frame (remove-if (lambda (x) \
-                                                 (null (window-system x))) \
-                                             (frame-list))))"
+    open-frame -e "(mapcar #'x-focus-frame (frame-list))"
 }
 
 function if-crashed-restart-emacs {
