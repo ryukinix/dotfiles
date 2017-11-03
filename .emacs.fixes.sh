@@ -14,3 +14,7 @@ then
     #unfunction preexec
     PS1='$ '
 fi
+
+if [[ $TERM == "xterm" ]]; then
+    export TERM=xterm-256color
+fi

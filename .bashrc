@@ -9,3 +9,4 @@ alias ls='ls --color=auto'
 PS1='[\u@\h \W]\$ '
 
 source ~/.aliases.sh
+[[ -f ~/.emacs.fixes.sh ]] && source ~/.emacs.fixes.sh
