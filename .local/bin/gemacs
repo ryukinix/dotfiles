@@ -27,7 +27,7 @@ function if-crashed-restart-emacs {
     [[ `rc-status --crashed` == *emacs.lerax* || ! `pgrep emacs` ]] && restart-emacs
 }
 
-if-crashed-restart-emacs
+[[ -f /usr/bin/openrc ]] && if-crashed-restart-emacs
 
 if [ `has-frame` == "t" ]; then
     open-frame "$@" 2> /dev/null || raise-frames 1> /dev/null
