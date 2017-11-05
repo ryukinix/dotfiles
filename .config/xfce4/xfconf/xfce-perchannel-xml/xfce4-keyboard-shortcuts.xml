@@ -54,6 +54,7 @@
       <property name="&lt;Super&gt;v" type="string" value="xfce4-popup-whiskermenu"/>
       <property name="&lt;Primary&gt;&lt;Super&gt;p" type="string" value="rofi -show window"/>
       <property name="&lt;Super&gt;a" type="string" value="geary"/>
+      <property name="&lt;Primary&gt;XF86AudioPlay" type="string" value="rhythmbox"/>
     </property>
   </property>
   <property name="xfwm4" type="empty">
