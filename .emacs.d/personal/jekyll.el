@@ -7,7 +7,7 @@
 
 ;; setup of org2jekyll
 (setq org2jekyll-blog-author "Manoel Vilela"
-      org2jekyll-source-directory (expand-file-name "~/Dropbox/Programming/Projects/Website/Org")
+      org2jekyll-source-directory (expand-file-name "~/Dropbox/Programming/Projects/Website/ryukinix.github.io/org")
       org2jekyll-jekyll-directory (expand-file-name "~/Dropbox/Programming/Projects/Website/ryukinix.github.io")
       org2jekyll-jekyll-drafts-dir ""
       org2jekyll-jekyll-posts-dir "_posts/"
