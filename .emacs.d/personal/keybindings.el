@@ -103,7 +103,7 @@
 
 ;; company-ode additional keybindings
 (define-key company-mode-map [C-tab] 'company-complete)
-(define-key company-active-map (kbd "C-f") 'company-complete)
+;; (define-key company-active-map (kbd "C-f") 'company-complete)
 (define-key company-mode-map [C-return] 'company-complete)
 (define-key company-active-map [C-tab] 'company-complete-common-or-cycle)
 (define-key company-active-map [tab] 'company-complete-selection)
