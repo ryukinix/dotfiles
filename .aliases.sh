@@ -18,7 +18,8 @@ alias deadstar-bind-right='ssh -Y lerax@deadstar -t "x2x -east -to :0.0"'
 alias deadstar-bind-down='ssh -Y lerax@deadstar -t "x2x -south -to :0.0"'
 alias starfox='ssh lerax@starfox'
 alias deadstar='ssh lerax@deadstar'
-
+alias ustar='ssh server.lerax.me'
+alias lerax.me='ssh server.lerax.me'
 # save definition of dot (graphviz language)
 alias dot-graph='/bin/dot'
 function dot {
