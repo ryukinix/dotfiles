@@ -116,3 +116,6 @@
 (when (executable-find "xclip")
   (require 'xclip)
   (xclip-mode +1))
+
+;; require ob-latex for exporting org-latex blocks correctly
+(require 'ob-latex)
