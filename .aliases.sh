@@ -9,6 +9,8 @@ alias lisp=sbcl
 alias lain=lein
 alias dic=sdcv
 
+
+
 # don't use nosetests anymore, is legacy broken and fucked
 alias nosetests='nose2'
 
@@ -45,3 +47,9 @@ function ixx {
 
 # you need tmate to use that
 alias ssh-share='tmux detach -E "tmate && zsh"'
+
+# mouse driver
+alias mouse-driver="ratslap"
+
+# making docker life more easy
+alias dc=docker
