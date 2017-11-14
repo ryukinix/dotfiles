@@ -30,3 +30,7 @@ function echo_info {
 function echo_error {
     printf_color $RED "[$1]"; echo ${@:2}
 }
+
+function command_exists {
+    command -v $1 > /dev/null
+}

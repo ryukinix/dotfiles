@@ -4,7 +4,7 @@ source conf.sh
 
 function install_packages {
     # if no sudo installed, just evaluate the expression
-    if [ ! -f /bin/sudo ]; then
+    if [ ! `command_exists sudo` ]; then
         # creating a alias don't will work
         function sudo {
             eval "$@"
@@ -12,15 +12,15 @@ function install_packages {
     fi
 
     # install main packages
-    if [ -f /usr/bin/pacman ]; then
+    if [ `command_exists pacman` ]; then
         echo_info info "Arch Linux based: using pacman."
-        sudo pacman -Sy --needed ${PACKAGES[@]} && chsh -s $DEFAULT_SHELL
-    elif [ -f /usr/bin/apt-get ]; then
+        sudo pacman -Sy --needed ${PACKAGES[@]}
+    elif [ `command_exists apt-get` ]; then
         echo_info info "Debian based: using apt-get."
-        sudo apt-get update && \
-             sudo apt-get install ${PACKAGES[@]} && \
-             chsh -s $DEFAULT_SHELL
+        sudo apt-get update &&  sudo apt-get install ${PACKAGES[@]}
     fi
+
+    [[ -f $DEFAULT_SHELL ]] && chsh -s $DEFAULT_SHELL
 }
 
 
