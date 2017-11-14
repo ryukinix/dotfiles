@@ -6,7 +6,7 @@ source <(curl -s https://raw.githubusercontent.com/ryukinix/dotfiles/master/lib.
 source <(curl -s https://raw.githubusercontent.com/ryukinix/dotfiles/master/conf.sh) # sorry again
 
 function clone_repo {
-    if [ ! `command_exists git` ]; then
+    if [[ ! `command_exists git` ]]; then
         echo_error "error" "Please install git and try again."
         exit 1
     fi
