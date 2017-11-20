@@ -3,7 +3,7 @@
 
 (prelude-require-packages '(multiple-cursors fsharp-mode neotree linum-relative
                                              darkroom speedbar sr-speedbar
-                                             projectile-speedbar))
+                                             projectile-speedbar key-chord))
 
 (require 'company)
 (require 'fsharp-mode)
@@ -230,3 +230,45 @@
 ;; prelude fullscreen
 (global-unset-key (kbd "<f11>"))
 (global-set-key (kbd "<f11>") 'prelude-fullscreen)
+
+;; install packages easy
+(global-set-key (kbd "M-p") 'package-install)
+
+
+(setq key-chord-two-keys-delay .015
+      key-chord-one-key-delay .020)
+
+(dolist (binding
+         `((" i" . previous-multiframe-window)
+           (" o" . next-multiframe-window)
+           (" l" . ibuffer)
+
+           (" m" . magit-status)
+
+           (" e" . er/expand-region)
+
+           (" 0" . delete-window)
+           (" 1" . delete-other-windows)
+           (" 2" . split-window-below)
+           (" 3" . split-window-right)
+           (" =" . winstack-push)
+           (" -" . winstack-pop)
+
+           (" w" . whitespace-mode)
+
+           ("ji" . undo-tree-undo)
+           ("jo" . undo-tree-redo)
+           ("jk" . undo-tree-switch-branch)
+           ("j;" . undo-tree-visualize)
+
+           (" b" . ido-switch-buffer)
+           (" f" . ido-find-file)
+           (" s" . save-buffer)
+           (" k" . kill-this-buffer-and-window)
+
+           (" x" . shell)
+
+           (" r" . recompile)))
+  (key-chord-define-global (car binding) (cdr binding)))
+;; enable key chord
+(key-chord-mode +1)
