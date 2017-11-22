@@ -56,3 +56,5 @@ alias dc=docker
 alias sprunge="curl -F 'sprunge=<-' http://sprunge.us"
 alias sprungex='sprunge | xcopy'
 alias pastebin=sprungex
+
+alias tmate="tmux detach-client -E 'tmate;tmux'"
