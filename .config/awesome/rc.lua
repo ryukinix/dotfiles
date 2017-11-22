@@ -481,6 +481,14 @@ globalkeys = awful.util.table.join(
          {description = "open media player", group = "applications"}
       ),
 
+       -- Rhythmbox
+      awful.key({"Ctrl"},  "XF86AudioPlay",
+         function ()
+            awful.spawn("rhythmbox")
+         end,
+         {description = "open media player", group = "applications"}
+      ),
+
       -- Geary
       awful.key({modkey}, "a",
          function ()
