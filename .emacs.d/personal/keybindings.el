@@ -238,6 +238,11 @@
 (setq key-chord-two-keys-delay .015
       key-chord-one-key-delay .020)
 
+(defun boombayah ()
+  "Insert the BOOMBAYAH korean signature"
+  (interactive)
+  (insert "붐바야"))
+
 (dolist (binding
          `((" i" . previous-multiframe-window)
            (" o" . next-multiframe-window)
@@ -267,6 +272,8 @@
            (" k" . kill-this-buffer-and-window)
 
            (" x" . shell)
+           (" b" . boombayah)
+           ;; O Rafael gosta de 붐바야
 
            (" r" . recompile)))
   (key-chord-define-global (car binding) (cdr binding)))
