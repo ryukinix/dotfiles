@@ -3,11 +3,13 @@
 
 (prelude-require-packages '(multiple-cursors fsharp-mode neotree linum-relative
                                              darkroom speedbar sr-speedbar
-                                             projectile-speedbar key-chord))
+                                             projectile-speedbar key-chord
+                                             yasnippet))
 
 (require 'company)
 (require 'fsharp-mode)
 (require 'prelude-custom) ;; definition of prelude-user-init-file
+(require 'yasnippet) ;; template system
 (require 'multiple-cursors)
 (require 'darkroom)
 (require 'sr-speedbar)
@@ -271,6 +273,7 @@
            (" s" . save-buffer)
            (" k" . kill-this-buffer-and-window)
 
+           (" t" . yas-insert-snippet)
            (" x" . shell)
            (" b" . boombayah)
            ;; O Rafael gosta de 붐바야
@@ -279,3 +282,6 @@
   (key-chord-define-global (car binding) (cdr binding)))
 ;; enable key chord
 (key-chord-mode +1)
+
+;; enable yasnippet globally
+(yas-global-mode +1)
