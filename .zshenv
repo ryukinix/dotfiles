@@ -11,3 +11,4 @@ if [[ ! -o LOGIN && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
 fi
 
 export GOPATH="/home/lerax/.go"
+export ANDROID_HOME="/home/lerax/Android/Sdk"
