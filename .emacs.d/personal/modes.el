@@ -70,8 +70,16 @@
 (global-git-commit-mode +1)
 
 ;; setup irc autologin channels
-(setq erc-autojoin-channels-alist '(("freenode.net" "#artix")))
+(setq erc-autojoin-channels-alist '(("freenode.net" "#lisp-br")))
 (setq erc-prompt "λ>")
+(add-to-list 'erc-modules 'notifications) ;; enable notifications
+(add-to-list 'erc-modules 'log) ;; enable
+
+;; == ERC LOG SETUP
+(setq erc-save-buffer-on-part nil)
+(setq erc-save-queries-on-quit nil)
+(setq erc-log-write-after-insert t)
+(setq erc-log-write-after-send t)
 
 (setq initial-scratch-message
 ";; ▓█████  ███▄ ▄███▓ ▄▄▄       ▄████▄    ██████
