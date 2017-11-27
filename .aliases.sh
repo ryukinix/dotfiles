@@ -1,7 +1,7 @@
 alias emacs='emacsclient -nw -a vim'
 alias semacs='SUDO_EDITOR="emacsclient -t -a vim" sudoedit'
 alias svim='SUDO_EDITOR=vim sudoedit'
-alias remacs='sudo rc-service emacs.lerax restart'
+alias remacs='sudo /etc/init.d/emacs.lerax restart'
 alias agenda='gcalcli agenda'
 alias dotnet-build='msbuild'
 alias sbcl='rlwrap sbcl'
