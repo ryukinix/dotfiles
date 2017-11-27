@@ -94,6 +94,9 @@
 (add-to-list 'auto-mode-alist '("\\.\\(c\\|f\\)sproj\\'" . xml-mode))
 (add-to-list 'auto-mode-alist '("\\.install" . shell-script-mode))
 
+;; openrc services auto mode
+(add-to-list 'magic-mode-alist '("#!/usr/bin/openrc-run" . shell-script-mode))
+
 (defun emacsd-push()
   (interactive)
   (shell-command "emacsd-push"))
