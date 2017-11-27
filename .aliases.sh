@@ -58,3 +58,8 @@ alias sprungex='sprunge | xcopy'
 alias pastebin=sprungex
 
 alias tmate="tmux detach-client -E 'tmate;tmux'"
+
+# function to run .el files
+function emacs-run {
+    emacsclient -e "(load \"$(pwd)/$1\")"
+}
