@@ -63,3 +63,5 @@ alias tmate="tmux detach-client -E 'tmate;tmux'"
 function emacs-run {
     emacsclient -e "(load \"$(pwd)/$1\")"
 }
+
+alias stack-size='ulimit -s'
