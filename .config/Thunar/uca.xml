@@ -59,8 +59,8 @@
 <action>
 	<icon>gksu-root-terminal</icon>
 	<name>Execute command</name>
-	<unique-id>1468509136669190-2</unique-id>
-	<command>chmod +x %f; xfce4-terminal -e %f --hold</command>
+	<unique-id>1513186069514024-1</unique-id>
+	<command>chmod +x &quot;%f&quot;; xfce4-terminal -e &quot;%f&quot; --hold</command>
 	<description>Execute command in terminal</description>
 	<patterns>*.sh;*.py</patterns>
 	<startup-notify/>
