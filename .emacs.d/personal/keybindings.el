@@ -270,6 +270,7 @@
 
            (" b" . ido-switch-buffer)
            (" f" . ido-find-file)
+           ("rf" . recentf-open-files)
            (" s" . save-buffer)
            (" k" . kill-this-buffer-and-window)
 
