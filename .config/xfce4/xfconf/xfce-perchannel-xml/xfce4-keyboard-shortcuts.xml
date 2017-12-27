@@ -58,6 +58,7 @@
       <property name="&lt;Primary&gt;&lt;Shift&gt;&lt;Alt&gt;Print" type="string" value="xfce4-screenshooter -f -c"/>
       <property name="&lt;Primary&gt;&lt;Shift&gt;Print" type="string" value="xfce4-screenshooter -r -c"/>
       <property name="&lt;Shift&gt;&lt;Alt&gt;Print" type="string" value="xfce4-screenshooter -w -c"/>
+      <property name="XF86AudioMute" type="string" value="/usr/bin/pactl set-sink-mute 0 toggle"/>
     </property>
   </property>
   <property name="xfwm4" type="empty">
