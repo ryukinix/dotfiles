@@ -72,7 +72,7 @@ alias stack-size='ulimit -s'
 
 
 # pacman aliases
-alias pacman-install='pacman -S'
-alias pacman-update='pacman -Sy'
-alias pacman-upgrade='pacman -Syuu'
+alias pacman-install='sudo pacman -S'
+alias pacman-update='sudo pacman -Sy'
+alias pacman-upgrade='sudo pacman -Syuu'
 alias pacman-search='pacman -Ss'
