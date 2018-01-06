@@ -59,7 +59,7 @@ alias mouse-driver="ratslap"
 alias dc=docker
 alias sprunge="curl -F 'sprunge=<-' http://sprunge.us"
 alias sprungex='sprunge | xcopy'
-alias pastebin=sprungex
+alias pastebin=ixx
 
 alias tmate="tmux detach-client -E 'tmate;tmux'"
 
