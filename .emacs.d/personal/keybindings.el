@@ -238,7 +238,8 @@
 
 
 (setq key-chord-two-keys-delay .015
-      key-chord-one-key-delay .020)
+      key-chord-one-key-delay .010)
+
 
 (dolist (binding
          `((" i" . previous-multiframe-window)
