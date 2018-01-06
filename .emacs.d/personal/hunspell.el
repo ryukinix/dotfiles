@@ -10,7 +10,7 @@
 
 
 ;; only provide this shortcuts and changes if hunspell is available
-(when nil (file-exists-p (or (executable-find hunspell-name) "/not/found/"))
+(when (file-exists-p (or (executable-find hunspell-name) "/not/found/"))
   ;; personal setup for using multiple dictionaries with hunspell
   ;; you need: hunspell and hunspell-pt-br
   (with-eval-after-load 'ispell
