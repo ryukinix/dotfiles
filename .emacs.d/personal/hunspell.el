@@ -8,21 +8,23 @@
 
 (defvar aspell-name (format "aspell%s" --additional-extension))
 
+(defvar default-spell-dict "aspell")
 
 ;; only provide this shortcuts and changes if hunspell is available
 (when (file-exists-p (or (executable-find hunspell-name) "/not/found/"))
   ;; personal setup for using multiple dictionaries with hunspell
   ;; you need: hunspell and hunspell-pt-br
   (with-eval-after-load 'ispell
-    (setq ispell-program-name hunspell-name)
     (setq ispell-hunspell-dictionary-alist
           '(("english" "[[:alpha:]]" "[^[:alpha:]]" "[']" t ("-d" "en_US") nil utf-8)
             ("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" t ("-d" "en_US") nil utf-8)
             ("pt_BR" "[[:alpha:]]" "[^[:alpha:]]" "[']" t ("-d" "pt_BR") nil utf-8)
             ("brasileiro" "[[:alpha:]]" "[^[:alpha:]]" "[']" t ("-d" "pt_BR") nil utf-8)
             ("dev" "[[:alpha:]]" "[^[:alpha:]]" "[']" t ("-d" "pt_BR,en_US") nil utf-8)))
-    (setq-default ispell-dictionary "dev") ;; default dictionary for hunspell
-    (setq ispell-dictionary-alist ispell-hunspell-dictionary-alist))
+    (when (equal default-spell-dict "hunspell")
+      (setq-default ispell-dictionary "dev") ;; default dictionary for hunspell
+      (setq ispell-program-name hunspell-name)
+      (setq ispell-dictionary-alist ispell-hunspell-dictionary-alist)))
 
   ;; only available for hunspell
   (global-set-key [C-f6]
