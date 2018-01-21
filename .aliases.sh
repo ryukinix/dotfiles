@@ -79,3 +79,5 @@ alias pacman-search='pacman -Ss'
 alias pacman-remove='sudo pacman -Rsu'
 alias service='sudo rc-service'
 alias pacaur-upgrade='pacaur -Syuua'
+
+alias lelerax='cd ~/Desktop/lelerax; ./repl'
