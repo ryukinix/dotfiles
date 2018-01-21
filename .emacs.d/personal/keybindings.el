@@ -276,7 +276,7 @@
            (" r" . recompile)))
   (key-chord-define-global (car binding) (cdr binding)))
 ;; enable key chord
-(key-chord-mode +1)
+;;(key-chord-mode +1)
 
 ;; enable yasnippet globally
 (yas-global-mode +1)
