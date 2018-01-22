@@ -49,7 +49,7 @@
      (find-file ,path)))
 
 
-(let ((courses-dir (expand-file-name "~/Dropbox/University/Courses/UFC/2017.2"))
+(let ((courses-dir (expand-file-name "~/Dropbox/University/Courses/UFC/2018.1"))
       (desktop-dir (expand-file-name"~/Desktop"))
       (langs-dir (expand-file-name "~/Dropbox/Programming/Langs")))
   ;; favorite directories
