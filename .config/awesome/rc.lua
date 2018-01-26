@@ -402,6 +402,7 @@ globalkeys = awful.util.table.join(
 
    -- Dropdown application
    awful.key({ modkey, }, "z", function () awful.screen.focused().quake:toggle() end),
+   awful.key({ }, "XF86AudioMute", function () os.execute("/usr/bin/pactl set-sink-mute 1 toggle") end),
 
    -- Widgets popups
    -- awful.key({ altkey, }, "c", function () lain.widget.calendar.show(7) end),
@@ -433,11 +434,12 @@ globalkeys = awful.util.table.join(
       --         os.execute(string.format("amixer -q set %s 100%%", beautiful.volume.channel))
       --         beautiful.volume.update()
       --     end),
-      awful.key({ modkey, altkey, "Control" }, "0",
-         function ()
-            os.execute(string.format("amixer -q set %s 0%%", beautiful.volume.channel))
-            beautiful.volume.update()
-      end),
+
+      -- awful.key({ modkey, altkey, "Control" }, "0",
+      --    function ()
+      --       os.execute(string.format("amixer -q set %s 0%%", beautiful.volume.channel))
+      --       beautiful.volume.update()
+      -- end),
 
       -- -- MPD control
       -- awful.key({ altkey, "Control" }, "Up",
