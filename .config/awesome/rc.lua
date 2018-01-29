@@ -526,7 +526,12 @@ globalkeys = awful.util.table.join(
                history_path = awful.util.get_cache_dir() .. "/history_eval"
             }
          end,
+         {description = "lua execute prompt", group = "awesome"}),
+
+      awful.key({ modkey, "Ctrl" }, "x",
+         function () awful.spawn("xkill") end,
          {description = "lua execute prompt", group = "awesome"})
+
 
 )
 
@@ -546,6 +551,9 @@ clientkeys = awful.util.table.join(
       end,
       {description = "toggle fullscreen", group = "client"}),
 
+   awful.key({ modkey, "Ctrl" }, "c", awful.placement.centered,
+      {description = "align to center", group = "client"}
+   ),
    awful.key({ modkey, "Shift"   }, "c",      function (c) c:kill()                         end,
       {description = "close", group = "client"}),
    awful.key({ altkey}, "F4",      function (c) c:kill()                         end,
@@ -644,7 +652,7 @@ awful.rules.rules = {
                      keys = clientkeys,
                      buttons = clientbuttons,
                      screen = awful.screen.preferred,
-                     placement = awful.placement.no_overlap+awful.placement.no_offscreen,
+                     placement = awful.placement.no_overlap+awful.placement.no_offscreen+awful.placement.centered,
                      size_hints_honor = false
      }
     },
