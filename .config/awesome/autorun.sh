@@ -39,6 +39,8 @@ autostart=(
     ~/.config/autostart/volumeicon.desktop
     ~/.config/autostart/dropbox.desktop
     ~/.config/autostart/fluxgui.desktop
+    ~/.config/autostart/mir.desktop
+    ~/.config/autostart/emacs-restart.desktop
     /etc/xdg/autostart/pulseaudio.desktop
 )
 
