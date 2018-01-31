@@ -13,6 +13,7 @@ Plugin 'wakatime/vim-wakatime'
 
 call vundle#end()
 
+:colorscheme iceberg
 
 " Turn on syntax highlighting
 syntax on
