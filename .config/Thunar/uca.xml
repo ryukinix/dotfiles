@@ -3,8 +3,8 @@
 <action>
 	<icon>utilities-terminal</icon>
 	<name>Terminal</name>
-	<unique-id>1516955592006824-2</unique-id>
-	<command>tmux has-session &amp;&amp; tmux new-window; exo-open --working-directory &apos;%f&apos; --launch TerminalEmulator</command>
+	<unique-id>1517519099019707-2</unique-id>
+	<command>tmux has-session &amp;&amp; tmux new-window; exo-open --working-directory %f --launch TerminalEmulator</command>
 	<description>Launch the default terminal emulator</description>
 	<patterns>*</patterns>
 	<directories/>
