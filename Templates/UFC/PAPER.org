@@ -1,0 +1,41 @@
+#+STARTUP: showall align
+#+OPTIONS: todo:nil tasks:("IN-PROGRESS" "DONE") tags:nil
+#+AUTHOR: Manoel Vilela
+#+TITLE: Primeiro titutlo @@latex:\\@@ SEgundo titutlo
+#+EXCLUDE_TAGS: TOC_3
+#+LANGUAGE: bt-br
+#+LATEX_HEADER: \usepackage[]{babel}
+#+LATEX_HEADER: \usepackage{indentfirst}
+#+LATEX_HEADER: \renewcommand\listingscaption{Código}
+#+OPTIONS: toc:nil
+[[./pics/ufc.png]]
+
+#+BEGIN_ABSTRACT
+
+Descreva aqui o resumo
+
+#+END_ABSTRACT
+#+TOC: headlines=2
+
+
+* Sumário                                                             :TOC_3:
+:PROPERTIES:
+:CUSTOM_ID: toc-org
+:END:
+- [[#introdução][Introdução]]
+- [[#apêndice][Apêndice]]
+  - [[#gráfico-1][Gráfico 1]]
+  - [[#gráfico-2][Gráfico 2]]
+
+* Introdução
+
+* Apêndice
+** Gráfico 1
+#+ATTR_LATEX: :height 15cm :placement [H]
+[[./pics/nlp.png]]
+
+
+** Gráfico 2
+
+#+ATTR_LATEX: :placement [H]
+[[./pics/dsp.png]]
