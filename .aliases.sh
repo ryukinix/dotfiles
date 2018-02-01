@@ -80,9 +80,11 @@ alias pacman-remove='sudo pacman -Rsu'
 alias service='sudo rc-service'
 alias pacaur-upgrade='pacaur -Syuua'
 
-alias lelerax='cd ~/Desktop/lelerax; ./repl'
+alias lelerax='cd ~/Desktop/workspace/dev/lelerax; ./repl'
 
 
 function daemonize {
     ($1 &> /dev/null&)&
 }
+
+alias aur=trizen
