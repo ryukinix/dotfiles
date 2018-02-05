@@ -92,16 +92,13 @@
 (global-set-key (kbd "<M-S-f1>") 'linum-relative-mode)
 
 ;; ispell changing dictionaries when need
-(global-set-key [C-f8] (lexical-let ((dict (if (eq system-type 'windows-nt)
-                                               "brasileiro"
-                                             "pt_BR")))
-                         (lambda ()
-                           (interactive)
-                           (ispell-change-dictionary dict))))
+(global-set-key [C-f8] (lambda ()
+                         (interactive)
+                         (ispell-change-dictionary "pt_BR")))
 
 (global-set-key [C-f7] (lambda ()
                          (interactive)
-                         (ispell-change-dictionary "english")))
+                         (ispell-change-dictionary "en_US")))
 
 ;; company-ode additional keybindings
 (define-key company-mode-map [C-tab] 'company-complete)

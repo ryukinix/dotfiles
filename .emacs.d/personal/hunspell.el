@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t -*-
+
 (require 'ispell)
 
 (defvar --additional-extension "")
@@ -8,41 +10,38 @@
 
 (defvar aspell-name (format "aspell%s" --additional-extension))
 
-(defvar default-spell-dict "aspell")
+(defvar hunspell-exists (file-exists-p (or (executable-find hunspell-name) "/not/found/")))
+
+(defvar default-spell-program hunspell-name)
+(defvar hunspell-dic "en_US,pt_BR")
+(defvar aspell-dict "en_US")
+
+(defun select-spell-program (spell-name)
+  (cond ((equal spell-name hunspell-name)
+         (setq ispell-program-name hunspell-name)
+         (ispell-set-spellchecker-params)
+         (ispell-hunspell-add-multi-dic hunspell-dic)
+         (ispell-change-dictionary hunspell-dic))
+        ((equal spell-name aspell-name)
+         (setq ispell-program-name aspell-name)
+         (ispell-set-spellchecker-params)
+         (ispell-change-dictionary aspell-dict))))
 
 ;; only provide this shortcuts and changes if hunspell is available
-(when (file-exists-p (or (executable-find hunspell-name) "/not/found/"))
-  ;; personal setup for using multiple dictionaries with hunspell
-  ;; you need: hunspell and hunspell-pt-br
-  (with-eval-after-load 'ispell
-    (setq ispell-hunspell-dictionary-alist
-          '(("english" "[[:alpha:]]" "[^[:alpha:]]" "[']" t ("-d" "en_US") nil utf-8)
-            ("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" t ("-d" "en_US") nil utf-8)
-            ("pt_BR" "[[:alpha:]]" "[^[:alpha:]]" "[']" t ("-d" "pt_BR") nil utf-8)
-            ("brasileiro" "[[:alpha:]]" "[^[:alpha:]]" "[']" t ("-d" "pt_BR") nil utf-8)
-            ("dev" "[[:alpha:]]" "[^[:alpha:]]" "[']" t ("-d" "pt_BR,en_US") nil utf-8)))
-    (when (equal default-spell-dict "hunspell")
-      (setq-default ispell-dictionary "dev") ;; default dictionary for hunspell
-      (setq ispell-program-name hunspell-name)
-      (setq ispell-dictionary-alist ispell-hunspell-dictionary-alist)))
+(when (and hunspell-exists
+           (equal default-spell-program hunspell-name))
 
-  ;; only available for hunspell
-  (global-set-key [C-f6]
-                  (lambda ()
-                    (interactive)
-                    (when (not (equal ispell-program-name hunspell-name))
-                      (setq-default ispell-program-name hunspell-name))
-                    (ispell-change-dictionary "dev")))
+  (setq ispell-dictionary hunspell-dic)
+  (select-spell-program hunspell-name))
 
-  ;; toggle program for ispell: aspell/hunspell
-  (global-set-key [C-f5]
-                  (lambda ()
-                    (interactive)
-                    (message "Ispell program set to: %s"
-                             (if (equal ispell-program-name hunspell-name)
-                                 ;; default for aspell
-                                 (progn (setq-local ispell-dictionary "english")
-                                        (setq-local ispell-program-name aspell-name))
-                               ;; default dictionary for hunspell
-                               (setq-local ispell-dictionary "dev")
-                               (setq-local ispell-program-name hunspell-name))))))
+;; enable hunspell shit thing
+(global-set-key [C-f6]
+                (lambda ()
+                  (interactive)
+                  (select-spell-program hunspell-name)))
+
+;; enable aspell program
+(global-set-key [C-f5]
+                (lambda ()
+                  (interactive)
+                  (select-spell-program aspell-name)))
