@@ -115,10 +115,6 @@
       (setenv ssh back))
     (message (getenv ssh))))
 
-;; use spacemacs theme for now... tired from zenburn and yellow colors.
-;; now changing from something new
-(load-theme 'doom-vibrant)
-
 ;; set tab size to 4 (I don't like it 8, very big for me)
 (setq-default tab-width 4)
 
