@@ -277,3 +277,6 @@
 
 ;; enable yasnippet globally
 (yas-global-mode +1)
+
+;; disable this random shit to paste with mouse, i do not use this shit!
+(global-unset-key (kbd "<mouse-2>"))
