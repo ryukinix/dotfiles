@@ -13,16 +13,18 @@
 (defvar hunspell-exists (file-exists-p (or (executable-find hunspell-name) "/not/found/")))
 
 (defvar default-spell-program hunspell-name)
-(defvar hunspell-dic "en_US,pt_BR")
+(defvar hunspell-dict "en_US,pt_BR")
 (defvar aspell-dict "en_US")
 
 (defun select-spell-program (spell-name)
   (cond ((equal spell-name hunspell-name)
          (setq ispell-program-name hunspell-name)
+         (setq ispell-dictionary hunspell-dict)
          (ispell-set-spellchecker-params)
-         (ispell-hunspell-add-multi-dic hunspell-dic)
-         (ispell-change-dictionary hunspell-dic))
+         (ispell-hunspell-add-multi-dic hunspell-dict)
+         (ispell-change-dictionary hunspell-dict))
         ((equal spell-name aspell-name)
+         (setq ispell-dictionary aspell-dict)
          (setq ispell-program-name aspell-name)
          (ispell-set-spellchecker-params)
          (ispell-change-dictionary aspell-dict))))
@@ -31,7 +33,7 @@
 (when (and hunspell-exists
            (equal default-spell-program hunspell-name))
 
-  (setq ispell-dictionary hunspell-dic)
+  (setq ispell-dictionary hunspell-dict)
   (select-spell-program hunspell-name))
 
 ;; enable hunspell shit thing
