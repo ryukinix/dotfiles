@@ -70,7 +70,7 @@
 (global-git-commit-mode +1)
 
 ;; setup irc autologin channels
-(setq erc-autojoin-channels-alist '(("freenode.net" "#lisp-br")))
+(setq erc-autojoin-channels-alist '(("freenode.net" "#lispgames")))
 (setq erc-prompt "λ>")
 (add-to-list 'erc-modules 'notifications) ;; enable notifications
 (add-to-list 'erc-modules 'log) ;; enable
