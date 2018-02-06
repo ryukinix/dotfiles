@@ -88,3 +88,4 @@ function daemonize {
 }
 
 alias aur=trizen
+alias examples=tldr
