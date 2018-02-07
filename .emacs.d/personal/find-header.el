@@ -18,8 +18,8 @@
 
 (setq-default find-header-file-header-file-prefixes (list "/usr/include/"
                                                           "/usr/local/include/"
-                                                          "/usr/include/c++/7.1.1/"
-                                                          "/usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/include/"))
+                                                          "/usr/include/c++/7.1.2/"
+                                                          "/usr/lib/gcc/x86_64-pc-linux-gnu/7.2.1/include/"))
 
 (defun find-header-file-current-char ()
   "Get the next char after point and return as string."
