@@ -116,7 +116,7 @@ let g:solarized_termtrans=1
 
 :command Xclip :call system('xclip -sel clipboard', @0)
 
-:noremap <C-c> y :Xclip<CR>
+:noremap <C-w> y :Xclip<CR>
 
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
