@@ -5,7 +5,7 @@
 (require 'prelude-packages)
 (prelude-require-package 'doom-themes)
 
-(defvar my:theme 'doom-vibrant)
+(defvar my:theme 'doom-one)
 (defvar my:theme-window-loaded nil)
 (defvar my:theme-terminal-loaded nil)
 
