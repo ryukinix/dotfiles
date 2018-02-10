@@ -1,2 +1,2 @@
-;; -*- common-lisp -*-
+;; -*- mode: lisp-mode  -*-
 ;; Manoel Vilela
