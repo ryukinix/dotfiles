@@ -71,7 +71,7 @@
 
 ;; disable tabs visualization on with-editor mode used to do commits
 ;; by command line
-(with-eval-after-load 'with-editor
+t(with-eval-after-load 'with-editor
   (add-hook 'with-editor-mode-hook (lambda () (whitespace-toggle-options 'tabs))))
 
 ;; to avoid scale problems
@@ -89,6 +89,10 @@
 (add-hook 'org-mode-hook (lambda ()
                            (whitespace-toggle-options 'lines-tail)
                            (auto-fill-mode)))
+
+(add-hook 'markdown-mode-hook (lambda ()
+                                (whitespace-toggle-options 'lines-tail)
+                                (auto-fill-mode)))
 
 ;; force xml-mode to msbuild project files
 (add-to-list 'auto-mode-alist '("\\.\\(c\\|f\\)sproj\\'" . xml-mode))
@@ -121,7 +125,8 @@
    (message "%s" geiser-impl--implementation)
    (if (eq geiser-impl--implementation 'racket)
        (setq-local flycheck-check-syntax-automatically '(save mode-enabled))
-     (setq flycheck-check-syntax-automatically (default-value 'flycheck-check-syntax-automatically))))
+     (setq flycheck-check-syntax-automatically
+           (default-value 'flycheck-check-syntax-automatically))))
 
 (advice-add 'geiser-set-scheme :after 'cooldown-flycheck-on-racket)
 (add-hook 'geiser-mode-hook 'cooldown-flycheck-on-racket)
