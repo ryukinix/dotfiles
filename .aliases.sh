@@ -90,3 +90,5 @@ function daemonize {
 
 alias aur=trizen
 alias examples=tldr
+alias monitor-off='xset -display :0.0 dpms force off'
+alias monitor-on='xset -display :0.0 dpms force on'
