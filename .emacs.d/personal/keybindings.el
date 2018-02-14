@@ -63,6 +63,7 @@
 (global-set-key (kbd "M-1") 'other-window)
 (global-set-key (kbd "M-2") 'other-window)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
+(global-set-key (kbd  "C-M-S-b") 'ibuffer)
 ;; neotree feels
 (global-set-key (kbd "C-x t") 'neotree-toggle)
 (global-set-key (kbd "C-x y") 'projectile-speedbar-toggle)
