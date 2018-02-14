@@ -80,7 +80,7 @@ alias pacman-search='pacman -Ss'
 alias pacman-remove='sudo pacman -Rsu'
 alias service='sudo rc-service'
 alias pacaur-upgrade='pacaur -Syuua'
-
+alias pacaur-install='pacaur -Sa'
 alias lelerax='cd ~/Desktop/workspace/dev/lelerax; ./repl'
 
 
