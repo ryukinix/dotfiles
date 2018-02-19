@@ -98,8 +98,8 @@
   (global-set-key (kbd "<f7>") (favorite-dir langs-dir)))
 
 (let ((init (if (eq system-type 'windows-nt)
-                (expand-file-name "~/.dotfiles/.emacs.d/personal/"))
-            prelude-user-init-file))
+                (expand-file-name "~/.dotfiles/.emacs.d/personal/")
+              prelude-user-init-file)))
   (global-set-key [f8] (favorite-dir init)))
 
 ;; spacemacs habits...
