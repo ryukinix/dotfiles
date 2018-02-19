@@ -88,7 +88,7 @@
   (text-scale-set 0))
 
 
-
+;; favorite directories
 (let ((courses-dir (expand-file-name "~/Dropbox/University/Courses/UFC/2018.1"))
       (desktop-dir (expand-file-name"~/Desktop"))
       (langs-dir (expand-file-name "~/Dropbox/Programming/Langs")))
@@ -97,8 +97,11 @@
   (global-set-key (kbd "<f6>") (favorite-dir desktop-dir))
   (global-set-key (kbd "<f7>") (favorite-dir langs-dir)))
 
+(let ((init (if (eq system-type 'windows-nt)
+                (expand-file-name "~/.dotfiles/.emacs.d/personal/"))
+            prelude-user-init-file))
+  (global-set-key [f8] (favorite-dir init)))
 
-(global-set-key [f8] (favorite-dir prelude-user-init-file))
 ;; spacemacs habits...
 (global-set-key (kbd "M-1") 'other-window)
 (global-set-key (kbd "M-2") 'other-window)
@@ -227,11 +230,6 @@
 ;; alternative keybinding because C-x C-; doesnt't works on terminal
 (global-set-key (kbd "C-x M-;") 'comment-line)
 
-
-;; prelude fullscreen
-(global-unset-key (kbd "<f11>"))
-(global-set-key (kbd "<f11>") 'prelude-fullscreen)
-
 ;; install packages easy
 (global-set-key (kbd "M-p") 'package-install)
 
@@ -284,6 +282,12 @@
 (global-unset-key (kbd "<mouse-2>"))
 
 
-(when-system windows
+
+(when-system 'windows
              (global-unset-key (kbd "<f11>"))
              (global-set-key (kbd "<f11>") 'toggle-frame-fullscreen))
+
+(when-system 'linux
+             ;; prelude fullscreen
+             (global-unset-key (kbd "<f11>"))
+             (global-set-key (kbd "<f11>") 'prelude-fullscreen))
