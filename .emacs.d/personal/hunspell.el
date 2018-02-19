@@ -29,21 +29,26 @@
          (ispell-set-spellchecker-params)
          (ispell-change-dictionary aspell-dict))))
 
-;; only provide this shortcuts and changes if hunspell is available
-(when (and hunspell-exists
-           (equal default-spell-program hunspell-name))
+(defun hunspell:activate ()
+  ;; only provide this shortcuts and changes if hunspell is available
+  (when (and hunspell-exists
+             (equal default-spell-program hunspell-name))
 
-  (setq ispell-dictionary hunspell-dict)
-  (select-spell-program hunspell-name))
+    (setq ispell-dictionary hunspell-dict)
+    (select-spell-program hunspell-name))
 
-;; enable hunspell shit thing
-(global-set-key [C-f6]
-                (lambda ()
-                  (interactive)
-                  (select-spell-program hunspell-name)))
+  ;; enable hunspell shit thing
+  (global-set-key [C-f6]
+                  (lambda ()
+                    (interactive)
+                    (select-spell-program hunspell-name)))
 
-;; enable aspell program
-(global-set-key [C-f5]
-                (lambda ()
-                  (interactive)
-                  (select-spell-program aspell-name)))
+  ;; enable aspell program
+  (global-set-key [C-f5]
+                  (lambda ()
+                    (interactive)
+                    (select-spell-program aspell-name))))
+
+
+(when-system 'linux
+             (hunspell:activate))
