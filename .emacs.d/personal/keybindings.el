@@ -49,6 +49,45 @@
      (interactive)
      (find-file ,path)))
 
+(defun toggle-window-split ()
+  "Toggle window split layout. Vertical to horizontal and vice-versa.
+   Function stole without shame from https://www.emacswiki.org/emacs/ToggleWindowSplit."
+  (interactive)
+  (if (= (count-windows) 2)
+      (let* ((this-win-buffer (window-buffer))
+         (next-win-buffer (window-buffer (next-window)))
+         (this-win-edges (window-edges (selected-window)))
+         (next-win-edges (window-edges (next-window)))
+         (this-win-2nd (not (and (<= (car this-win-edges)
+                     (car next-win-edges))
+                     (<= (cadr this-win-edges)
+                     (cadr next-win-edges)))))
+         (splitter
+          (if (= (car this-win-edges)
+             (car (window-edges (next-window))))
+          'split-window-horizontally
+        'split-window-vertically)))
+    (delete-other-windows)
+    (let ((first-win (selected-window)))
+      (funcall splitter)
+      (if this-win-2nd (other-window 1))
+      (set-window-buffer (selected-window) this-win-buffer)
+      (set-window-buffer (next-window) next-win-buffer)
+      (select-window first-win)
+      (if this-win-2nd (other-window 1))))))
+
+(defun kill-this-buffer-and-window ()
+  (interactive)
+  (if (> (length (window-list)) 1)
+      (kill-buffer-and-window)
+    (kill-buffer (current-buffer))))
+
+;; reset scale
+(defun text-scale-reset ()
+  (interactive)
+  (text-scale-set 0))
+
+
 
 (let ((courses-dir (expand-file-name "~/Dropbox/University/Courses/UFC/2018.1"))
       (desktop-dir (expand-file-name"~/Desktop"))
@@ -74,12 +113,6 @@
 (global-set-key (kbd "<f9>") 'compile)
 (global-set-key (kbd "C-M-S-x") 'crux-eval-and-replace)
 (global-set-key (kbd "<C-f9>") 'flyspell-buffer)
-
-(defun kill-this-buffer-and-window ()
-  (interactive)
-  (if (> (length (window-list)) 1)
-      (kill-buffer-and-window)
-    (kill-buffer (current-buffer))))
 
 ;; killing emacs: daemon, frame and just closing
 (global-set-key (kbd "<C-M-f4>") 'save-buffers-kill-emacs)
@@ -115,11 +148,6 @@
 
 ;; open a terminal full-featured on emacs
 (global-set-key (kbd "C-x M") 'term)
-
-;; reset scale
-(defun text-scale-reset ()
-  (interactive)
-  (text-scale-set 0))
 
 ;; multiple-cursors
 (global-set-key (kbd "C-S-<mouse-1>") 'mc/add-cursor-on-click)
@@ -191,35 +219,7 @@
 ;; selection
 (global-unset-key (kbd "<M-mouse-1>"))
 
-
-
-(defun toggle-window-split ()
-  "Toggle window split layout. Vertical to horizontal and vice-versa.
-   Function stole without shame from https://www.emacswiki.org/emacs/ToggleWindowSplit."
-  (interactive)
-  (if (= (count-windows) 2)
-      (let* ((this-win-buffer (window-buffer))
-         (next-win-buffer (window-buffer (next-window)))
-         (this-win-edges (window-edges (selected-window)))
-         (next-win-edges (window-edges (next-window)))
-         (this-win-2nd (not (and (<= (car this-win-edges)
-                     (car next-win-edges))
-                     (<= (cadr this-win-edges)
-                     (cadr next-win-edges)))))
-         (splitter
-          (if (= (car this-win-edges)
-             (car (window-edges (next-window))))
-          'split-window-horizontally
-        'split-window-vertically)))
-    (delete-other-windows)
-    (let ((first-win (selected-window)))
-      (funcall splitter)
-      (if this-win-2nd (other-window 1))
-      (set-window-buffer (selected-window) this-win-buffer)
-      (set-window-buffer (next-window) next-win-buffer)
-      (select-window first-win)
-      (if this-win-2nd (other-window 1))))))
-
+;; split keybindings
 (global-set-key (kbd "C-x /") 'toggle-window-split)
 (global-set-key (kbd "C-x |") 'split-window-horizontally)
 (global-set-key (kbd "C-x _") 'split-window-vertically)
