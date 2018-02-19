@@ -7,6 +7,8 @@
      They are using this old, possibily, deprecated
      variable which at least is not defined on 27.0"))
 
+;; this is necessary because a weird bug related to the haskell-mode and new ghc 8.2.1
+;; module load interface at REPL
 (with-eval-after-load 'haskell-mode
   (setq haskell-process-args-ghci
         '("-ferror-spans" "-fshow-loaded-modules"))
