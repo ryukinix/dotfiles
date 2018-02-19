@@ -69,6 +69,22 @@
 
   (add-to-list 'helm-projectile-sources-list helm-source-file-not-found t))
 
+;; make flycheck on racket less agressive
+(defun cooldown-flycheck-on-racket (&rest _)
+  (message "%s" geiser-impl--implementation)
+  (if (eq geiser-impl--implementation 'racket)
+      (setq-local flycheck-check-syntax-automatically '(save mode-enabled))
+    (setq flycheck-check-syntax-automatically
+          (default-value 'flycheck-check-syntax-automatically))))
+
+(defun setup-terminal-session (&optional frame)
+  (interactive) ;; make callable as command by M-x
+  (when (and (null (window-system frame))
+             (< (tty-display-color-cells frame) 256))
+    (set-face-attribute 'helm-selection frame
+                        :background "yellow"
+                        :foreground "black")))
+
 ;; disable tabs visualization on with-editor mode used to do commits
 ;; by command line
 t(with-eval-after-load 'with-editor
@@ -81,52 +97,22 @@ t(with-eval-after-load 'with-editor
 
 ;; add commands for build and debug to C++ and C
 (add-hook 'c-mode-common-hook 'setup-c-and-cpp-compiler-with-gdb)
-
 ;; add commands for debug Python code
 (add-hook 'python-mode-hook 'setup-python-pdb-command)
-
-
 (add-hook 'org-mode-hook (lambda ()
                            (whitespace-toggle-options 'lines-tail)
                            (auto-fill-mode)))
-
 (add-hook 'markdown-mode-hook (lambda ()
                                 (whitespace-toggle-options 'lines-tail)
                                 (auto-fill-mode)))
 
+(add-hook 'after-make-frame-functions 'setup-terminal-session)
+(add-hook 'geiser-mode-hook 'cooldown-flycheck-on-racket)
+(advice-add 'geiser-set-scheme :after 'cooldown-flycheck-on-racket)
+
+
 ;; force xml-mode to msbuild project files
 (add-to-list 'auto-mode-alist '("\\.\\(c\\|f\\)sproj\\'" . xml-mode))
 (add-to-list 'auto-mode-alist '("\\.install" . shell-script-mode))
-
 ;; openrc services auto mode
 (add-to-list 'magic-mode-alist '("#!/usr/bin/openrc-run" . shell-script-mode))
-
-(defun emacsd-push()
-  (interactive)
-  (shell-command "emacsd-push"))
-
-(defun emacsd-pull()
-  (interactive)
-  (shell-command "emacsd-pull"))
-
-(defun setup-terminal-session (&optional frame)
-  (interactive) ;; make callable as command by M-x
-  (when (and (null (window-system frame))
-             (< (tty-display-color-cells frame) 256))
-    (set-face-attribute 'helm-selection frame
-                        :background "yellow"
-                        :foreground "black")))
-
-(add-hook 'after-make-frame-functions 'setup-terminal-session)
-
-
-;; make flycheck on racket less agressive
-(defun cooldown-flycheck-on-racket (&rest _)
-   (message "%s" geiser-impl--implementation)
-   (if (eq geiser-impl--implementation 'racket)
-       (setq-local flycheck-check-syntax-automatically '(save mode-enabled))
-     (setq flycheck-check-syntax-automatically
-           (default-value 'flycheck-check-syntax-automatically))))
-
-(advice-add 'geiser-set-scheme :after 'cooldown-flycheck-on-racket)
-(add-hook 'geiser-mode-hook 'cooldown-flycheck-on-racket)
