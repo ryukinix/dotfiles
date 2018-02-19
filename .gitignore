@@ -1,3 +1,4 @@
 .dot
 .quicklisp/dist
 .quicklisp/temp
+/.emacs.d/personal/custom.el
