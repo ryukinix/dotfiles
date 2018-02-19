@@ -13,6 +13,7 @@
 (require 'multiple-cursors)
 (require 'darkroom)
 (require 'sr-speedbar)
+(require 'manoel)
 
 (message "Personal keybindings loading...")
 
@@ -281,3 +282,8 @@
 
 ;; disable this random shit to paste with mouse, i do not use this shit!
 (global-unset-key (kbd "<mouse-2>"))
+
+
+(when-system windows
+             (global-unset-key (kbd "<f11>"))
+             (global-set-key (kbd "<f11>") 'toggle-frame-fullscreen))
