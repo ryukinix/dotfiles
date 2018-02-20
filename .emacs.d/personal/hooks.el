@@ -116,3 +116,7 @@ t(with-eval-after-load 'with-editor
 (add-to-list 'auto-mode-alist '("\\.install" . shell-script-mode))
 ;; openrc services auto mode
 (add-to-list 'magic-mode-alist '("#!/usr/bin/openrc-run" . shell-script-mode))
+
+(with-eval-after-load 'go-mode
+  (define-key go-mode-map (kbd "M-.") 'godef-jump)
+  (define-key go-mode-map (kbd "C-M-.") 'godef-jump-other-window))
