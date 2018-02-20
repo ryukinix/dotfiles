@@ -42,10 +42,10 @@ alias xpaste='xclip -o -selection clipboard'
 alias ufc='cd ~/Dropbox/University/Courses/UFC/2017.2/'
 
 
-function ixx {
-    link=`ix "${@:1}" 2> /dev/null`
+function termbin {
+    link=`nc termbin.com 9999 2> /dev/null | tr -d "\n"`
     if [ $? -eq '0' ]; then
-        echo $link | xclip -selection clipboard
+        printf $link | xclip -selection clipboard
         printf "Copied '%s' to X clipboard.\n" $link
     fi
 }
@@ -60,7 +60,7 @@ alias mouse-driver="ratslap"
 alias dc=docker
 alias sprunge="curl -F 'sprunge=<-' http://sprunge.us"
 alias sprungex='sprunge | xcopy'
-alias pastebin=ixx
+alias pastebin=termbin
 
 alias tmate="tmux detach-client -E 'tmate;tmux'"
 
@@ -91,4 +91,5 @@ function daemonize {
 alias aur=trizen
 alias examples=tldr
 alias monitor-off='xset -display :0.0 dpms force off'
-alias monitor-on='xset -display :0.0 dpms force on'
+alias monitor-on='xset -display :0.0 dpms force on
+'
