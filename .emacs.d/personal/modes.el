@@ -55,7 +55,7 @@
   (xclip-mode +1))
 
 ;; ensure that all the ssh keys was loaded
-(unless (equal system-name "ustar")
+(unless (equal system-name "ustar.localdomain")
  (when (executable-find ssh-agency-agent-executable)
    ;; this will not work if the SSH_AUTH_SOCK was not opened yet
    ;; On my setup I rely on gnome-keyring to open this shit on XFCE startup
