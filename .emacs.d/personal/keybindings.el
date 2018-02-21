@@ -148,6 +148,9 @@
 (define-key company-active-map (kbd "M-.") 'company-show-location)
 (define-key yas-minor-mode-map [C-return] 'yas-expand)
 
+(with-eval-after-load 'slime
+  (define-key slime-mode-map (kbd "TAB") 'company-indent-or-complete-common))
+
 ;; open a terminal full-featured on emacs
 (global-set-key (kbd "C-x M") 'term)
 
@@ -163,6 +166,8 @@
 (global-set-key (kbd "C-c C->") 'mc/mark-all-like-this)
 (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
 
+(global-set-key (kbd "C-c <") 'mc/mark-previous-like-this-word)
+(global-set-key (kbd "C-c >") 'mc/mark-next-like-this-word)
 
 ;; setup for commands which always run for all cursors
 (setq mc/always-run-for-all '(crux-kill-whole-line
