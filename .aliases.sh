@@ -1,4 +1,4 @@
-if [ $(hostname) != "ustar"]; then
+if [ $(hostname) != "ustar" ]; then
     alias vim=nvim
     alias emacs='emacsclient -nw -a vim'
     alias semacs='SUDO_EDITOR="emacsclient -t -a vim" sudoedit'
