@@ -48,7 +48,6 @@
       <property name="&lt;Alt&gt;&lt;Super&gt;Return" type="string" value="bash -c &quot;tmux h -t alt &amp;&amp; xfce4-terminal -e &apos;tmux a -t alt -d&apos; || xfce4-terminal -e &apos;tmux new -s alt&apos;&quot; || xfce4-terminal"/>
       <property name="&lt;Alt&gt;&lt;Super&gt;p" type="string" value="xfce4-display-settings --minimal"/>
       <property name="&lt;Super&gt;r" type="string" value="xfrun4"/>
-      <property name="&lt;Super&gt;g" type="string" value="/home/lerax/.Telegram/Telegram"/>
       <property name="&lt;Alt&gt;&lt;Super&gt;e" type="string" value="emacsclient -n -c"/>
       <property name="&lt;Super&gt;q" type="string" value="firefox"/>
       <property name="&lt;Super&gt;v" type="string" value="xfce4-popup-whiskermenu"/>
@@ -60,6 +59,7 @@
       <property name="&lt;Shift&gt;&lt;Alt&gt;Print" type="string" value="xfce4-screenshooter -w -c"/>
       <property name="XF86AudioMute" type="string" value="/usr/bin/pactl set-sink-mute 1 toggle"/>
       <property name="&lt;Super&gt;l" type="string" value="xflock4"/>
+      <property name="&lt;Super&gt;t" type="string" value="/home/lerax/.Telegram/Telegram"/>
     </property>
   </property>
   <property name="xfwm4" type="empty">
