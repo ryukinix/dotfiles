@@ -1,6 +1,9 @@
 #!/bin/bash
 # Setup Xorg a little bit after awesomewm starts
 
+# MANOEL HELL HERE, be careful or just delete this
+setxkbmap br
+
 userresources=$HOME/.Xdefaults
 usermodmap=$HOME/.Xmodmap
 sysresources=/etc/X11/xinit/.Xresources
@@ -26,8 +29,6 @@ if [ -f "$usermodmap" ]; then
     xmodmap "$usermodmap"
 fi
 
-# MANOEL HELL HERE, be careful or just delete this
-setxkbmap br
 
 # Setup some stuff based on xfce4 autostart files
 autostart=(
