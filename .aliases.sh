@@ -96,6 +96,7 @@ alias sprunge="curl -F 'sprunge=<-' http://sprunge.us"
 alias sprungex='sprunge | xcopy'
 alias pastebin=termbin
 
+alias tmate.="/usr/bin/tmate"
 alias tmate="tmux detach-client -E 'tmate;tmux'"
 alias stack-size='ulimit -s'
 
