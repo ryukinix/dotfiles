@@ -5,11 +5,11 @@
 (require 'prelude-packages)
 (prelude-require-package 'doom-themes)
 
-(defvar my:theme 'doom-vibrant)
-(defvar my:theme-window-loaded nil)
-(defvar my:theme-terminal-loaded nil)
+(defvar lerax:theme 'doom-one)
+(defvar lerax:theme-window-loaded nil)
+(defvar lerax:theme-terminal-loaded nil)
 
-(setq prelude-theme my:theme)
+(setq prelude-theme lerax:theme)
 
 ;; this code is not very efficient and not pretty,
 ;; but solve my problem about handling crazy themes
@@ -20,18 +20,18 @@
               (lambda (frame)
                 (select-frame frame)
                 (if (window-system frame)
-                    (unless my:theme-window-loaded
-                      (if my:theme-terminal-loaded
-                          (enable-theme my:theme)
-                        (load-theme my:theme t))
-                      (setq my:theme-window-loaded t))
-                  (unless my:theme-terminal-loaded
-                    (if my:theme-window-loaded
-                        (enable-theme my:theme)
-                      (load-theme my:theme t))
-                    (setq my:theme-terminal-loaded t)))))
+                    (unless lerax:theme-window-loaded
+                      (if lerax:theme-terminal-loaded
+                          (enable-theme lerax:theme)
+                        (load-theme lerax:theme t))
+                      (setq lerax:theme-window-loaded t))
+                  (unless lerax:theme-terminal-loaded
+                    (if lerax:theme-window-loaded
+                        (enable-theme lerax:theme)
+                      (load-theme lerax:theme t))
+                    (setq lerax:theme-terminal-loaded t)))))
   (progn
-    (load-theme my:theme t)
+    (load-theme lerax:theme t)
     (if (display-graphic-p)
-        (setq my:theme-window-loaded t)
-      (setq my:theme-terminal-loaded t))))
+        (setq lerax:theme-window-loaded t)
+      (setq lerax:theme-terminal-loaded t))))
