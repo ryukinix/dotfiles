@@ -17,14 +17,17 @@ if [ -f $sysmodmap ]; then
 fi
 
 if [ -f "$userresources" ]; then
+    echo $userresources loading
     xrdb -merge "$userresources"
 fi
 
 if [ -f "$usermodmap" ]; then
+    echo $usermodmap loading
     xmodmap "$usermodmap"
 fi
 
 # MANOEL HELL HERE, be careful or just delete this
+setxkbmap br
 
 # Setup some stuff based on xfce4 autostart files
 autostart=(

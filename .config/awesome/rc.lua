@@ -57,7 +57,7 @@ local function run_once(cmd_arr)
          findme = cmd:sub(0, firstspace-1)
       end
       awful.spawn.with_shell(string.format("pgrep -u $USER -x %s > /dev/null || (%s)", findme, cmd))
-      awful.spawn.with_shell("exec ~/.config/awesome/autorun.sh &")
+      awful.spawn.with_shell("exec ~/.config/awesome/autorun.sh")
    end
 end
 -- manoel stuff here, fix of the fix from fixed fix
@@ -66,7 +66,7 @@ local posix = require("posix")
 posix.setenv("SSH_AUTH_SOCK", "/run/user/1000/keyring/ssh")
 
 
-run_once({ "unclutter -root" }) -- entries must be comma-separated
+-- run_once({ "unclutter -root" }) -- entries must be comma-separated
 -- }}}
 
 -- {{{ Variable definitions

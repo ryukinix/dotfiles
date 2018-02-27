@@ -122,14 +122,14 @@ theme.weather = lain.widget.weather({
 })
 
 -- / fs
-local fsicon = wibox.widget.imagebox(theme.widget_fs)
-theme.fs = lain.widget.fs({
-    options = "--exclude-type=tmpfs",
-    notification_preset = { font = "xos4 Terminus 10", fg = theme.fg_normal },
-    settings  = function()
-        widget:set_markup(markup.fontfg(theme.font, "#80d9d8", fs_now.used .. "% "))
-    end
-})
+-- local fsicon = wibox.widget.imagebox(theme.widget_fs)
+-- theme.fs = lain.widget.fs({
+--     options = "--exclude-type=tmpfs",
+--     notification_preset = { font = "xos4 Terminus 10", fg = theme.fg_normal },
+--     settings  = function()
+--         widget:set_markup(markup.fontfg(theme.font, "#80d9d8", fs_now.used .. "% "))
+--     end
+-- })
 
 --[[ Mail IMAP check
 -- commented because it needs to be set before use
@@ -310,8 +310,8 @@ function theme.at_screen_connect(s)
             memory.widget,
             cpuicon,
             cpu.widget,
-            fsicon,
-            theme.fs.widget,
+            -- fsicon,
+            -- theme.fs.widget,
             -- weathericon,
             -- theme.weather.widget,
             -- tempicon,
