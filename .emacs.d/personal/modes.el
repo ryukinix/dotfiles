@@ -1,6 +1,6 @@
 ;; fetching personal defined packages
 (require 'prelude-packages)
-(prelude-require-packages '(slime-company ssh-agency xclip doom-themes))
+(prelude-require-packages '(slime-company ssh-agency xclip pyvenv))
 
 
 (require 'erc)
