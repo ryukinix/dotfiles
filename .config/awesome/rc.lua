@@ -235,7 +235,7 @@ globalkeys = awful.util.table.join(
    awful.key({modkey}, "d", function() awful.util.spawn("thunar") end,
       {description = "open file manager", group = "applications"}),
 
-   awful.key({modkey}, "g",
+   awful.key({modkey}, "t",
       function() awful.util.spawn("/home/lerax/.Telegram/Telegram") end,
       {description = "open telegram", group = "applications"}),
 

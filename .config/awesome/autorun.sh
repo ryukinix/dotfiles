@@ -3,6 +3,7 @@
 
 # MANOEL HELL HERE, be careful or just delete this
 setxkbmap br
+setxkbmap -option compose:rctrl
 
 userresources=$HOME/.Xdefaults
 usermodmap=$HOME/.Xmodmap
