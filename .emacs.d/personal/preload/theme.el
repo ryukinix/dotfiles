@@ -5,7 +5,7 @@
 (require 'prelude-packages)
 (prelude-require-package 'doom-themes)
 
-(defvar lerax:theme 'doom-one)
+(defvar lerax:theme 'doom-vibrant)
 (defvar lerax:theme-window-loaded nil)
 (defvar lerax:theme-terminal-loaded nil)
 
