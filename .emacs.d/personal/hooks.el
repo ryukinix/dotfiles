@@ -1,7 +1,7 @@
 ;; set of hooks made to keep the life more easy
 
 (require 'prelude-packages)
-(prelude-require-package 'geiser)
+(prelude-require-packages '(geiser pyvenv))
 
 (require 'python)
 (require 'cc-mode)
@@ -99,6 +99,7 @@ t(with-eval-after-load 'with-editor
 (add-hook 'c-mode-common-hook 'setup-c-and-cpp-compiler-with-gdb)
 ;; add commands for debug Python code
 (add-hook 'python-mode-hook 'setup-python-pdb-command)
+(add-hook 'python-mode-hook 'pyvenv-mode)
 (add-hook 'org-mode-hook (lambda ()
                            (whitespace-toggle-options 'lines-tail)
                            (auto-fill-mode)))
