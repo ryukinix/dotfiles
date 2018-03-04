@@ -122,3 +122,7 @@ alias qemu=qemu-system-x86_64
 alias lelerax='cd ~/Desktop/workspace/dev/lelerax; ./repl'
 alias encrypt='gpg -se'
 alias decrypt='gpg -q --decrypt'
+
+# pip install ipykernel
+alias jupyter-create-kernel='ipython kernel install --user --name'
+alias distro='cat /etc/os-release | grep "^NAME=" | cut -d"=" -f 2 | tr -d \"'
