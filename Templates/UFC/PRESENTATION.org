@@ -1,0 +1,31 @@
+#+TITLE: Título
+#+AUTHOR: Manoel Vilela
+#+OPTIONS: toc:nil num:nil
+#+STARTUP: beamer
+#+LATEX_HEADER: \usetheme{metropolis}
+#+LATEX_HEADER: \institute{Universidade Federal do Ceará}
+#+LANGUAGE: bt-br
+#+LATEX_HEADER: \usepackage[]{babel}
+
+
+* What is Beamer?
+
+  - LaTeX styles for presentations
+  - Exports to PowerPoint-style presentation format
+
+* What is Org-mode?
+
+  - Emacs major-mode for organized thought
+  - Spiritual successor to =outline-mode=
+  - Supports wide variety of markup
+    - /italic/, *bold*, =code=, ~verbatim~, etc.
+    - Inline LaTeX (including math!)
+  - Can export to LaTeX, HTML, and other formats
+
+* How Do I Work This Thing?
+
+  - Edit text
+  - Export to PDF
+    - Intermediate LaTeX file is created and saved
+    - This allows all the fine-grained tweaking of LaTeX -- optionally
+  - Unfortunately, the difficult bit remains: giving the presentation
