@@ -35,3 +35,8 @@
     (if (display-graphic-p)
         (setq lerax:theme-window-loaded t)
       (setq lerax:theme-terminal-loaded t))))
+
+
+(defun lerax:theme-reload ()
+  (interactive)
+  (load-theme lerax:theme))
