@@ -126,3 +126,5 @@ alias decrypt='gpg -q --decrypt'
 # pip install ipykernel
 alias jupyter-create-kernel='ipython kernel install --user --name'
 alias distro='cat /etc/os-release | grep "^NAME=" | cut -d"=" -f 2 | tr -d \"'
+alias telegram-disable='chmod -x ~/.Telegram/Telegram'
+alias telegram-enable='chmod +x ~/.Telegram/Telegram'
