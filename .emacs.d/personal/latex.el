@@ -18,3 +18,4 @@
       (shell-command "rm -rf *.tex _minted*"))))
 
 (advice-add 'org-latex-export-to-pdf :after #'clean-export-pdf)
+(advice-add 'org-beamer-export-to-pdf :after #'clean-export-pdf)
