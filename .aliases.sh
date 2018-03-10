@@ -51,7 +51,7 @@ else
     alias svim='SUDO_EDITOR="vim" sudoedit'
 fi
 
-
+alias emacs-run='/bin/emacs --script'
 alias remacs='sudo /etc/init.d/emacs.lerax restart'
 alias agenda='gcalcli agenda'
 alias dotnet-build='msbuild'
@@ -128,3 +128,11 @@ alias jupyter-create-kernel='ipython kernel install --user --name'
 alias distro='cat /etc/os-release | grep "^NAME=" | cut -d"=" -f 2 | tr -d \"'
 alias telegram-disable='chmod -x ~/.Telegram/Telegram'
 alias telegram-enable='chmod +x ~/.Telegram/Telegram'
+
+
+function env-up {
+    source $1/bin/activate
+}
+
+alias env-down='deactivate'
+alias pyenv-init='eval "$(pyenv init -)"'
