@@ -13,7 +13,7 @@ function u-root-boot {
 
 
 function daemonize {
-    ($1 &> /dev/null&)&
+    ($@ &> /dev/null&)&
 }
 
 
