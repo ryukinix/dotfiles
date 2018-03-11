@@ -17,6 +17,11 @@ function daemonize {
 }
 
 
+function filter-prime {
+    factor $@ | grep -E '^(.*): \1$' | cut -d':' -f 2 | tr -d ' '
+}
+
+
 # function to run .el files
 function emacs-run {
     emacsclient -e "(load \"$(pwd)/$1\")"
