@@ -217,6 +217,8 @@
 (with-eval-after-load 'org
   (define-key org-mode-map (kbd "<f9>") 'org-latex-export-to-pdf))
 
+(with-eval-after-load 'ox-beamer
+  (define-key org-beamer-mode-map (kbd "<f9>") 'org-beamer-export-to-pdf))
 
 ;; set darkroom for non-distract mode keybinding
 (global-set-key (kbd "<S-f11>") 'darkroom-tentative-mode)
