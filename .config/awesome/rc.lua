@@ -77,7 +77,7 @@ local terminal     = "xfce4-terminal"
 local alt_terminal = "xterm"
 local editor       = "emacsclient"
 local gui_editor   = "/home/lerax/.local/bin/gemacs"
-local browser      = "firefox-nightly"
+local browser      = "exo-open --launch WebBrowser"
 
 awful.util.terminal = terminal
 awful.util.tagnames = { "1", "2", "3", "4", "5" }
@@ -242,6 +242,10 @@ globalkeys = awful.util.table.join(
    -- Open the rc config on the default gui_editor
    awful.key({modkey, "Control"}, "e",
       function () awful.util.spawn(string.format("%s %s", gui_editor, awesome.conffile)) end,
+      {description = "open file config of awesome", group = "applications"}),
+
+   awful.key({modkey, "Shift"}, "e",
+      function () awful.util.spawn("/home/lerax/.emacs_anywhere/bin/run") end,
       {description = "open file config of awesome", group = "applications"}),
 
    -- User programs
