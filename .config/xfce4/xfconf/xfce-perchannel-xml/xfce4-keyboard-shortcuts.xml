@@ -61,6 +61,7 @@
       <property name="&lt;Super&gt;l" type="string" value="xflock4"/>
       <property name="&lt;Super&gt;t" type="string" value="/home/lerax/.Telegram/Telegram"/>
       <property name="&lt;Super&gt;o" type="string" value="/home/lerax/.local/bin/move-to-next-monitor"/>
+      <property name="&lt;Shift&gt;&lt;Super&gt;e" type="string" value="/home/lerax/.emacs_anywhere/bin/run"/>
     </property>
   </property>
   <property name="xfwm4" type="empty">
