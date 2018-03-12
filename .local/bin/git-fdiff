@@ -1,0 +1,31 @@
+#!/bin/sh
+
+# git-fdiff - git diff browser
+# https://github.com/lubien/dotfiles/
+
+fdiff() {
+  git status \
+		--short \
+	| \
+  fzf \
+    --ansi \
+    --reverse \
+    --tiebreak=index \
+    --no-sort \
+    --bind=ctrl-s:toggle-sort \
+    --bind=ctrl-l:preview-down \
+    --bind=ctrl-h:preview-up \
+    --preview ' \
+    	line={}
+    	type=$(echo $line | xargs | cut -d " " -f 1)
+    	filename=$(echo $line | xargs | cut -d " " -f 2)
+
+    	if [ $type = "??" ]; then
+      	cat $filename
+    	else
+      	git diff --color=always $filename
+    	fi
+    '
+}
+
+fdiff "$@"
