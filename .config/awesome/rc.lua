@@ -27,6 +27,10 @@ local hotkeys_popup = require("awful.hotkeys_popup").widget
 local cyclefocus    = require('cyclefocus')
 -- }}}
 
+-- Manoel here
+-- limit icon size of notifications
+naughty.config.defaults['icon_size'] = 100
+
 -- {{{ Error handling
 if awesome.startup_errors then
    naughty.notify({ preset = naughty.config.presets.critical,
