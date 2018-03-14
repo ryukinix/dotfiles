@@ -10,6 +10,7 @@ call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'wakatime/vim-wakatime'
+Plugin 'scrooloose/nerdtree'
 
 call vundle#end()
 
@@ -124,3 +125,4 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
 :nnoremap <C-l> :nohl<CR><C-l>
+:nnoremap <F4> :NERDTreeToggle<CR>
