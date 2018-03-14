@@ -114,7 +114,7 @@
 
 ;; universal compile command
 (global-set-key (kbd "<f9>") 'compile)
-(global-set-key (kbd "C-M-S-x") 'crux-eval-and-replace)
+(global-set-key (kbd "C-M-S-x") 'edebug-eval-top-level-form)
 (global-set-key (kbd "<C-f9>") 'flyspell-buffer)
 
 ;; killing emacs: daemon, frame and just closing
@@ -286,3 +286,11 @@
 
 ;; disable this random shit to paste with mouse, i do not use this shit!
 (global-unset-key (kbd "<mouse-2>"))
+
+;; I always type this shit wrongly, skip that
+(global-unset-key (kbd "C-z"))
+(defun nao-seja-burro ()
+  (interactive)
+  (message "Não seja burro! C-z aqui não"))
+
+(global-set-key (kbd "C-z") #'nao-seja-burro)
