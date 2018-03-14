@@ -11,6 +11,12 @@
 
 (setq prelude-theme lerax:theme)
 
+(defun lerax:theme-reload ()
+  (interactive)
+  (load-theme lerax:theme t)
+  (enable-theme lerax:theme))
+
+
 ;; this code is not very efficient and not pretty,
 ;; but solve my problem about handling crazy themes
 ;; using the daemon way
@@ -21,22 +27,13 @@
                 (select-frame frame)
                 (if (window-system frame)
                     (unless lerax:theme-window-loaded
-                      (if lerax:theme-terminal-loaded
-                          (enable-theme lerax:theme)
-                        (load-theme lerax:theme t))
+                      (lerax:theme-reload)
                       (setq lerax:theme-window-loaded t))
                   (unless lerax:theme-terminal-loaded
-                    (if lerax:theme-window-loaded
-                        (enable-theme lerax:theme)
-                      (load-theme lerax:theme t))
+                    (lerax:theme-reload)
                     (setq lerax:theme-terminal-loaded t)))))
   (progn
     (load-theme lerax:theme t)
     (if (display-graphic-p)
         (setq lerax:theme-window-loaded t)
       (setq lerax:theme-terminal-loaded t))))
-
-
-(defun lerax:theme-reload ()
-  (interactive)
-  (load-theme lerax:theme))
