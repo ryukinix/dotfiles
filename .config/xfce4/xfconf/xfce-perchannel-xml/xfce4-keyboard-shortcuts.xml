@@ -49,7 +49,6 @@
       <property name="&lt;Alt&gt;&lt;Super&gt;p" type="string" value="xfce4-display-settings --minimal"/>
       <property name="&lt;Super&gt;r" type="string" value="xfrun4"/>
       <property name="&lt;Alt&gt;&lt;Super&gt;e" type="string" value="emacsclient -n -c"/>
-      <property name="&lt;Super&gt;q" type="string" value="firefox"/>
       <property name="&lt;Super&gt;v" type="string" value="xfce4-popup-whiskermenu"/>
       <property name="&lt;Primary&gt;&lt;Super&gt;p" type="string" value="rofi -show window"/>
       <property name="&lt;Super&gt;a" type="string" value="geary"/>
@@ -62,6 +61,7 @@
       <property name="&lt;Super&gt;t" type="string" value="/home/lerax/.Telegram/Telegram"/>
       <property name="&lt;Super&gt;o" type="string" value="/home/lerax/.local/bin/move-to-next-monitor"/>
       <property name="&lt;Shift&gt;&lt;Super&gt;e" type="string" value="/home/lerax/.emacs_anywhere/bin/run"/>
+      <property name="&lt;Super&gt;q" type="string" value="exo-open --launch WebBrowser"/>
     </property>
   </property>
   <property name="xfwm4" type="empty">
