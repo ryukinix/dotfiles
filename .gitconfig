@@ -1,0 +1,3 @@
+[alias]
+    hide = update-index --assume-unchanged
+    unhide = update-index --no-assume-unchanged
