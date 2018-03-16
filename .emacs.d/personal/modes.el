@@ -55,16 +55,17 @@
   (xclip-mode +1))
 
 ;; ensure that all the ssh keys was loaded
-(unless (equal system-name "ustar.localdomain")
- (when (executable-find ssh-agency-agent-executable)
-   ;; this will not work if the SSH_AUTH_SOCK was not opened yet
-   ;; On my setup I rely on gnome-keyring to open this shit on XFCE startup
-   ;; so then on a running without X this will not work
-   (let ((hardcoded-auth (getenv "SSH_AUTH_SOCK")))
-     (ssh-agency-ensure)
-     (when hardcoded-auth
-       (setenv "SSH_AUTH_SOCK_BACK" (getenv "SSH_AUTH_SOCK"))
-       (setenv "SSH_AUTH_SOCK" hardcoded-auth)))))
+(when-system 'linux
+ (unless (equal system-name "ustar.localdomain")
+   (when (executable-find ssh-agency-agent-executable)
+     ;; this will not work if the SSH_AUTH_SOCK was not opened yet
+     ;; On my setup I rely on gnome-keyring to open this shit on XFCE startup
+     ;; so then on a running without X this will not work
+     (let ((hardcoded-auth (getenv "SSH_AUTH_SOCK")))
+       (ssh-agency-ensure)
+       (when hardcoded-auth
+         (setenv "SSH_AUTH_SOCK_BACK" (getenv "SSH_AUTH_SOCK"))
+         (setenv "SSH_AUTH_SOCK" hardcoded-auth))))))
 
 ;; move to trash on deleting
 (setq delete-by-moving-to-trash t)
