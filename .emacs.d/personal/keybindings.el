@@ -4,7 +4,7 @@
 (prelude-require-packages '(multiple-cursors fsharp-mode neotree linum-relative
                                              darkroom speedbar sr-speedbar
                                              projectile-speedbar key-chord
-                                             yasnippet))
+                                             yasnippet zeal-at-point))
 
 (require 'company)
 (require 'fsharp-mode)
@@ -294,3 +294,5 @@
   (message "Não seja burro! C-z aqui não"))
 
 (global-set-key (kbd "C-z") #'nao-seja-burro)
+
+(global-set-key (kbd "C-'") 'zeal-at-point)
