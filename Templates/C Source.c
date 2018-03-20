@@ -1,7 +1,7 @@
 /**
  * ================================================
  *
- *         Copyright 2017 Manoel Vilela
+ *         Copyright 2018 Manoel Vilela
  *
  *         Author: Manoel Vilela
  *        Contact: manoel_vilela@engineer.com
