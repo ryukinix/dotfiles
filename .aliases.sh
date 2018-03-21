@@ -108,6 +108,7 @@ alias stack-size='ulimit -s'
 
 # pacman aliases
 alias pacman-install='sudo pacman -S'
+alias pacmani='pacman-install --noconfirm'
 alias pacman-update='sudo pacman -Sy'
 alias pacman-upgrade='sudo pacman -Syuu'
 alias pacman-search='pacman -Ss'
@@ -141,3 +142,4 @@ function env-up {
 
 alias env-down='deactivate'
 alias pyenv-init='eval "$(pyenv init -)"'
+alias pipi='pip install --user'
