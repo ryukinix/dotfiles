@@ -69,8 +69,10 @@ local posix = require("posix")
 posix.setenv("SSH_AUTH_SOCK", "/run/user/1000/keyring/ssh")
 
 
-run_once({ "unclutter -root",
-           "exec ~/.config/awesome/autorun.sh"}) -- entries must be comma-separated
+run_once({ "exec ~/.config/awesome/autorun.sh",
+           "thunar --daemon",
+           "unclutter -root"})
+-- entries must be comma-separated
 -- }}}
 
 -- {{{ Variable definitions
