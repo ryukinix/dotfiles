@@ -8,7 +8,7 @@ Comment[pt]=Simulador universal de circuitos
 Comment[fr]=Simulateur universel de circuits
 Comment[it]=Simulatore universale di circuiti
 TryExec=qucs
-Exec=env GTK2_RC_FILES=/usr/share/themes/Vertex/gtk-2.0/gtkrc qucs %U
+Exec=env GTK2_RC_FILES=/usr/share/themes/Vertex/gtk-2.0/gtkrc qucs -i %f
 Icon=qucs
 Terminal=false
 Type=Application
