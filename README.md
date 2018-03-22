@@ -4,6 +4,8 @@
 My personal dotfiles on Linux usage history. Not much user-friendly, even for me.
 Be careful.
 
+![pic](https://i.imgur.com/4cfp21F.png)
+
 ## Installing
 
 ``` bash
