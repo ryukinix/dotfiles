@@ -143,3 +143,4 @@ function env-up {
 alias env-down='deactivate'
 alias pyenv-init='eval "$(pyenv init -)"'
 alias pipi='pip install --user'
+alias rot13="tr 'A-Za-z' 'N-ZA-Mn-za-m'"
