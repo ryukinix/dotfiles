@@ -47,7 +47,8 @@
   (global-set-key [C-f5]
                   (lambda ()
                     (interactive)
-                    (select-spell-program aspell-name))))
+                    (select-spell-program aspell-name)))
+  (global-set-key [M-f5] 'flyspell-mode))
 
 
 (when-system 'linux
