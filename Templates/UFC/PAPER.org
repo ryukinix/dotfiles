@@ -1,7 +1,7 @@
 #+STARTUP: showall align
 #+OPTIONS: todo:nil tasks:("IN-PROGRESS" "DONE") tags:nil
 #+AUTHOR: Manoel Vilela
-#+TITLE: Primeiro titutlo @@latex:\\@@ SEgundo titutlo
+#+TITLE: Primeiro titutlo @@latex:\\@@ Segundo titutlo
 #+EXCLUDE_TAGS: TOC_3
 #+LANGUAGE: bt-br
 #+LATEX_HEADER: \usepackage[]{babel}
@@ -23,19 +23,7 @@ Descreva aqui o resumo
 :CUSTOM_ID: toc-org
 :END:
 - [[#introdução][Introdução]]
-- [[#apêndice][Apêndice]]
-  - [[#gráfico-1][Gráfico 1]]
-  - [[#gráfico-2][Gráfico 2]]
 
 * Introdução
 
-* Apêndice
-** Gráfico 1
-#+ATTR_LATEX: :height 15cm :placement [H]
-[[./pics/nlp.png]]
-
-
-** Gráfico 2
-
-#+ATTR_LATEX: :placement [H]
-[[./pics/dsp.png]]
+Cogito ergo sum.
