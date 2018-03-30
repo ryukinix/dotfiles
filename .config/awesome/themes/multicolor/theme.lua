@@ -15,7 +15,7 @@ local os    = { getenv = os.getenv, setlocale = os.setlocale }
 local theme                                     = {}
 theme.confdir                                   = os.getenv("HOME") .. "/.config/awesome/themes/multicolor"
 theme.wallpaper                                 = theme.confdir .. "/wall.png"
-theme.font                                      = "xos4 Terminus 10"
+theme.font                                      = "Terminus 10"
 theme.menu_bg_normal                            = "#000000"
 theme.menu_bg_focus                             = "#000000"
 theme.bg_normal                                 = "#000000"
@@ -102,7 +102,7 @@ mytextclock.font = theme.font
 theme.cal = lain.widget.calendar({
     attach_to = { mytextclock },
     notification_preset = {
-        font = "xos4 Terminus 10",
+        font = "Terminus 10",
         fg   = theme.fg_normal,
         bg   = theme.bg_normal
     }
@@ -112,7 +112,7 @@ theme.cal = lain.widget.calendar({
 local weathericon = wibox.widget.imagebox(theme.widget_weather)
 theme.weather = lain.widget.weather({
     city_id = 2643743, -- placeholder (London)
-    notification_preset = { font = "xos4 Terminus 10", fg = theme.fg_normal },
+    notification_preset = { font = "Terminus 10", fg = theme.fg_normal },
     weather_na_markup = markup.fontfg(theme.font, "#eca4c4", "N/A "),
     settings = function()
         descr = weather_now["weather"][1]["description"]:lower()
@@ -125,7 +125,7 @@ theme.weather = lain.widget.weather({
 -- local fsicon = wibox.widget.imagebox(theme.widget_fs)
 -- theme.fs = lain.widget.fs({
 --     options = "--exclude-type=tmpfs",
---     notification_preset = { font = "xos4 Terminus 10", fg = theme.fg_normal },
+--     notification_preset = { font = "Terminus 10", fg = theme.fg_normal },
 --     settings  = function()
 --         widget:set_markup(markup.fontfg(theme.font, "#80d9d8", fs_now.used .. "% "))
 --     end
