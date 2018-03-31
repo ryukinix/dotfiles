@@ -190,7 +190,6 @@
                    (kbd (replace-regexp-in-string key bind meta))))
   (let* ((windows-p (eq system-name 'windows-nt))
          (wheel-up (if windows-p "wheel-up" "mouse-4"))
-
          (wheel-down (if windows-p "wheel-down" "mouse-5"))
          (mouse-forward (if windows-p "mouse-5" "mouse-9"))
          (mouse-backforward (if windows-p "mouse-4" "mouse-8")))
@@ -200,6 +199,7 @@
     (global-set-key (meta-kbd "<@key>" mouse-forward) 'text-scale-increase)
     (global-set-key (meta-kbd "<@key>" mouse-backforward) 'text-scale-decrease)
     (global-set-key (kbd "C-*") 'text-scale-reset)
+    (global-set-key (kbd "<C-Scroll_Lock>") 'text-scale-reset)
     (global-set-key (kbd "<C-pause>") 'text-scale-decrease)
     (global-set-key (meta-kbd "<C-M-@key>" mouse-forward) 'text-scale-reset)
     (global-set-key (meta-kbd "<C-M-@key>" mouse-backforward) 'text-scale-reset)))
