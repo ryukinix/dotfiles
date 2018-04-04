@@ -53,6 +53,7 @@ commands=(
     "xfdesktop --disable-wm-check"
     "nm-applet"
     "geary --hidden"
+    "udiskie"
 )
 
 
