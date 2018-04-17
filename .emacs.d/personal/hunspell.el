@@ -1,6 +1,7 @@
 ;; -*- lexical-binding: t -*-
 
 (require 'ispell)
+(require 'manoel)
 
 (defvar --additional-extension "")
 (when (eq system-type 'windows-nt)
