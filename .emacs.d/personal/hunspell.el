@@ -3,54 +3,55 @@
 (require 'ispell)
 (require 'manoel)
 
-(defvar --additional-extension "")
+(defvar hunspell:extension "")
 (when (eq system-type 'windows-nt)
-  (setq --additional-extension ".exe"))
+  (setq hunspell:extension ".exe"))
 
-(defvar hunspell-name (format "hunspell%s" --additional-extension))
+(defvar hunspell:hunspell-name (format "hunspell%s" hunspell:extension))
 
-(defvar aspell-name (format "aspell%s" --additional-extension))
+(defvar hunspell:aspell-name (format "aspell%s" hunspell:extension))
 
-(defvar hunspell-exists (file-exists-p (or (executable-find hunspell-name) "/not/found/")))
+(defvar hunspell:hunspell-exists
+  (file-exists-p (or (executable-find hunspell:hunspell-name) "/not/found/")))
 
-(defvar default-spell-program hunspell-name)
-(defvar hunspell-dict "en_US,pt_BR")
-(defvar aspell-dict "en_US")
+(defvar hunspell:default-spell-program hunspell:hunspell-name)
+(defvar hunspell:hunspell-dict "en_US,pt_BR")
+(defvar hunspell:aspell-dict "en_US")
 
-(defun select-spell-program (spell-name)
-  (cond ((equal spell-name hunspell-name)
-         (setq ispell-program-name hunspell-name)
-         (setq ispell-dictionary hunspell-dict)
+(defun hunspell:select-spell-program (spell-name)
+  (cond ((equal spell-name hunspell:hunspell-name)
+         (setq ispell-program-name hunspell:hunspell-name)
+         (setq ispell-dictionary hunspell:hunspell-dict)
          (ispell-set-spellchecker-params)
-         (ispell-hunspell-add-multi-dic hunspell-dict)
-         (ispell-change-dictionary hunspell-dict))
-        ((equal spell-name aspell-name)
-         (setq ispell-dictionary aspell-dict)
-         (setq ispell-program-name aspell-name)
+         (ispell-hunspell-add-multi-dic hunspell:hunspell-dict)
+         (ispell-change-dictionary hunspell:hunspell-dict))
+        ((equal spell-name hunspell:aspell-name)
+         (setq ispell-dictionary hunspell:aspell-dict)
+         (setq ispell-program-name hunspell:aspell-name)
          (ispell-set-spellchecker-params)
-         (ispell-change-dictionary aspell-dict))))
+         (ispell-change-dictionary hunspell:aspell-dict))))
 
 (defun hunspell:activate ()
   ;; only provide this shortcuts and changes if hunspell is available
-  (when (and hunspell-exists
-             (equal default-spell-program hunspell-name))
+  (when (and hunspell:hunspell-exists
+             (equal hunspell:default-spell-program hunspell:hunspell-name))
 
-    (setq ispell-dictionary hunspell-dict)
-    (select-spell-program hunspell-name))
+    (setq ispell-dictionary hunspell:hunspell-dict)
+    (hunspell:select-spell-program hunspell:hunspell-name))
 
   ;; enable hunspell shit thing
   (global-set-key [C-f6]
                   (lambda ()
                     (interactive)
-                    (select-spell-program hunspell-name)))
+                    (hunspell:select-spell-program hunspell:hunspell-name)))
 
   ;; enable aspell program
   (global-set-key [C-f5]
                   (lambda ()
                     (interactive)
-                    (select-spell-program aspell-name)))
+                    (hunspell:select-spell-program hunspell:aspell-name)))
   (global-set-key [M-f5] 'flyspell-mode))
 
 
-(when-system 'linux
-             (hunspell:activate))
+(when (eq system-type 'gnu/linux)
+  (hunspell:activate))
