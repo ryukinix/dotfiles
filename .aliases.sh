@@ -144,3 +144,4 @@ alias env-down='deactivate'
 alias pyenv-init='eval "$(pyenv init -)"'
 alias pipi='pip install --user'
 alias rot13="tr 'A-Za-z' 'N-ZA-Mn-za-m'"
+alias vpn='sudo openvpn /etc/openvpn/neoway.conf'
