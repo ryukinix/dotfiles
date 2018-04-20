@@ -18,19 +18,6 @@
 (message "Modos do Manoel")
 
 
-(defun ssh-agency-auth-sock-restore ()
-  "Restore SSH_AUTH_SOCK_BACK and SSH_AUTH_SOCK"
-  (interactive)
-  (let* ((ssh "SSH_AUTH_SOCK")
-         (ssh-back "SSH_AUTH_SOCK_BACK")
-         (current (getenv ssh))
-         (back (getenv ssh-back)))
-    (when back
-      (setenv ssh-back current)
-      (setenv ssh back))
-    (message (getenv ssh))))
-
-
 ;; only activate global-wakatime-mode if the user
 ;; specifically installed this
 (when (package-installed-p 'wakatime-mode)
@@ -53,19 +40,6 @@
 (when (executable-find "xclip")
   (require 'xclip)
   (xclip-mode +1))
-
-;; ensure that all the ssh keys was loaded
-(when-system 'linux
- (unless (equal system-name "ustar.localdomain")
-   (when (executable-find ssh-agency-agent-executable)
-     ;; this will not work if the SSH_AUTH_SOCK was not opened yet
-     ;; On my setup I rely on gnome-keyring to open this shit on XFCE startup
-     ;; so then on a running without X this will not work
-     (let ((hardcoded-auth (getenv "SSH_AUTH_SOCK")))
-       (ssh-agency-ensure)
-       (when hardcoded-auth
-         (setenv "SSH_AUTH_SOCK_BACK" (getenv "SSH_AUTH_SOCK"))
-         (setenv "SSH_AUTH_SOCK" hardcoded-auth))))))
 
 ;; move to trash on deleting
 (setq delete-by-moving-to-trash t)
@@ -96,7 +70,7 @@
 (push 'slime-asdf slime-contribs)
 
 ;; setup irc autologin channels
-(setq erc-autojoin-channels-alist '(("freenode.net" "#lispgames")))
+(setq erc-autojoin-channels-alist '(("freenode.net" "#artix")))
 (setq erc-prompt "λ>")
 (add-to-list 'erc-modules 'notifications) ;; enable notifications
 (add-to-list 'erc-modules 'log) ;; enable

@@ -145,3 +145,4 @@ alias pyenv-init='eval "$(pyenv init -)"'
 alias pipi='pip install --user'
 alias rot13="tr 'A-Za-z' 'N-ZA-Mn-za-m'"
 alias xfdesktop-shadow-fix='xfconf-query -c xfce4-desktop -p /desktop-icons/center-text -n -t bool -s false'
+alias vpn='sudo openvpn /etc/openvpn/neoway.conf'
