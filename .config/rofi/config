@@ -97,7 +97,7 @@ rofi.combi-modi:                     window,drun
 ! "Indicate how it match by underlining it." Set from: Default
 ! rofi.show-match:                     true
 ! "New style theme file" Set from: Default
-rofi.theme: DarkBlue
+rofi.theme: Arc-Dark
 ! "Color scheme for normal row" Set from: Default
 ! rofi.color-normal:                   
 ! "Color scheme for urgent row" Set from: Default
