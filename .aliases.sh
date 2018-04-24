@@ -145,3 +145,4 @@ alias pyenv-init='eval "$(pyenv init -)"'
 alias pipi='pip install --user'
 alias rot13="tr 'A-Za-z' 'N-ZA-Mn-za-m'"
 alias vpn='2fa -clip neoway | xcopy; sudo openvpn /etc/openvpn/neoway.conf'
+alias docker-clean='docker system prune'
