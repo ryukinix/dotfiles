@@ -261,10 +261,12 @@ globalkeys = awful.util.table.join(
       { description = "open editor", group = "applications"}),
 
    -- Menubar
-   awful.key({ modkey }, "p", function() awful.spawn("rofi -show drun") end,
+   awful.key({ modkey }, "p",
+      function() awful.spawn("rofi -show drun -async-pre-load 100") end,
       {description = "show the menubar", group = "launcher"}),
    -- Rofi client
-   awful.key({ modkey, "Ctrl" }, "p", function() awful.spawn("rofi -show combi") end,
+   awful.key({ modkey, "Ctrl" }, "p",
+      function() awful.spawn("rofi -show combi -async-pre-load 100") end,
       {description = "show the window menu", group = "client"}),
    -- Hotkeys
    awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
