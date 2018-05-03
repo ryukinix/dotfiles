@@ -27,14 +27,24 @@ function emacs-run {
     emacsclient -e "(load \"$(pwd)/$1\")"
 }
 
-
-function termbin {
-    link=`nc termbin.com 9999 2> /dev/null | tr -d "\n"`
+# receive the first argument, eval it and copy the result to clipboard.
+# used to generate easy functions pastebin-like, as termbin and ixx
+function _pastebin-generic {
+    link=`eval $1 2> /dev/null | tr -d "\n"`
     if [ $? -eq '0' ]; then
         printf $link | xclip -selection clipboard
         printf "Copied '%s' to X clipboard.\n" $link
     fi
 }
+
+function termbin {
+    _pastebin-generic 'nc termbin.com 9999'
+}
+
+function ixx {
+    _pastebin-generic 'ix'
+}
+
 
 function dot {
     GIT_DIR=$HOME/.dot GIT_WORK_TREE=$HOME git $@
@@ -99,7 +109,7 @@ alias mouse-driver="ratslap"
 alias dc=docker
 alias sprunge="curl -F 'sprunge=<-' http://sprunge.us"
 alias sprungex='sprunge | xcopy'
-alias pastebin=termbin
+alias pastebin=ixx
 
 alias tmate.="/usr/bin/tmate"
 alias tmate="tmux detach-client -E 'tmate;tmux'"
