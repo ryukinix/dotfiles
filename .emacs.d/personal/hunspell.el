@@ -1,7 +1,6 @@
 ;; -*- lexical-binding: t -*-
 
 (require 'ispell)
-(require 'manoel)
 
 (defvar hunspell:extension "")
 (when (eq system-type 'windows-nt)
@@ -14,7 +13,7 @@
 (defvar hunspell:hunspell-exists
   (file-exists-p (or (executable-find hunspell:hunspell-name) "/not/found/")))
 
-(defvar hunspell:default-spell-program hunspell:hunspell-name)
+(defvar hunspell:default-spell-program hunspell:aspell-name)
 (defvar hunspell:hunspell-dict "en_US,pt_BR")
 (defvar hunspell:aspell-dict "en_US")
 
