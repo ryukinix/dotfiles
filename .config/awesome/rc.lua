@@ -70,7 +70,6 @@ posix.setenv("SSH_AUTH_SOCK", "/run/user/1000/keyring/ssh")
 
 
 run_once({ "exec ~/.config/awesome/autorun.sh",
-           "thunar --daemon",
            "unclutter -root"})
 -- entries must be comma-separated
 -- }}}

@@ -38,6 +38,7 @@ autostart=(
     /etc/xdg/autostart/gnome-keyring-ssh.desktop
     /etc/xdg/autostart/xfce-polkit-gnome-authentication-agent-1.desktop
     /etc/xdg/autostart/at-spi-dbus-bus.desktop
+    /etc/xdg/autostart/pulseaudio.desktop
     /usr/share/applications/xfce4-clipman.desktop
     ~/.config/autostart/Compton.desktop
     ~/.config/autostart/Zeal.desktop
@@ -46,11 +47,11 @@ autostart=(
     ~/.config/autostart/fluxgui.desktop
     ~/.config/autostart/mir.desktop
     ~/.config/autostart/emacs-restart.desktop
-    /etc/xdg/autostart/pulseaudio.desktop
 )
 
 commands=(
     "xfdesktop --disable-wm-check"
+    "thunar --daemon",
     "nm-applet"
     "geary --hidden"
     "udiskie"
