@@ -50,6 +50,7 @@ path=(
   ~/Android/Sdk/platform-tools
   ~/Android/Sdk/tools/
   ~/Android/Sdk/tools/bin
+  ~/.roswell/bin
   $path
 )
 
