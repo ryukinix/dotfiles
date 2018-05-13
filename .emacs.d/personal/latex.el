@@ -13,9 +13,7 @@
 (plist-put org-format-latex-options :scale 1.2)
 
 (defun clean-export-pdf (&rest _)
-  (save-window-excursion
-    (let ((inhibit-message t))
-      (shell-command "rm -rf *.tex _minted*"))))
+  (call-process-shell-command "rm -rf *.tex _minted*&" nil 0))
 
 (advice-add 'org-latex-export-to-pdf :after #'clean-export-pdf)
 (advice-add 'org-beamer-export-to-pdf :after #'clean-export-pdf)
