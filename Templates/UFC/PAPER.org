@@ -10,11 +10,11 @@
 #+OPTIONS: toc:nil
 [[./pics/ufc.png]]
 
-#+BEGIN_ABSTRACT
+#+BEGIN_abstract
 
 Descreva aqui o resumo
 
-#+END_ABSTRACT
+#+END_abstract
 #+TOC: headlines=2
 
 
