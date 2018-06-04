@@ -71,7 +71,7 @@ alias remacs='sudo /etc/init.d/emacs.lerax restart'
 alias agenda='gcalcli agenda'
 alias dotnet-build='msbuild'
 alias sbcl='rlwrap sbcl'
-alias lisp=sbcl
+alias lisp='sbcl --noinform'
 alias lain=lein
 alias dic=sdcv
 
@@ -124,11 +124,9 @@ alias pacman-upgrade='sudo pacman -Syuu'
 alias pacman-search='pacman -Ss'
 alias pacman-remove='sudo pacman -Rsu'
 alias service='sudo rc-service'
-alias pacaur-upgrade='pacaur -Syuua'
-alias pacaur-install='pacaur -Sa'
+alias aur=aurman
+alias aur-install='aur -S'
 
-
-alias aur=trizen
 alias examples=tldr
 alias monitor-off='xset -display :0.0 dpms force off'
 alias monitor-on='xset -display :0.0 dpms force on'
