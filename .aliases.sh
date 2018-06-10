@@ -157,3 +157,4 @@ alias vpn='2fa -clip neoway | xcopy; sudo openvpn /etc/openvpn/neoway.conf'
 alias docker-clean='docker system prune'
 alias android-up='jmtpfs'
 alias android-down='fusermount -u'
+alias json=gron
