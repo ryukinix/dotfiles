@@ -109,6 +109,8 @@ t(with-eval-after-load 'with-editor
 
 (add-hook 'after-make-frame-functions 'setup-terminal-session)
 (add-hook 'geiser-mode-hook 'cooldown-flycheck-on-racket)
+(add-hook 'geiser-mode-hook (lambda ()
+                              (company-quickhelp-mode 0)))
 (advice-add 'geiser-set-scheme :after 'cooldown-flycheck-on-racket)
 
 

@@ -55,7 +55,8 @@
         ("css"
          :base-directory ,(org2jekyll-input-directory "css")
          :base-extension "css\\|el"
-         :publishing-directory ,(org2jekyll-output-directory "css")
+         :publishing-directory ,(org2jekyll-output-directory (concat org2jekyll-jekyll-posts-dir
+                                                                      "/css"))
          :publishing-function org-publish-attachment
          :recursive t)
         ("web" :components ("images" "js" "css"))))
