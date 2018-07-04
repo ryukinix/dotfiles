@@ -158,3 +158,5 @@ alias docker-clean='docker system prune'
 alias android-up='jmtpfs'
 alias android-down='fusermount -u'
 alias json=gron
+alias job='cd ~/Desktop/nlp; source up'
+alias reload-aliases='source ~/.aliases.sh'
