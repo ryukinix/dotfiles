@@ -2,8 +2,14 @@
 # Setup Xorg a little bit after awesomewm starts
 
 # MANOEL HELL HERE, be careful or just delete this
-setxkbmap br
-setxkbmap -option compose:rctrl
+
+if [[ $(hostname) == "starfox" ]]; then
+    setxkbmap -model abnt2 -layout br
+    setxkbmap -option compose:rctrl
+elif [[ $(hostname) == "celeste" ]]; then
+    setxkbmap -model thinkpad60 -layout br
+    setxkbmap -option
+fi
 
 userresources=$HOME/.Xdefaults
 usermodmap=$HOME/.Xmodmap
@@ -41,11 +47,11 @@ autostart=(
     /etc/xdg/autostart/pulseaudio.desktop
     /usr/share/applications/xfce4-clipman.desktop
     ~/.config/autostart/Compton.desktop
-    ~/.config/autostart/Zeal.desktop
+    # ~/.config/autostart/Zeal.desktop
     ~/.config/autostart/volumeicon.desktop
     ~/.config/autostart/dropbox.desktop
     ~/.config/autostart/fluxgui.desktop
-    ~/.config/autostart/mir.desktop
+    # ~/.config/autostart/mir.desktop
 )
 
 commands=(
