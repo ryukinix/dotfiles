@@ -69,6 +69,9 @@ local posix = require("posix")
 posix.setenv("SSH_AUTH_SOCK", "/run/user/1000/keyring/ssh")
 
 
+
+
+
 run_once({ "exec ~/.config/awesome/autorun.sh",
            "unclutter -root"})
 -- entries must be comma-separated
@@ -412,9 +415,9 @@ globalkeys = awful.util.table.join(
       {description = "restore minimized", group = "client"}),
 
    -- Dropdown application
-   awful.key({ modkey, }, "z", function () awful.screen.focused().quake:toggle() end),
-   awful.key({ }, "XF86AudioMute", function () os.execute("/usr/bin/pactl set-sink-mute 1 toggle") end),
 
+   awful.key({ modkey, }, "z", function () awful.screen.focused().quake:toggle() end),
+   awful.key({ }, "XF86AudioMute", function () awful.spawn.with_shell("pactl set-sink-mute 1 toggle || pactl set-sink-mute 0 toggle") end),
    -- Widgets popups
    -- awful.key({ altkey, }, "c", function () lain.widget.calendar.show(7) end),
    awful.key({ altkey, }, "h", function () if beautiful.fs then beautiful.fs.show(7) end end),
