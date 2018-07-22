@@ -8,6 +8,7 @@
    You need install: awesome, lain and awesome-freedesktop-git and luaposix (sorry).
    TIP: sudo pacman -S awesome --noconfirm; yaourt -S lain awesome-freedesktop-git --noconfirm
    TIP2: sudo pacman -S rofi
+   TIP3: sudo pacman -S luarocks; sudo luarocks install luaposix
 --]]
 
 -- {{{ Required libraries
@@ -29,7 +30,7 @@ local cyclefocus    = require('cyclefocus')
 
 -- Manoel here
 -- limit icon size of notifications
-naughty.config.defaults['icon_size'] = 100
+naughty.config.defaults['icon_size'] = 50
 
 -- {{{ Error handling
 if awesome.startup_errors then
@@ -416,9 +417,12 @@ globalkeys = awful.util.table.join(
 
    -- Dropdown application
 
-   awful.key({ modkey, }, "z", function () awful.screen.focused().quake:toggle() end),
-   awful.key({ }, "XF86AudioMute", function () awful.spawn.with_shell("pactl set-sink-mute 1 toggle || pactl set-sink-mute 0 toggle") end),
-   awful.key({ }, "XF86AudioMicMute", function () awful.spawn.with_shell("pactl set-source-mute 1 toggle") end),
+   awful.key({ modkey, }, "z", function ()
+         awful.screen.focused().quake:toggle() end),
+   awful.key({ }, "XF86AudioMute", function ()
+         awful.spawn.with_shell("pactl set-sink-mute 1 toggle || pactl set-sink-mute 0 toggle") end),
+   awful.key({ }, "XF86AudioMicMute", function ()
+         awful.spawn.with_shell("pactl set-source-mute 1 toggle") end),
    -- Widgets popups
    -- awful.key({ altkey, }, "c", function () lain.widget.calendar.show(7) end),
    awful.key({ altkey, }, "h", function () if beautiful.fs then beautiful.fs.show(7) end end),
