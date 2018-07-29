@@ -296,3 +296,8 @@
 (global-set-key (kbd "C-z") #'nao-seja-burro)
 
 (global-set-key (kbd "C-'") 'zeal-at-point)
+
+
+;; horizontal scroll in emacs is weird
+(global-unset-key (kbd "<C-prior>"))
+(global-unset-key (kbd "<C-next>"))

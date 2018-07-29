@@ -423,6 +423,8 @@ globalkeys = awful.util.table.join(
          awful.spawn.with_shell("pactl set-sink-mute 1 toggle || pactl set-sink-mute 0 toggle") end),
    awful.key({ }, "XF86AudioMicMute", function ()
          awful.spawn.with_shell("pactl set-source-mute 1 toggle") end),
+   awful.key({ }, "XF86Launch1", function ()
+         awful.spawn.with_shell("slock") end),
    -- Widgets popups
    -- awful.key({ altkey, }, "c", function () lain.widget.calendar.show(7) end),
    awful.key({ altkey, }, "h", function () if beautiful.fs then beautiful.fs.show(7) end end),
