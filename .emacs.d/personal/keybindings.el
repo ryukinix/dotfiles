@@ -188,7 +188,7 @@
 ;; mouse-9 -> mouse-5
 (labels ((meta-kbd (meta bind &optional (key "@key"))
                    (kbd (replace-regexp-in-string key bind meta))))
-  (let* ((windows-p (eq system-name 'windows-nt))
+  (let* ((windows-p (eq (system-name) 'windows-nt))
          (wheel-up (if windows-p "wheel-up" "mouse-4"))
          (wheel-down (if windows-p "wheel-down" "mouse-5"))
          (mouse-forward (if windows-p "mouse-5" "mouse-9"))
@@ -219,6 +219,10 @@
 
 (with-eval-after-load 'ox-beamer
   (define-key org-beamer-mode-map (kbd "<f9>") 'org-beamer-export-to-pdf))
+
+(with-eval-after-load 'python
+  (define-key python-mode-map (kbd "C-c p") 'run-python))
+;; new version of python.el removes this ^ keybinding
 
 ;; set darkroom for non-distract mode keybinding
 (global-set-key (kbd "<S-f11>") 'darkroom-tentative-mode)
