@@ -161,3 +161,4 @@ alias json=gron
 alias job='cd ~/Desktop/nlp; source up'
 alias job-venv='source ~/Desktop/nlp/venv/bin/activate'
 alias reload-aliases='source ~/.aliases.sh'
+alias battery=acpi
