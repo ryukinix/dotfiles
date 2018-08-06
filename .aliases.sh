@@ -163,7 +163,7 @@ alias job-venv='source ~/Desktop/nlp/venv/bin/activate'
 alias reload-aliases='source ~/.aliases.sh'
 alias battery=acpi
 
-# neoway-machine tunnel function
+# neoway ssh tunnel functions
 if [[ -f ~/.ssh/config_neoway ]]; then
     NEOWAY_SSH_CONFIG=~/.ssh/config_neoway
     NEOWAY_HOSTS=`cat $NEOWAY_SSH_CONFIG | grep '^Host.*' | cut -d ' ' -f 2 | xargs echo`
