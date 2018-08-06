@@ -12,6 +12,28 @@ function u-root-boot {
 }
 
 
+# neoway ssh tunnel functions
+if [[ -f ~/.ssh/config_neoway ]]; then
+    NEOWAY_SSH_CONFIG=~/.ssh/config_neoway
+    NEOWAY_HOSTS=`cat $NEOWAY_SSH_CONFIG | grep '^Host.*' | cut -d ' ' -f 2 | xargs echo`
+    function neoway-tunnel {
+        ssh -nNT -F "$NEOWAY_SSH_CONFIG" $@
+
+    }
+
+    function neoway-ssh {
+        ssh -F "$NEOWAY_SSH_CONFIG" $@
+    }
+
+    function _neoway-autocomplete {
+        _arguments -C \
+                   "1:host:($NEOWAY_HOSTS)"
+    }
+
+    compdef _neoway-autocomplete neoway-tunnel neoway-ssh
+fi
+
+
 function daemonize {
     ($@ &> /dev/null&)&
 }
@@ -162,24 +184,4 @@ alias job='cd ~/Desktop/nlp; source up'
 alias job-venv='source ~/Desktop/nlp/venv/bin/activate'
 alias reload-aliases='source ~/.aliases.sh'
 alias battery=acpi
-
-# neoway ssh tunnel functions
-if [[ -f ~/.ssh/config_neoway ]]; then
-    NEOWAY_SSH_CONFIG=~/.ssh/config_neoway
-    NEOWAY_HOSTS=`cat $NEOWAY_SSH_CONFIG | grep '^Host.*' | cut -d ' ' -f 2 | xargs echo`
-    function neoway-tunnel {
-        ssh -nNT -F "$NEOWAY_SSH_CONFIG" $@
-
-    }
-
-    function neoway-ssh {
-        ssh -F "$NEOWAY_SSH_CONFIG" $@
-    }
-
-    function _neoway-autocomplete {
-        _arguments -C \
-               "1:host:($NEOWAY_HOSTS)"
-    }
-
-    compdef _neoway-autocomplete neoway-tunnel neoway-ssh
-fi
+alias ungron='gron --ungron'
