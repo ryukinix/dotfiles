@@ -14,6 +14,8 @@
 (require 'darkroom)
 (require 'sr-speedbar)
 (require 'manoel)
+(require 'cider)
+(require 'ox-beamer)
 
 (message "Personal keybindings loading...")
 
@@ -220,9 +222,13 @@
 (with-eval-after-load 'ox-beamer
   (define-key org-beamer-mode-map (kbd "<f9>") 'org-beamer-export-to-pdf))
 
-(with-eval-after-load 'python
-  (define-key python-mode-map (kbd "C-c p") 'run-python))
-;; new version of python.el removes this ^ keybinding
+;; new version of projectile rebind "C-c p" as projectile prefix
+;; to C-c C-p which conflicts with Python run-python keybinding
+;; so rollback this change
+(with-eval-after-load 'projectile
+  (custom-set-default 'projectile-keymap-prefix (kbd "C-c p"))
+  (define-key projectile-mode-map (kbd "C-c C-p") nil)
+  (define-key projectile-mode-map projectile-keymap-prefix projectile-command-map))
 
 ;; set darkroom for non-distract mode keybinding
 (global-set-key (kbd "<S-f11>") 'darkroom-tentative-mode)
