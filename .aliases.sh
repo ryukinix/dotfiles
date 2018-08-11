@@ -146,7 +146,7 @@ alias pacman-upgrade='sudo pacman -Syuu'
 alias pacman-search='pacman -Ss'
 alias pacman-remove='sudo pacman -Rsu'
 alias service='sudo rc-service'
-alias aur=aurman
+alias aur=yay
 alias aur-install='aur -S'
 
 alias examples=tldr
