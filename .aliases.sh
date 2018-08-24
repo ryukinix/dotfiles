@@ -30,7 +30,9 @@ if [[ -f ~/.ssh/config_neoway ]]; then
                    "1:host:($NEOWAY_HOSTS)"
     }
 
-    compdef _neoway-autocomplete neoway-tunnel neoway-ssh
+    if [[ $0 == "zsh" ]]; then
+        compdef _neoway-autocomplete neoway-tunnel neoway-ssh
+    fi
 fi
 
 
