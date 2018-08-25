@@ -106,15 +106,17 @@ alias deadstar-bind-up='ssh -Y lerax@deadstar -t "x2x -north -to :0.0"'
 alias deadstar-bind-left='ssh -Y lerax@deadstar -t "x2x -west -to :0.0"'
 alias deadstar-bind-right='ssh -Y lerax@deadstar -t "x2x -east -to :0.0"'
 alias deadstar-bind-down='ssh -Y lerax@deadstar -t "x2x -south -to :0.0"'
+alias deadstar='ssh lerax@deadstar'
 alias starfox-bind-up='ssh -Y lerax@starfox -t "x2x -north -to :0.0"'
 alias starfox-bind-left='ssh -Y lerax@starfox -t "x2x -west -to :0.0"'
 alias starfox-bind-right='ssh -Y lerax@starfox -t "x2x -east -to :0.0"'
 alias starfox-bind-down='ssh -Y lerax@starfox -t "x2x -south -to :0.0"'
 alias starfox='ssh lerax@starfox'
-alias deadstar='ssh lerax@deadstar'
-alias ustar='ssh server.lerax.me'
-alias lerax.me='ssh server.lerax.me'
-
+alias celeste-bind-up='ssh -Y lerax@celeste -t "x2x -north -to :0.0"'
+alias celeste-bind-left='ssh -Y lerax@celeste -t "x2x -west -to :0.0"'
+alias celeste-bind-right='ssh -Y lerax@celeste -t "x2x -east -to :0.0"'
+alias celeste-bind-down='ssh -Y lerax@celeste -t "x2x -south -to :0.0"'
+alias celeste='ssh lerax@celeste'
 
 
 # xclipboard
