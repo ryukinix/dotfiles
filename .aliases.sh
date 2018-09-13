@@ -30,7 +30,7 @@ if [[ -f ~/.ssh/config_neoway ]]; then
                    "1:host:($NEOWAY_HOSTS)"
     }
 
-    if [ ! -z "$ZSH_NAME" ]; then
+    if command -v compdef > /dev/null ; then
         compdef _neoway-autocomplete neoway-tunnel neoway-ssh
     fi
 fi
@@ -184,7 +184,7 @@ alias docker-clean='docker system prune'
 alias android-up='jmtpfs'
 alias android-down='fusermount -u'
 alias json=gron
-alias job='cd ~/Desktop/nlp; source up'
+alias job='cd ~/Desktop/nlp/dou-jobs; env-up venv;'
 alias job-venv='source ~/Desktop/nlp/venv/bin/activate'
 alias reload-aliases='source ~/.aliases.sh'
 alias battery=acpi
