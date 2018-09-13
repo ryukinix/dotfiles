@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# This script is shitty, use it in your own risk
+
 function remove-s3-prefix {
     # Remove s3:// prefix from a given s3 bucket path
     local s3_bucket_path="$1"
