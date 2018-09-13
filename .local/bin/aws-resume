@@ -1,0 +1,59 @@
+#!/bin/bash
+
+function remove-s3-prefix {
+    # Remove s3:// prefix from a given s3 bucket path
+    local s3_bucket_path="$1"
+    local prefix="s3://"
+    local fpath="${s3_bucket_path/#$prefix}"
+    echo "$fpath"
+}
+
+
+function get-bucket {
+    # Get the bucket name of a given s3 bucket path
+    local s3_bucket_path="$1"
+    local fpath=`remove-s3-prefix $s3_bucket_path`
+    local bucket=`echo $fpath | cut -d '/' -f1`
+    echo "$bucket"
+}
+
+
+function get-key {
+    # Get the key directory of a given s3 bucket path
+    local s3_bucket_path="$1"
+    local fpath=`remove-s3-prefix "$s3_bucket_path"`
+    local bucket=`get-bucket "$s3_bucket_path"`
+    local key=${fpath/#"$bucket/"}
+    echo "$key"
+}
+
+
+function aws-resume-download {
+    # Print to stdout the next bytes of a given file in s3
+    local s3_bucket_path="$1"
+    local file="$2"
+    local size=`stat -c '%s' $file`
+    local bucket=`get-bucket "$s3_bucket_path"`
+    local key=`get-key "$s3_bucket_path"`
+
+    aws s3api get-object \
+        --bucket "$bucket" \
+        --key "$key" \
+        --range "bytes=$size-" \
+        /dev/stdout
+}
+
+
+function main {
+    local s3_bucket_path="$1"
+    local file="$2"
+
+    if command -v pv > /dev/null; then
+        aws-resume-download "$s3_bucket_path" "$file" | pv >> "$file"
+    else
+        aws-resume-download "$s3_bucket_path" "$file" >> "$file"
+    fi
+}
+
+# Usage: aws-resume s3_bucket_path local_file_path
+main $@
