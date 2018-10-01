@@ -189,3 +189,4 @@ alias job-venv='source ~/Desktop/nlp/dou-jobs/venv/bin/activate'
 alias reload-aliases='source ~/.aliases.sh'
 alias battery=acpi
 alias ungron='gron --ungron'
+alias histogram='sort | uniq -c'
