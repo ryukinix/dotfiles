@@ -1,7 +1,7 @@
 #!/bin/bash
-GREEN="$(tput setaf 2)"
-RED="$(tput setaf 1)"
-RESET="$(tput sgr0)"
+GREEN="\033[0;32m"
+RED="\033[0;31m"
+RESET="\033[0m"
 
 function dot {
     git --git-dir=$HOME/.dot/ --work-tree=$HOME $@
