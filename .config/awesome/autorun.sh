@@ -104,20 +104,40 @@ function execution-pool {
     xargs -L 1 -I{in} -P $1 bash -c "({in} &> /dev/null &)"
 }
 
-function autorun {
-    tasks=`echo "${autostart[@]}" | wc -w`
-    array-to-lines "${autostart[@]}" \
-        | filter-exists \
+function run-desktop {
+    local tasks=$1
+    if [[ -z $tasks ]]; then
+        tasks=1
+    fi
+    filter-exists \
         | parse-desktop \
         | filter-not-running \
         | execution-pool $tasks
+}
 
-    tasks=`echo "${commands[@]}" | wc -w`
-    array-to-lines "${commands[@]}" \
-        | filter-exists \
+function run-commands {
+    local tasks=$1
+    if [[ -z $tasks ]]; then
+        tasks=1
+    fi
+    filter-exists \
         | filter-not-running \
-        | execution-pool 1
+        | execution-pool $tasks
 
+}
+
+function autorun {
+    tasks=`echo "${autostart[@]}" | wc -w`
+    array-to-lines "${autostart[@]}" | run-desktop $tasks
+    array-to-lines "${commands[@]}" | run-commands
+
+    # NOTE: !WARNING!
+    # local-autostart.txt should have a input like $autostart array
+    # variable one entry per line of a .desktop absolute path.
+    local local_autostart=~/.config/awesome/local-autostart.txt
+    if [[ -f $local_autostart ]]; then
+        cat $local_autostart | run-desktop 1
+    fi
 }
 
 autorun
