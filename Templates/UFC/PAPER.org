@@ -1,7 +1,7 @@
 #+STARTUP: showall align
 #+OPTIONS: todo:nil tasks:("IN-PROGRESS" "DONE") tags:nil
 #+AUTHOR: Manoel Vilela
-#+TITLE: Primeiro titutlo @@latex:\\@@ Segundo titutlo
+#+TITLE: Primeiro título @@latex:\\@@ Segundo título
 #+EXCLUDE_TAGS: TOC_3
 #+LANGUAGE: bt-br
 #+LATEX_HEADER: \usepackage[]{babel}
