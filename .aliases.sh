@@ -190,3 +190,9 @@ alias reload-aliases='source ~/.aliases.sh'
 alias battery=acpi
 alias ungron='gron --ungron'
 alias histogram='sort | uniq -c'
+
+function s3-mkdir {
+    local bucket="$1"
+    local folder="$2"
+    aws s3api put-object --bucket "$bucket" --key "$folder"
+}
