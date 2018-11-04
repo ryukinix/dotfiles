@@ -19,4 +19,4 @@ safe-source ~/.aliases.sh
 safe-source ~/.sudo.plugin.zsh
 safe-source ~/.emacs.fixes.sh
 safe-source ~/.tmate.sh
-[[ -f `which fzf` ]] && safe-source ~/.fzf.sh
+[[ -f `which fzf` ]] && safe-source ~/.fzf.zsh
