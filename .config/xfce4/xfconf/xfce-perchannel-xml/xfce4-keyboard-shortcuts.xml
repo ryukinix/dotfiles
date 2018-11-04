@@ -63,6 +63,7 @@
       <property name="&lt;Super&gt;q" type="string" value="exo-open --launch WebBrowser"/>
       <property name="XF86AudioMute" type="string" value="bash -c &quot;pactl set-sink-mute 1 toggle || pactl set-sink-mute 0 toggle&quot;"/>
       <property name="XF86AudioMicMute" type="string" value="pactl set-source-mute 1 toggle"/>
+      <property name="XF86Launch1" type="string" value="slock"/>
     </property>
   </property>
   <property name="xfwm4" type="empty">
