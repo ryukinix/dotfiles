@@ -56,10 +56,11 @@ autostart=(
 
 commands=(
     "xfdesktop --disable-wm-check"
-    "thunar --daemon",
+    "thunar --daemon"
     "nm-applet"
     "geary --hidden"
     "udiskie"
+    "pamac-tray"
 )
 
 
