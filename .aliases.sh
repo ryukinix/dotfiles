@@ -196,3 +196,5 @@ function s3-mkdir {
     local folder="$2"
     aws s3api put-object --bucket "$bucket" --key "$folder"
 }
+
+alias sum-lines="awk '{s+=$1} END {print s}'"
