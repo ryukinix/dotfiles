@@ -104,3 +104,12 @@
 
 ;; prettify lambda as λ
 (global-prettify-symbols-mode +1)
+
+;; disable prompting stuff
+(setq confirm-nonexistent-file-or-buffer nil)
+(setq ido-create-new-buffer 'always)
+(setq inhibit-startup-message t
+      inhibit-startup-echo-area-message t)
+(setq kill-buffer-query-functions
+      (remq 'process-kill-buffer-query-function
+            kill-buffer-query-functions))
