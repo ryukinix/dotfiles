@@ -1,0 +1,25 @@
+#!/usr/bin/python
+
+"""DESCRIPTION
+This is a simple program to fetch the IPv4 address attached
+to a domain.
+
+ex.: > hostip google.com
+172.217.30.46
+"""
+
+import socket
+import sys
+from os import path
+
+
+if len(sys.argv) > 1:
+    for k in sys.argv[1:]:
+        try:
+            print(socket.gethostbyname(k))
+        except socket.gaierror:
+            pass
+else:
+    usage = f'{path.basename(sys.argv[0])}: hosts...'
+    print(usage)
+    print(__doc__)
