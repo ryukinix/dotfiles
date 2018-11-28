@@ -129,4 +129,14 @@
 	<text-files/>
 	<video-files/>
 </action>
+<action>
+	<icon>python</icon>
+	<name>Execute Python</name>
+	<unique-id>1543176165508906-1</unique-id>
+	<command>python %f</command>
+	<description></description>
+	<patterns>*.py</patterns>
+	<startup-notify/>
+	<text-files/>
+</action>
 </actions>
