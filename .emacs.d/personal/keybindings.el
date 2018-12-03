@@ -151,7 +151,14 @@
 (define-key yas-minor-mode-map [C-return] 'yas-expand)
 
 (with-eval-after-load 'slime
-  (define-key slime-mode-map (kbd "TAB") 'company-indent-or-complete-common))
+  (define-key slime-mode-map (kbd "TAB") 'company-indent-or-complete-common)
+  ;; NOTE: something weird happened here
+  ;; usually C-c C-z open a slime inferior lisp if not opened
+  ;; now open directly a inferior-lisp without slime...
+  ;; after slime it's loaded, it's bind C-c C-z to
+  ;; slime-switch-to-output-buffer
+  (define-key lisp-mode-map (kbd "C-c C-z") 'slime)
+  )
 
 ;; open a terminal full-featured on emacs
 (global-set-key (kbd "C-x M") 'term)
@@ -228,7 +235,7 @@
 (with-eval-after-load 'projectile
   (custom-set-default 'projectile-keymap-prefix (kbd "C-c p"))
   (define-key projectile-mode-map (kbd "C-c C-p") nil)
-  (define-key projectile-mode-map projectile-keymap-prefix projectile-command-map))
+  (define-key projectile-mode-map (kbd "C-c p") projectile-command-map))
 
 ;; set darkroom for non-distract mode keybinding
 (global-set-key (kbd "<S-f11>") 'darkroom-tentative-mode)
