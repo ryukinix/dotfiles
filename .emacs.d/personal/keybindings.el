@@ -157,8 +157,17 @@
   ;; now open directly a inferior-lisp without slime...
   ;; after slime it's loaded, it's bind C-c C-z to
   ;; slime-switch-to-output-buffer
-  (define-key lisp-mode-map (kbd "C-c C-z") 'slime)
-  )
+  ;; slime-switch-to-output-buffer doesn't works if slime is not connected
+  (defun slime-repl-open ()
+    (interactive)
+    (if (slime-connected-p)
+        (slime-switch-to-output-buffer)
+      (slime)))
+  (define-key lisp-mode-map (kbd "C-c C-z") 'slime-repl-open)
+  (define-key slime-mode-map (kbd "C-c C-z") 'slime-repl-open))
+
+(with-eval-after-load 'slime-repl
+  (define-key slime-repl-mode-map (kbd "C-c C-z") 'other-window))
 
 ;; open a terminal full-featured on emacs
 (global-set-key (kbd "C-x M") 'term)
