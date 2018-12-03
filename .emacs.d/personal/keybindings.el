@@ -246,6 +246,9 @@
   (define-key projectile-mode-map (kbd "C-c C-p") nil)
   (define-key projectile-mode-map (kbd "C-c p") projectile-command-map))
 
+(with-eval-after-load 'python
+  (define-key inferior-python-mode-map (kbd "C-c C-z") 'other-window))
+
 ;; set darkroom for non-distract mode keybinding
 (global-set-key (kbd "<S-f11>") 'darkroom-tentative-mode)
 
