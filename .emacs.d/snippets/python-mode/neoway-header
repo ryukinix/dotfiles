@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name: Neoway Header
+# name: neoway header
 # key: neoway-header
 # --
 #!/usr/bin/env python3
@@ -7,8 +7,7 @@
 #
 #    Copyright © Neoway Business Solutions
 #
-#       @team: Data Analytics
-#    @project: <project>
+#    @project: $1
 #     @author: Manoel Vilela
 #      @email: manoel.neto@neoway.com.br
 #
