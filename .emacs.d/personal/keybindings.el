@@ -1,21 +1,28 @@
 ;;; -*- lexical-binding: t -*-
 ;; My Personal Keybindings
 
-(prelude-require-packages '(multiple-cursors fsharp-mode neotree linum-relative
-                                             darkroom speedbar sr-speedbar
-                                             projectile-speedbar key-chord
-                                             yasnippet zeal-at-point))
+(prelude-require-packages '(multiple-cursors linum-relative
+                            fsharp-mode neotree
+                            darkroom speedbar sr-speedbar
+                            projectile-speedbar key-chord
+                            yasnippet yasnippet-snippets
+                            zeal-at-point))
 
 (require 'company)
 (require 'fsharp-mode)
-(require 'prelude-custom) ;; definition of prelude-user-init-file
+(require 'prelude-custom "~/.emacs.d/core/prelude-custom.el") ;; definition of prelude-user-init-file
 (require 'yasnippet) ;; template system
 (require 'multiple-cursors)
 (require 'darkroom)
 (require 'sr-speedbar)
-(require 'manoel)
+(require 'manoel "~/.emacs.d/personal/preload/mano.el")
 (require 'cider)
 (require 'ox-beamer)
+(require 'projectile)
+(require 'key-chord)
+(require 'slime)
+(require 'slime-repl)
+(require 'python)
 
 (message "Personal keybindings loading...")
 
@@ -140,7 +147,7 @@
                          (interactive)
                          (ispell-change-dictionary "en_US")))
 
-;; company-ode additional keybindings
+;; company-mode additional keybindings
 (define-key company-mode-map [C-tab] 'company-complete)
 (define-key company-active-map [C-tab] 'company-complete-common-or-cycle)
 (define-key company-active-map [tab] 'company-complete-selection)
