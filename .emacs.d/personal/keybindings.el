@@ -174,7 +174,9 @@
   (define-key slime-mode-map (kbd "C-c C-z") 'slime-repl-open))
 
 (with-eval-after-load 'slime-repl
-  (define-key slime-repl-mode-map (kbd "C-c C-z") 'other-window))
+  (define-key slime-repl-mode-map (kbd "C-c C-z") (lambda ()
+                                                    (interactive)
+                                                    (select-window (previous-window)))))
 
 ;; open a terminal full-featured on emacs
 (global-set-key (kbd "C-x M") 'term)
