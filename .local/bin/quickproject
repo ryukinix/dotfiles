@@ -1,5 +1,13 @@
 #!/usr/bin/sbcl --script
 
+#|
+
+Manoel Vilela © 2018
+
+This script helps me building a simple ASDF project for Common Lisp
+based in the library quickproject.
+
+|#
 
 #-quicklisp (load "~/.sbclrc")
 #-quicklisp (error "You should have quicklisp installed!")
