@@ -49,25 +49,29 @@ quickproject.
 
 
 (defun exit-message (message exit-code)
+  "EXIT-MESSAGE print a message to *ERROR-OUTPUT* and exists with EXIT-CODE."
   (format *error-output* message)
   (exit :code exit-code))
 
 (defun errorf (message &rest args)
+  "ERRORF print MESSAGE using FORMAT to *ERROR-OUTPUT* based on ARGS."
   (apply #'format
          *error-output*
          (format nil "~a: error: ~a" *program-name* message)
          args))
 
 (defun help-p (&optional (args *posix-argv*))
+  "HELP-P checks if -h or --help was passed to *POSIX-ARGV*."
   (loop for x in args
         thereis (or (equal x "-h")
                     (equal x "--help"))))
 
 (defun string->directory (string)
+  "STRING->DIRECTORY converts a STRING proper into directory pathname."
   (pathname-as-directory (merge-pathnames (make-pathname :name string))))
 
 (defun create-project (pathname-string project-name)
-  "quickproject:quickproject wrapper with stdio info"
+  "CREATE-PROJECT is quickproject:make-project wrapper with additional handling."
   (let* ((pathname (string->directory pathname-string))
          (pathname-wildcard (merge-pathnames pathname "*.*"))
          (directory-name (first (last (pathname-directory pathname)))))
@@ -86,6 +90,7 @@ quickproject.
           do (format t "    + ~a~%" (file-namestring f)))))
 
 (defun main ()
+  "MAIN runs all the shits together."
   (cond ((help-p) ;; help!
          (exit-message *usage* 0))
         ((null *pathname*)  ;; a project_pathname is need
@@ -93,4 +98,6 @@ quickproject.
          (exit-message *usage* 0))
         (t (create-project *pathname* *project-name*))))
 
-(main)
+
+(eval-when (:execute)
+  (main))
