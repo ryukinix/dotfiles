@@ -28,3 +28,30 @@
 (with-eval-after-load 'exec-path-from-shell
   (message "HOTFIX: exec-path-from-shell remove -i flag")
   (setq exec-path-from-shell-arguments (delete "-i" exec-path-from-shell-arguments) ))
+
+
+(defun file-readlines (file)
+  "FILE-READLINES reads FILE and return a LIST of STRINGS."
+  (with-temp-buffer
+    (insert-file-contents file)
+    (split-string (buffer-string) "\n" t)))
+
+;; dbus stuff
+(defun fetch-dbus-address (&optional bus private)
+  "FETCH-DBUS-ADDRESS reads the ~/.dbus/session-bus/ first file
+parses and set DBUS_SESSION_BUS_ADDRES to its expected value."
+  (when (equal bus :session)
+   (let* ((file (car (directory-files "~/.dbus/session-bus/" t ".*-0")))
+          (varname "DBUS_SESSION_BUS_ADDRESS")
+          (regexp (format "^%s=" varname))
+          (value nil))
+     (when file
+       (setq value (car (remove-if-not (lambda (x)
+                                         (equal (string-match regexp x) 0))
+                                       (file-readlines file))))
+       (setq value (replace-regexp-in-string regexp "" value))
+       (setq value (replace-regexp-in-string "'" "" value))
+       (message "HELLLO!!!!")
+       (dbus-setenv :session varname value)))))
+
+;; (advice-add 'dbus-init-bus :before #'fetch-dbus-address)
