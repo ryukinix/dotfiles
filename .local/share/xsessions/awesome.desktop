@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=awesome
+Comment=Highly configurable framework window manager
+TryExec=awesome
+Exec=dbus-launch --exit-with-session --sh-syntax awesome
+Type=Application
