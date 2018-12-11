@@ -115,3 +115,6 @@
 (setq kill-buffer-query-functions
       (remq 'process-kill-buffer-query-function
             kill-buffer-query-functions))
+
+
+(defalias 'halt-and-catch-fire #'save-buffers-kill-emacs)
