@@ -14,7 +14,7 @@
   (file-exists-p (or (executable-find hunspell:hunspell-name) "/not/found/")))
 
 (defvar hunspell:default-spell-program hunspell:aspell-name)
-(defvar hunspell:hunspell-dict "en_US,pt_BR")
+(defvar hunspell:hunspell-dict "pt_BR")
 (defvar hunspell:aspell-dict "en_US")
 
 (defun hunspell:select-spell-program (spell-name)
