@@ -74,6 +74,21 @@ function dot {
     GIT_DIR=$HOME/.dot GIT_WORK_TREE=$HOME git $@
 }
 
+function env-up {
+    source $1/bin/activate
+}
+
+function s3-mkdir {
+    local bucket="$1"
+    local folder="$2"
+    aws s3api put-object --bucket "$bucket" --key "$folder"
+}
+
+function gccrun {
+    gcc $@ -o a.out; ./a.out; rm -f a.out
+}
+
+
 # save definition of dot (graphviz language)
 alias dot-graph='/usr/bin/dot'
 alias dot-tig='GIT_DIR=$HOME/.dot/ tig'
@@ -123,7 +138,7 @@ alias celeste='ssh lerax@celeste'
 alias xcopy='xclip -selection clipboard'
 alias xpaste='xclip -o -selection clipboard'
 
-alias ufc='cd ~/Dropbox/University/Courses/UFC/2017.2/'
+alias ufc='cd ~/Dropbox/University/Courses/UFC/'
 
 # you need tmate to use that
 alias ssh-share='tmux detach -E "tmate && zsh"'
@@ -140,7 +155,6 @@ alias pastebin=ixx
 alias tmate.="/usr/bin/tmate"
 alias tmate="tmux detach-client -E 'tmate;tmux'"
 alias stack-size='ulimit -s'
-
 
 # pacman aliases
 alias pacman-install='sudo pacman -S'
@@ -170,10 +184,6 @@ alias telegram-disable='chmod -x ~/.Telegram/Telegram'
 alias telegram-enable='chmod +x ~/.Telegram/Telegram'
 
 
-function env-up {
-    source $1/bin/activate
-}
-
 alias env-down='deactivate'
 alias pyenv-init='eval "$(pyenv init -)"'
 alias pipi='pip install --user'
@@ -191,11 +201,4 @@ alias battery=acpi
 alias ungron='gron --ungron'
 alias histogram='sort | uniq -c'
 alias scp-continue='rsync -P -e ssh'
-
-function s3-mkdir {
-    local bucket="$1"
-    local folder="$2"
-    aws s3api put-object --bucket "$bucket" --key "$folder"
-}
-
 alias sum-lines="awk '{s+=$1} END {print s}'"
