@@ -100,7 +100,7 @@ awful.layout.layouts = {
    --awful.layout.suit.fair.horizontal,
    --awful.layout.suit.spiral,
    --awful.layout.suit.spiral.dwindle,
-   -- awful.layout.suit.max,
+   awful.layout.suit.max,
    --awful.layout.suit.max.fullscreen,
    awful.layout.suit.magnifier,
    --awful.layout.suit.corner.nw,
@@ -244,8 +244,12 @@ globalkeys = awful.util.table.join(
    awful.key({modkey}, "d", function() awful.util.spawn("thunar") end,
       {description = "open file manager", group = "applications"}),
 
+   awful.key({ }, "XF86WebCam",
+      function() awful.util.spawn("cheese") end,
+      {description = "open webcam", group = "applications"}),
+
    awful.key({modkey}, "t",
-      function() awful.util.spawn("/home/lerax/.Telegram/Telegram") end,
+      function() awful.util.spawn("telegram-desktop") end,
       {description = "open telegram", group = "applications"}),
 
    -- Open the rc config on the default gui_editor
@@ -253,9 +257,7 @@ globalkeys = awful.util.table.join(
       function () awful.util.spawn(string.format("%s %s", gui_editor, awesome.conffile)) end,
       {description = "open file config of awesome", group = "applications"}),
 
-   awful.key({modkey, "Shift"}, "e",
-      function () awful.util.spawn("/home/lerax/.emacs_anywhere/bin/run") end,
-      {description = "open file config of awesome", group = "applications"}),
+
 
    -- User programs
    awful.key({ modkey }, "q", function () awful.spawn(browser) end,
