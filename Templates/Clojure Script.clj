@@ -1,2 +1,0 @@
-;;; Clojure Script
-;;; Manoel Vilela
