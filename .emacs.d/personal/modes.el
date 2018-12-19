@@ -1,6 +1,10 @@
 ;; fetching personal defined packages
 (require 'prelude-packages)
-(prelude-require-packages '(slime-company ssh-agency xclip pyvenv))
+(prelude-require-packages '(slime-company
+                            ssh-agency
+                            xclip
+                            pyvenv
+                            ox-gfm))
 
 
 (require 'erc)
@@ -11,12 +15,16 @@
 (require 'company-quickhelp)
 (require 'slime)
 (require 'ssh-agency)
-(require 'ob-latex) ;; require ob-latex for exporting org-latex blocks correctly
 (require 'dbus)
 
 ;; My modes
 (message "Modos do Manoel")
 
+(eval-after-load "org"
+  ;; require ob-latex for exporting org-latex blocks correctly
+  '(progn
+    (require 'ob-latex)
+    (require 'ox-gfm nil t)))
 
 ;; only activate global-wakatime-mode if the user
 ;; specifically installed this
@@ -70,7 +78,7 @@
 (push 'slime-asdf slime-contribs)
 
 ;; setup irc autologin channels
-(setq erc-autojoin-channels-alist '(("freenode.net" "#artix")))
+;;(setq erc-autojoin-channels-alist '(("freenode.net" "#artix")))
 (setq erc-prompt "λ>")
 
 ;; enable notifications -- only if have dbus
