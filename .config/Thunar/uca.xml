@@ -99,7 +99,7 @@
 	<icon>subtitleeditor</icon>
 	<name>Download Subs</name>
 	<unique-id>1507968057959363-1</unique-id>
-	<command>/home/lerax/.go/bin/subdb -p %f -l en</command>
+	<command>/home/lerax/.go/bin/subdb -p %f -l pt</command>
 	<description>Download Subtitle of Video on Portuguese</description>
 	<patterns>*</patterns>
 	<video-files/>
