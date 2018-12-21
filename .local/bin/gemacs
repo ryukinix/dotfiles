@@ -15,7 +15,9 @@ function open-frame {
 }
 
 function raise-frames {
-    open-frame -e "(mapcar #'raise-frame (frame-list))"
+    open-frame -e "(mapcar (lambda (x) (progn (raise-frame x) \
+                                              (x-focus-frame x))) \
+                           (frame-list))"
 }
 
 function if-crashed-restart-emacs {
@@ -31,7 +33,6 @@ function if-crashed-restart-emacs {
 
 if [ `has-frame` == "t" ]; then
     open-frame "$@" 2> /dev/null || raise-frames 1> /dev/null
-
 else
     new-frame "$@"
 fi
