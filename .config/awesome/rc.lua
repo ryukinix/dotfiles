@@ -670,7 +670,7 @@ awful.rules.rules = {
                      keys = clientkeys,
                      buttons = clientbuttons,
                      screen = awful.screen.preferred,
-                     placement = awful.placement.no_overlap+awful.placement.no_offscreen,
+                     placement = awful.placement.no_overlap+awful.placement.no_offscreen + awful.placement.centered,
                      size_hints_honor = false
      }
     },
@@ -699,7 +699,7 @@ client.connect_signal("manage", function (c)
       not c.size_hints.user_position
       and not c.size_hints.program_position then
         -- Prevent clients from being unreachable after screen count changes.
-        awful.placement.no_offscreen(c)
+         awful.placement.no_offscreen(c)
     end
 end)
 
