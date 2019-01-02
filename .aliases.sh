@@ -201,5 +201,5 @@ alias battery=acpi
 alias ungron='gron --ungron'
 alias histogram='sort | uniq -c'
 alias scp-continue='rsync -P -e ssh'
-alias sum-lines="awk '{s+=$1} END {print s}'"
+alias sum-lines='awk "{s+=\$1} END {print s}"'
 alias hcf='sudo halt'
