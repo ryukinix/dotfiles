@@ -145,8 +145,13 @@ local bat = lain.widget.bat({
       settings = function()
          local perc = bat_now.perc ~= "N/A" and bat_now.perc .. "%" or bat_now.perc
 
-         if bat_now.ac_status == 1 then
-            perc = perc .. " plug"
+         -- -- !debug
+         -- for k,v in pairs(bat_now) do
+         --    io.stderr:write(string.format("%s\t%s\n",k,v))
+         -- end
+
+         if bat_now.status == "Charging" then
+            perc = "+" .. perc
          end
 
          widget:set_markup(markup.fontfg(theme.font, theme.fg_normal, perc .. " "))
