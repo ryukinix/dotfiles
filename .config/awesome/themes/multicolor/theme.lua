@@ -201,7 +201,16 @@ local netupinfo = lain.widget.net({
 local memicon = wibox.widget.imagebox(theme.widget_mem)
 local memory = lain.widget.mem({
       settings = function()
-         widget:set_markup(markup.fontfg(theme.font, "#e0da37", mem_now.used .. "M "))
+
+         local m = mem_now.used .. "M "
+         local k = tonumber(mem_now.used)
+         if k < 1024 then
+            m = string.format("%02.fMB ", k)
+         else
+            m = string.format("%04.1fGB ", k/1024)
+         end
+
+         widget:set_markup(markup.fontfg(theme.font, "#e0da37", m))
       end
 })
 
