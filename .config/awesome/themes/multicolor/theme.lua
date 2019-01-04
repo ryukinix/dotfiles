@@ -205,7 +205,7 @@ local memory = lain.widget.mem({
          local m = mem_now.used .. "M "
          local k = tonumber(mem_now.used)
          if k < 1024 then
-            m = string.format("%02.fMB ", k)
+            m = string.format("%04.fMB ", k)
          else
             m = string.format("%04.1fGB ", k/1024)
          end
