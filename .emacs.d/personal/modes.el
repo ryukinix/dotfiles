@@ -126,3 +126,9 @@
 
 
 (defalias 'halt-and-catch-fire #'save-buffers-kill-emacs)
+
+;; org-mode babel setup
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((emacs-lisp . t)
+   (python . t)))
