@@ -174,7 +174,7 @@ alias monitor-on='xset -display :0.0 dpms force on'
 alias pdf=llpp
 alias qemu=qemu-system-x86_64
 alias lelerax='cd ~/Desktop/workspace/dev/lelerax; ./repl'
-alias encrypt='gpg -se'
+alias encrypt='gpg -se -r manoel'
 alias decrypt='gpg -q --decrypt'
 
 # pip install ipykernel
