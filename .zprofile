@@ -48,6 +48,9 @@ path=(
   ~/.cargo/bin
   ~/.go/bin
   ~/.roswell/bin
+  ~/Android/Sdk/tools/
+  ~/Android/Sdk/tools/bin/
+  ~/Android/Sdk/platform-tools/
   $path
 )
 
