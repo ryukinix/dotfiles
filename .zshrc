@@ -20,4 +20,5 @@ safe-source ~/.sudo.plugin.zsh
 safe-source ~/.emacs.fixes.sh
 safe-source ~/.tmate.sh
 safe-source ~/.python-venv-autoswitch.zsh
+safe-source ~/.economy-mode.sh
 [[ -f `which fzf` ]] && safe-source ~/.fzf.zsh
