@@ -1,2 +1,7 @@
 #!/usr/bin/bash
-ip addr | grep global | grep -E -o \[a-z0-9\]+$
+default_route () {
+    route | head -n 3 | tail -n 1
+}
+
+
+default_route | awk '{print $8}'
