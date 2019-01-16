@@ -1,31 +1,65 @@
 #!/usr/bin/python
 # coding: utf-8
 
-"""DESCRIPTION
-This is a simple program to fetch the IPv4 address attached
-to a domain.
+"""\
+DESCRIPTION
+   This is a simple program to fetch the IPv4 address attached
+   to a domain. Only valid hosts returns a ip address.
 
-ex.:
-> hostip google.com
-172.217.30.46
+EXAMPLES
+    > hostip google.com
+    172.217.30.46
+
+    > hostip weird-domain.com lerax.me
+    185.199.109.153
 
 AUTHOR
-Manoel Vilela © 2018.
+    Manoel Vilela © 2018.
 """
 
 import socket
 import sys
 from os import path
+from typing import List, Optional
 
 
-if len(sys.argv) > 1 and not any(h in sys.argv for h in ('-h', '--help')):
-    for k in sys.argv[1:]:
+def host_to_ip(hosts: List[str]) -> List[Optional[str]]:
+    ips = []
+    for host in hosts:
         try:
-            print(socket.gethostbyname(k))
+            ips.append(socket.gethostbyname(host))
         except socket.gaierror:
-            pass
-else:
-    usage = f'{path.basename(sys.argv[0])}: hosts...'
-    print(usage)
+            ips.append(None)
+    return ips
+
+
+def usage() -> None:
+    usage_string = f'Usage: {path.basename(sys.argv[0])}: hosts...'
+    print(usage_string)
     print()
     print(__doc__)
+
+
+def infer_action(args: List[str]) -> str:
+    if len(args) == 0 or any(h in args for h in ('-h', '--help')):
+        return 'help'
+    else:
+        return 'get_ip'
+
+
+def main():
+    args = sys.argv[1:]
+    action = infer_action(args)
+    if action == 'get_ip':
+        for ip in host_to_ip(args):
+            if ip is not None:
+                print(ip)
+    elif action == 'help':
+        usage()
+    else:
+        print('Unknown option action!')
+        sys.exit(1)
+
+
+if __name__ == '__main__':
+    main()
