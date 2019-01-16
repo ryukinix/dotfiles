@@ -88,6 +88,9 @@ function gccrun {
     gcc $@ -o a.out; ./a.out; rm -f a.out
 }
 
+function gateway () {
+    route | head -n 3 | tail -n 1 | awk '{print $2}'
+}
 
 # save definition of dot (graphviz language)
 alias dot-graph='/usr/bin/dot'
@@ -173,7 +176,7 @@ alias monitor-on='xset -display :0.0 dpms force on'
 
 alias pdf=llpp
 alias qemu=qemu-system-x86_64
-alias lelerax='cd ~/Desktop/workspace/dev/lelerax; ./repl'
+alias lelerax='cd ~/Desktop/lelerax; ./repl'
 alias encrypt='gpg -se -r manoel'
 alias decrypt='gpg -q --decrypt'
 
@@ -202,3 +205,4 @@ alias scp-continue='rsync -P -e ssh'
 alias sum-lines='awk "{s+=\$1} END {print s}"'
 alias hcf='sudo halt'
 alias thinkpad-keyboard='sudo setxkbmap -model thinkpad60 -layout br'
+alias venv='python -m venv'
