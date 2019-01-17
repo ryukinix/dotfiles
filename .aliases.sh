@@ -37,7 +37,7 @@ fi
 
 
 function daemonize {
-    ($@ &> /dev/null&)&
+    ($@ &> /dev/null&) &> /dev/null&
 }
 
 
@@ -169,6 +169,7 @@ alias pacman-remove='sudo pacman -Rsu'
 alias service='sudo rc-service'
 alias aur=yay
 alias aur-install='aur -S'
+alias aur-upgrade='aur -Syuua --overwrite "*"'
 
 alias examples=tldr
 alias monitor-off='xset -display :0.0 dpms force off'
