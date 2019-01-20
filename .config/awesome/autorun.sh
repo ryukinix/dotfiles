@@ -61,6 +61,8 @@ commands=(
     "geary --hidden"
     "udiskie"
     "pamac-tray"
+    "/usr/lib/bluetooth/obexd" # bluetooth file-sharing server
+    "blueman-applet"
 )
 
 
