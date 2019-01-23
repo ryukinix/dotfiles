@@ -50,20 +50,19 @@
       <property name="&lt;Super&gt;r" type="string" value="xfrun4"/>
       <property name="&lt;Alt&gt;&lt;Super&gt;e" type="string" value="emacsclient -n -c"/>
       <property name="&lt;Super&gt;v" type="string" value="xfce4-popup-whiskermenu"/>
-      <property name="&lt;Primary&gt;&lt;Super&gt;p" type="string" value="rofi -show window"/>
       <property name="&lt;Super&gt;a" type="string" value="geary"/>
       <property name="&lt;Primary&gt;XF86AudioPlay" type="string" value="rhythmbox"/>
       <property name="&lt;Primary&gt;&lt;Shift&gt;&lt;Alt&gt;Print" type="string" value="xfce4-screenshooter -f -c"/>
       <property name="&lt;Primary&gt;&lt;Shift&gt;Print" type="string" value="xfce4-screenshooter -r -c"/>
       <property name="&lt;Shift&gt;&lt;Alt&gt;Print" type="string" value="xfce4-screenshooter -w -c"/>
       <property name="&lt;Super&gt;l" type="string" value="xflock4"/>
-      <property name="&lt;Super&gt;t" type="string" value="/home/lerax/.Telegram/Telegram"/>
       <property name="&lt;Super&gt;o" type="string" value="/home/lerax/.local/bin/move-to-next-monitor"/>
-      <property name="&lt;Shift&gt;&lt;Super&gt;e" type="string" value="/home/lerax/.emacs_anywhere/bin/run"/>
       <property name="&lt;Super&gt;q" type="string" value="exo-open --launch WebBrowser"/>
       <property name="XF86AudioMute" type="string" value="bash -c &quot;pactl set-sink-mute 1 toggle || pactl set-sink-mute 0 toggle&quot;"/>
       <property name="XF86AudioMicMute" type="string" value="pactl set-source-mute 1 toggle"/>
       <property name="XF86Launch1" type="string" value="slock"/>
+      <property name="&lt;Super&gt;t" type="string" value="telegram-desktop"/>
+      <property name="&lt;Primary&gt;&lt;Super&gt;p" type="string" value="rofi -show combi"/>
     </property>
   </property>
   <property name="xfwm4" type="empty">
