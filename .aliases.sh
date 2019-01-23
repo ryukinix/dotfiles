@@ -67,6 +67,55 @@ function gateway () {
     route | head -n 3 | tail -n 1 | awk '{print $2}'
 }
 
+function check-ssh-agent-pid () {
+    local LIST=$(echo `pgrep ssh-agent` `pgrep gnome-keyring-d` | tr '\n' ' ')
+    local VALUE="$SSH_AGENT_PID"
+    local SEARCH=$(echo "$LIST" | xargs -n1 echo | grep -E "^$VALUE\$")
+    # echo LIST: $LIST
+    # echo VALUE: $VALUE
+    # echo SEARCH: $SEARCH
+    echo $SEARCH
+}
+
+function ssh-auth () {
+    local ssh_agent_pid=$(check-ssh-agent-pid)
+    local ssh_session_file=/tmp/ssh
+
+    if [[ -z $(check-ssh-agent-pid) ]]; then
+        # read session-wise variable
+        if [ -f /tmp/ssh ]; then
+            source /tmp/ssh
+        fi
+        # try again check ssh agent-pid
+        ssh_agent_pid=$(check-ssh-agent-pid)
+    fi
+
+    if [[ -z "$ssh_agent_pid" || ! ssh-add > /dev/null ]]; then
+        # delete old variables
+        rm -rf /tmp/ssh
+        # kill old agents
+        killall ssh-agent
+
+        # create new session
+        eval $(ssh-agent)
+        export SSH_AGENT_PID
+        export SSH_AUTH_SOCK
+
+        # save variables session-wise to filesystem
+        touch $ssh_session_file
+        echo "export SSH_AGENT_PID=$SSH_AGENT_PID" >> $ssh_session_file
+        echo "export SSH_AUTH_SOCK=$SSH_AUTH_SOCK" >> $ssh_session_file
+
+        # add ssh key
+        ssh-add
+    elif [[ -z `ssh-add -l` ]]; then
+        # if there is a agent, but no keys, just add it
+        ssh-add
+    else
+        echo "SSH already have auth!" >> /dev/stderr
+    fi
+}
+
 # save definition of dot (graphviz language)
 alias dot-graph='/usr/bin/dot'
 alias dot-tig='GIT_DIR=$HOME/.dot/ tig'
