@@ -12,12 +12,12 @@ function u-root-boot {
 }
 
 function daemonize {
-    ($@ &> /dev/null&) &> /dev/null&
+    ("$@" &> /dev/null&) &> /dev/null&
 }
 
 
 function filter-prime {
-    factor $@ | grep -E '^(.*): \1$' | cut -d':' -f 2 | tr -d ' '
+    factor "$@" | grep -E '^(.*): \1$' | cut -d':' -f 2 | tr -d ' '
 }
 
 
@@ -46,7 +46,7 @@ function ixx {
 
 
 function dot {
-    GIT_DIR=$HOME/.dot GIT_WORK_TREE=$HOME git $@
+    GIT_DIR=$HOME/.dot GIT_WORK_TREE=$HOME git "$@"
 }
 
 function env-up {
@@ -60,7 +60,7 @@ function s3-mkdir {
 }
 
 function gccrun {
-    gcc $@ -o a.out; ./a.out; rm -f a.out
+    gcc "$@" -o a.out; ./a.out; rm -f a.out
 }
 
 function gateway () {
@@ -123,6 +123,10 @@ function ssh-auth () {
             echo "[info] SSH auth ok!"
         fi
     fi
+}
+
+function sum-lines {
+    awk '{s+=$1} END {print s}'
 }
 
 # save definition of dot (graphviz language)
@@ -236,7 +240,6 @@ alias battery=acpi
 alias ungron='gron --ungron'
 alias histogram='sort | uniq -c'
 alias scp-continue='rsync -P -e ssh'
-alias sum-lines='awk "{s+=\$1} END {print s}"'
 alias hcf='sudo halt'
 alias thinkpad-keyboard='sudo setxkbmap -model thinkpad60 -layout br'
 alias venv='python -m venv'
