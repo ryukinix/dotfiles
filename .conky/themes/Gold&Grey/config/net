@@ -50,14 +50,14 @@ color1					00d9ff
 color2					ffffff
 
 # — Network — #
-# network_interface 		enp3s0
+# network_interface 		wlp3s0
 
 
 
 
 
 TEXT
-${voffset 3}${font PizzaDude Bullets:size=18}r$color2${font}${goto 25}${voffset -7} ${downspeed enp3s0 }
-${goto 25}${voffset -1}${font Dejavu Sans:size=8:condensed:bold}$color1 ${totaldown enp3s0 }$font${goto 92}${voffset -12}${downspeedgraph enp3s0  15,30}$color
-${font PizzaDude Bullets:size=18}v$color2${font}${goto 25}${voffset -7} ${upspeed enp3s0 }${alignr 5}
-${goto 25}${voffset -1}${font Dejavu Sans:size=8:condensed:bold}$color1 ${totalup enp3s0 }$font${goto 92}${voffset -12}${upspeedgraph enp3s0  15,30}$color${voffset -27}
+${voffset 3}${font PizzaDude Bullets:size=18}r$color2${font}${goto 25}${voffset -7} ${downspeed wlp3s0 }
+${goto 25}${voffset -1}${font Dejavu Sans:size=8:condensed:bold}$color1 ${totaldown wlp3s0 }$font${goto 92}${voffset -12}${downspeedgraph wlp3s0  15,30}$color
+${font PizzaDude Bullets:size=18}v$color2${font}${goto 25}${voffset -7} ${upspeed wlp3s0 }${alignr 5}
+${goto 25}${voffset -1}${font Dejavu Sans:size=8:condensed:bold}$color1 ${totalup wlp3s0 }$font${goto 92}${voffset -12}${upspeedgraph wlp3s0  15,30}$color${voffset -27}
