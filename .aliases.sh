@@ -81,38 +81,47 @@ function ssh-auth () {
     local ssh_agent_pid=$(check-ssh-agent-pid)
     local ssh_session_file=/tmp/ssh
 
-    if [[ -z $(check-ssh-agent-pid) ]]; then
-        # read session-wise variable
-        if [ -f /tmp/ssh ]; then
-            source /tmp/ssh
-        fi
-        # try again check ssh agent-pid
-        ssh_agent_pid=$(check-ssh-agent-pid)
-    fi
-
-    if [[ -z "$ssh_agent_pid" || ! ssh-add > /dev/null ]]; then
-        # delete old variables
-        rm -rf /tmp/ssh
-        # kill old agents
-        killall ssh-agent
-
-        # create new session
-        eval $(ssh-agent)
-        export SSH_AGENT_PID
-        export SSH_AUTH_SOCK
-
-        # save variables session-wise to filesystem
-        touch $ssh_session_file
-        echo "export SSH_AGENT_PID=$SSH_AGENT_PID" >> $ssh_session_file
-        echo "export SSH_AUTH_SOCK=$SSH_AUTH_SOCK" >> $ssh_session_file
-
-        # add ssh key
-        ssh-add
-    elif [[ -z `ssh-add -l` ]]; then
-        # if there is a agent, but no keys, just add it
-        ssh-add
+    if [[ $SSH_AUTH_SOCK == *"/keyring/ssh" ]]; then
+        echo "[info] SSH auth with gnome-keyring-daemon."
     else
-        echo "SSH already have auth!" >> /dev/stderr
+        if [[ -z $(check-ssh-agent-pid) ]]; then
+            # read session-wise variable
+            if [ -f /tmp/ssh ]; then
+                source /tmp/ssh
+                echo "[info] read /tmp/ssh variable sessions"
+            fi
+            # try again check ssh agent-pid
+            ssh_agent_pid=$(check-ssh-agent-pid)
+        fi
+
+        if [[ -z "$ssh_agent_pid" || ! ssh-add > /dev/null ]]; then
+            # delete old variables
+            rm -rf /tmp/ssh
+            # kill old agents
+            echo "[info] kill all currently ssh-agent"
+            killall ssh-agent
+
+            # create new session
+            echo "[info] spawn new ssh-agent"
+            eval $(ssh-agent)
+            export SSH_AGENT_PID
+            export SSH_AUTH_SOCK
+
+            # save variables session-wise to filesystem
+            touch $ssh_session_file
+            echo "export SSH_AGENT_PID=$SSH_AGENT_PID" >> $ssh_session_file
+            echo "export SSH_AUTH_SOCK=$SSH_AUTH_SOCK" >> $ssh_session_file
+            echo "[info] saved ssh auth variables into $ssh_session_file "
+            # add ssh key
+            echo "[info] add default ssh key"
+            ssh-add
+        elif [[ -z `ssh-add -l` ]]; then
+            # if there is a agent, but no keys, just add it
+            echo "[info] found a ssh agent working, but there is no keys."
+            ssh-add
+        else
+            echo "[info] SSH auth ok!"
+        fi
     fi
 }
 
