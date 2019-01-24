@@ -63,6 +63,7 @@
       <property name="XF86Launch1" type="string" value="slock"/>
       <property name="&lt;Super&gt;t" type="string" value="telegram-desktop"/>
       <property name="&lt;Primary&gt;&lt;Super&gt;p" type="string" value="rofi -show combi"/>
+      <property name="XF86ScreenSaver" type="string" value="slock"/>
     </property>
   </property>
   <property name="xfwm4" type="empty">
