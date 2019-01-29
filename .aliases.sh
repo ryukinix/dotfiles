@@ -1,6 +1,9 @@
 #!/bin/sh
+# shellcheck disable=SC2039
+# shellcheck disable=SC2155
+# shellcheck disable=SC2050
 
-function u-root-boot {
+u-root-boot () {
     sudo qemu-system-x86_64 \
          -kernel /boot/vmlinuz-linux-lts \
          -initrd /tmp/initramfs.linux_amd64.cpio \
@@ -11,73 +14,76 @@ function u-root-boot {
 
 }
 
-function daemonize {
+daemonize () {
     ("$@" &> /dev/null&) &> /dev/null&
 }
 
 
-function filter-prime {
+filter-prime () {
     factor "$@" | grep -E '^(.*): \1$' | cut -d':' -f 2 | tr -d ' '
 }
 
 
 # function to run .el files
-function emacs-run {
+emacs-run () {
     emacsclient -e "(load \"$(pwd)/$1\")"
 }
 
 # receive the first argument, eval it and copy the result to clipboard.
 # used to generate easy functions pastebin-like, as termbin and ixx
-function _pastebin-generic {
-    link=`eval $1 2> /dev/null | tr -d "\n"`
-    if [ $? -eq '0' ]; then
-        printf $link | xclip -selection clipboard
-        printf "Copied '%s' to X clipboard.\n" $link
+_pastebin-generic () {
+    link=$(eval "$1" 2> /dev/null | tr -d "\n")
+    # shellcheck disable=SC2181
+    if [ "$?" -eq '0' ]; then
+        printf "%s" "$link" | xclip -selection clipboard
+        printf "Copied '%s' to X clipboard.\n" "$link"
     fi
 }
 
-function termbin {
+termbin () {
     _pastebin-generic 'nc termbin.com 9999'
 }
 
-function ixx {
+ixx () {
     _pastebin-generic 'ix'
 }
 
 
-function dot {
+dot () {
     GIT_DIR=$HOME/.dot GIT_WORK_TREE=$HOME git "$@"
 }
 
-function env-up {
-    source $1/bin/activate
+env-up () {
+    # shellcheck disable=SC1090
+    source "$1/bin/activate"
 }
 
-function s3-mkdir {
+s3-mkdir () {
     local bucket="$1"
     local folder="$2"
     aws s3api put-object --bucket "$bucket" --key "$folder"
 }
 
-function gccrun {
+
+gccrun () {
     gcc "$@" -o a.out; ./a.out; rm -f a.out
 }
 
-function gateway () {
+gateway () {
     route | head -n 3 | tail -n 1 | awk '{print $2}'
 }
 
-function check-ssh-agent-pid () {
-    local LIST=$(echo `pgrep ssh-agent` `pgrep gnome-keyring-d` | tr '\n' ' ')
+check-ssh-agent-pid () {
+    local LIST=$(echo "$(pgrep ssh-agent)" "$(pgrep gnome-keyring-d)" | tr '\n' ' ')
     local VALUE="$SSH_AGENT_PID"
     local SEARCH=$(echo "$LIST" | xargs -n1 echo | grep -E "^$VALUE\$")
     # echo LIST: $LIST
     # echo VALUE: $VALUE
     # echo SEARCH: $SEARCH
-    echo $SEARCH
+    echo "$SEARCH"
 }
 
-function ssh-auth () {
+ssh-auth () {
     local ssh_agent_pid=$(check-ssh-agent-pid)
     local ssh_session_file=/tmp/ssh
 
@@ -87,6 +93,7 @@ function ssh-auth () {
         if [[ -z $(check-ssh-agent-pid) ]]; then
             # read session-wise variable
             if [ -f /tmp/ssh ]; then
+                # shellcheck disable=SC1091
                 source /tmp/ssh
                 echo "[info] read /tmp/ssh variable sessions"
             fi
@@ -103,7 +110,7 @@ function ssh-auth () {
 
             # create new session
             echo "[info] spawn new ssh-agent"
-            eval $(ssh-agent)
+            eval "$(ssh-agent)"
             export SSH_AGENT_PID
             export SSH_AUTH_SOCK
 
@@ -115,7 +122,7 @@ function ssh-auth () {
             # add ssh key
             echo "[info] add default ssh key"
             ssh-add
-        elif [[ -z `ssh-add -l` ]]; then
+        elif [ -z "$(ssh-add -l)" ]; then
             # if there is a agent, but no keys, just add it
             echo "[info] found a ssh agent working, but there is no keys."
             ssh-add
@@ -125,7 +132,7 @@ function ssh-auth () {
     fi
 }
 
-function sum-lines {
+sum-lines () {
     awk '{s+=$1} END {print s}'
 }
 
@@ -135,7 +142,7 @@ alias dot-tig='GIT_DIR=$HOME/.dot/ tig'
 
 
 # ustar is my server
-if [ $(hostname) != "ustar" ]; then
+if [ "$(hostname)" != "ustar" ]; then
     alias vim=nvim
     alias emacs='emacsclient -nw -a vim'
     alias semacs='SUDO_EDITOR="emacsclient -t -a vim" sudoedit'
