@@ -12,6 +12,19 @@
 # the first command does not respect panel/decoration offsets and the second
 # will sometimes give a "-0-0" geometry. This is why we resort to "xwininfo".
 
+PROGRAM=$(readlink -f "$0")
+
+notify_broken_dependency () {
+    local program
+    program="$1"
+    if ! which $program 2> /dev/null; then
+        notify-send "ERROR: $PROGRAM" "$program was not found"
+    fi
+}
+
+notify_broken_dependency xdotool
+notify_broken_dependency wmctrl
+
 screen_width=$(xdpyinfo | awk '/dimensions:/ { print $2; exit }' | cut -d"x" -f1)
 screen_height=$(xdpyinfo | awk '/dimensions:/ { print $2; exit }' | cut -d"x" -f2)
 display_width=$(xdotool getdisplaygeometry | cut -d" " -f1)
