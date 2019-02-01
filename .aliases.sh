@@ -5,7 +5,7 @@
 
 u-root-boot () {
     sudo qemu-system-x86_64 \
-         -kernel /boot/vmlinuz-linux-lts \
+         -kernel /boot/vmlinuz-linux \
          -initrd /tmp/initramfs.linux_amd64.cpio \
          -append "console=ttyS0" \
          -nographic \
@@ -136,6 +136,10 @@ sum-lines () {
     awk '{s+=$1} END {print s}'
 }
 
+drun () {
+    docker run -it --rm "$@"
+}
+
 # save definition of dot (graphviz language)
 alias dot-graph='/usr/bin/dot'
 alias dot-tig='GIT_DIR=$HOME/.dot/ tig'
@@ -237,7 +241,6 @@ alias pyenv-init='eval "$(pyenv init -)"'
 alias pipi='pip install --user'
 alias rot13="tr 'A-Za-z' 'N-ZA-Mn-za-m'"
 alias xfdesktop-shadow-fix='xfconf-query -c xfce4-desktop -p /desktop-icons/center-text -n -t bool -s false'
-alias vpn='2fa -clip neoway | xcopy; sudo openvpn /etc/openvpn/neoway.conf'
 alias docker-clean='docker system prune'
 alias android-up='jmtpfs'
 alias android-down='fusermount -u'

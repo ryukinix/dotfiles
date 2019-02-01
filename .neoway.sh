@@ -1,17 +1,22 @@
+# shellcheck disable=SC2039
+# shellcheck disable=SC2155
+# shellcheck disable=SC2050
+
 # neoway ssh tunnel functions
 if [[ -f ~/.ssh/config_neoway ]]; then
     NEOWAY_SSH_CONFIG=~/.ssh/config_neoway
-    NEOWAY_HOSTS=`cat $NEOWAY_SSH_CONFIG | grep '^Host.*' | cut -d ' ' -f 2 | xargs echo`
-    function neoway-tunnel {
-        ssh -nNT -F "$NEOWAY_SSH_CONFIG" $@
+    NEOWAY_HOSTS=$(cat "$NEOWAY_SSH_CONFIG" | grep '^Host.*' | cut -d ' ' -f 2 | xargs echo)
+
+    neoway-tunnel () {
+        ssh -nNT -F "$NEOWAY_SSH_CONFIG" "$@"
 
     }
 
-    function neoway-ssh {
-        ssh -F "$NEOWAY_SSH_CONFIG" $@
+    neoway-ssh () {
+        ssh -F "$NEOWAY_SSH_CONFIG" "$@"
     }
 
-    function _neoway-autocomplete {
+    _neoway-autocomplete () {
         _arguments -C \
                    "1:host:($NEOWAY_HOSTS)"
     }
@@ -21,28 +26,36 @@ if [[ -f ~/.ssh/config_neoway ]]; then
     fi
 fi
 
-function _neoway-get {
+ _neoway-get () {
     awk "{print \$$1}" | tr -d '/'
 }
 
-function neoway-last-parquet-date {
+neoway-last-parquet-date () {
     aws s3 cp s3://data-analytics-nw/dataset_bkp/replica/lastdata.txt -
 }
 
-function neoway-last-dumps-date {
-    aws s3 ls s3://backups-dataarea/backups-core/replica/dumps/science/ \
+neoway-last-dumps-date () {
+    aws s3 ls "s3://backups-dataarea/backups-core/replica/dumps/science/" \
         | _neoway-get 2 \
         | tail -n 1
 }
 
-function neoway-last-parquets {
+neoway-last-parquets () {
     local d=$(neoway-last-parquet-date)
-    aws s3 ls s3://data-analytics-nw/dataset_bkp/replica/$d/ \
+    aws s3 ls "s3://data-analytics-nw/dataset_bkp/replica/$d/" \
         | _neoway-get 2
 }
 
-function neoway-last-dumps {
+neoway-last-dumps () {
     local d=$(neoway-last-dumps-date)
-    aws s3 ls s3://backups-dataarea/backups-core/replica/dumps/science/$d/ \
+    aws s3 ls "s3://backups-dataarea/backups-core/replica/dumps/science/$d/" \
         | _neoway-get 4
 }
+
+2fa-gitlab () {
+    token=$(2fa -clip neoway-gitlab)
+    printf "%s" "$token" | xclip -sel clipboard
+    echo "$token"
+}
+
+alias vpn='2fa -clip neoway | xcopy; sudo openvpn /etc/openvpn/neoway.conf'
