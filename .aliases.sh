@@ -140,6 +140,11 @@ drun () {
     docker run -it --rm "$@"
 }
 
+venv () {
+    [[ ! -d .venv ]] && python -m venv .venv
+    cd . || exit 1
+}
+
 # save definition of dot (graphviz language)
 alias dot-graph='/usr/bin/dot'
 alias dot-tig='GIT_DIR=$HOME/.dot/ tig'
@@ -252,4 +257,3 @@ alias histogram='sort | uniq -c'
 alias scp-continue='rsync -P -e ssh'
 alias hcf='sudo halt'
 alias thinkpad-keyboard='sudo setxkbmap -model thinkpad60 -layout br'
-alias venv='python -m venv'
