@@ -59,3 +59,4 @@ neoway-last-dumps () {
 }
 
 alias vpn='2fa -clip neoway | xcopy; sudo openvpn /etc/openvpn/neoway.conf'
+alias dataproc='cd /home/lerax/Desktop/workspace/townplanner-troublemaker/gcloud/dataproc/'
