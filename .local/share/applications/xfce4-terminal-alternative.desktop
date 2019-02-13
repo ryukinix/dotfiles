@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Xfce Terminal [alt]
+GenericName=Terminal Emulator
+Comment=Terminal Emulator
+Icon=utilities-terminal
+Exec=bash -c "tmux h -t alt && xfce4-terminal -e 'tmux a -t alt -d' || xfce4-terminal -e 'tmux new -s alt'" || xfce4-terminal
+NoDisplay=false
+Categories=GTK;System;TerminalEmulator;
+StartupNotify=true
+Terminal=false
