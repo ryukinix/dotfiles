@@ -257,3 +257,7 @@ alias histogram='sort | uniq -c'
 alias scp-continue='rsync -P -e ssh'
 alias hcf='sudo halt'
 alias thinkpad-keyboard='sudo setxkbmap -model thinkpad60 -layout br'
+alias open='xdg-open'
+alias ssh-ustar="gcloud compute ssh --zone=us-central1-c lerax@ustar"
+alias duhere="du -h -d 1 | sort -h -k 1"
+alias git-amend="git commit --amend --no-edit"
