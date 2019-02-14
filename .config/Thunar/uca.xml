@@ -116,6 +116,16 @@
 	<text-files/>
 </action>
 <action>
+	<icon>application-script-blank</icon>
+	<name>Execute Script</name>
+	<unique-id>1550175884092628-1</unique-id>
+	<command>xfce4-terminal -e &quot;bash -c &apos;bash %f; echo Press enter to close.; read&apos;&quot;</command>
+	<description>Execute Shell Script</description>
+	<patterns>*</patterns>
+	<other-files/>
+	<text-files/>
+</action>
+<action>
 	<icon>system-file-manager-symbolic</icon>
 	<name>Detox</name>
 	<unique-id>1524702181205361-1</unique-id>
