@@ -261,3 +261,4 @@ alias open='xdg-open'
 alias ssh-ustar="gcloud compute ssh --zone=us-central1-c lerax@ustar"
 alias duhere="du -h -d 1 | sort -h -k 1"
 alias git-amend="git commit --amend --no-edit"
+alias merge='meld'
