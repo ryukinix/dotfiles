@@ -77,19 +77,23 @@
     (setq flycheck-check-syntax-automatically
           (default-value 'flycheck-check-syntax-automatically))))
 
+
 (defun setup-terminal-session (&optional frame)
+  "SETUP-TERMINAL-SESSION fix wrong theme colors in terminal frame."
   (interactive) ;; make callable as command by M-x
-  (when (and (null (window-system frame))
-             (< (tty-display-color-cells frame) 256))
+  (message "windows-system: %s" (print (window-system frame)))
+  (when (null (window-system frame))
     (set-face-attribute 'helm-selection frame
-                        :background "yellow"
-                        :foreground "black")))
+                        :background "#a60022"
+                        :foreground "white")))
+
+(add-hook 'after-make-frame-functions 'setup-terminal-session t)
+
 
 ;; disable tabs visualization on with-editor mode used to do commits
 ;; by command line
-t(with-eval-after-load 'with-editor
+(with-eval-after-load 'with-editor
   (add-hook 'with-editor-mode-hook (lambda () (whitespace-toggle-options 'tabs))))
-
 ;; to avoid scale problems
 (with-eval-after-load 'linum
   (set-face-attribute 'linum nil :height 100))
@@ -107,7 +111,7 @@ t(with-eval-after-load 'with-editor
                                 (whitespace-toggle-options 'lines-tail)
                                 (auto-fill-mode)))
 
-(add-hook 'after-make-frame-functions 'setup-terminal-session)
+
 (add-hook 'geiser-mode-hook 'cooldown-flycheck-on-racket)
 (add-hook 'geiser-mode-hook (lambda ()
                               (company-quickhelp-mode 0)))
