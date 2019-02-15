@@ -1,0 +1,9 @@
+#!/bin/bash
+if [ $(id -u) != 0 ]; then
+    program=$(basename "$0")
+    echo "error: must run as root, try: sudo $program" > /dev/stderr
+    exit 1
+fi
+
+
+grub-mkconfig > /boot/grub/grub.cfg
