@@ -128,7 +128,7 @@ local fsicon = wibox.widget.imagebox(theme.widget_fs)
 theme.fs = lain.widget.fs({
       notification_preset = { font = "xos4 Terminus Regular 10", fg = theme.fg_normal },
       settings  = function()
-         widget:set_markup(markup.fontfg(theme.font, "#80d9d8", string.format("%.1f", fs_now["/"].used) .. "% "))
+         widget:set_markup(markup.fontfg(theme.font, "#80d9d8", string.format("%.1f", fs_now["/"].percentage) .. "% "))
       end
 })
 
