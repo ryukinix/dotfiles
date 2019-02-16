@@ -4,7 +4,8 @@
                             ssh-agency
                             xclip
                             pyvenv
-                            ox-gfm))
+                            ox-gfm
+                            htmlize))
 
 
 (require 'erc)
