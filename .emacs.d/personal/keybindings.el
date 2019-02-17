@@ -1,6 +1,6 @@
 ;;; -*- lexical-binding: t -*-
 ;; My Personal Keybindings
-
+(require 'prelude-packages)
 (prelude-require-packages '(multiple-cursors linum-relative
                             fsharp-mode neotree
                             darkroom speedbar sr-speedbar
@@ -344,3 +344,12 @@
 (when (eq system-type 'gnu/linux)
   (global-unset-key (kbd "<f11>"))
   (global-set-key (kbd "<f11>") 'prelude-fullscreen))
+
+
+(defun switch-to-minibuffer-window ()
+  "Switch to minibuffer window (if active)"
+  (interactive)
+  (when (active-minibuffer-window)
+    (select-window (active-minibuffer-window))))
+
+(global-set-key (kbd "M-O") 'switch-to-minibuffer-window)
