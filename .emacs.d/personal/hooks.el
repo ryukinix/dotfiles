@@ -81,11 +81,16 @@
 (defun setup-terminal-session (&optional frame)
   "SETUP-TERMINAL-SESSION fix wrong theme colors in terminal frame."
   (interactive) ;; make callable as command by M-x
-  (message "windows-system: %s" (print (window-system frame)))
+  ;;(message "windows-system: %s" (print (window-system frame)))
   (when (null (window-system frame))
-    (set-face-attribute 'helm-selection frame
-                        :background "#a60022"
-                        :foreground "white")))
+    (let ((background "#a60022")
+          (foreground "white"))
+      (when (< (tty-display-color-cells frame) 256)
+        (setq background "blue"))
+      (set-face-attribute 'helm-selection frame
+                          :background background
+                          :foreground foreground))))
+
 
 (add-hook 'after-make-frame-functions 'setup-terminal-session t)
 
