@@ -16,7 +16,6 @@
 (require 'darkroom)
 (require 'sr-speedbar)
 (require 'manoel "~/.emacs.d/personal/preload/mano.el")
-(require 'cider)
 (require 'ox-beamer)
 (require 'projectile)
 (require 'key-chord)
