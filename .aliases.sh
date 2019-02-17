@@ -26,7 +26,7 @@ filter-prime () {
 
 # function to run .el files
 emacs-run () {
-    emacsclient -e "(load \"$(pwd)/$1\")"
+    emacsclient -e "(load '$(pwd)/$1')"
 }
 
 # receive the first argument, eval it and copy the result to clipboard.
@@ -51,6 +51,10 @@ ixx () {
 
 dot () {
     GIT_DIR=$HOME/.dot GIT_WORK_TREE=$HOME git "$@"
+}
+
+dotk () {
+    GIT_DIR=$HOME/.dot GIT_WORK_TREE=$HOME gitk "$@"
 }
 
 env-up () {
@@ -161,7 +165,7 @@ else
     alias svim='SUDO_EDITOR="vim" sudoedit'
 fi
 
-alias emacs-run='/bin/emacs --script'
+
 alias remacs='sudo /etc/init.d/emacs.lerax restart'
 alias agenda='gcalcli agenda'
 alias dotnet-build='msbuild'
