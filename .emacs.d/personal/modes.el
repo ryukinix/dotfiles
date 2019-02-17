@@ -5,7 +5,10 @@
                             xclip
                             pyvenv
                             ox-gfm
+                            flycheck
                             htmlize))
+
+
 
 
 (require 'erc)
@@ -133,3 +136,6 @@
  'org-babel-load-languages
  '((emacs-lisp . t)
    (python . t)))
+
+(setq-default flycheck-check-syntax-automatically '(mode-enabled save))
+(setq-default prelude-flyspell nil) ;; disable flyspell as default
