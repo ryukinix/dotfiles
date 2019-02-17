@@ -177,6 +177,9 @@ local myawesomemenu = {
    { "manual", terminal .. " -e 'man awesome'" },
    { "edit config", string.format("%s %s", gui_editor, awesome.conffile) },
    { "restart", awesome.restart },
+   { "suspend", function ()
+        awful.spawn("loginctl suspend")
+   end},
    { "quit", function() awesome.quit() end }
 }
 awful.util.mymainmenu = freedesktop.menu.build({
