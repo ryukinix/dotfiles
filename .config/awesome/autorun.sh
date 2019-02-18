@@ -139,7 +139,8 @@ function autorun {
     # variable one entry per line of a .desktop absolute path.
     local local_autostart=~/.config/awesome/local-autostart.txt
     if [[ -f $local_autostart ]]; then
-        cat $local_autostart | run-desktop 1
+        cat $local_autostart | grep -i ".desktop$" | run-desktop 1
+        cat $local_autostart | grep -i ".sh$" | run-commands 1
     fi
 }
 
