@@ -1,9 +1,10 @@
+(require 'prelude-packages nil t)
+
 (prelude-require-package 'org2jekyll)
 (prelude-require-package 'toc-org)
 
 (require 'org)
 (require 'org2jekyll)
-(require 'prelude-packages)
 
 ;; setup of org2jekyll
 (setq org2jekyll-blog-author "Manoel Vilela"

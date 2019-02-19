@@ -1,6 +1,6 @@
 ;;; -*- lexical-binding: t -*-
 ;; My Personal Keybindings
-(require 'prelude-packages)
+(require 'prelude-packages nil t)
 (prelude-require-packages '(multiple-cursors linum-relative
                             fsharp-mode neotree
                             darkroom speedbar sr-speedbar

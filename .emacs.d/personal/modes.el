@@ -1,5 +1,6 @@
 ;; fetching personal defined packages
-(require 'prelude-packages)
+(require 'prelude-packages "~/.emacs.d/core/prelude-packages.el" t)
+
 (prelude-require-packages '(slime-company
                             ssh-agency
                             xclip
@@ -12,6 +13,7 @@
 
 
 (require 'erc)
+(require 'erc-log)
 (require 'org)
 (require 'org-mouse) ;; enable mouse features on org-mode
 (require 'python)
@@ -90,11 +92,13 @@
 (add-to-list 'erc-modules 'log) ;; enable
 
 ;; == ERC LOG SETUP
-(setq erc-save-buffer-on-part nil)
-(setq erc-save-queries-on-quit nil)
-(setq erc-log-write-after-insert t)
-(setq erc-log-write-after-send t)
-(setq erc-log-insert-log-on-open t)
+(with-eval-after-load 'erc
+  (setq erc-save-buffer-on-part nil)
+  (setq erc-save-queries-on-quit nil)
+  (setq erc-log-write-after-insert t)
+  (setq erc-log-write-after-send t)
+  (setq erc-log-insert-log-on-open t))
+
 (setq initial-scratch-message
 ";; ▓█████  ███▄ ▄███▓ ▄▄▄       ▄████▄    ██████
 ;; ▓█   ▀ ▓██▒▀█▀ ██▒▒████▄    ▒██▀ ▀█  ▒██    ▒
@@ -139,3 +143,7 @@
 
 (setq-default flycheck-check-syntax-automatically '(mode-enabled save))
 (setq-default prelude-flyspell nil) ;; disable flyspell as default
+
+
+(with-eval-after-load 'flycheck
+  (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc)))

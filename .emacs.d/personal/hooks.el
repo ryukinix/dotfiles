@@ -1,6 +1,6 @@
 ;; set of hooks made to keep the life more easy
 
-(require 'prelude-packages)
+(require 'prelude-packages nil t)
 (prelude-require-packages '(geiser pyvenv))
 
 (require 'python)
