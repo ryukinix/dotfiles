@@ -15,7 +15,10 @@ open-frame () {
 }
 
 raise-frames () {
-    open-frame -e "(mapcan #'raise-frame \
+    open-frame -e "(mapcan (lambda (x) \
+                               (when (window-system x) \
+                                (progn (raise-frame x) \
+                                       (x-focus-frame x)))) \
                            (frame-list))"
 }
 
