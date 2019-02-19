@@ -1,38 +1,43 @@
 #!/bin/bash
 
-function has-frame {
+has-frame () {
     emacsclient -n -e "(plusp (length (remove-if (lambda (x) \
                                                          (null (window-system x))) \
                                                  (frame-list))))"
 }
 
-function new-frame {
+new-frame () {
     emacsclient -c -n -a "" "$@"
 }
 
-function open-frame {
+open-frame () {
     emacsclient -n -a "" "$@"
 }
 
-function raise-frames {
-    open-frame -e "(mapcar (lambda (x) (progn (raise-frame x) \
-                                              (x-focus-frame x))) \
+raise-frames () {
+    open-frame -e "(mapcan #'raise-frame \
                            (frame-list))"
 }
 
-function if-crashed-restart-emacs {
-    function restart-emacs {
-        notify-send "Emacs daemon crashed :(" "restarting"
-        gksudo -m "Need your password to restart emacs daemon." rc-service emacs.lerax restart
-    }
-
-    [[ `rc-status --crashed` == *emacs.lerax* || ! `pgrep emacs` ]] && restart-emacs
+restart-emacs () {
+    notify-send "Emacs daemon crashed :(" "restarting"
+    gksudo -m "Need your password to restart emacs daemon." /etc/init.d/emacs.* restart
 }
 
-[[ -f /usr/bin/openrc ]] && (if-crashed-restart-emacs || exit 0)
+if-crashed-restart-emacs () {
+    [[ $(rc-status --crashed) == *emacs.* || ! "$(pgrep emacs)" ]] && restart-emacs
+}
 
-if [ `has-frame` == "t" ]; then
-    open-frame "$@" 2> /dev/null || raise-frames 1> /dev/null
-else
-    new-frame "$@"
-fi
+main () {
+    # use only if using openrc
+    [[ -f /usr/bin/openrc ]] && (if-crashed-restart-emacs || exit 0)
+
+    if [ "$(has-frame)" == "t" ]; then
+        open-frame "$@" 2> /dev/null || raise-frames 1> /dev/null
+    else
+        new-frame "$@"
+    fi
+
+}
+
+main "$@"
