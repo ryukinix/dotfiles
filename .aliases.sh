@@ -57,6 +57,10 @@ dotk () {
     GIT_DIR=$HOME/.dot GIT_WORK_TREE=$HOME gitk "$@"
 }
 
+dotg () {
+    GIT_WORK_TREE=$HOME gitg $HOME/.dot "$@"
+}
+
 env-up () {
     # shellcheck disable=SC1090
     source "$1/bin/activate"
@@ -269,3 +273,4 @@ alias merge='meld'
 alias artix-news-summary='artix-news | grep "\[News\]" | bat'
 alias awesome-restart='echo awesome.restart() | awesome-client'
 alias no='yes | tr "y" "n"'
+alias ge='gemacs'
