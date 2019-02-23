@@ -270,7 +270,7 @@ alias ssh-ustar="gcloud compute ssh --zone=us-central1-c lerax@ustar"
 alias duhere="du -h -d 1 | sort -h -k 1"
 alias git-amend="git commit --amend --no-edit"
 alias merge='meld'
-alias artix-news-summary='artix-news | grep "\[News\]" | bat'
+alias artix-news-summary='artix-news -s'
 alias awesome-restart='echo awesome.restart() | awesome-client'
 alias no='yes | tr "y" "n"'
 alias ge='gemacs'
