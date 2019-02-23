@@ -146,7 +146,9 @@ local cpu = lain.widget.cpu({
 local tempicon = wibox.widget.imagebox(theme.widget_temp)
 local temp = lain.widget.temp({
       settings = function()
-         widget:set_markup(markup.fontfg(theme.font, "#f1af5f", coretemp_now .. "°C "))
+         if coretemp_now ~= "N/A" then
+            widget:set_markup(markup.fontfg(theme.font, "#f1af5f", coretemp_now .. "°C "))
+         end
       end
 })
 
@@ -264,7 +266,7 @@ function theme.at_screen_connect(s)
    -- Add widgets to the wibox
    s.mywibox:setup {
       layout = wibox.layout.align.horizontal,
-      expand = "none",
+      expand = "left",
       { -- Left widgets
          layout = wibox.layout.fixed.horizontal,
          s.rofibutton,
