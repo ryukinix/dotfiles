@@ -4,7 +4,7 @@ set -ux
 w=1438
 h=858
 counter=0
-limit=300
+limit=500
 regex='^Desktop$'
 
 
