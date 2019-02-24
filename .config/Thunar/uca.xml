@@ -60,9 +60,9 @@
 	<icon>gksu-root-terminal</icon>
 	<name>Execute command</name>
 	<unique-id>1513186069514024-1</unique-id>
-	<command>chmod +x &quot;%f&quot;; xfce4-terminal -e &quot;%f&quot; --hold</command>
+	<command>./$f</command>
 	<description>Execute command in terminal</description>
-	<patterns>*.sh;*.py</patterns>
+	<patterns>*.sh;*.py;*.lisp</patterns>
 	<startup-notify/>
 	<text-files/>
 </action>
