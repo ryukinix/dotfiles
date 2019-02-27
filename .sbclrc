@@ -7,3 +7,9 @@
                                        (user-homedir-pathname))))
   (when (probe-file quicklisp-init)
     (load quicklisp-init)))
+
+#+quicklisp (progn
+              (ql:quickload :linedit :silent t)
+              (require :sb-aclrepl)
+              (require :linedit)
+              (funcall (intern "INSTALL-REPL" :linedit) :wrap-current t))

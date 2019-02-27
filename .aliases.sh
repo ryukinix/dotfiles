@@ -173,8 +173,8 @@ fi
 alias remacs='sudo /etc/init.d/emacs.lerax restart'
 alias agenda='gcalcli agenda'
 alias dotnet-build='msbuild'
-alias sbcl='rlwrap sbcl'
-alias lisp='sbcl --noinform'
+alias sbcl='sbcl --noinform'
+alias lisp='sbcl'
 alias lain=lein
 alias dic=sdcv
 
@@ -274,3 +274,10 @@ alias artix-news-summary='artix-news -s'
 alias awesome-restart='echo awesome.restart() | awesome-client'
 alias no='yes | tr "y" "n"'
 alias ge='gemacs'
+
+
+common-lisp-jupter () {
+    docker run --network=host -it \
+           neowaylabs/common-lisp-jupyter jupyter \
+           notebook --ip=127.0.0.1
+}
