@@ -173,7 +173,7 @@ fi
 alias remacs='sudo /etc/init.d/emacs.lerax restart'
 alias agenda='gcalcli agenda'
 alias dotnet-build='msbuild'
-alias sbcl='sbcl --noinform'
+alias sbcl='rlwrap sbcl --noinform'
 alias lisp='sbcl'
 alias lain=lein
 alias dic=sdcv
@@ -281,3 +281,5 @@ common-lisp-jupter () {
            neowaylabs/common-lisp-jupyter jupyter \
            notebook --ip=127.0.0.1
 }
+
+alias git-push-all='git remote | xargs -L 1  -I@ git push'
