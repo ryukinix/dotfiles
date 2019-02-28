@@ -58,5 +58,15 @@ neoway-last-dumps () {
     echo "$token"
 }
 
+replica () {
+    if command -v pgcli > /dev/null; then
+        decrypt ~/.credentials/replica.txt.gpg | xcopy
+        pgcli -h localhost -p 7543 -U manoel.vilela -W repositorio
+    else
+        echo "error: install pgcli not found, fix it: yay -Sa pgcli"
+    fi
+}
+
+
 alias vpn='2fa -clip neoway | xcopy; sudo openvpn /etc/openvpn/neoway.conf'
 alias dataproc='cd /home/lerax/Desktop/workspace/townplanner-troublemaker/gcloud/dataproc/'

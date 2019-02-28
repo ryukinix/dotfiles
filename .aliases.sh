@@ -29,6 +29,12 @@ emacs-run () {
     emacsclient -e "(load '$(pwd)/$1')"
 }
 
+common-lisp-jupter () {
+    docker run --network=host -it \
+           neowaylabs/common-lisp-jupyter jupyter \
+           notebook --ip=127.0.0.1
+}
+
 # receive the first argument, eval it and copy the result to clipboard.
 # used to generate easy functions pastebin-like, as termbin and ixx
 _pastebin-generic () {
@@ -274,12 +280,7 @@ alias artix-news-summary='artix-news -s'
 alias awesome-restart='echo awesome.restart() | awesome-client'
 alias no='yes | tr "y" "n"'
 alias ge='gemacs'
-
-
-common-lisp-jupter () {
-    docker run --network=host -it \
-           neowaylabs/common-lisp-jupyter jupyter \
-           notebook --ip=127.0.0.1
-}
-
 alias git-push-all='git remote | xargs -L 1  -I@ git push'
+alias python-server='python -m http.server'
+alias dr='docker run --rm -it'
+alias chown-here='chown -R lerax:lerax .'
