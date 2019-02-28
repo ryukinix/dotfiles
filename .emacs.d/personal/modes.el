@@ -3,6 +3,7 @@
 
 (prelude-require-packages '(slime-company
                             ssh-agency
+                            ix
                             xclip
                             pyvenv
                             ox-gfm
