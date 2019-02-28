@@ -1,0 +1,17 @@
+#!/usr/bin/env python
+
+"""\
+usage: downcase files...
+
+Author: Manoel Vilela
+"""
+import sys
+import os
+
+args = sys.argv[1:]
+
+if args and not any(k in args for k in ('-h', '--help')):
+    for f in args:
+        os.system(f"mv {f} {f.lower()}")
+else:
+    sys.stderr.write(__doc__)
