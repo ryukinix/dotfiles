@@ -2,8 +2,34 @@
 
 ;;; The following lines added by ql:add-to-init-file:
 
+(defmacro when-let (binding &body body)
+  "Bind `binding` and execute `body`, short-circuiting on `nil`.
+
+  This macro combines `when` and `let`.  It takes a binding and binds
+  it like `let` before executing `body`, but if the binding's value
+  evaluates to `nil`, then `nil` is returned.
+
+  Examples:
+    (when-let ((a 1))
+      (list a))
+    ; =>
+    (1)
+
+    (when-let ((a nil))
+      (list a))
+    ; =>
+    NIL
+
+  src: http://stevelosh.com/blog/2018/07/fun-with-macros-if-let/
+  "
+  (destructuring-bind ((symbol value)) binding
+    `(let ((,symbol ,value))
+       (when ,symbol
+         ,@body))))
 #-quicklisp
-(let ((quicklisp-init (merge-pathnames ".quicklisp/setup.lisp"
-                                       (user-homedir-pathname))))
-  (when (probe-file quicklisp-init)
-    (load quicklisp-init)))
+(when-let ((quicklisp-init (merge-pathnames ".quicklisp/setup.lisp"
+                                            (user-homedir-pathname))))
+  (load quicklisp-init))
+
+(when-let ((cl (probe-file "~/common-lisp")))
+  (pushnew cl asdf:*central-registry*))
