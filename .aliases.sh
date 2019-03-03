@@ -3,6 +3,14 @@
 # shellcheck disable=SC2155
 # shellcheck disable=SC2050
 
+cl-jupyter () {
+    docker run \
+           --network=host \
+           -it \
+           neowaylabs/common-lisp-jupyter \
+           jupyter notebook --ip=127.0.0.1
+}
+
 u-root-boot () {
     sudo qemu-system-x86_64 \
          -kernel /boot/vmlinuz-linux \
