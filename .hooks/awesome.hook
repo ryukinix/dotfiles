@@ -1,0 +1,10 @@
+# Description = Rebuild dkms module of Nvidia
+[Trigger]
+Operation = Upgrade
+Type = Package
+Target = awesome-git
+
+# try dkms autoinstall if this doesn't works (more portable)
+[Action]
+When = PostTransaction
+Exec = /usr/bin/sed -i "s/^Exec=/Exec=dbus-launch /g" /usr/share/xsessions/awesome.desktop
