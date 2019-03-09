@@ -13,6 +13,6 @@ args = sys.argv[1:]
 if args and not any(k in args for k in ('-h', '--help')):
     for f in args:
         if f != f.lower():
-            os.system(f"mv -v {f} {f.lower()}")
+            os.system(f"mv -v '{f}' '{f.lower()}'")
 else:
     sys.stderr.write(__doc__)
