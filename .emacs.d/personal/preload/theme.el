@@ -5,16 +5,16 @@
 (require 'prelude-packages)
 (prelude-require-package 'doom-themes)
 
-(defvar lerax:theme 'doom-peacock)
-(defvar lerax:theme-window-loaded nil)
-(defvar lerax:theme-terminal-loaded nil)
+(defvar lerax-theme 'doom-peacock)
+(defvar lerax-theme-window-loaded nil)
+(defvar lerax-theme-terminal-loaded nil)
 
-(setq prelude-theme lerax:theme)
+(setq prelude-theme lerax-theme)
 
-(defun lerax:theme-reload ()
+(defun lerax-theme-reload ()
   (interactive)
-  (load-theme lerax:theme t)
-  (enable-theme lerax:theme))
+  (load-theme lerax-theme t)
+  (enable-theme lerax-theme))
 
 
 ;; this code is not very efficient and not pretty,
@@ -26,14 +26,14 @@
               (lambda (frame)
                 (select-frame frame)
                 (if (window-system frame)
-                    (unless lerax:theme-window-loaded
-                      (lerax:theme-reload)
-                      (setq lerax:theme-window-loaded t))
-                  (unless lerax:theme-terminal-loaded
-                    (lerax:theme-reload)
-                    (setq lerax:theme-terminal-loaded t)))))
+                    (unless lerax-theme-window-loaded
+                      (lerax-theme-reload)
+                      (setq lerax-theme-window-loaded t))
+                  (unless lerax-theme-terminal-loaded
+                    (lerax-theme-reload)
+                    (setq lerax-theme-terminal-loaded t)))))
   (progn
-    (load-theme lerax:theme t)
+    (load-theme lerax-theme t)
     (if (display-graphic-p)
-        (setq lerax:theme-window-loaded t)
-      (setq lerax:theme-terminal-loaded t))))
+        (setq lerax-theme-window-loaded t)
+      (setq lerax-theme-terminal-loaded t))))

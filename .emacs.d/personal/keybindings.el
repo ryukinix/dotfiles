@@ -38,7 +38,7 @@
 ;;not careful, doing so will take all the child frames away with it).  This
 ;;is my solution to that: an intelligent close-frame operation that works in
 ;;all cases (even in an emacs -nw session).
-(defun intelligent-close ()
+(defun lerax-intelligent-close ()
   "quit a frame the same way no matter what kind of frame you are on"
   (interactive)
   (if (eq (car (visible-frame-list)) (selected-frame))
@@ -57,7 +57,7 @@
      (interactive)
      (find-file ,path)))
 
-(defun toggle-window-split ()
+(defun lerax-toggle-window-split ()
   "Toggle window split layout. Vertical to horizontal and vice-versa.
    Function stole without shame from https://www.emacswiki.org/emacs/ToggleWindowSplit."
   (interactive)
@@ -96,6 +96,36 @@
   (text-scale-set 0))
 
 
+(defun switch-to-minibuffer-window ()
+  "Switch to minibuffer window (if active)"
+  (interactive)
+  (when (active-minibuffer-window)
+    (select-window (active-minibuffer-window))))
+
+(global-set-key (kbd "M-O") 'switch-to-minibuffer-window)
+
+(with-eval-after-load 'slime
+  (define-key slime-mode-map (kbd "TAB") 'company-indent-or-complete-common)
+  ;; NOTE: something weird happened here
+  ;; usually C-c C-z open a slime inferior lisp if not opened
+  ;; now open directly a inferior-lisp without slime...
+  ;; after slime it's loaded, it's bind C-c C-z to
+  ;; slime-switch-to-output-buffer
+  ;; slime-switch-to-output-buffer doesn't works if slime is not connected
+  (defun slime-repl-open ()
+    (interactive)
+    (if (slime-connected-p)
+        (slime-switch-to-output-buffer)
+      (slime)))
+  (define-key lisp-mode-map (kbd "C-c C-z") 'slime-repl-open)
+  (define-key slime-mode-map (kbd "C-c C-z") 'slime-repl-open))
+
+(with-eval-after-load 'slime-repl
+  (define-key slime-repl-mode-map (kbd "C-c C-z") (lambda ()
+                                                    (interactive)
+                                                    (select-window (previous-window)))))
+
+
 ;; favorite directories
 (let ((courses-dir (expand-file-name "~/Dropbox/University/Courses/UFC/2018.1"))
       (desktop-dir (expand-file-name"~/Desktop"))
@@ -130,7 +160,7 @@
 
 (global-set-key (kbd "<C-f4>") 'kill-this-buffer-and-window)
 (global-set-key (kbd "C-M-S-k") 'kill-this-buffer-and-window)
-(global-set-key (kbd "<M-f4>") 'intelligent-close)
+(global-set-key (kbd "<M-f4>") 'lerax-intelligent-close)
 
 (global-set-key (kbd "<M-f1>") 'linum-mode) ;; don't work on terminal
 (global-set-key (kbd "M-N") 'linum-mode)
@@ -155,27 +185,6 @@
 (define-key company-active-map (kbd "\C-d") 'company-show-doc-buffer)
 (define-key company-active-map (kbd "M-.") 'company-show-location)
 (define-key yas-minor-mode-map [C-return] 'yas-expand)
-
-(with-eval-after-load 'slime
-  (define-key slime-mode-map (kbd "TAB") 'company-indent-or-complete-common)
-  ;; NOTE: something weird happened here
-  ;; usually C-c C-z open a slime inferior lisp if not opened
-  ;; now open directly a inferior-lisp without slime...
-  ;; after slime it's loaded, it's bind C-c C-z to
-  ;; slime-switch-to-output-buffer
-  ;; slime-switch-to-output-buffer doesn't works if slime is not connected
-  (defun slime-repl-open ()
-    (interactive)
-    (if (slime-connected-p)
-        (slime-switch-to-output-buffer)
-      (slime)))
-  (define-key lisp-mode-map (kbd "C-c C-z") 'slime-repl-open)
-  (define-key slime-mode-map (kbd "C-c C-z") 'slime-repl-open))
-
-(with-eval-after-load 'slime-repl
-  (define-key slime-repl-mode-map (kbd "C-c C-z") (lambda ()
-                                                    (interactive)
-                                                    (select-window (previous-window)))))
 
 ;; open a terminal full-featured on emacs
 (global-set-key (kbd "C-x M") 'term)
@@ -266,7 +275,7 @@
 (global-unset-key (kbd "<M-mouse-1>"))
 
 ;; split keybindings
-(global-set-key (kbd "C-x /") 'toggle-window-split)
+(global-set-key (kbd "C-x /") 'lerax-toggle-window-split)
 (global-set-key (kbd "C-x |") 'split-window-horizontally)
 (global-set-key (kbd "C-x _") 'split-window-vertically)
 
@@ -343,12 +352,3 @@
 (when (eq system-type 'gnu/linux)
   (global-unset-key (kbd "<f11>"))
   (global-set-key (kbd "<f11>") 'prelude-fullscreen))
-
-
-(defun switch-to-minibuffer-window ()
-  "Switch to minibuffer window (if active)"
-  (interactive)
-  (when (active-minibuffer-window)
-    (select-window (active-minibuffer-window))))
-
-(global-set-key (kbd "M-O") 'switch-to-minibuffer-window)

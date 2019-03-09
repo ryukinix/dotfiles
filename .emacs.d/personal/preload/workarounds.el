@@ -14,15 +14,15 @@
 ;; which seems fixed at: https://github.com/haskell/haskell-mode/pull/1625
 (with-eval-after-load 'haskell-mode
   (message "HOTFIX: haskell-mode hacks")
-  (setq haskell-process-args-ghci
-        '("-ferror-spans" "-fshow-loaded-modules"))
-  (setq haskell-process-args-cabal-repl
-        '("--ghc-options=-ferror-spans -fshow-loaded-modules"))
-  (setq haskell-process-args-stack-ghci
-        '("--ghci-options=-ferror-spans -fshow-loaded-modules"
-          "--no-build" "--no-load"))
-  (setq haskell-process-args-cabal-new-repl
-        '("--ghc-options=-ferror-spans -fshow-loaded-modules")))
+  (defconst haskell-process-args-ghci
+    '("-ferror-spans" "-fshow-loaded-modules"))
+  (defconst haskell-process-args-cabal-repl
+    '("--ghc-options=-ferror-spans -fshow-loaded-modules"))
+  (defconst haskell-process-args-stack-ghci
+    '("--ghci-options=-ferror-spans -fshow-loaded-modules"
+      "--no-build" "--no-load"))
+  (defconst haskell-process-args-cabal-new-repl
+    '("--ghc-options=-ferror-spans -fshow-loaded-modules")))
 
 
 (with-eval-after-load 'exec-path-from-shell

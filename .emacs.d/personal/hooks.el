@@ -18,7 +18,7 @@
 (defvar gud-gud-gdb-history nil)
 
 
-(defun setup-c-and-cpp-compiler-with-gdb ()
+(defun lerax-setup-c-mode-make ()
   "Generate strings for 'compile and 'gud-gdb commands on C/C++ mode"
   (interactive)
   (define-key (current-local-map) (kbd "\C-c C-c") 'compile)
@@ -78,7 +78,7 @@
           (default-value 'flycheck-check-syntax-automatically))))
 
 
-(defun setup-terminal-session (&optional frame)
+(defun lerax-setup-terminal-session (&optional frame)
   "SETUP-TERMINAL-SESSION fix wrong theme colors in terminal frame."
   (interactive) ;; make callable as command by M-x
   ;;(message "windows-system: %s" (print (window-system frame)))
@@ -92,7 +92,7 @@
                           :foreground foreground))))
 
 
-(add-hook 'after-make-frame-functions 'setup-terminal-session t)
+(add-hook 'after-make-frame-functions 'lerax-setup-terminal-session t)
 
 
 ;; disable tabs visualization on with-editor mode used to do commits
@@ -105,7 +105,7 @@
 
 
 ;; add commands for build and debug to C++ and C
-(add-hook 'c-mode-common-hook 'setup-c-and-cpp-compiler-with-gdb)
+(add-hook 'c-mode-common-hook 'setup-c-mode-make)
 ;; add commands for debug Python code
 (add-hook 'python-mode-hook 'setup-python-pdb-command)
 (add-hook 'python-mode-hook 'pyvenv-mode)
