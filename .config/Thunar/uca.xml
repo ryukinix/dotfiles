@@ -149,4 +149,18 @@
 	<startup-notify/>
 	<text-files/>
 </action>
+<action>
+	<icon>mail-archive</icon>
+	<name>Downcase</name>
+	<unique-id>1552098470583441-1</unique-id>
+	<command>python /home/lerax/.local/bin/downcase %N</command>
+	<description>Downcase files</description>
+	<patterns>*</patterns>
+	<directories/>
+	<audio-files/>
+	<image-files/>
+	<other-files/>
+	<text-files/>
+	<video-files/>
+</action>
 </actions>
