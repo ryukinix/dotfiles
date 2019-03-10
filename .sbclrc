@@ -26,10 +26,19 @@
     `(let ((,symbol ,value))
        (when ,symbol
          ,@body))))
+
+(defparameter *lerax-local-projects*
+  '("~/common-lisp/"
+    "~/.roswell/local-projects/")
+  "My custom local-projects directories")
+
 #-quicklisp
 (when-let ((quicklisp-init (merge-pathnames ".quicklisp/setup.lisp"
                                             (user-homedir-pathname))))
   (load quicklisp-init))
 
-(when-let ((cl (probe-file "~/common-lisp")))
-  (pushnew cl asdf:*central-registry*))
+(mapcar
+ (lambda (x)
+   (when-let ((f (probe-file x)))
+     (pushnew f asdf:*central-registry*)))
+ *lerax-local-projects*)
