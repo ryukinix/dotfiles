@@ -1,6 +1,7 @@
 # when run inside emacs make this special
 if [ ! -z ${INSIDE_EMACS+x} ]; then
     export GIT_EDITOR=emacsclient
+    alias emacs=gemacs
 fi
 
 # need do that on tramp (not working yet)
