@@ -54,3 +54,13 @@ parses and set DBUS_SESSION_BUS_ADDRES to its expected value."
 
 
 ;; (advice-add 'dbus-init-bus :before #'fetch-dbus-address)
+
+;; c-mode bullshitness
+;; ref: https://github.com/Fuco1/smartparens/issues/783
+;; date: Mon 11 Mar 2019 11:44:11 PM -03
+;; avoid auto escape insertion of c-mode single quotes
+(with-eval-after-load 'smartparens
+  ;; 'c-mode-common-hook maybe help
+  (add-hook 'c-mode-common-hook
+            (lambda ()
+              (setq-local sp-escape-quotes-after-insert nil))))
