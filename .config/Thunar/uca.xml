@@ -117,10 +117,10 @@
 </action>
 <action>
 	<icon>application-script-blank</icon>
-	<name>Execute Script</name>
+	<name>Execute</name>
 	<unique-id>1550175884092628-1</unique-id>
-	<command>xfce4-terminal -e &quot;bash -c &apos;bash %f; echo Press enter to close.; read&apos;&quot;</command>
-	<description>Execute Shell Script</description>
+	<command>xfce4-terminal -e &quot;bash -c &apos;&quot;%f&quot;; echo Press enter to close.; read&apos;&quot;</command>
+	<description>Execute Application</description>
 	<patterns>*</patterns>
 	<other-files/>
 	<text-files/>
