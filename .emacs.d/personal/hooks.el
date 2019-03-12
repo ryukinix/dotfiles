@@ -105,7 +105,7 @@
 
 
 ;; add commands for build and debug to C++ and C
-(add-hook 'c-mode-common-hook 'setup-c-mode-make)
+(add-hook 'c-mode-common-hook 'lerax-setup-c-mode-make)
 ;; add commands for debug Python code
 (add-hook 'python-mode-hook 'setup-python-pdb-command)
 (add-hook 'python-mode-hook 'pyvenv-mode)
