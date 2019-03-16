@@ -118,7 +118,10 @@
         (slime-switch-to-output-buffer)
       (slime)))
   (define-key lisp-mode-map (kbd "C-c C-z") 'slime-repl-open)
-  (define-key slime-mode-map (kbd "C-c C-z") 'slime-repl-open))
+  (define-key slime-mode-map (kbd "C-c C-z") 'slime-repl-open)
+  (add-to-list 'lisp-mode-hook
+               (lambda ()
+                 (setq-local browse-url-browser-function 'eww-browse-url))))
 
 (with-eval-after-load 'slime-repl
   (define-key slime-repl-mode-map (kbd "C-c C-z") (lambda ()
@@ -127,7 +130,7 @@
 
 
 ;; favorite directories
-(let ((courses-dir (expand-file-name "~/Dropbox/University/Courses/UFC/2018.1"))
+(let ((courses-dir (expand-file-name "~/Dropbox/University/Courses/UFC/"))
       (desktop-dir (expand-file-name"~/Desktop"))
       (langs-dir (expand-file-name "~/Dropbox/Programming/Langs")))
   ;; favorite directories
@@ -147,6 +150,11 @@
 (global-set-key (kbd  "C-M-S-b") 'ibuffer)
 ;; neotree feels
 (global-set-key (kbd "C-x t") 'neotree-toggle)
+(global-set-key (kbd "C-x T")
+                (lambda ()
+                  (interactive)
+                  (neotree-refresh)
+                  (neotree)))
 (global-set-key (kbd "C-x y") 'projectile-speedbar-toggle)
 
 
