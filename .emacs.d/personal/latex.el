@@ -18,7 +18,7 @@
 (plist-put org-format-latex-options :scale 1.2)
 
 (defun clean-export-pdf (&rest _)
-  (call-process-shell-command "rm -rf *.tex *.bbl _minte*&" nil 0)
+  (call-process-shell-command "rm -rf *.tex  _minte*&" nil 0)
   (call-process-shell-command "rm -rf _minte*&" nil 0))
 
 (advice-add 'org-latex-export-to-pdf :after #'clean-export-pdf)
