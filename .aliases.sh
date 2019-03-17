@@ -175,7 +175,7 @@ alias dot-tig='GIT_DIR=$HOME/.dot/ tig'
 # ustar is my server
 if [ "$(hostname)" != "ustar" ]; then
     alias vim=nvim
-    alias emacs='emacsclient -nw -a vim'
+    alias emacs='emacsclient -nw -a lem'
     alias semacs='SUDO_EDITOR="emacsclient -t -a vim" sudoedit'
     alias svim='SUDO_EDITOR=vim sudoedit'
 else

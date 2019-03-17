@@ -7,11 +7,11 @@ has-frame () {
 }
 
 new-frame () {
-    emacsclient -c -n -a "" "$@"
+    emacsclient -c -n -a "emacs" "$@"
 }
 
 open-frame () {
-    emacsclient -n -a "" "$@"
+    emacsclient -n -a "emacs" "$@"
 }
 
 raise-frames () {
