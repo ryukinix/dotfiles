@@ -3,6 +3,11 @@
 # shellcheck disable=SC2155
 # shellcheck disable=SC2050
 
+shutdown-docker () {
+    sudo rc-service docker stop
+    sudo ip link del dev docker0 2>/dev/null || true
+}
+
 cl-jupyter () {
     docker run \
            --network=host \
@@ -174,7 +179,6 @@ alias dot-tig='GIT_DIR=$HOME/.dot/ tig'
 
 # ustar is my server
 if [ "$(hostname)" != "ustar" ]; then
-    alias vim=nvim
     alias emacs='emacsclient -nw -a lem'
     alias semacs='SUDO_EDITOR="emacsclient -t -a vim" sudoedit'
     alias svim='SUDO_EDITOR=vim sudoedit'
