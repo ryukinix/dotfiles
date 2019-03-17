@@ -35,11 +35,11 @@
              ;; $(CC) -c -o $@ $(CPPFLAGS) $(CFLAGS) $<
              (format "%s -o '%s.%s' %s %s '%s'"
                      (or (getenv "CC") (case c-buffer-is-cc-mode
-                                         ('c++-mode "g++")
-                                         ('c-mode "gcc")))
+                                         (c++-mode "g++")
+                                         (c-mode "gcc")))
                      file-basename extension
                      (or (getenv "CPPFLAGS") "-DDEBUG=9")
-                     (or (getenv "CFLAGS") "-pedantic -Wall -g")
+                     (or (getenv "CFLAGS") " -Wall -g")
                      file)))
       (set (make-local-variable 'gud-gud-gdb-history)
            (cons (format "gdb --fullname \"%s.%s\"" file-basename extension)
