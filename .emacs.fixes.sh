@@ -2,6 +2,7 @@
 if [ ! -z ${INSIDE_EMACS+x} ]; then
     export GIT_EDITOR=emacsclient
     alias emacs=gemacs
+    alias thunar='thunar --daemon'
 fi
 
 # need do that on tramp (not working yet)
