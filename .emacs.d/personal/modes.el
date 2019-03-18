@@ -83,6 +83,7 @@
 ;; add slime-company completion tool to slime-contribs
 (push 'slime-company slime-contribs)
 (push 'slime-asdf slime-contribs)
+(push 'slime-quicklisp slime-contribs)
 
 ;; setup irc autologin channels
 ;;(setq erc-autojoin-channels-alist '(("freenode.net" "#artix")))
