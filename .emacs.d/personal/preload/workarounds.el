@@ -64,3 +64,9 @@ parses and set DBUS_SESSION_BUS_ADDRES to its expected value."
   (add-hook 'c-mode-common-hook
             (lambda ()
               (setq-local sp-escape-quotes-after-insert nil))))
+
+;; lab doesn't works fine
+;; ref: https://emacs.stackexchange.com/questions/48437/how-to-integrate-emacs-lab-magit/48439#48439
+(with-eval-after-load 'git-commit
+  (defconst git-commit-filename-regexp
+    "/\\(\\\(\\(COMMIT\\|NOTES\\|PULLREQ\\|TAG\\|MERGEREQ\\)_EDIT\\|MERGE_\\|\\)MSG\\\|\\(BRANCH\\|EDIT\\|_EDITMSG\\)_DESCRIPTION\\)\\'"))
