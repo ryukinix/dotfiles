@@ -2,7 +2,7 @@
 [Trigger]
 Operation = Upgrade
 Type = Package
-Target = awesome-git
+Target = awesome
 
 # try dkms autoinstall if this doesn't works (more portable)
 [Action]
