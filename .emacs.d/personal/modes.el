@@ -149,3 +149,5 @@
 
 (with-eval-after-load 'flycheck
   (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc)))
+
+(scroll-bar-mode -1) ;; disable that ugly scroll bar, i don't need that
