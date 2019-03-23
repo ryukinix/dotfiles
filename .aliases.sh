@@ -3,6 +3,12 @@
 # shellcheck disable=SC2155
 # shellcheck disable=SC2050
 
+restart-network () {
+    killall -q -9 nm-applet || true
+    sudo rc-service -s NetworkManager stop
+    sudo rc-service net.wlp3s0 restart
+}
+
 shutdown-docker () {
     sudo rc-service docker stop
     sudo ip link del dev docker0 2>/dev/null || true
@@ -297,3 +303,6 @@ alias python-server='python -m http.server'
 alias dr='docker run --rm -it'
 alias chown-here='chown -R lerax:lerax .'
 alias ustar='ssh ustar'
+alias networks='wicd-curses'
+alias drive-upgrade='go get -u github.com/odeke-em/drive/cmd/drive'
+alias benchmark='hyperfine'
