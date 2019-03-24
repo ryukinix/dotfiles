@@ -36,7 +36,7 @@ UXTerm*font:     -misc-fixed-medium-r-normal--18-120-100-100-c-90-iso10646-1
 XTerm*wideFont: -misc-fixed-medium-r-normal-ja-18-120-100-100-c-180-iso10646-1
 UXTerm*wideFont: -misc-fixed-medium-r-normal-ja-18-120-100-100-c-180-iso10646-1
 
-Emacs.font:             xos4 Terminus:style=regular:size=11
+Emacs*font:             xos4 Terminus-12
 
 ! ^ The above lines are no comments!
 ! ! Leave them as they are if a file ~/.extend.Xresources is being used on your
