@@ -148,6 +148,15 @@
 
 
 (with-eval-after-load 'flycheck
-  (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc)))
+  (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc))
+  (setq-default flycheck-scheme-chicken-executable "chicken-csc"))
 
 (scroll-bar-mode -1) ;; disable that ugly scroll bar, i don't need that
+
+(with-eval-after-load 'geiser
+  ;; chicken-install -s srfi-18 apropos chicken-doc
+  (setq-default geiser-chicken-binary "chicken-csi")
+  (setq-default geiser-active-implementations
+                '(chicken racket guile chez mit chibi))
+  (add-hook 'geiser-repl-mode-hook (lambda ()
+                                    (smartparens-mode +1))))
