@@ -13,8 +13,14 @@
 
 (defun lerax-theme-reload ()
   (interactive)
+  (set-face-attribute 'default nil
+                      :family "xos4 Terminus"
+                      :height 110
+                      :weight 'normal
+                      :width 'normal)
   (load-theme lerax-theme t)
   (enable-theme lerax-theme))
+
 
 
 ;; this code is not very efficient and not pretty,
