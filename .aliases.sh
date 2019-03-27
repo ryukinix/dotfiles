@@ -3,6 +3,11 @@
 # shellcheck disable=SC2155
 # shellcheck disable=SC2050
 
+gclone () {
+    local repo="$1"
+    git clone "git@github.com:$repo.git"
+}
+
 restart-network () {
     killall -q -9 nm-applet || true
     sudo rc-service -s NetworkManager stop
