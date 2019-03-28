@@ -16,6 +16,7 @@ exwm () {
 
     # Finally start Emacs
     exec dbus-launch emacsclient -c --eval "(progn (require (quote exwm)) (exwm-init))" -a ""
+    
 }
 
 exwm
