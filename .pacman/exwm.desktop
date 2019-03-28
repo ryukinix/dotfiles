@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=exwm
+Comment=Emacs as Windows Manager
+TryExec=sh
+Exec=sh /home/lerax/.exwm.sh
+Type=Application
