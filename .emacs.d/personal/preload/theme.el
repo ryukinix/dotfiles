@@ -11,14 +11,17 @@
 
 (setq prelude-theme lerax-theme)
 
-(defun lerax-theme-reload ()
-  (interactive)
+(defun lerax-theme-set-font ()
   (set-face-attribute 'default nil
                       :family "xos4 Terminus"
                       :height 110
                       :weight 'normal
-                      :width 'normal)
+                      :width 'normal))
+
+(defun lerax-theme-reload ()
+  (interactive)
   (load-theme lerax-theme t)
+  (lerax-theme-set-font)
   (enable-theme lerax-theme))
 
 
@@ -27,6 +30,7 @@
 ;; but solve my problem about handling crazy themes
 ;; using the daemon way
 ;; ref: https://stackoverflow.com/oquestions/18904529/after-emacs-deamon-i-can-not-see-new-theme-in-emacsclient-frame-it-works-fr
+(lerax-theme-set-font)
 (if (daemonp)
     (add-hook 'after-make-frame-functions
               (lambda (frame)
