@@ -1,6 +1,7 @@
 #!/bin/sh
 
 setup_keyboard () {
+    xmodmap ~/.Xmodmap
     if [[ $(hostname) == "starfox" ]]; then
         setxkbmap -model abnt2 -layout br
         setxkbmap -option compose:rctrl
@@ -8,6 +9,14 @@ setup_keyboard () {
         setxkbmap -model thinkpad60 -layout br
         setxkbmap -option
     fi
+}
+
+start_daemons () {
+    eval $(gnome-keyring-daemon --start --components=ssh)
+    gnome-keyring-daemon --start --components=pkcs11 &
+    gnome-keyring-daemon --start --components=secrets &
+    /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+    export SSH_AUTH_SOCK
 }
 
 exwm () {
@@ -29,5 +38,6 @@ exwm () {
 
 }
 
+start_daemons
 setup_keyboard
 exwm

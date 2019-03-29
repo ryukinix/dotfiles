@@ -1,7 +1,8 @@
 ;; -*- lexical-binding: t -*-
-
+;; manual: https://github.com/ch11ng/exwm/wiki
 (require 'prelude-packages nil t)
 (prelude-require-packages '(exwm
+                            dmenu
                             helm-exwm
                             pulseaudio-control))
 (require 'exwm)
@@ -13,6 +14,7 @@
                 "volumeicon"    ;; volume
                 "nm-applet"     ;; network manager
                 "fluxgui"       ;; monitor temperature
+                "compton"       ;; window compositor
                 )
               (when (equal host "celeste")
                 '("xfce4-power-manager"))
@@ -83,7 +85,6 @@
   ;;; Those cannot be set globally: if Emacs would be run in another WM, the "s-"
   ;;; prefix will conflict with the WM bindings.
   (exwm-input-set-key (kbd "s-R") #'exwm-reset)
-  (exwm-input-set-key (kbd "s-x") #'exwm-input-toggle-keyboard)
   (exwm-input-set-key (kbd "s-h") #'windmove-left)
   (exwm-input-set-key (kbd "<s-down>") #'windmove-down)
   (exwm-input-set-key (kbd "<s-up>") #'windmove-up)
@@ -150,6 +151,7 @@
   (exwm-input-set-key (kbd "<M-print>") #'lerax-exwm-start-screenshot-clipboard)
   (exwm-input-set-key (kbd "<C-print>") #'lerax-exwm-start-screenshot-region)
   (exwm-input-set-key (kbd "s-l") #'lerax-exwm-start-lock)
+  (exwm-input-set-key (kbd "s-x") #'dmenu)
 
   ;;; Volume control
   (when (require 'pulseaudio-control nil t)
