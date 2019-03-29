@@ -54,6 +54,7 @@ autostart=(
     # ~/.config/autostart/mir.desktop
 )
 
+
 commands=(
     "xfdesktop --disable-wm-check"
     "thunar --daemon"

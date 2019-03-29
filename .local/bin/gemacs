@@ -28,7 +28,7 @@ restart-emacs () {
 }
 
 if-crashed-restart-emacs () {
-    [[ $(rc-status --crashed) == *emacs.* || ! "$(pgrep emacs)" ]] && restart-emacs
+    [[ $(rc-status --crashed) == *emacs.* || -z "$(pgrep emacs)" ]] && restart-emacs
 }
 
 main () {
