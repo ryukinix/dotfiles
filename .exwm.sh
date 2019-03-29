@@ -2,17 +2,18 @@
 
 setup_keyboard () {
     xmodmap ~/.Xmodmap
-    if [[ $(hostname) == "starfox" ]]; then
+    if [ "$(hostname)" = "starfox" ]; then
         setxkbmap -model abnt2 -layout br
         setxkbmap -option compose:rctrl
-    elif [[ $(hostname) == "celeste" ]]; then
+    elif [ "$(hostname)" = "celeste" ]; then
         setxkbmap -model thinkpad60 -layout br
         setxkbmap -option
     fi
 }
 
+
 start_daemons () {
-    eval $(gnome-keyring-daemon --start --components=ssh)
+    eval "$(gnome-keyring-daemon --start --components=ssh)"
     gnome-keyring-daemon --start --components=pkcs11 &
     gnome-keyring-daemon --start --components=secrets &
     /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
@@ -22,7 +23,7 @@ start_daemons () {
 exwm () {
     export EXWM=1
     # Disable access control for the current user.
-    xhost +SI:localuser:$USER
+    xhost "+SI:localuser:$USER"
 
     # Make Java applications aware this is a non-reparenting window manager.
     export _JAVA_AWT_WM_NONREPARENTING=1

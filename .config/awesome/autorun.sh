@@ -57,6 +57,7 @@ autostart=(
 
 commands=(
     "xfdesktop --disable-wm-check"
+    "/etc/init.d/emacs.lerax restart"
     "thunar --daemon"
     "nm-applet"
     "geary --hidden"

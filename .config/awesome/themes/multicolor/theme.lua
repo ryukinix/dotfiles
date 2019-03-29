@@ -210,7 +210,7 @@ local netupinfo = lain.widget.net({
       end
 })
 
--- MEM
+-- Memory RAM
 local memicon = wibox.widget.imagebox(theme.widget_mem)
 local memory = lain.widget.mem({
       settings = function()
