@@ -9,12 +9,15 @@
 
 (defconst lerax-exwm-autostart-programs
     (let ((host (system-name)))
-      (append '("xfce4-clipman"
-                "volumeicon"
-                "fluxgui")
+      (append '("xfce4-clipman" ;; clipboard manager
+                "volumeicon"    ;; volume
+                "nm-applet"     ;; network manager
+                "fluxgui"       ;; monitor temperature
+                )
               (when (equal host "celeste")
                 '("xfce4-power-manager"))
               )))
+(defvar lerax-exwm-autostarted nil)
 
 
 (defun lerax-exwm-rename-buffer ()
@@ -39,6 +42,20 @@
   (start-process-shell-command "xfce4-screenshooter"
                                nil
                                "xfce4-screenshooter"))
+
+;;; Screenshot
+(defun lerax-exwm-start-screenshot-clipboard ()
+  (interactive)
+  (start-process-shell-command "xfce4-screenshooter"
+                               nil
+                               "xfce4-screenshooter -c -f"))
+
+(defun lerax-exwm-start-screenshot-region ()
+  (interactive)
+  (start-process-shell-command "xfce4-screenshooter"
+                               nil
+                               "xfce4-screenshooter -r"))
+
 
 (defun lerax-setup-exwm ()
 
@@ -73,9 +90,8 @@
   (exwm-input-set-key (kbd "<s-right>") #'windmove-right)
   (exwm-input-set-key (kbd "<s-left>") #'windmove-left)
 
-  (exwm-input-set-key (kbd "s-D") #'kill-this-buffer)
+  (exwm-input-set-key (kbd "s-d") #'kill-this-buffer)
   (exwm-input-set-key (kbd "s-b") #'list-buffers)
-  (exwm-input-set-key (kbd "s-F") #'find-file)
 
   ;; The following can only apply to EXWM buffers, else it could have unexpected effects.
   (push ?\s-  exwm-input-prefix-keys)
@@ -83,20 +99,11 @@
 
   (exwm-input-set-key (kbd "s-i") #'follow-delete-other-windows-and-split)
   (exwm-input-set-key (kbd "s-f") #'exwm-layout-toggle-fullscreen)
-
-  (with-eval-after-load 'helm
-    ;; Need `with-eval-after-load' here since 'helm-map is not defined in 'helm-config.
-    (exwm-input-set-key (kbd "s-c") #'helm-resume)
-    (exwm-input-set-key (kbd "s-b") #'helm-mini)
-    (exwm-input-set-key (kbd "s-f") #'helm-find-files)
-    (exwm-input-set-key (kbd "s-F") #'helm-locate)
-    (when (fboundp 'lerax-helm-locate-meta)
-      (exwm-input-set-key (kbd "s-F") #'lerax-helm-locate-meta)))
-
+  (exwm-input-set-key (kbd "<s-escape>") #'exwm-layout-toggle-fullscreen)
 
   (exwm-input-set-key (kbd "s-<tab>") #'lerax-switch-to-last-buffer)
 
-;;; Emacs mode shortcuts.
+  ;;; Emacs mode shortcuts.
   (exwm-input-set-key (kbd "s-<return>")
                       (lambda ()
                         (interactive)
@@ -106,9 +113,9 @@
   (when (fboundp 'magit-status)
     (exwm-input-set-key (kbd "s-v") #'magit-status))
 
-  (exwm-input-set-key (kbd "s-E") #'eww)
+  (exwm-input-set-key (kbd "s-e") #'eww)
 
-;;; External application shortcuts.
+  ;;; External application shortcuts.
   (defun lerax-exwm-launch (command)
     (interactive (list (read-shell-command "$ ")))
     (start-process-shell-command command nil command))
@@ -130,11 +137,19 @@
     ;; Launcher
     (exwm-input-set-key (kbd "s-r") 'helm-run-external-command)
     ;; Web browser
-    (exwm-input-set-key (kbd "s-w") #'helm-exwm-switch-browser)
-    (exwm-input-set-key (kbd "s-W") #'helm-exwm-switch-browser-other-window))
+    (exwm-input-set-key (kbd "s-w")
+                        (lambda ()
+                          (interactive)
+                          (start-process-shell-command "google-chrome-stable"
+                                                       nil
+                                                       "google-chrome-stable"))))
 
 
+  ;;; utils
   (exwm-input-set-key (kbd "<print>") #'lerax-exwm-start-screenshot)
+  (exwm-input-set-key (kbd "<M-print>") #'lerax-exwm-start-screenshot-clipboard)
+  (exwm-input-set-key (kbd "<C-print>") #'lerax-exwm-start-screenshot-region)
+  (exwm-input-set-key (kbd "s-l") #'lerax-exwm-start-lock)
 
   ;;; Volume control
   (when (require 'pulseaudio-control nil t)
@@ -151,7 +166,7 @@
     (exwm-input-set-key (kbd "s-=") #'pulseaudio-control-increase-volume)
     (exwm-input-set-key (kbd "s-0") #'pulseaudio-control-toggle-current-sink-mute))
 
-;;; Check for start-up errors. See ~/.profile.
+  ;;; Check for start-up errors. See ~/.profile.
   (let ((error-logs (directory-files "~" t "errors.*log$")))
     (when error-logs
       (warn "Error during system startup.  See %s." (mapconcat 'identity error-logs ", "))
@@ -159,14 +174,20 @@
         ;; Non-daemon Emacs already brings up the *Warning* buffer.
         (setq initial-buffer-choice
               (lambda () (get-buffer "*Warnings*"))))))
-  (mapcar (lambda (p)
-            (start-process-shell-command p nil p))
-          lerax-exwm-autostart-programs)
-  )
+
+  ;; autostart programs
+  (when (not lerax-exwm-autostarted)
+    (mapc (lambda (p)
+              (message (format "<EXWM> Starting: %s" p))
+              (start-process-shell-command p nil p))
+            lerax-exwm-autostart-programs)
+    (setq lerax-exwm-autostarted t)))
 
 
-(defun lerax-exwm-start (&optional frame)
-  (when (not (null (getenv "EXWM")) )
+(defun lerax-exwm-start (&optional frame force)
+  (interactive)
+  (when (or (not (null (getenv "EXWM")))
+            force)
     (require 'exwm)
     (lerax-setup-exwm)
     (exwm-init frame)))

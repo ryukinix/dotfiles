@@ -97,6 +97,8 @@
 (with-eval-after-load 'erc
   (setq erc-save-buffer-on-part nil)
   (setq erc-save-queries-on-quit nil)
+  (when (getenv "EXWM")
+    (erc-notify-mode))
   (setq erc-log-write-after-insert t)
   (setq erc-log-write-after-send t)
   (setq erc-log-insert-log-on-open t))

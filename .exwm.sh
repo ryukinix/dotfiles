@@ -25,7 +25,7 @@ exwm () {
     xset r rate 200 60
 
     # Finally start Emacs
-    exec dbus-launch emacsclient -c --eval "(lerax-exwm-start)" -a ""
+    exec dbus-launch emacs --eval "(lerax-exwm-start nil t)"
 
 }
 
