@@ -1,9 +1,10 @@
 # when run inside emacs make this special
-if [ ! -z ${INSIDE_EMACS+x} ]; then
+if [ -n "$EXWM" ] || [ -n "$EXWM" ]; then
     export GIT_EDITOR=emacsclient
     alias emacs=gemacs
     alias thunar='thunar --daemon'
 fi
+
 
 # need do that on tramp (not working yet)
 # FIXME: why tramp doesn't works with zsh as default shell?

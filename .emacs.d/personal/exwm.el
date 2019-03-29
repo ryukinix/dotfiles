@@ -65,9 +65,6 @@
   (add-hook 'exwm-update-class-hook 'lerax-exwm-rename-buffer)
   (add-hook 'exwm-update-title-hook 'lerax-exwm-rename-buffer)
 
-
-
-  (global-set-key (kbd "C-x C-c") 'save-buffers-kill-emacs)
   (add-hook 'exwm-floating-setup-hook 'exwm-layout-hide-mode-line)
   (add-hook 'exwm-floating-exit-hook 'exwm-layout-show-mode-line)
 

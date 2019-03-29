@@ -1,17 +1,28 @@
 #!/bin/bash
 
+
+
+emacs-client () {
+    if [ -n "$EXWM" ]; then
+        emacsclient -s exwm $@
+    else
+        emacsclient $@
+
+    fi
+}
+
 has-frame () {
-    emacsclient -n -e "(plusp (length (remove-if (lambda (x) \
+    emacs-client -n -e "(plusp (length (remove-if (lambda (x) \
                                                          (null (window-system x))) \
                                                  (frame-list))))"
 }
 
 new-frame () {
-    emacsclient -c -n -a "emacs" "$@"
+    emacs-client -c -n -a "emacs" "$@"
 }
 
 open-frame () {
-    emacsclient -n -a "emacs" "$@"
+    emacs-client -n -a "emacs" "$@"
 }
 
 raise-frames () {
@@ -24,7 +35,7 @@ raise-frames () {
 
 restart-emacs () {
     notify-send "Emacs daemon crashed :(" "restarting"
-    /etc/init.d/emacs.* restart
+    openrc-run "/etc/init.d/emacs.$(whoami)" restart
 }
 
 if-crashed-restart-emacs () {
@@ -35,7 +46,9 @@ main () {
     # use only if using openrc
     [[ -f /usr/bin/openrc ]] && (if-crashed-restart-emacs || exit 0)
 
-    if [ "$(has-frame)" == "t" ]; then
+    if [ -n "$EXWM" ]; then
+        open-frame "$@" 2> /dev/null
+    elif [ "$(has-frame)" == "t" ]; then
         open-frame "$@" 2> /dev/null || raise-frames 1> /dev/null
     else
         new-frame "$@"
