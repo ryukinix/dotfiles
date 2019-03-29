@@ -1,5 +1,15 @@
 #!/bin/sh
 
+setup_keyboard () {
+    if [[ $(hostname) == "starfox" ]]; then
+        setxkbmap -model abnt2 -layout br
+        setxkbmap -option compose:rctrl
+    elif [[ $(hostname) == "celeste" ]]; then
+        setxkbmap -model thinkpad60 -layout br
+        setxkbmap -option
+    fi
+}
+
 exwm () {
     export EXWM=1
     # Disable access control for the current user.
@@ -15,8 +25,9 @@ exwm () {
     xset r rate 200 60
 
     # Finally start Emacs
-    exec dbus-launch emacsclient -c --eval "(progn (require (quote exwm)) (exwm-init))" -a ""
-    
+    exec dbus-launch emacsclient -c --eval "(lerax-exwm-start)" -a ""
+
 }
 
+setup_keyboard
 exwm
