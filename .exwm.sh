@@ -1,7 +1,6 @@
 #!/bin/sh
 
 setup_keyboard () {
-    xmodmap ~/.Xmodmap
     if [ "$(hostname)" = "starfox" ]; then
         setxkbmap -model abnt2 -layout br
         setxkbmap -option compose:rctrl
@@ -9,6 +8,7 @@ setup_keyboard () {
         setxkbmap -model thinkpad60 -layout br
         setxkbmap -option
     fi
+    xmodmap ~/.Xmodmap
 }
 
 

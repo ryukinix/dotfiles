@@ -1,23 +1,11 @@
 # when run inside emacs make this special
-if [ -n "$EXWM" ] || [ -n "$EXWM" ]; then
-    export GIT_EDITOR=emacsclient
+if [ -n "$INSIDE_EMACS" ] || [ -n "$EXWM" ]; then
+    if [ -n "$EXWM" ]; then
+        export GIT_EDITOR="emacsclient -s exwm"
+    else
+        export GIT_EDITOR=emacsclient
+    fi
+
     alias emacs=gemacs
     alias thunar='thunar --daemon'
 fi
-
-
-# need do that on tramp (not working yet)
-# FIXME: why tramp doesn't works with zsh as default shell?
-# if [[ "$TERM" == "dumb" && -v INSIDE_EMACS ]]
-# then
-#     unsetopt zle
-#     unsetopt prompt_cr
-#     unsetopt prompt_subst
-#     #unfunction precmd
-#     #unfunction preexec
-#     PS1='$ '
-# fi
-
-# if [[ $TERM == "xterm" ]]; then
-#     export TERM=xterm-256color
-# fi
