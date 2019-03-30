@@ -15,9 +15,14 @@
                 "nm-applet"     ;; network manager
                 "fluxgui"       ;; monitor temperature
                 "compton"       ;; window compositor
+                "thunar --daemon"
+                "udiskie"
+                "pamac-tray"
                 )
               (when (equal host "celeste")
-                '("xfce4-power-manager"))
+                '("xfce4-power-manager"
+                  "/usr/lib/bluetooth/obexd" ;; bluetooth file-sharing server
+                  "blueman-applet"))
               )))
 (defvar lerax-exwm-autostarted nil)
 
@@ -33,34 +38,41 @@
   (interactive)
   (switch-to-buffer (other-buffer (current-buffer) 1)))
 
+
+(defun lerax-run (command)
+  (start-process-shell-command command
+                               nil
+                               command))
+
+
+(defun lerax-runner (command)
+  (lambda ()
+    (interactive)
+    (lerax-run command)))
+
+
 ;;; Lock screen
 (defun lerax-exwm-start-lock ()
   (interactive)
-  (start-process "slock" nil "slock"))
+  (lerax-run "slock"))
 
 ;;; Screenshot
 (defun lerax-exwm-start-screenshot ()
   (interactive)
-  (start-process-shell-command "xfce4-screenshooter"
-                               nil
-                               "xfce4-screenshooter"))
+  (lerax-run "xfce4-screenshooter"))
 
 ;;; Screenshot
 (defun lerax-exwm-start-screenshot-clipboard ()
   (interactive)
-  (start-process-shell-command "xfce4-screenshooter"
-                               nil
-                               "xfce4-screenshooter -c -f"))
+  (lerax-run "xfce4-screenshooter -c -f"))
 
 (defun lerax-exwm-start-screenshot-region ()
   (interactive)
-  (start-process-shell-command "xfce4-screenshooter"
-                               nil
-                               "xfce4-screenshooter -r"))
+  (lerax-run "xfce4-screenshooter -r"))
 
 
 (defun lerax-setup-exwm ()
-
+  (interactive)
   ;; Add these hooks in a suitable place (e.g., as done in exwm-config-default)
   (add-hook 'exwm-update-class-hook 'lerax-exwm-rename-buffer)
   (add-hook 'exwm-update-title-hook 'lerax-exwm-rename-buffer)
@@ -87,9 +99,10 @@
   (exwm-input-set-key (kbd "<s-up>") #'windmove-up)
   (exwm-input-set-key (kbd "<s-right>") #'windmove-right)
   (exwm-input-set-key (kbd "<s-left>") #'windmove-left)
-
+  (exwm-input-set-key (kbd "<s-!>") #'shell-command)
   (exwm-input-set-key (kbd "s-d") #'kill-this-buffer)
   (exwm-input-set-key (kbd "s-b") #'list-buffers)
+
 
   ;; The following can only apply to EXWM buffers, else it could have unexpected effects.
   (push ?\s-  exwm-input-prefix-keys)
@@ -98,15 +111,13 @@
   (exwm-input-set-key (kbd "s-i") #'follow-delete-other-windows-and-split)
   (exwm-input-set-key (kbd "s-f") #'exwm-layout-toggle-fullscreen)
   (exwm-input-set-key (kbd "<s-escape>") #'exwm-layout-toggle-fullscreen)
-
   (exwm-input-set-key (kbd "s-<tab>") #'lerax-switch-to-last-buffer)
 
   ;;; Emacs mode shortcuts.
   (exwm-input-set-key (kbd "s-<return>")
-                      (lambda ()
-                        (interactive)
-                        (start-process-shell-command "xfce4-terminal" nil
-                                                     "xfce4-terminal")))
+                      (lerax-runner "xfce4-terminal"))
+  (exwm-input-set-key (kbd "s-a")
+                      (lerax-runner "geary"))
 
   (when (fboundp 'magit-status)
     (exwm-input-set-key (kbd "s-v") #'magit-status))
@@ -136,11 +147,7 @@
     (exwm-input-set-key (kbd "s-r") 'helm-run-external-command)
     ;; Web browser
     (exwm-input-set-key (kbd "s-w")
-                        (lambda ()
-                          (interactive)
-                          (start-process-shell-command "google-chrome-stable"
-                                                       nil
-                                                       "google-chrome-stable"))))
+                        (lerax-runner "google-chrome-stable")))
 
 
   ;;; utils
@@ -149,21 +156,35 @@
   (exwm-input-set-key (kbd "<C-print>") #'lerax-exwm-start-screenshot-region)
   (exwm-input-set-key (kbd "s-l") #'lerax-exwm-start-lock)
   (exwm-input-set-key (kbd "s-x") #'dmenu)
+  (exwm-input-set-key (kbd "<C-s-e>")
+                      (lambda ()
+                        (interactive)
+                        (find-file (expand-file-name "~/.emacs.d/personal/exwm.el"))))
 
   ;;; Volume control
   (when (require 'pulseaudio-control nil t)
-    (exwm-input-set-key (kbd "s-<kp-subtract>") #'pulseaudio-control-decrease-volume)
-    (exwm-input-set-key (kbd "s-<kp-add>") #'pulseaudio-control-increase-volume)
-    (exwm-input-set-key (kbd "s-<kp-enter>") #'pulseaudio-control-toggle-current-sink-mute)
+    (exwm-input-set-key (kbd "s-<kp-subtract>")
+                        #'pulseaudio-control-decrease-volume)
+    (exwm-input-set-key (kbd "s-<kp-add>")
+                        #'pulseaudio-control-increase-volume)
+    (exwm-input-set-key (kbd "s-<kp-enter>")
+                        #'pulseaudio-control-toggle-current-sink-mute)
 
-    (exwm-input-set-key (kbd "<XF86AudioLowerVolume>") #'pulseaudio-control-decrease-volume)
-    (exwm-input-set-key (kbd "<XF86AudioRaiseVolume>") #'pulseaudio-control-increase-volume)
-    (exwm-input-set-key (kbd "<XF86AudioMute>") #'pulseaudio-control-toggle-current-sink-mute)
-    (exwm-input-set-key (kbd "<XF86AudioMicMute>") #'pulseaudio-control-toggle-current-source-mute)
+    (exwm-input-set-key (kbd "<XF86AudioLowerVolume>")
+                        #'pulseaudio-control-decrease-volume)
+    (exwm-input-set-key (kbd "<XF86AudioRaiseVolume>")
+                        #'pulseaudio-control-increase-volume)
+    (exwm-input-set-key (kbd "<XF86AudioMute>")
+                        #'pulseaudio-control-toggle-current-sink-mute)
+    (exwm-input-set-key (kbd "<XF86AudioMicMute>")
+                        #'pulseaudio-control-toggle-current-source-mute)
 
-    (exwm-input-set-key (kbd "s--") #'pulseaudio-control-decrease-volume)
-    (exwm-input-set-key (kbd "s-=") #'pulseaudio-control-increase-volume)
-    (exwm-input-set-key (kbd "s-0") #'pulseaudio-control-toggle-current-sink-mute))
+    (exwm-input-set-key (kbd "s--")
+                        #'pulseaudio-control-decrease-volume)
+    (exwm-input-set-key (kbd "s-=")
+                        #'pulseaudio-control-increase-volume)
+    (exwm-input-set-key (kbd "s-0")
+                        #'pulseaudio-control-toggle-current-sink-mute))
 
   ;;; Check for start-up errors. See ~/.profile.
   (let ((error-logs (directory-files "~" t "errors.*log$")))
