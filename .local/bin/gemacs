@@ -18,11 +18,11 @@ has-frame () {
 }
 
 new-frame () {
-    emacs-client -c -n -a "emacs" "$@"
+    emacs-client -c -n -a "emacs" $(ls -b "$@")
 }
 
 open-frame () {
-    emacs-client -n -a "emacs" "$@"
+    emacs-client -n -a "emacs" $(ls -b "$@")
 }
 
 raise-frames () {
