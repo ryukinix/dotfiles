@@ -88,8 +88,6 @@
   ;;; System tray
   (require 'exwm-systemtray)
   (exwm-systemtray-enable)
-  (setq exwm-systemtray-height 16)
-
 
   ;;; Those cannot be set globally: if Emacs would be run in another WM, the "s-"
   ;;; prefix will conflict with the WM bindings.
@@ -100,7 +98,8 @@
   (exwm-input-set-key (kbd "<s-right>") #'windmove-right)
   (exwm-input-set-key (kbd "<s-left>") #'windmove-left)
   (exwm-input-set-key (kbd "<s-!>") #'shell-command)
-  (exwm-input-set-key (kbd "s-d") #'kill-this-buffer)
+  (exwm-input-set-key (kbd "s-d") (lerax-runner "thunar"))
+  (exwm-input-set-key (kbd "s-c") #'kill-this-buffer)
   (exwm-input-set-key (kbd "s-b") #'list-buffers)
 
 
