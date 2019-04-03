@@ -1,12 +1,11 @@
 #!/bin/bash
 
 
-
 emacs-client () {
     if [ -n "$EXWM" ]; then
-        emacsclient -s exwm $@
+        emacsclient -s exwm $@ 2> /dev/null
     else
-        emacsclient $@
+        emacsclient $@ 2> /dev/null
 
     fi
 }
@@ -18,11 +17,11 @@ has-frame () {
 }
 
 new-frame () {
-    emacs-client -c -n -a "emacs" $(ls -b "$@")
+    emacs-client -c -n -a "emacs" "$@"
 }
 
 open-frame () {
-    emacs-client -n -a "emacs" $(ls -b "$@")
+    emacs-client -n -a "emacs" "$@"
 }
 
 raise-frames () {
@@ -51,7 +50,7 @@ main () {
     elif [ "$(has-frame)" == "t" ]; then
         open-frame "$@" 2> /dev/null || raise-frames 1> /dev/null
     else
-        new-frame "$@"
+        new-frame "$@" 2> /dev/null
     fi
 
 }
