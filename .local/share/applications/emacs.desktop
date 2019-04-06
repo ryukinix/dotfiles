@@ -5,16 +5,20 @@ Name=Emacs
 GenericName=Text Editor
 Comment=A powerful extensbile editor written in Lisp
 Icon=emacs
-Exec=/home/lerax/.local/bin/gemacs "%F"
+Exec=/home/lerax/.local/bin/gemacs %F
 NoDisplay=false
-Categories=Development;TextEditor;
+Categories=TextEditor;Development;
 Keywords=Text;Editor;Gemacs;Emacs
 MimeType=text/english;text/plain;text/x-makefile;text/x-c++hdr;text/x-c++src;text/x-chdr;text/x-csrc;text/x-java;text/x-moc;text/x-pascal;text/x-tcl;text/x-tex;application/x-shellscript;text/x-c;text/x-c++;
 StartupWMClass=Emacs
 StartupNotify=false
 Terminal=false
-
 Actions=NewShortcut;
+Name[en_US.UTF-8]=Emacs
+X-GNOME-FullName[en_US.UTF-8]=Emacs
+Comment[en_US.UTF-8]=A powerful extensbile editor written in Lisp
+Path=
+X-GNOME-UsesNotifications=false
 
 [Desktop Action NewShortcut]
 Name=New Frame
