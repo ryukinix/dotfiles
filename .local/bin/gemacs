@@ -1,27 +1,25 @@
 #!/bin/bash
 
-
-emacs-client () {
-    if [ -n "$EXWM" ]; then
-        emacsclient -s exwm $@ 2> /dev/null
-    else
-        emacsclient $@ 2> /dev/null
-
-    fi
-}
+# TODO: BUG FROM HELL
+# If I define this shitty, it will bug all
+if [ -n "$EXWM" ]; then
+    function emacsclient {
+        emacsclient -s exwm $@
+    }
+fi
 
 has-frame () {
-    emacs-client -n -e "(plusp (length (remove-if (lambda (x) \
+    emacsclient -n -e "(plusp (length (remove-if (lambda (x) \
                                                          (null (window-system x))) \
                                                  (frame-list))))"
 }
 
 new-frame () {
-    emacs-client -c -n -a "emacs" "$@"
+    emacsclient -c -n -a "emacs" "$@"
 }
 
 open-frame () {
-    emacs-client -n -a "emacs" "$@"
+    emacsclient -n -a "emacs" "$@"
 }
 
 raise-frames () {
