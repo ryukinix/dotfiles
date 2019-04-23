@@ -13,7 +13,7 @@
 
 (defun lerax-theme-set-font ()
   (set-face-attribute 'default nil
-                      :family "xos4 Terminus"
+                      :family "Hack"
                       :height 110
                       :weight 'normal
                       :width 'normal))
