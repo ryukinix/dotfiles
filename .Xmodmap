@@ -1,2 +1,4 @@
-clear Lock
-keycode 66 = F9 Caps_Lock
+clear lock
+clear control
+keycode 66 = Control_L Caps_Lock
+add control = Control_L Control_R

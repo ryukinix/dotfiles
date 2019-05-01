@@ -61,8 +61,8 @@ local function run_once(cmd_arr)
 end
 -- manoel stuff here, fix of the fix from fixed fix
 -- I need that shit done here, sorry
-local posix = require("posix")
-posix.setenv("SSH_AUTH_SOCK", "/run/user/1000/keyring/ssh")
+-- local posix = require("posix")
+-- posix.setenv("SSH_AUTH_SOCK", "/run/user/1000/keyring/ssh")
 
 
 run_once({"exec ~/.config/awesome/autorun.sh"})

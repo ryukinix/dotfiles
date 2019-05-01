@@ -57,10 +57,10 @@ autostart=(
 
 commands=(
     "xfdesktop --disable-wm-check"
-    "/etc/init.d/emacs.lerax restart"
+    # "/etc/init.d/emacs.lerax restart"
     "thunar --daemon"
     "nm-applet"
-    "geary --hidden"
+    # "geary --hidden"
     "udiskie"
     "pamac-tray"
     "/usr/lib/bluetooth/obexd" # bluetooth file-sharing server

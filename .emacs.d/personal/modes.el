@@ -162,3 +162,6 @@
                 '(chicken racket guile chez mit chibi))
   (add-hook 'geiser-repl-mode-hook (lambda ()
                                     (smartparens-mode +1))))
+
+(with-eval-after-load 'python
+  (setq python-shell-interpreter "python3"))
