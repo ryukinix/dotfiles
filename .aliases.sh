@@ -8,6 +8,47 @@ gclone () {
     git clone "git@github.com:$repo.git"
 }
 
+function ftp-start {
+    sudo service pure-ftpd start
+}
+
+function ftp-stop {
+    sudo service pure-ftpd stop
+}
+
+function ftp-status {
+    sudo service pure-ftpd status
+}
+
+function warsaw-browser {
+    xhost +;
+    docker run -it --rm \
+           -v /tmp/.X11-unix:/tmp/.X11-unix \
+           -v $HOME/ArquivosDoBanco:/home/bank/Downloads \
+           -e DISPLAY=unix$DISPLAY \
+           --name warsaw-browser \
+           lichti/warsaw-browser $1;
+}
+
+function hack-chat {
+    docker run -d --name hchat \
+           -p 80:8080 \
+           -p 6060:6060 \
+           -e WSPROTOCOL="ws://" \
+           -e WSPORT="6060" \
+           -e WSBASEURL="" \
+           -e ADMIN_NAME="boop" \
+           -e PASSWORD="pass" \
+           -e SALT="2dSg4kS" \
+           mcgriddle/hack-chat:latest
+}
+
+alias bb="warsaw-browser bb"
+alias bbpj="warsaw-browser bbpj"
+alias cef="warsaw-browser cef"
+alias itau="warsaw-browser itau"
+
+
 restart-network () {
     killall -q -9 nm-applet || true
     sudo rc-service -s NetworkManager stop
@@ -200,6 +241,11 @@ fi
 
 
 alias remacs='sudo /etc/init.d/emacs.lerax restart'
+
+if which systemctl &> /dev/null; then
+   alias remacs='systemctl --user restart emacs'
+fi
+
 alias agenda='gcalcli agenda'
 alias dotnet-build='msbuild'
 alias sbcl='rlwrap sbcl --noinform'
