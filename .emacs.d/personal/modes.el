@@ -164,4 +164,6 @@
                                     (smartparens-mode +1))))
 
 (with-eval-after-load 'python
-  (setq python-shell-interpreter "python3"))
+  (setq python-shell-interpreter "python3")
+  (setq flycheck-python-pycompile-executable "python3")
+  )

@@ -131,11 +131,11 @@
 
 ;; favorite directories
 (let ((courses-dir (expand-file-name "~/Dropbox/University/Courses/UFC/"))
-      (desktop-dir (expand-file-name"~/Desktop"))
-      (langs-dir (expand-file-name "~/Dropbox/Programming/Langs")))
+      (todo-dir (expand-file-name"~/Dropbox/todo.txt"))
+      (did-dir (expand-file-name "~/Dropbox/did.txt")))
   ;; favorite directories
-  (global-set-key (kbd "<f5>") (favorite-dir courses-dir))
-  (global-set-key (kbd "<f6>") (favorite-dir desktop-dir))
+  (global-set-key (kbd "<f5>") (favorite-dir todo-dir))
+  (global-set-key (kbd "<f6>") (favorite-dir did-dir))
   (global-set-key (kbd "<f7>") (favorite-dir langs-dir)))
 
 (let ((init (if (eq system-type 'windows-nt)
