@@ -10,3 +10,5 @@ PS1='[\u@\h \W]\$ '
 
 source ~/.aliases.sh
 [[ -f ~/.emacs.fixes.sh ]] && source ~/.emacs.fixes.sh
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
