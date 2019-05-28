@@ -220,7 +220,7 @@ drun () {
 }
 
 venv () {
-    [[ ! -d .venv ]] && python -m venv .venv
+    [[ ! -d .venv ]] && python3 -m venv .venv
     cd . || exit 1
 }
 
@@ -231,7 +231,7 @@ alias dot-tig='GIT_DIR=$HOME/.dot/ tig'
 
 # ustar is my server
 if [ "$(hostname)" != "ustar" ]; then
-    alias emacs='emacsclient -nw -a lem'
+    alias emacs='emacsclient -nw -a nano'
     alias semacs='SUDO_EDITOR="emacsclient -t -a vim" sudoedit'
     alias svim='SUDO_EDITOR=vim sudoedit'
 else
@@ -291,17 +291,20 @@ alias sprunge="curl -F 'sprunge=<-' http://sprunge.us"
 alias sprungex='sprunge | xcopy'
 alias pastebin=ixx
 
-alias tmate.="/usr/bin/tmate"
 alias tmate="tmux detach-client -E 'tmate;tmux'"
 alias stack-size='ulimit -s'
 
 # pacman aliases
 alias pacman-install='sudo pacman -S'
-alias pacmani='pacman-install --noconfirm'
 alias pacman-update='sudo pacman -Sy'
 alias pacman-upgrade='sudo pacman -Syuu'
 alias pacman-search='pacman -Ss'
 alias pacman-remove='sudo pacman -Rsu'
+alias pcmi='pacman-install'
+alias pcmu='pacman-update'
+alias pcmuu='pacman-upgrade'
+alias pcms='pacman-search'
+alias pcmr='pacman-remove'
 alias service='sudo rc-service'
 alias aur=yay
 alias aur-install='aur -S'
