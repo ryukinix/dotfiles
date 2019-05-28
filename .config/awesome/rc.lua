@@ -420,15 +420,15 @@ globalkeys = awful.util.table.join(
    awful.key({ }, "XF86AudioMicMute", function ()
          awful.spawn.with_shell("pactl set-source-mute 1 toggle") end),
    awful.key({ }, "XF86Launch1", function ()
-         awful.spawn.with_shell("slock") end),
+         awful.spawn.with_shell("dm-tool lock") end),
    awful.key({modkey}, "l", function ()
-         awful.spawn.with_shell("slock") end),
+         awful.spawn.with_shell("dm-tool lock") end),
    -- Widgets popups
    -- awful.key({ altkey, }, "c", function () lain.widget.calendar.show(7) end),
    awful.key({ altkey, }, "h", function () if beautiful.fs then beautiful.fs.show(7) end end),
       -- awful.key({ altkey, }, "w", function () if beautiful.weather then beautiful.weather.show(7) end end),
 
-      -- Brightness
+      -- Brightess
       awful.key({ }, "XF86MonBrightnessUp", function () awful.util.spawn("xbacklight -inc 10") end),
       awful.key({ }, "XF86MonBrightnessDown", function () awful.util.spawn("xbacklight -dec 10") end),
 
