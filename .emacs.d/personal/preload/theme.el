@@ -3,9 +3,9 @@
 
 
 (require 'prelude-packages)
-(prelude-require-package 'doom-themes)
+(prelude-require-package 'kaolin-themes)
 
-(defvar lerax-theme 'doom-vibrant)
+(defvar lerax-theme 'kaolin-bubblegum)
 (defvar lerax-theme-window-loaded nil)
 (defvar lerax-theme-terminal-loaded nil)
 
