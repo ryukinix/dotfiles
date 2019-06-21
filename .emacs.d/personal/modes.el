@@ -4,6 +4,7 @@
 (prelude-require-packages '(slime-company
                             ssh-agency
                             ix
+                            telephone-line
                             xclip
                             pyvenv
                             ox-gfm
@@ -167,3 +168,5 @@
   (setq python-shell-interpreter "python3")
   (setq flycheck-python-pycompile-executable "python3")
   )
+
+(telephone-line-mode +1)

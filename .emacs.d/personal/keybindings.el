@@ -136,7 +136,7 @@
   ;; favorite directories
   (global-set-key (kbd "<f5>") (favorite-dir todo-dir))
   (global-set-key (kbd "<f6>") (favorite-dir did-dir))
-  (global-set-key (kbd "<f7>") (favorite-dir langs-dir)))
+  (global-set-key (kbd "<f7>") (favorite-dir courses-dir)))
 
 (let ((init (if (eq system-type 'windows-nt)
                 (expand-file-name "~/.dotfiles/.emacs.d/personal/")
