@@ -10,11 +10,12 @@ local gears = require("gears")
 local lain  = require("lain")
 local awful = require("awful")
 local wibox = require("wibox")
+local net_widgets = require("net_widgets")
 local os    = { getenv = os.getenv, setlocale = os.setlocale }
 
 local theme                                     = {}
 theme.confdir                                   = os.getenv("HOME") .. "/.config/awesome/themes/multicolor"
-theme.wallpaper                                 = theme.confdir .. "/wall.jpg"
+theme.wallpaper                                 = theme.confdir .. "/wall_pain.jpg"
 theme.font                                      = "Terminus (TTF) 12"
 theme.menu_bg_normal                            = "#000000"
 theme.menu_bg_focus                             = "#000000"
@@ -210,6 +211,12 @@ local netupinfo = lain.widget.net({
       end
 })
 
+local net_wireless = net_widgets.wireless({
+      interface="wlan0",
+      font=theme.font
+})
+
+
 -- Memory RAM
 local memicon = wibox.widget.imagebox(theme.widget_mem)
 local memory = lain.widget.mem({
@@ -289,16 +296,19 @@ function theme.at_screen_connect(s)
          memory.widget,
          cpuicon,
          cpu.widget,
-         fsicon,
-         theme.fs.widget,
+
          -- weathericon,
          -- theme.weather.widget,
-         tempicon,
-         temp.widget,
+
       },
       {
          layout = wibox.layout.fixed.horizontal,
          wibox.widget.systray(),
+         tempicon,
+         temp.widget,
+         fsicon,
+         theme.fs.widget,
+         net_wireless,
          baticon,
          bat.widget,
          clockicon,
