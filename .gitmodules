@@ -10,3 +10,6 @@
 [submodule ".config/awesome/lain"]
 	path = .config/awesome/lain
 	url = "https://github.com/lcpz/lain.git "
+[submodule ".config/awesome/net_widgets"]
+	path = .config/awesome/net_widgets
+	url = https://github.com/pltanton/net_widgets
