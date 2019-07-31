@@ -7,3 +7,6 @@
 [submodule ".config/awesome/cyclefocus"]
 	path = .config/awesome/cyclefocus
 	url = https://github.com/blueyed/awesome-cyclefocus
+[submodule ".config/awesome/lain"]
+	path = .config/awesome/lain
+	url = "https://github.com/lcpz/lain.git "
