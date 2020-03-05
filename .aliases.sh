@@ -211,6 +211,11 @@ ssh-auth () {
     fi
 }
 
+ssh-remember () {
+    # use seahorse to remember password
+    /usr/lib/x86_64-linux-gnu/seahorse/seahorse-ssh-askpass ~/.ssh/id_rsa > /dev/null
+}
+
 sum-lines () {
     awk '{s+=$1} END {print s}'
 }
