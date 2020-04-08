@@ -8,15 +8,24 @@
 (defvar lerax-theme 'kaolin-bubblegum)
 (defvar lerax-theme-window-loaded nil)
 (defvar lerax-theme-terminal-loaded nil)
-
+(defvar lerax-theme-font "Hack")
 (setq prelude-theme lerax-theme)
 
+
+(defun font-exists-p (font)
+  "check if font exists"
+  (if (and (window-system)
+           (null (x-list-fonts font)))
+      nil
+    t))
+
 (defun lerax-theme-set-font ()
-  (set-face-attribute 'default nil
-                      :family "Hack"
-                      :height 110
-                      :weight 'normal
-                      :width 'normal))
+  (when (font-exists-p lerax-theme-font)
+    (set-face-attribute 'default nil
+                        :family lerax-theme-font
+                        :height 110
+                        :weight 'normal
+                        :width 'normal)))
 
 (defun lerax-theme-reload ()
   (interactive)
