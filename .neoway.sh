@@ -72,3 +72,4 @@ alias vpn='2fa -clip neoway | xcopy; sudo openvpn /etc/openvpn/neoway.conf'
 alias dataproc='cd /home/lerax/Desktop/workspace/townplanner-troublemaker/project_gcp/neoway-data-science/dataproc'
 alias jupyter-gateway-tunnel='ssh -v -nNT -L 8080:10.251.64.200:80 manoel.vilela@10.240.0.10'
 alias jupyter-gateway-create="jupyter notebook --gateway-url=http://localhost:8080 --GatewayClient.http_user=${USER} --GatewayClient.http_pwd=${USER}-password"
+alias jupyter-gateway-install="pip install jupyter_enterprise_gateway"
