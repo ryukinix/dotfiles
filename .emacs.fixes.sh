@@ -8,4 +8,7 @@ if [ -n "$INSIDE_EMACS" ] || [ -n "$EXWM" ]; then
 
     alias emacs=gemacs
     alias thunar='thunar --daemon'
+    if [[ "$(basename $SHELL)" == "zsh" ]]; then
+        prompt minimal
+    fi
 fi
