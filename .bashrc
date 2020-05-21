@@ -12,3 +12,7 @@ source ~/.aliases.sh
 [[ -f ~/.emacs.fixes.sh ]] && source ~/.emacs.fixes.sh
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/home/lerax/.sdkman"
+[[ -s "/home/lerax/.sdkman/bin/sdkman-init.sh" ]] && source "/home/lerax/.sdkman/bin/sdkman-init.sh"

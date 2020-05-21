@@ -23,3 +23,7 @@ safe-source ~/.python-venv-autoswitch.zsh
 safe-source ~/.economy-mode.sh
 safe-source ~/.neoway.sh
 [[ -f `which fzf` ]] && safe-source ~/.fzf.zsh
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/home/lerax/.sdkman"
+[[ -s "/home/lerax/.sdkman/bin/sdkman-init.sh" ]] && source "/home/lerax/.sdkman/bin/sdkman-init.sh"
