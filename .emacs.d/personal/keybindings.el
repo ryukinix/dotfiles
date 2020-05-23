@@ -170,10 +170,15 @@
 (global-set-key (kbd "C-M-S-k") 'kill-this-buffer-and-window)
 (global-set-key (kbd "<M-f4>") 'lerax-intelligent-close)
 
-(global-set-key (kbd "<M-f1>") 'linum-mode) ;; don't work on terminal
-(global-set-key (kbd "M-N") 'linum-mode)
+;; only available after emacs 26.X
+(defvar optimal-linum-mode
+  (if (fboundp 'display-line-numbers-mode)
+      'display-line-numbers-mode
+    'linum-mode))
+
+(global-set-key (kbd "M-N") optimal-linum-mode)
 (global-set-key (kbd "M-R") 'linum-relative-mode)
-(global-set-key (kbd "<M-S-f1>") 'linum-relative-mode)
+
 
 ;; ispell changing dictionaries when need
 (global-set-key [C-f8] (lambda ()
@@ -333,6 +338,7 @@
            (" r" . recompile)))
   (key-chord-define-global (car binding) (cdr binding)))
 ;; enable key chord
+;; disabled because I type too fast --ahahha
 ;;(key-chord-mode +1)
 
 ;; enable yasnippet globally
