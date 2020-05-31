@@ -3,9 +3,9 @@
 
 
 (require 'prelude-packages)
-(prelude-require-package 'kaolin-themes)
+(prelude-require-package 'doom-themes)
 
-(defvar lerax-theme 'kaolin-bubblegum)
+(defvar lerax-theme 'doom-vibrant)
 (defvar lerax-theme-window-loaded nil)
 (defvar lerax-theme-terminal-loaded nil)
 (defvar lerax-theme-font "Hack")
