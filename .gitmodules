@@ -13,3 +13,6 @@
 [submodule ".config/awesome/net_widgets"]
 	path = .config/awesome/net_widgets
 	url = https://github.com/pltanton/net_widgets
+[submodule "/home/lerax/.git-fuzzy"]
+	path = /home/lerax/.git-fuzzy
+	url = https://github.com/bigH/git-fuzzy.git

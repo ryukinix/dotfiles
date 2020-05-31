@@ -52,6 +52,7 @@ path=(
   ~/Android/Sdk/tools/bin/
   ~/Android/Sdk/platform-tools/
   ~/.fzf/bin/
+  ~/.git-fuzzy/bin
   $path
 )
 
