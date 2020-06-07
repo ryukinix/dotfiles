@@ -44,9 +44,9 @@ typeset -gU cdpath fpath mailpath path
 # Set the list of directories that Zsh searches for programs.
 path=(
   /usr/local/{bin,sbin}
+  ~/go/bin
   ~/.local/bin
   ~/.cargo/bin
-  ~/go/bin
   ~/.roswell/bin
   ~/Android/Sdk/tools/
   ~/Android/Sdk/tools/bin/
