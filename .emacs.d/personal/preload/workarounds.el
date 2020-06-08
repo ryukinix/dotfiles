@@ -16,7 +16,8 @@
   (defconst ghc-version (when (executable-find "ghc")
                           (s-trim (shell-command-to-string "ghc --numeric-version"))))
 
-  (when (version<= "8.2.1" ghc-version)
+  (when (and ghc-version
+             (version<= "8.2.1" ghc-version))
     (message "HOTFIX: haskell-mode hacks")
    (defconst haskell-process-args-ghci
      '("-ferror-spans" "-fshow-loaded-modules"))
