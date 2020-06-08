@@ -13,16 +13,20 @@
 ;; main issue here: https://github.com/haskell/haskell-mode/issues/1553
 ;; which seems fixed at: https://github.com/haskell/haskell-mode/pull/1625
 (with-eval-after-load 'haskell-mode
-  (message "HOTFIX: haskell-mode hacks")
-  (defconst haskell-process-args-ghci
-    '("-ferror-spans" "-fshow-loaded-modules"))
-  (defconst haskell-process-args-cabal-repl
-    '("--ghc-options=-ferror-spans -fshow-loaded-modules"))
-  (defconst haskell-process-args-stack-ghci
-    '("--ghci-options=-ferror-spans -fshow-loaded-modules"
-      "--no-build" "--no-load"))
-  (defconst haskell-process-args-cabal-new-repl
-    '("--ghc-options=-ferror-spans -fshow-loaded-modules")))
+  (defconst ghc-version (when (executable-find "ghc")
+                          (s-trim (shell-command-to-string "ghc --numeric-version"))))
+
+  (when (version<= "8.2.1" ghc-version)
+    (message "HOTFIX: haskell-mode hacks")
+   (defconst haskell-process-args-ghci
+     '("-ferror-spans" "-fshow-loaded-modules"))
+   (defconst haskell-process-args-cabal-repl
+     '("--ghc-options=-ferror-spans -fshow-loaded-modules"))
+   (defconst haskell-process-args-stack-ghci
+     '("--ghci-options=-ferror-spans -fshow-loaded-modules"
+       "--no-build" "--no-load"))
+   (defconst haskell-process-args-cabal-new-repl
+     '("--ghc-options=-ferror-spans -fshow-loaded-modules"))))
 
 
 (with-eval-after-load 'exec-path-from-shell
