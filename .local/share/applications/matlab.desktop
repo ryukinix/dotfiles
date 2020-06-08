@@ -1,0 +1,18 @@
+[Desktop Entry]
+Encoding=UTF-8
+Type=Application
+Name=Matlab
+Comment=A high-level language for numerical computation and visualization.
+TryExec=matlab
+Exec=matlab -desktop %F
+Icon=matlab
+Terminal=false
+StartupNotify=true
+Categories=science;Mathematics;IDE;Development;Education;
+MimeType=text/x-matlab;
+Path=/home/lerax/Dropbox/University/Courses/UFC/
+Name[en_US.UTF-8]=Matlab
+X-GNOME-FullName[en_US.UTF-8]=Matlab
+Comment[en_US.UTF-8]=A high-level language for numerical computation and visualization.
+NoDisplay=false
+X-GNOME-UsesNotifications=false

@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.1
+Type=Application
+Name=DrRacket
+GenericName=IDE for Racket
+Comment=DrRacket is an interactive, integrated, graphical programming environment for the Racket programming languages.
+Icon=drracket
+TryExec=drracket
+Exec=env GTK_THEME=Vertex-Light  drracket -singleInstance %F
+Actions=
+Categories=Development;Education;Kf5-Development;
