@@ -156,9 +156,11 @@
 (global-set-key (kbd "C-x Y")
                 (lambda ()
                   (interactive)
-                  (treemacs-display-current-project-exclusively)
-                  (treemacs--follow)
-                  (treemacs)))
+                  (let ((original-state (treemacs-current-visibility)))
+                    (treemacs-display-current-project-exclusively)
+                    (treemacs--follow)
+                    (when (eq (treemacs-current-visibility) original-state)
+                      (treemacs)))))
 
 
 ;; universal compile command
