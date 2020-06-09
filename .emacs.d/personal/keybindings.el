@@ -2,9 +2,8 @@
 ;; My Personal Keybindings
 (require 'prelude-packages nil t)
 (prelude-require-packages '(multiple-cursors linum-relative
-                            fsharp-mode neotree
-                            darkroom speedbar sr-speedbar
-                            projectile-speedbar key-chord
+                            fsharp-mode neotree treemacs
+                            darkroom  key-chord
                             yasnippet yasnippet-snippets
                             zeal-at-point))
 
@@ -14,7 +13,6 @@
 (require 'yasnippet) ;; template system
 (require 'multiple-cursors)
 (require 'darkroom)
-(require 'sr-speedbar)
 (require 'manoel "~/.emacs.d/personal/preload/mano.el")
 (require 'ox-beamer)
 (require 'projectile)
@@ -148,14 +146,19 @@
 (global-set-key (kbd "M-2") 'other-window)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (global-set-key (kbd  "C-M-S-b") 'ibuffer)
-;; neotree feels
 (global-set-key (kbd "C-x t") 'neotree-toggle)
 (global-set-key (kbd "C-x T")
                 (lambda ()
                   (interactive)
                   (neotree-refresh)
                   (neotree)))
-(global-set-key (kbd "C-x y") 'projectile-speedbar-toggle)
+(global-set-key (kbd "C-x y") 'treemacs)
+(global-set-key (kbd "C-x Y")
+                (lambda ()
+                  (interactive)
+                  (treemacs-display-current-project-exclusively)
+                  (treemacs--follow)
+                  (treemacs)))
 
 
 ;; universal compile command
