@@ -12,6 +12,7 @@
 (require 'prelude-custom "~/.emacs.d/core/prelude-custom.el") ;; definition of prelude-user-init-file
 (require 'yasnippet) ;; template system
 (require 'multiple-cursors)
+(require 'treemacs)
 (require 'darkroom)
 (require 'manoel "~/.emacs.d/personal/preload/mano.el")
 (require 'ox-beamer)
