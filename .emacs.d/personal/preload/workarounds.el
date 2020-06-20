@@ -1,5 +1,12 @@
 ;; Workarounds: making my packages working on any emacs version
 
+;; ref: https://github.com/bbatsov/prelude/issues/1225
+;; error: Package ‘undo-tree-’ is unavailable
+;; affects emacs 26.1 and 26.2, fixed in emacs 26.3
+(when (and (= emacs-major-version 26)
+           (< emacs-minor-version 3))
+  (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3"))
+
 (when (version<= "25.3" emacs-version) ;; only for pos-25.4
   (message "HOTFIX: fill-column matlab-mode fix")
   (defvar default-fill-column fill-column)
