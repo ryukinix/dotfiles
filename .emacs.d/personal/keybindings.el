@@ -2,10 +2,13 @@
 ;; My Personal Keybindings
 (require 'manoel "~/.emacs.d/personal/preload/mano.el")
 
+;; NOTE: Sat 20 Jun 2020 05:21:37 PM -03
+;; installing: yasnippet-snippets destroy all my software ↓ fuckups everything, please don't do that
+;; docker-lerax related bug at bootstraping package install
 (lerax-require-packages '(multiple-cursors linum-relative
                           fsharp-mode neotree treemacs
                           darkroom  key-chord
-                          yasnippet yasnippet-snippets))
+                          yasnippet))
 
 (require 'company)
 (require 'fsharp-mode)
@@ -14,7 +17,6 @@
 (require 'multiple-cursors)
 (require 'treemacs)
 (require 'darkroom)
-(require 'manoel "~/.emacs.d/personal/preload/mano.el")
 (require 'ox-beamer)
 (require 'projectile)
 (require 'key-chord)
@@ -137,10 +139,11 @@
   (global-set-key (kbd "<f6>") (favorite-dir did-dir))
   (global-set-key (kbd "<f7>") (favorite-dir courses-dir)))
 
-(let ((init (if (eq system-type 'windows-nt)
-                (expand-file-name "~/.dotfiles/.emacs.d/personal/")
-              prelude-user-init-file)))
-  (global-set-key [f8] (favorite-dir init)))
+(eval-after-load 'prelude-custom
+ (let ((init (if (eq system-type 'windows-nt)
+                 (expand-file-name "~/.dotfiles/.emacs.d/personal/")
+               prelude-user-init-file)))
+   (global-set-key [f8] (favorite-dir init))))
 
 ;; spacemacs habits...
 (global-set-key (kbd "M-1") 'other-window)
@@ -204,9 +207,11 @@
 (define-key company-active-map (kbd "\C-d") 'company-show-doc-buffer)
 (define-key company-active-map (kbd "M-.") 'company-show-location)
 (define-key yas-minor-mode-map [C-return] 'yas-expand)
+(define-key yas-minor-mode-map [M-return] 'yas-insert-snippet)
 
 ;; open a terminal full-featured on emacs
 (global-set-key (kbd "C-x M") 'term)
+
 
 ;; multiple-cursors
 (global-set-key (kbd "C-S-<mouse-1>") 'mc/add-cursor-on-click)

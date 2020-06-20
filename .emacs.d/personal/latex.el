@@ -1,14 +1,9 @@
 ;; this enable syntax highlight on org-mode org |> latex |> pdf
 (require 'manoel "~/.emacs.d/personal/preload/mano.el")
 
-;; disabled due bug at docker-lerax: Sat 20 Jun 2020 03:36:44 PM -03
-;; File error: https://melpa.org/packages/tablist-20200427.2205.tar, Bad Request
-;; org-ref -> pdf-tools -> tablist
-;; I'm not sure the reason for that ????
+(lerax-require-packages '(org-ref))
 
-;; (lerax-require-packages '(org-ref))
-;; (require 'org-ref)
-
+(require 'org-ref)
 (require 'ox-latex)
 (require 'org-bibtex)
 (with-eval-after-load 'ox-latex

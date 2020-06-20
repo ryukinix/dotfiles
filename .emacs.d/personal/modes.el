@@ -155,7 +155,8 @@
   (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc))
   (setq-default flycheck-scheme-chicken-executable "chicken-csc"))
 
-(when (display-graphic-p)
+;; not available in emacs-nox package
+(when (fboundp 'scroll-bar-mode)
  (scroll-bar-mode -1)) ;; disable that ugly scroll bar, i don't need that
 
 (with-eval-after-load 'geiser

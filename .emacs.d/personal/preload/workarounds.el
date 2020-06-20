@@ -1,4 +1,7 @@
+;; -*- lexical-binding: t -*-
 ;; Workarounds: making my packages working on any emacs version
+
+(require 'manoel "~/.emacs.d/personal/preload/mano.el")
 
 ;; ref: https://github.com/bbatsov/prelude/issues/1225
 ;; error: Package ‘undo-tree-’ is unavailable
