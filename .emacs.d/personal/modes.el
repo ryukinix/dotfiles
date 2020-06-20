@@ -5,6 +5,7 @@
                           ssh-agency
                           ix
                           telephone-line
+                          company-quickhelp
                           xclip
                           pyvenv
                           ox-gfm
