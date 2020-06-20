@@ -3,10 +3,9 @@
 (require 'manoel "~/.emacs.d/personal/preload/mano.el")
 
 (lerax-require-packages '(multiple-cursors linum-relative
-                            fsharp-mode neotree treemacs
-                            darkroom  key-chord
-                            yasnippet yasnippet-snippets
-                            zeal-at-point))
+                          fsharp-mode neotree treemacs
+                          darkroom  key-chord
+                          yasnippet yasnippet-snippets))
 
 (require 'company)
 (require 'fsharp-mode)
@@ -354,16 +353,8 @@
 ;; disable this random shit to paste with mouse, i do not use this shit!
 (global-unset-key (kbd "<mouse-2>"))
 
-;; I always type this shit wrongly, skip that
+;; I don't like this keybinding, it minimizes the emacs
 (global-unset-key (kbd "C-z"))
-(defun nao-seja-burro ()
-  (interactive)
-  (message "Não seja burro! C-z aqui não"))
-
-(global-set-key (kbd "C-z") #'nao-seja-burro)
-
-(global-set-key (kbd "C-'") 'zeal-at-point)
-
 
 ;; horizontal scroll in emacs is weird
 (global-unset-key (kbd "<C-prior>"))
