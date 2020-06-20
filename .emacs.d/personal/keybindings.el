@@ -139,11 +139,10 @@
   (global-set-key (kbd "<f6>") (favorite-dir did-dir))
   (global-set-key (kbd "<f7>") (favorite-dir courses-dir)))
 
-(eval-after-load 'prelude-custom
- (let ((init (if (eq system-type 'windows-nt)
-                 (expand-file-name "~/.dotfiles/.emacs.d/personal/")
-               prelude-user-init-file)))
-   (global-set-key [f8] (favorite-dir init))))
+(let ((init (if (eq system-type 'windows-nt)
+                (expand-file-name "~/.dotfiles/.emacs.d/personal/")
+              prelude-user-init-file)))
+  (global-set-key [f8] (favorite-dir init)))
 
 ;; spacemacs habits...
 (global-set-key (kbd "M-1") 'other-window)
