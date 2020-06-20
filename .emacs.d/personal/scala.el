@@ -7,7 +7,6 @@
   (require 'manoel "~/.emacs.d/personal/preload/mano.el")
 
   (lerax-require-packages '(use-package
-                             changes
                              lsp-mode
                              company-posframe
                              lsp-ui
