@@ -32,7 +32,9 @@
 
 ;;; Code:
 
+(package-initialize)
 (require 'cl-lib) ;;noqa
+(require 'package)
 
 (defmacro try-quote (symbol)
   "Quote the SYMBOL if is not quoted.
@@ -117,17 +119,22 @@ BODY is the rest of eval forms to be used FUNC memoized."
   "Check if all packages in `packages' are installed."
   (cl-every #'package-installed-p packages))
 
+(defun package-refresh-contents-once ()
+  (defconst lerax-package-refreshed nil)
+  (unless lerax-package-refresh
+    (package-refresh-contents)
+    (setq lerax-package-refreshed t)))
+
 (defun lerax-require-package (package)
   "Install PACKAGE unless already installed."
   (unless (package-installed-p package)
+    (package-refresh-contents-once)
     (package-install package)))
 
 (defun lerax-require-packages (packages)
   "Ensure PACKAGES are installed.
 Missing packages are installed automatically."
-  (unless (lerax-packages-installed-p packages)
-    (package-refresh-contents)
-    (mapc #'lerax-require-package packages)))
+  (mapc #'lerax-require-package packages))
 
 
 (provide 'manoel)

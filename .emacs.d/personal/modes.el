@@ -155,7 +155,8 @@
   (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc))
   (setq-default flycheck-scheme-chicken-executable "chicken-csc"))
 
-(scroll-bar-mode -1) ;; disable that ugly scroll bar, i don't need that
+(when (display-graphic-p)
+ (scroll-bar-mode -1)) ;; disable that ugly scroll bar, i don't need that
 
 (with-eval-after-load 'geiser
   ;; chicken-install -s srfi-18 apropos chicken-doc
@@ -167,7 +168,6 @@
 
 (with-eval-after-load 'python
   (setq python-shell-interpreter "python3")
-  (setq flycheck-python-pycompile-executable "python3")
-  )
+  (setq flycheck-python-pycompile-executable "python3"))
 
 (telephone-line-mode +1)

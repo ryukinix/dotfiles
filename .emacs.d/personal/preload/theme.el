@@ -1,20 +1,20 @@
 ;; configuration about my personal theme
 ;; theme
 
+(require 'manoel "~/.emacs.d/personal/preload/mano.el")
 
-(require 'prelude-packages)
-(prelude-require-package 'doom-themes)
+(lerax-require-packages '(doom-themes))
 
 (defvar lerax-theme 'doom-vibrant)
 (defvar lerax-theme-window-loaded nil)
 (defvar lerax-theme-terminal-loaded nil)
 (defvar lerax-theme-font "Hack")
-(setq prelude-theme lerax-theme)
+(defconst prelude-theme lerax-theme)
 
 
 (defun font-exists-p (font)
   "check if font exists"
-  (if (and (window-system)
+  (if (and (display-graphic-p)
            (null (x-list-fonts font)))
       nil
     t))
@@ -44,7 +44,7 @@
     (add-hook 'after-make-frame-functions
               (lambda (frame)
                 (select-frame frame)
-                (if (window-system frame)
+                (if (display-graphic-p frame)
                     (unless lerax-theme-window-loaded
                       (lerax-theme-reload)
                       (setq lerax-theme-window-loaded t))

@@ -81,8 +81,7 @@
 (defun lerax-setup-terminal-session (&optional frame)
   "SETUP-TERMINAL-SESSION fix wrong theme colors in terminal frame."
   (interactive) ;; make callable as command by M-x
-  ;;(message "windows-system: %s" (print (window-system frame)))
-  (when (null (window-system frame))
+  (when (not (display-graphic-p frame))
     (let ((background "#a60022")
           (foreground "white"))
       (when (< (tty-display-color-cells frame) 256)
