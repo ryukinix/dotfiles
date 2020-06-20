@@ -1,12 +1,6 @@
 ;; -*- lexical-binding: t -*-
 ;; manual: https://github.com/ch11ng/exwm/wiki
 (require 'manoel "~/.emacs.d/personal/preload/mano.el")
-(lerax-require-packages '(exwm
-                            dmenu
-                            helm-exwm
-                            pulseaudio-control))
-(require 'exwm)
-
 
 (defconst lerax-exwm-autostart-programs
     (let ((host (system-name)))
@@ -207,6 +201,10 @@
   (interactive)
   (when (or (not (null (getenv "EXWM")))
             force)
+    (lerax-require-packages '(exwm
+                              dmenu
+                              helm-exwm
+                              pulseaudio-control))
     (require 'exwm)
     (lerax-setup-exwm)
     (exwm-init frame)))
