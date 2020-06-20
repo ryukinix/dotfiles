@@ -7,13 +7,15 @@
 
 ;; HACK: sudo apt-get install ttf-ancient-fonts -y
 ;; Symbola font can be get by this ^ 😂
+;; Use company autocompletion to get proper emojy
 (defun lerax-set-emoji-font (frame)
   "Adjust the font settings of FRAME so Emacs can display emoji properly."
-  (if (eq system-type 'darwin)
-      ;; For NS/Cocoa
-      (set-fontset-font t 'symbol (font-spec :family "Apple Color Emoji") frame 'prepend)
-    ;; For Linux
-    (set-fontset-font t 'symbol (font-spec :family "Symbola") frame 'prepend)))
+  (when (fboundp 'set-fontset-font)
+   (if (eq system-type 'darwin)
+       ;; For NS/Cocoa
+       (set-fontset-font t 'symbol (font-spec :family "Apple Color Emoji") frame 'prepend)
+     ;; For Linux
+     (set-fontset-font t 'symbol (font-spec :family "Symbola") frame 'prepend))))
 
 ;; For when Emacs is started in GUI mode:
 ;; Hook for when a frame is created with emacsclient
