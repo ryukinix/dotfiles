@@ -1,14 +1,21 @@
 (defun scala-metals ()
+  "You will need emacs-metals in $PATH to work properly.
+
+  Source: https://scalameta.org/metals/docs/editors/emacs.html#installation
+  "
+
   (require 'manoel "~/.emacs.d/personal/preload/mano.el")
 
   (lerax-require-packages '(use-package
-                               lsp-mode
-                               company-posframe
-                               lsp-ui
-                               company-lsp
-                               sbt-mode
-                               dap-mode
-                               lsp-treemacs))
+                             changes
+                             lsp-mode
+                             company-posframe
+                             lsp-ui
+                             company-lsp
+                             sbt-mode
+                             lsp-treemacs
+                             dap-mode))
+
 
   ;; Enable nice rendering of documentation on hover
   (use-package lsp-ui)
@@ -39,7 +46,14 @@
   (use-package dap-mode
     :hook
     (lsp-mode . dap-mode)
-    (lsp-mode . dap-ui-mode)))
+    (lsp-mode . dap-ui-mode))
+
+  ;; ;; Use the Tree View Protocol for viewing the project structure and triggering compilation
+  ;; (use-package lsp-treemacs
+  ;;   :config
+  ;;   (lsp-metals-treeview-enable t)
+  ;;   (setq lsp-metals-treeview-show-when-views-received t))
+  )
 
 
 (when (and (not (version< emacs-version "26.1"))
