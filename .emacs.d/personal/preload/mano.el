@@ -133,7 +133,7 @@ BODY is the rest of eval forms to be used FUNC memoized."
   (cl-every #'package-installed-p packages))
 
 (defun package-refresh-contents-once ()
-  (defconst lerax-package-refreshed nil)
+  (defvar lerax-package-refreshed nil)
   (unless lerax-package-refreshed
     (package-refresh-contents)
     (setq lerax-package-refreshed t)))
