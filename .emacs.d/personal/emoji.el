@@ -1,7 +1,7 @@
 ;; fetching personal defined packages
-(require 'prelude-packages "~/.emacs.d/core/prelude-packages.el" t)
+(require 'manoel "~/.emacs.d/personal/preload/mano.el")
 
-(prelude-require-packages '(company-emoji))
+(lerax-require-packages '(company-emoji))
 
 (require 'company-emoji)
 

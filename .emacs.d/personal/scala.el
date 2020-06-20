@@ -1,7 +1,7 @@
-(require 'package)
-
 (defun scala-metals ()
-  (prelude-require-packages '(use-package
+  (require 'manoel "~/.emacs.d/personal/preload/mano.el")
+
+  (lerax-require-packages '(use-package
                                lsp-mode
                                company-posframe
                                lsp-ui

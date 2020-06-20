@@ -1,7 +1,8 @@
 ;;; -*- lexical-binding: t -*-
 ;; My Personal Keybindings
-(require 'prelude-packages nil t)
-(prelude-require-packages '(multiple-cursors linum-relative
+(require 'manoel "~/.emacs.d/personal/preload/mano.el")
+
+(lerax-require-packages '(multiple-cursors linum-relative
                             fsharp-mode neotree treemacs
                             darkroom  key-chord
                             yasnippet yasnippet-snippets

@@ -1,7 +1,7 @@
 ;; -*- lexical-binding: t -*-
 ;; manual: https://github.com/ch11ng/exwm/wiki
-(require 'prelude-packages nil t)
-(prelude-require-packages '(exwm
+(require 'manoel "~/.emacs.d/personal/preload/mano.el")
+(lerax-require-packages '(exwm
                             dmenu
                             helm-exwm
                             pulseaudio-control))

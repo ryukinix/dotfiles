@@ -1,7 +1,7 @@
 ;; set of hooks made to keep the life more easy
 
-(require 'prelude-packages nil t)
-(prelude-require-packages '(geiser pyvenv))
+(require 'manoel "~/.emacs.d/personal/preload/mano.el")
+(lerax-require-packages '(geiser pyvenv))
 
 (require 'python)
 (require 'cc-mode)

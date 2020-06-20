@@ -32,6 +32,8 @@
 
 ;;; Code:
 
+(require 'cl-lib) ;;noqa
+
 (defmacro try-quote (symbol)
   "Quote the SYMBOL if is not quoted.
 SYMBOL is any datum."
@@ -103,11 +105,30 @@ BODY is the rest of eval forms to be used FUNC memoized."
   "Go to a random line in this buffer."
                                         ; good for electrobibliomancy.
   (interactive)
-  (goto-line (1+ (random (buffer-line-count)))))
+  (forward-line (1+ (random (buffer-line-count)))))
 
 (defun buffer-line-count ()
   "Return the number of lines in this buffer."
   (count-lines (point-min) (point-max)))
+
+;; stoled from prelude, trying to decouple my config from prelude by steps
+
+(defun lerax-packages-installed-p (packages)
+  "Check if all packages in `packages' are installed."
+  (cl-every #'package-installed-p packages))
+
+(defun lerax-require-package (package)
+  "Install PACKAGE unless already installed."
+  (unless (package-installed-p package)
+    (package-install package)))
+
+(defun lerax-require-packages (packages)
+  "Ensure PACKAGES are installed.
+Missing packages are installed automatically."
+  (unless (lerax-packages-installed-p packages)
+    (package-refresh-contents)
+    (mapc #'lerax-require-package packages)))
+
 
 (provide 'manoel)
 ;;; mano.el ends here
