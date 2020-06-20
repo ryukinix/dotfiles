@@ -171,3 +171,6 @@
   (setq flycheck-python-pycompile-executable "python3"))
 
 (telephone-line-mode +1)
+
+;; I hate these asdf.txt~ files
+(setq make-backup-files nil)
