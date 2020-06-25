@@ -1,10 +1,10 @@
+(require 'manoel "~/.emacs.d/personal/preload/mano.el")
+
 (defun scala-metals ()
   "You will need emacs-metals in $PATH to work properly.
 
   Source: https://scalameta.org/metals/docs/editors/emacs.html#installation
   "
-
-  (require 'manoel "~/.emacs.d/personal/preload/mano.el")
 
   (lerax-require-packages '(use-package
                              lsp-mode
