@@ -3,16 +3,30 @@
 (defun scala-metals ()
   "You will need emacs-metals in $PATH to work properly.
 
+# Make sure to use coursier v1.1.0-M9 or newer.
+curl -L -o coursier https://git.io/coursier-cli
+chmod +x coursier
+./coursier bootstrap \
+  --java-opt -Xss4m \
+  --java-opt -Xms100m \
+  --java-opt -Dmetals.client=emacs \
+  org.scalameta:metals_2.12:0.9.0 \
+  -r bintray:scalacenter/releases \
+  -r sonatype:snapshots \
+  -o /usr/local/bin/metals-emacs -f
+
+
   Source: https://scalameta.org/metals/docs/editors/emacs.html#installation
   "
 
   (lerax-require-packages '(use-package
-                             lsp-mode
-                             company-posframe
-                             lsp-ui
-                             company-lsp
                              sbt-mode
+                             lsp-metals
+                             lsp-mode
+                             lsp-ui
                              lsp-treemacs
+                             company-posframe
+                             company-lsp
                              dap-mode))
 
 
