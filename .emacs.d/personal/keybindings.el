@@ -17,6 +17,7 @@
 (require 'multiple-cursors)
 (require 'treemacs)
 (require 'darkroom)
+(require 'neotree)
 (require 'ox-beamer)
 (require 'projectile)
 (require 'key-chord)
