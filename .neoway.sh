@@ -26,31 +26,12 @@ if [[ -f ~/.ssh/config_neoway ]]; then
     fi
 fi
 
- _neoway-get () {
-    awk "{print \$$1}" | tr -d '/'
+
+neoway-latest-timestmap () {
+    gsutil ls gs://nwdl_features_store/prd/ | tail -n1 | grep 'prd.*'  -o | cut -d / -f2
 }
 
-neoway-last-parquet-date () {
-    aws s3 cp s3://data-analytics-nw/dataset_bkp/replica/lastdata.txt -
-}
 
-neoway-last-dumps-date () {
-    aws s3 ls "s3://backups-dataarea/backups-core/replica/dumps/science/" \
-        | _neoway-get 2 \
-        | tail -n 1
-}
-
-neoway-last-parquets () {
-    local d=$(neoway-last-parquet-date)
-    aws s3 ls "s3://data-analytics-nw/dataset_bkp/replica/$d/" \
-        | _neoway-get 2
-}
-
-neoway-last-dumps () {
-    local d=$(neoway-last-dumps-date)
-    aws s3 ls "s3://backups-dataarea/backups-core/replica/dumps/science/$d/" \
-        | _neoway-get 4
-}
 
 2fa-gitlab () {
     token=$(2fa -clip neoway-gitlab)
