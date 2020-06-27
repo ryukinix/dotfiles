@@ -55,3 +55,4 @@ alias dataproc='cd /home/lerax/Desktop/workspace/townplanner-troublemaker/projec
 alias jupyter-gateway-tunnel='neoway-tunnel jupyter-gateway'
 alias jupyter-gateway-create="jupyter notebook --gateway-url=http://localhost:8321 --GatewayClient.http_user=${USER} --GatewayClient.http_pwd=${USER}-password"
 alias jupyter-gateway-install="pip install jupyter_enterprise_gateway"
+alias jupyter-gateway-open='jupyter-gateway-tunnel -f; jupyter-gateway-create'
