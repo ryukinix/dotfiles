@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# configura autenticação
+gcloud config set project analytics-k8s-prod-3592
+gcloud auth activate-service-account --key-file=/keybase/team/neoway.bigdata.cloud.google.datascience.airflow/analytics-services.json
+gcloud config set account airflow-service@analytics-services-prod-1964.iam.gserviceaccount.com
+gcloud container clusters get-credentials analytics-k8s-prod-3592-models --zone us-east1
+
+# redireciona kubectl para localhost
+kubectl config set-cluster gke_analytics-k8s-prod-3592_us-east1_analytics-k8s-prod-3592-models --insecure-skip-tls-verify=true --server="https://127.0.0.1:8443"
+kubectl config use-context gke_analytics-k8s-prod-3592_us-east1_analytics-k8s-prod-3592-models
