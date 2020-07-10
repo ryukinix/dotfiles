@@ -61,6 +61,12 @@ chmod +x coursier
     (lsp-mode . dap-mode)
     (lsp-mode . dap-ui-mode))
 
+  (use-package scala-mode
+    :hook
+    (scala-mode . (lambda () (whitespace-toggle-options 'lines-tail)))
+    (scala-mode . (lambda () (setq-local flycheck-check-syntax-automatically
+                                    '(save idle-change new-line mode-enabled)))))
+
   ;; ;; Use the Tree View Protocol for viewing the project structure and triggering compilation
   ;; (use-package lsp-treemacs
   ;;   :config
