@@ -374,3 +374,4 @@ alias rasp='ssh rasp'
 alias pip='pip3'
 alias python='python3'
 alias commits='git --no-pager log --oneline master..@'
+alias tunnels="lsof -i -n | egrep '^ssh\b'"
