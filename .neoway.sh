@@ -41,8 +41,7 @@ neoway-latest-timestmap () {
 
 replica () {
     if command -v pgcli > /dev/null; then
-        decrypt ~/.credentials/replica.txt.gpg | xcopy
-        pgcli -h localhost -p 7543 -U manoel.vilela -W repositorio
+        env $(decrypt ~/.credentials/replica.txt.gpg | sed 's/export //g') pgcli
     else
         echo "error: install pgcli not found, fix it: yay -Sa pgcli"
     fi
