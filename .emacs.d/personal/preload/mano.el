@@ -148,3 +148,9 @@ Missing packages are installed automatically."
 
 (provide 'manoel)
 ;;; mano.el ends here
+
+(defun lerax-memory-ram ()
+  "Return total RAM available in the host system"
+  (when (eq system-type 'gnu/linux)
+    (string-to-number
+     (shell-command-to-string "free --giga  | grep Mem | awk '{print $2}'"))))
