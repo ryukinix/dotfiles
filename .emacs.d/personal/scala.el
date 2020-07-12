@@ -76,5 +76,6 @@ chmod +x coursier
 
 
 (when (and (not (version< emacs-version "26.1"))
-           (executable-find "metals-emacs"))
+           (executable-find "metals-emacs")
+           (>= (lerax-memory-ram) 8))
   (scala-metals))
