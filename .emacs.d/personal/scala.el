@@ -21,19 +21,33 @@ chmod +x coursier
 
   (lerax-require-packages '(use-package
                              sbt-mode
-                             lsp-metals
-                             lsp-mode
-                             lsp-ui
-                             lsp-treemacs
-                             company-posframe
-                             company-lsp
-                             dap-mode))
+                             scala-mode))
 
 
-  ;; Enable nice rendering of documentation on hover
-  (use-package lsp-ui)
-  ;; Add company-lsp backend for metals
-  (use-package company-lsp)
+
+  ;; that is only for NASA COMPUTERS
+  (when (>= (lerax-memory-ram) 16)
+    (lerax-require-packages '(lsp-metals
+                              lsp-mode
+                              lsp-ui
+                              lsp-treemacs
+                              company-posframe
+                              company-lsp
+                              dap-mode))
+    ;; Enable nice rendering of documentation on hover
+    (use-package lsp-ui)
+    ;; Add company-lsp backend for metals
+    (use-package company-lsp)
+    (use-package lsp-mode
+      ;; Optional - enable lsp-mode automatically in scala files
+      :hook  (scala-mode . lsp)
+      (lsp-mode . lsp-lens-mode))
+    ;; Use the Debug Adapter Protocol for running tests and debugging
+    (use-package dap-mode
+      :hook
+      (lsp-mode . dap-mode)
+      (lsp-mode . dap-ui-mode)))
+
 
   ;; Enable sbt mode for executing sbt commands
   (use-package sbt-mode
@@ -48,34 +62,16 @@ chmod +x coursier
     ;; sbt-supershell kills sbt-mode:  https://github.com/hvesalai/emacs-sbt-mode/issues/152
     (setq sbt:program-options '("-Dsbt.supershell=false")))
 
-
-  (use-package lsp-mode
-    ;; Optional - enable lsp-mode automatically in scala files
-    :hook  (scala-mode . lsp)
-    (lsp-mode . lsp-lens-mode))
-
-  ;; installed company-posframe
-  ;; Use the Debug Adapter Protocol for running tests and debugging
-  (use-package dap-mode
-    :hook
-    (lsp-mode . dap-mode)
-    (lsp-mode . dap-ui-mode))
-
   (use-package scala-mode
     :hook
     (scala-mode . (lambda () (whitespace-toggle-options 'lines-tail)))
     (scala-mode . (lambda () (setq-local flycheck-check-syntax-automatically
                                     '(save idle-change new-line mode-enabled)))))
 
-  ;; ;; Use the Tree View Protocol for viewing the project structure and triggering compilation
-  ;; (use-package lsp-treemacs
-  ;;   :config
-  ;;   (lsp-metals-treeview-enable t)
-  ;;   (setq lsp-metals-treeview-show-when-views-received t))
   )
 
 
 (when (and (not (version< emacs-version "26.1"))
            (executable-find "metals-emacs")
-           (>= (lerax-memory-ram) 16))
+           (>= (lerax-memory-ram) 8))
   (scala-metals))
