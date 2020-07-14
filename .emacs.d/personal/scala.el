@@ -18,35 +18,41 @@ chmod +x coursier
 
   Source: https://scalameta.org/metals/docs/editors/emacs.html#installation
   "
+  (lerax-require-packages '(lsp-metals
+                            lsp-mode
+                            lsp-ui
+                            lsp-treemacs
+                            company-posframe
+                            company-lsp
+                            dap-mode))
+  ;; Enable nice rendering of documentation on hover
+  (use-package lsp-ui)
+  ;; Add company-lsp backend for metals
+  (use-package company-lsp)
+  (use-package lsp-mode
+    ;; Optional - enable lsp-mode automatically in scala files
+    :hook  (scala-mode . lsp)
+    (lsp-mode . lsp-lens-mode))
+  ;; Use the Debug Adapter Protocol for running tests and debugging
+  (use-package dap-mode
+    :hook
+    (lsp-mode . dap-mode)
+    (lsp-mode . dap-ui-mode)))
+
+(defun scala-setup ()
+  "My scala env for emacs"
 
   (lerax-require-packages '(use-package
                              sbt-mode
                              scala-mode))
 
-
-
   ;; that is only for NASA COMPUTERS
-  (when (>= (lerax-memory-ram) 16)
-    (lerax-require-packages '(lsp-metals
-                              lsp-mode
-                              lsp-ui
-                              lsp-treemacs
-                              company-posframe
-                              company-lsp
-                              dap-mode))
-    ;; Enable nice rendering of documentation on hover
-    (use-package lsp-ui)
-    ;; Add company-lsp backend for metals
-    (use-package company-lsp)
-    (use-package lsp-mode
-      ;; Optional - enable lsp-mode automatically in scala files
-      :hook  (scala-mode . lsp)
-      (lsp-mode . lsp-lens-mode))
-    ;; Use the Debug Adapter Protocol for running tests and debugging
-    (use-package dap-mode
-      :hook
-      (lsp-mode . dap-mode)
-      (lsp-mode . dap-ui-mode)))
+  ;; be careful, it your EATS RAM REALLY FAST!
+  ;; 8gb ram do you have? This is not enough!
+  (when (and (not (version< emacs-version "26.1"))
+             (executable-find "metals-emacs")
+             (>= (lerax-memory-ram) 16))
+    (scala-metals))
 
 
   ;; Enable sbt mode for executing sbt commands
@@ -66,12 +72,7 @@ chmod +x coursier
     :hook
     (scala-mode . (lambda () (whitespace-toggle-options 'lines-tail)))
     (scala-mode . (lambda () (setq-local flycheck-check-syntax-automatically
-                                    '(save idle-change new-line mode-enabled)))))
-
-  )
+                                    '(save idle-change new-line mode-enabled))))))
 
 
-(when (and (not (version< emacs-version "26.1"))
-           (executable-find "metals-emacs")
-           (>= (lerax-memory-ram) 8))
-  (scala-metals))
+(scala-setup)
