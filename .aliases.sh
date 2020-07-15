@@ -3,6 +3,12 @@
 # shellcheck disable=SC2155
 # shellcheck disable=SC2050
 
+emacs-lite () {
+    local lite="~/.emacs.d.lite"
+    emacs -q --eval "(setq user-emacs-directory \"$lite\")" \
+          -l "$lite/init.el" "$@"
+}
+
 gclone () {
     local repo="$1"
     git clone "git@github.com:$repo.git"
