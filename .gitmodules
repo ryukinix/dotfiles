@@ -16,3 +16,6 @@
 [submodule ".git-fuzzy"]
 	path = .git-fuzzy
 	url = https://github.com/bigH/git-fuzzy.git
+[submodule ".emacs.d.lite"]
+	path = .emacs.d.lite
+	url = https://github.com/ryukinix/emacsd-lite.git
