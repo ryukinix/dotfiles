@@ -291,7 +291,13 @@
   (define-key inferior-python-mode-map (kbd "C-c C-z") 'other-window))
 
 ;; set darkroom for non-distract mode keybinding
-(global-set-key (kbd "<S-f11>") 'darkroom-tentative-mode)
+(with-eval-after-load 'darkroom
+  (setq-default darkroom-text-scale-increase 1.2)
+  (global-set-key (kbd "<S-f11>") 'darkroom-tentative-mode)
+  (add-hook 'darkroom-tentative-mode-hook
+            (lambda ()
+              (setq-local truncate-lines t)
+              )))
 
 ;; disable mouse-start-secondary (selection)
 ;; this avoid weird highlights when I try just copy and paste with a mouse
