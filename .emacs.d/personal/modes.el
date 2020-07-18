@@ -180,4 +180,4 @@
 ;; i'm done with guru mode!
 ;; j. krishnamurti says that gurus are no good
 ;; i need to think by mysefl, goodbye guru-mode
-(guru-global-mode -1)
+(setq prelude-guru nil)
