@@ -235,6 +235,11 @@ venv () {
     cd . || exit 1
 }
 
+git-remember() {
+    # cache my https password for 1 week
+    git config --global credential.helper 'cache --timeout=604800'
+}
+
 # save definition of dot (graphviz language)
 alias dot-graph='/usr/bin/dot'
 alias dot-tig='GIT_DIR=$HOME/.dot/ tig'
