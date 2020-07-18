@@ -175,3 +175,9 @@
 
 ;; I hate these asdf.txt~ files
 (setq make-backup-files nil)
+
+;; Sat 18 Jul 2020 08:45:56 AM -03
+;; i'm done with guru mode!
+;; j. krishnamurti says that gurus are no good
+;; i need to think by mysefl, goodbye guru-mode
+(guru-global-mode -1)

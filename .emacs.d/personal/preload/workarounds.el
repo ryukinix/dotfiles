@@ -2,6 +2,8 @@
 ;; Workarounds: making my packages working on any emacs version
 
 (require 'manoel "~/.emacs.d/personal/preload/mano.el")
+(require 'cl-lib)
+(require 'subr-x)
 
 ;; ref: https://github.com/bbatsov/prelude/issues/1225
 ;; error: Package ‘undo-tree-’ is unavailable
@@ -24,7 +26,7 @@
 ;; which seems fixed at: https://github.com/haskell/haskell-mode/pull/1625
 (with-eval-after-load 'haskell-mode
   (defconst ghc-version (when (executable-find "ghc")
-                          (s-trim (shell-command-to-string "ghc --numeric-version"))))
+                          (string-trim (shell-command-to-string "ghc --numeric-version"))))
 
   (when (and ghc-version
              (version<= "8.2.1" ghc-version))
@@ -55,12 +57,13 @@
 (defun fetch-dbus-address (&optional bus private)
   "FETCH-DBUS-ADDRESS reads the ~/.dbus/session-bus/ first file
 parses and set DBUS_SESSION_BUS_ADDRES to its expected value."
+  (ignore bus private)
   (let* ((file (car (directory-files "~/.dbus/session-bus/" t ".*-0")))
          (varname "DBUS_SESSION_BUS_ADDRESS")
          (regexp (format "^%s=" varname))
          (value nil))
     (when file
-      (setq value (car (remove-if-not (lambda (x)
+      (setq value (car (cl-remove-if-not (lambda (x)
                                         (equal (string-match regexp x) 0))
                                       (file-readlines file))))
       (setq value (replace-regexp-in-string regexp "" value))
@@ -85,3 +88,16 @@ parses and set DBUS_SESSION_BUS_ADDRES to its expected value."
 (with-eval-after-load 'git-commit
   (defconst git-commit-filename-regexp
     "/\\(\\\(\\(COMMIT\\|NOTES\\|PULLREQ\\|TAG\\|MERGEREQ\\)_EDIT\\|MERGE_\\|\\)MSG\\\|\\(BRANCH\\|EDIT\\|_EDITMSG\\)_DESCRIPTION\\)\\'"))
+
+
+;; Sat 18 Jul 2020 08:47:28 AM -03
+;; arrow keys is not working on terminal
+(add-hook 'after-make-frame-functions
+          (lambda (frame)
+            (when (not (display-graphic-p frame))		;; Only use in tty-sessions.
+              (defvar arrow-keys-map (make-sparse-keymap) "Keymap for arrow keys")
+              (define-key esc-map "O" arrow-keys-map)
+              (define-key arrow-keys-map "A" 'previous-line)
+              (define-key arrow-keys-map "B" 'next-line)
+              (define-key arrow-keys-map "C" 'forward-char)
+              (define-key arrow-keys-map "D" 'backward-char))))
