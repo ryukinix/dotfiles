@@ -3,6 +3,10 @@
 # shellcheck disable=SC2155
 # shellcheck disable=SC2050
 
+dosrun () {
+    dosbox "$@" -fullscreen -exit
+}
+
 emacs-lite () {
     local lite="~/.emacs.d.lite"
     emacs -q --eval "(setq user-emacs-directory \"$lite\")" \
