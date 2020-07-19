@@ -33,18 +33,19 @@
 ;;; Code:
 
 ;; sorry
-(require 'cl)
+(require 'cl-lib)
 (require 'package)
 
 ;; accessing a package repo over https on Windows is a no go, so we
 ;; fallback to http there
-(if (eq system-type 'windows-nt)
-    (add-to-list 'package-archives
-                 '("melpa" . "http://melpa.org/packages/") t)
-  (add-to-list 'package-archives
-               '("melpa" . "https://melpa.org/packages/") t))
+(unless package--initialized
+ (if (eq system-type 'windows-nt)
+     (add-to-list 'package-archives
+                  '("melpa" . "http://melpa.org/packages/") t)
+   (add-to-list 'package-archives
+                '("melpa" . "https://melpa.org/packages/") t))
 
-(package-initialize)
+ (package-initialize))
 
 (defmacro try-quote (symbol)
   "Quote the SYMBOL if is not quoted.
@@ -146,11 +147,12 @@ BODY is the rest of eval forms to be used FUNC memoized."
 Missing packages are installed automatically."
   (mapc #'lerax-require-package packages))
 
-(provide 'manoel)
-;;; mano.el ends here
-
 (defun lerax-memory-ram ()
   "Return total RAM available in the host system"
   (when (eq system-type 'gnu/linux)
     (string-to-number
      (shell-command-to-string "free --giga  | grep Mem | awk '{print $2}'"))))
+
+
+(provide 'manoel)
+;;; mano.el ends here

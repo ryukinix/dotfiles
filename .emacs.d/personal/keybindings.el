@@ -371,7 +371,8 @@
 (global-unset-key (kbd "<C-prior>"))
 (global-unset-key (kbd "<C-next>"))
 
-
 (when (eq system-type 'gnu/linux)
   (global-unset-key (kbd "<f11>"))
   (global-set-key (kbd "<f11>") 'prelude-fullscreen))
+
+(global-set-key (kbd "C-S-k") 'sp-kill-whole-line)

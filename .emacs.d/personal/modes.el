@@ -6,6 +6,7 @@
                           ix
                           telephone-line
                           company-quickhelp
+                          company-c-headers
                           xclip
                           pyvenv
                           ox-gfm
@@ -125,6 +126,7 @@
 (global-git-commit-mode +1)
 ;; add company quickhelp mode
 (company-quickhelp-mode +1)
+(add-to-list 'company-backends 'company-c-headers)
 
 ;; prettify lambda as λ
 (global-prettify-symbols-mode +1)

@@ -5,7 +5,7 @@
 
 (require 'org-ref)
 (require 'ox-latex)
-(require 'org-bibtex)
+
 (with-eval-after-load 'ox-latex
   (setq org-latex-listings 'minted
         org-latex-minted-options '(("frame" "lines")
