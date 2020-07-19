@@ -30,16 +30,6 @@ function ftp-status {
     sudo service pure-ftpd status
 }
 
-function warsaw-browser {
-    xhost +;
-    docker run -it --rm \
-           -v /tmp/.X11-unix:/tmp/.X11-unix \
-           -v $HOME/ArquivosDoBanco:/home/bank/Downloads \
-           -e DISPLAY=unix$DISPLAY \
-           --name warsaw-browser \
-           lichti/warsaw-browser $1;
-}
-
 function hack-chat {
     docker run -d --name hchat \
            -p 80:8080 \
@@ -52,12 +42,6 @@ function hack-chat {
            -e SALT="2dSg4kS" \
            mcgriddle/hack-chat:latest
 }
-
-alias bb="warsaw-browser bb"
-alias bbpj="warsaw-browser bbpj"
-alias cef="warsaw-browser cef"
-alias itau="warsaw-browser itau"
-
 
 restart-network () {
     killall -q -9 nm-applet || true
