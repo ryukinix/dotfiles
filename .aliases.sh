@@ -228,6 +228,11 @@ git-remember() {
     git config --global credential.helper 'cache --timeout=604800'
 }
 
+git-branch-clean() {
+    git remote prune origin
+    git branch --merged | egrep -v "(^\*|master|dev)" | xargs git branch -d
+}
+
 # save definition of dot (graphviz language)
 alias dot-graph='/usr/bin/dot'
 alias dot-tig='GIT_DIR=$HOME/.dot/ tig'
