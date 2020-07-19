@@ -56,7 +56,7 @@ autostart=(
 
 
 commands=(
-    # "/etc/init.d/emacs.lerax restart"
+    "sudo /etc/init.d/emacs.lerax restart"
     # "geary --hidden"
     # "nm-applet"
     #"blueman-applet"
@@ -65,6 +65,7 @@ commands=(
     "thunar --daemon"
     "udiskie"
     "pamac-tray"
+    "run_keybase -g -a" # keybase kbfs no gui
 )
 
 
