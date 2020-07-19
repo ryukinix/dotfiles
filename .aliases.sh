@@ -229,8 +229,10 @@ git-remember() {
 }
 
 git-branch-clean() {
+    git checkout master
+    [[ ! -z $1 ]] && git push --delete origin $1
     git remote prune origin
-    git branch --merged | egrep -v "(^\*|master|dev)" | xargs git branch -d
+    git branch --merged | egrep -v "(^\*|master|dev)" | xargs -r git branch -d
 }
 
 # save definition of dot (graphviz language)
