@@ -381,3 +381,4 @@ alias pip='pip3'
 alias python='python3'
 alias commits='git --no-pager log --oneline master..@'
 alias tunnels="lsof -i -n | egrep '^ssh\b'"
+alias celeste-resolution="xrandr --output LVDS1 --mode 1366x768 --rate 60"
