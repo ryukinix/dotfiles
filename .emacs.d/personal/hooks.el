@@ -130,4 +130,7 @@
 
 (with-eval-after-load 'go-mode
   (define-key go-mode-map (kbd "M-.") 'godef-jump)
-  (define-key go-mode-map (kbd "C-M-.") 'godef-jump-other-window))
+  (define-key go-mode-map (kbd "C-M-.") 'godef-jump-other-window)
+  (add-hook 'go-mode-hook (lambda ()
+                            (whitespace-toggle-options 'lines-tail)))
+  )
