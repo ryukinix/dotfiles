@@ -56,3 +56,4 @@ alias jupyter-gateway-create="jupyter notebook --gateway-url=http://localhost:83
 alias jupyter-gateway-install="pip install jupyter_enterprise_gateway"
 alias jupyter-gateway-open='jupyter-gateway-tunnel -f; jupyter-gateway-create'
 alias jovis='cd ~/Desktop/workspace/jovis && jupyter-gateway-open'
+alias dl='gsutil -u analytics-k8s-dev-4742'
