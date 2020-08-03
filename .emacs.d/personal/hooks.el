@@ -1,7 +1,7 @@
 ;; set of hooks made to keep the life more easy
 
 (require 'manoel "~/.emacs.d/personal/preload/mano.el")
-(lerax-require-packages '(geiser pyvenv))
+(lerax-require-packages '(geiser pyvenv flycheck company-c-headers))
 
 (require 'python)
 (require 'cc-mode)
@@ -12,6 +12,9 @@
 (require 'company)
 (require 'geiser)
 (require 'geiser-impl)
+(require 'flycheck)
+(require 'company-clang)
+(require 'company-c-headers)
 
 ;; this fucking variable is created on the fly for gud,
 ;; so I need declare here to avoid warnings
@@ -47,6 +50,25 @@
       (set (make-local-variable 'gud-gdb-history)
            (cons (format "gdb -i=mi \"%s.%s\"" file-basename extension)
                  gud-gdb-history)))))
+
+(defun lerax-setup-c-project ()
+  (interactive)
+  (defconst src-path (concat (projectile-project-root) "src/"))
+  (message src-path)
+  (when (file-exists-p src-path)
+    (message "Setup C/C++ project!")
+    (let* ((include-path (list src-path
+                               "/usr/include/SDL2/"))
+           (clang-argument (list
+                            (format "-I%s"
+                                    src-path))))
+      (local-set-key (kbd "\C-c C-c") 'projectile-compile-project)
+      (setq-local flycheck-clang-include-path include-path)
+      (setq-local flycheck-gcc-include-path include-path)
+      (setq-local company-clang-arguments clang-argument)
+      (setq-local company-c-headers-path-user
+                  (append company-c-headers-path-user
+                          include-path)))))
 
 
 (defun setup-python-pdb-command ()
@@ -105,6 +127,7 @@
 
 ;; add commands for build and debug to C++ and C
 (add-hook 'c-mode-common-hook 'lerax-setup-c-mode-make)
+(add-hook 'c-mode-common-hook 'lerax-setup-c-project t)
 ;; add commands for debug Python code
 (add-hook 'python-mode-hook 'setup-python-pdb-command)
 (add-hook 'python-mode-hook 'pyvenv-mode)
