@@ -22,6 +22,7 @@ safe-source ~/.tmate.sh
 safe-source ~/.python-venv-autoswitch.zsh
 safe-source ~/.economy-mode.sh
 safe-source ~/.neoway.sh
+safe-source ~/.local.sh
 [[ -f `which fzf` ]] && safe-source ~/.fzf.zsh
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
