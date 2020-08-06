@@ -29,7 +29,7 @@
   (when buffer-file-name
     (let* ((file (file-name-nondirectory buffer-file-name))
           (file-basename (file-name-sans-extension file))
-          (extension (if (eq system-type 'windows-nt) "exe" "out")))
+          (extension (if (eq system-type 'windows-nt) "exe" "bin")))
       (unless (or (file-exists-p "Makefile") (file-exists-p "makefile"))
         (set (make-local-variable 'compile-command)
              ;; emulate make's .c.o implicit pattern rule, but with
