@@ -54,7 +54,6 @@
 (defun lerax-setup-c-project ()
   (interactive)
   (defconst src-path (concat (projectile-project-root) "src/"))
-  (message src-path)
   (when (file-exists-p src-path)
     (message "Setup C/C++ project!")
     (let* ((include-path (list src-path
