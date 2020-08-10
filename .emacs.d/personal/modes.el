@@ -183,3 +183,5 @@
 ;; j. krishnamurti says that gurus are no good
 ;; i need to think by mysefl, goodbye guru-mode
 (setq prelude-guru nil)
+
+(setq projectile-project-search-path "/home/lerax/Desktop/workspace/")
