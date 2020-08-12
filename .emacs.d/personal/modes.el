@@ -181,7 +181,7 @@
 ;; Sat 18 Jul 2020 08:45:56 AM -03
 ;; i'm done with guru mode!
 ;; j. krishnamurti says that gurus are no good
-;; i need to think by mysefl, goodbye guru-mode
+;; i need to think by myself, goodbye guru-mode
 (setq prelude-guru nil)
 
 (setq projectile-project-search-path "/home/lerax/Desktop/workspace/")
@@ -192,3 +192,5 @@
 (advice-add 'helm-M-x :before
             (lambda (_)
               (setq-local extended-command-history nil)))
+
+(display-battery-mode +1)
