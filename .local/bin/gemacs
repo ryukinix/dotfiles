@@ -25,8 +25,8 @@ open-frame () {
 raise-frames () {
     open-frame -e "(mapcan (lambda (x) \
                                (when (window-system x) \
-                                (progn (raise-frame x) \
-                                       (x-focus-frame x)))) \
+                                (progn (x-focus-frame x) \
+                                       (raise-frame x)))) \
                            (frame-list))"
 }
 
@@ -49,6 +49,7 @@ main () {
         open-frame "$@" 2> /dev/null || raise-frames 1> /dev/null
     else
         new-frame "$@" 2> /dev/null
+        raise-frames 1> /dev/null
     fi
 
 }
