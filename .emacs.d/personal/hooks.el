@@ -1,7 +1,7 @@
 ;; set of hooks made to keep the life more easy
 
 (require 'manoel "~/.emacs.d/personal/preload/mano.el")
-(lerax-require-packages '(geiser pyvenv flycheck company-c-headers))
+(lerax-require-packages '(geiser pyvenv flycheck company-c-headers restclient))
 
 (require 'python)
 (require 'cc-mode)
@@ -147,6 +147,7 @@
 ;; force xml-mode to msbuild project files
 (add-to-list 'auto-mode-alist '("\\.\\(c\\|f\\)sproj\\'" . xml-mode))
 (add-to-list 'auto-mode-alist '("\\.install" . shell-script-mode))
+(add-to-list 'auto-mode-alist '("\\.http" . restclient-mode))
 ;; openrc services auto mode
 (add-to-list 'magic-mode-alist '("#!/usr/bin/openrc-run" . shell-script-mode))
 
