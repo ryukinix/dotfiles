@@ -47,6 +47,14 @@ replica () {
     fi
 }
 
+sparkui () {
+    local spark_app_name=$1
+    local selector="spark-role=driver,sparkoperator.k8s.io/app-name=$spark_app_name"
+    local driver=$(kubectl get pod -n spark \
+                           --selector=$selector \
+                           --output jsonpath='{.items[0].metadata.name}')
+    kubectl port-forward -n spark $driver 4040:4040
+}
 
 alias vpn='2fa -clip neoway | xcopy; sudo openvpn /etc/openvpn/neoway.conf'
 alias dataproc='cd /home/lerax/Desktop/workspace/townplanner-troublemaker/project_gcp/neoway-data-science/dataproc'
