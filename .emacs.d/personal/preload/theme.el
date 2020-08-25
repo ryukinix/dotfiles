@@ -5,7 +5,7 @@
 
 (lerax-require-packages '(doom-themes))
 
-(defvar lerax-theme 'doom-vibrant)
+(defvar lerax-theme 'doom-nord)
 (defvar lerax-theme-window-loaded nil)
 (defvar lerax-theme-terminal-loaded nil)
 (defvar lerax-theme-font "Hack")
