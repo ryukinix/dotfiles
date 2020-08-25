@@ -62,6 +62,7 @@
                             (format "-I%s"
                                     src-path))))
       (local-set-key (kbd "\C-c C-c") 'projectile-compile-project)
+      (local-set-key (kbd "<f9>") 'projectile-compile-project)
       (setq-local flycheck-clang-include-path include-path)
       (setq-local flycheck-gcc-include-path include-path)
       (setq-local company-clang-arguments clang-argument)
