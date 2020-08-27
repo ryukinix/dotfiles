@@ -4,6 +4,7 @@
 (lerax-require-packages '(geiser pyvenv flycheck company-c-headers restclient))
 
 (require 'python)
+(require 'pyvenv)
 (require 'cc-mode)
 (require 'gud)
 (require 'compile)
@@ -69,6 +70,17 @@
       (setq-local company-c-headers-path-user
                   (append company-c-headers-path-user
                           include-path)))))
+
+
+(defun lerax-python-venv-auto-activate ()
+  (interactive)
+  (let* ((basepath (or (projectile-project-root) default-directory))
+         (venvpath (concat basepath ".venv/")))
+    (when (and (not (string-equal venvpath pyvenv-virtual-env))
+               (file-exists-p venvpath))
+      (pyvenv-activate venvpath))))
+
+(add-hook 'python-mode-hook #'lerax-python-venv-auto-activate)
 
 
 (defun setup-python-pdb-command ()
