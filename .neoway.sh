@@ -47,6 +47,14 @@ replica () {
     fi
 }
 
+databook () {
+    if command -v pgcli > /dev/null; then
+        env $(decrypt ~/.credentials/databook.txt.gpg | sed 's/export //g') pgcli
+    else
+        echo "error: install pgcli not found, fix it: yay -Sa pgcli"
+    fi
+}
+
 sparkui () {
     local spark_app_name=$1
     local selector="spark-role=driver,sparkoperator.k8s.io/app-name=$spark_app_name"
