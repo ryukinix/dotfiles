@@ -298,6 +298,7 @@ alias mouse-driver="ratslap"
 
 # making docker life more easy
 alias dc=docker
+alias dcp='docker-compose'
 alias sprunge="curl -F 'sprunge=<-' http://sprunge.us"
 alias sprungex='sprunge | xcopy'
 alias pastebin=ixx
