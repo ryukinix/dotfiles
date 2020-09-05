@@ -1,0 +1,35 @@
+#!/bin/bash
+
+echo "NOTE: That script will mark the NVIDIA drivers as immutable for all kernels"
+
+
+immutable-nvidia() {
+    local kernel_release="$1"
+    local module_path="/lib/modules/${kernel_release}/kernel/drivers/video"
+    local files=(
+        "${module_path}/nvidia_uvm.ko"
+        "${module_path}/fbdev/nvidia/nvidiafb.ko"
+    )
+    if [[ -f "$files" ]]; then
+        echo "    Before:"
+        lsattr ${files[@]}
+        sudo chattr +i ${files[@]}
+        echo "    After: "
+        lsattr ${files[@]}
+    else
+        echo "ERROR: nvidia drivers not found, skipping"
+    fi
+
+}
+
+printf "Continue? [y/N]"
+read
+if [[ "$REPLY" != "y" ]]; then
+    echo "Operation aborted."
+    exit 1;
+fi
+
+for kernel in `ls /lib/modules`; do
+    echo ":: Locking drivers for: $kernel"
+    immutable-nvidia $kernel
+done
