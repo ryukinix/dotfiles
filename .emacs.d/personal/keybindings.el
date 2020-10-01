@@ -185,8 +185,18 @@
       'display-line-numbers-mode
     'linum-mode))
 
+(defun optimal-linum-relative-mode ()
+  "Use the best available linum relative mode"
+  (interactive)
+  (if (boundp 'display-line-numbers)
+      (if (not (equal display-line-numbers 'relative))
+        (setq display-line-numbers 'relative)
+      (display-line-numbers-mode -1))
+    (linum-relative-mode)))
+
 (global-set-key (kbd "M-N") optimal-linum-mode)
-(global-set-key (kbd "M-R") 'linum-relative-mode)
+(global-unset-key (kbd "M-R"))
+(global-set-key (kbd "M-R") 'optimal-linum-relative-mode)
 
 
 ;; ispell changing dictionaries when need
@@ -288,7 +298,9 @@
   (define-key projectile-mode-map (kbd "C-c p") projectile-command-map))
 
 (with-eval-after-load 'python
-  (define-key inferior-python-mode-map (kbd "C-c C-z") 'other-window))
+  (define-key inferior-python-mode-map (kbd "C-c C-z") 'other-window)
+  (when (package-installed-p 'python-black)
+    (define-key python-mode-map (kbd "C-c C-f") 'python-black-buffer)))
 
 ;; set darkroom for non-distract mode keybinding
 (with-eval-after-load 'darkroom
