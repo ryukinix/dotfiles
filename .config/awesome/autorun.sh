@@ -44,27 +44,16 @@ autostart=(
     /etc/xdg/autostart/gnome-keyring-ssh.desktop
     /etc/xdg/autostart/xfce-polkit-gnome-authentication-agent-1.desktop
     /etc/xdg/autostart/at-spi-dbus-bus.desktop
-    /etc/xdg/autostart/pulseaudio.desktop
     /usr/share/applications/xfce4-clipman.desktop
     ~/.config/autostart/Compton.desktop
-    # ~/.config/autostart/Zeal.desktop
-    ~/.config/autostart/volumeicon.desktop
     ~/.config/autostart/dropbox.desktop
-    ~/.config/autostart/fluxgui.desktop
-    # ~/.config/autostart/mir.desktop
 )
 
-
 commands=(
-    "sudo /etc/init.d/emacs.lerax restart"
-    # "geary --hidden"
-    # "nm-applet"
-    #"blueman-applet"
-    #"/usr/lib/bluetooth/obexd" # bluetooth file-sharing server
     "xfdesktop --disable-wm-check"
     "thunar --daemon"
-    "udiskie"
-    "pamac-tray"
+    "pulseaudio -D"
+    "volumeicon"
     "run_keybase -g -a" # keybase kbfs no gui
 )
 
