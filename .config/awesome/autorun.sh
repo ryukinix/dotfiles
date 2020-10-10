@@ -42,7 +42,6 @@ autostart=(
     /etc/xdg/autostart/gnome-keyring-pkcs11.desktop
     /etc/xdg/autostart/gnome-keyring-secrets.desktop
     /etc/xdg/autostart/gnome-keyring-ssh.desktop
-    /etc/xdg/autostart/xfce-polkit-gnome-authentication-agent-1.desktop
     /etc/xdg/autostart/at-spi-dbus-bus.desktop
     /usr/share/applications/xfce4-clipman.desktop
     ~/.config/autostart/Compton.desktop
