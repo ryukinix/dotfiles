@@ -2,7 +2,7 @@
 ;; manual: https://github.com/ch11ng/exwm/wiki
 (require 'manoel "~/.emacs.d/personal/preload/mano.el")
 
-(defconst lerax-exwm-autostart-programs
+(defcustom lerax-exwm-autostart-programs
     (let ((host (system-name)))
       (append '("xfce4-clipman" ;; clipboard manager
                 "volumeicon"    ;; volume
@@ -17,7 +17,11 @@
                 '("xfce4-power-manager"
                   "/usr/lib/bluetooth/obexd" ;; bluetooth file-sharing server
                   "blueman-applet"))
-              )))
+              ))
+    "Autostart programs when used EXWM"
+    :group 'lerax
+    :type 'list
+    )
 (defvar lerax-exwm-autostarted nil)
 
 

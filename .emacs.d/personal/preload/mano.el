@@ -47,6 +47,11 @@
 
  (package-initialize))
 
+(defgroup lerax nil
+  "My variable group collection"
+  :prefix "lerax-"
+  :group 'convenience)
+
 (defmacro try-quote (symbol)
   "Quote the SYMBOL if is not quoted.
 SYMBOL is any datum."

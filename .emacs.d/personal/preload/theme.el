@@ -5,10 +5,19 @@
 
 (lerax-require-packages '(doom-themes))
 
-(defvar lerax-theme 'doom-nord)
+(defcustom lerax-theme 'doom-nord
+  "My theme: only loaded in initialization"
+  :group 'lerax
+  :type 'symbol)
+
+
+(defcustom lerax-theme-font "Hack"
+  "My default font: only loaded in initialization"
+  :group 'lerax
+  :type 'string)
+
 (defvar lerax-theme-window-loaded nil)
 (defvar lerax-theme-terminal-loaded nil)
-(defvar lerax-theme-font "Hack")
 (defconst prelude-theme lerax-theme)
 
 

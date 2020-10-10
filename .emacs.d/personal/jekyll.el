@@ -6,10 +6,16 @@
 (require 'org)
 (require 'org2jekyll)
 
+(defcustom lerax-blog-basepath
+  (expand-file-name "~/Dropbox/Programming/Projects/Website/ryukinix.github.io")
+  "My blog base path"
+  :group 'lerax
+  :type 'string)
+
 ;; setup of org2jekyll
 (setq org2jekyll-blog-author "Manoel Vilela"
-      org2jekyll-source-directory (expand-file-name "~/Dropbox/Programming/Projects/Website/ryukinix.github.io/org")
-      org2jekyll-jekyll-directory (expand-file-name "~/Dropbox/Programming/Projects/Website/ryukinix.github.io")
+      org2jekyll-source-directory (concat lerax-blog-basepath "/org")
+      org2jekyll-jekyll-directory lerax-blog-basepath
       org2jekyll-jekyll-drafts-dir ""
       org2jekyll-jekyll-posts-dir "_posts/"
       org-publish-project-alist

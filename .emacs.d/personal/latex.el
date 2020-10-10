@@ -6,8 +6,14 @@
 (require 'org-ref)
 (require 'ox-latex)
 
+
+(defcustom lerax-latex-listing 'minted
+  "If `lerax-latex-listing' is minted enable syntax highlight"
+  :group 'lerax
+  :type 'symbol)
+
 (with-eval-after-load 'ox-latex
-  (setq org-latex-listings 'minted
+  (setq org-latex-listings lerax-latex-listing
         org-latex-minted-options '(("frame" "lines")
                                    ("linenos" "true"))
         org-preview-latex-default-process 'imagemagick))
