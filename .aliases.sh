@@ -392,3 +392,5 @@ alias celeste-resolution="xrandr --output LVDS1 --mode 1366x768 --rate 60"
 alias git-commit-stage="git reset --soft @~1"
 alias makedeb="sudo checkinstall"
 alias ptime="ps -o etime= -p"
+alias rsync-ssh-push='rsync -r ~/.ssh /keybase/private/lerax/.ssh'
+alias rsync-ssh-pull='rsync -r /keybase/private/lerax/.ssh ~/.ssh'
