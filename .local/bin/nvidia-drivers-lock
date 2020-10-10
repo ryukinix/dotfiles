@@ -2,25 +2,45 @@
 
 echo "NOTE: That script will mark the NVIDIA drivers as immutable for all kernels"
 
+lockfiles() {
+    local files=$@
+    echo "    Before:"
+    lsattr ${files[@]}
+    sudo chattr -i ${files[@]}
+    echo "    After: "
+    lsattr ${files[@]}
+
+}
 
 immutable-nvidia() {
     local kernel_release="$1"
-    local module_path="/lib/modules/${kernel_release}/kernel/drivers/video"
+    local module_path="/lib/modules/${kernel_release}/kernel/drivers"
     local files=(
-        "${module_path}/nvidia_uvm.ko"
-        "${module_path}/fbdev/nvidia/nvidiafb.ko"
+        "${module_path}/char/drm/nvidia.ko"
+        "${module_path}/video/nvidia_uvm.ko"
+        "${module_path}/video/fbdev/nvidia/nvidiafb.ko"
     )
     if [[ -f "$files" ]]; then
-        echo "    Before:"
-        lsattr ${files[@]}
-        sudo chattr +i ${files[@]}
-        echo "    After: "
-        lsattr ${files[@]}
+        lockfiles ${files[@]}
     else
         echo "ERROR: nvidia drivers not found, skipping"
     fi
-
 }
+
+immutable-gl () {
+    nvidiagl=(
+        /usr/lib/x86_64-linux-gnu/libEGL.so.1.1.0
+        /usr/lib/x86_64-linux-gnu/libEGL.so.340.108
+        /usr/lib/x86_64-linux-gnu/libGL.so.1.7.0
+        /usr/lib/x86_64-linux-gnu/libGL.so.340.108
+        /usr/lib/x86_64-linux-gnu/libGLESv1_CM.so.1.2.0
+        /usr/lib/x86_64-linux-gnu/libGLESv1_CM.so.340.108
+        /usr/lib/x86_64-linux-gnu/libGLESv2.so.2.1.0
+        /usr/lib/x86_64-linux-gnu/libGLESv2.so.340.108
+    )
+    lockfiles ${nvidiagl[@]}
+}
+
 
 printf "Continue? [y/N]"
 read
@@ -28,6 +48,8 @@ if [[ "$REPLY" != "y" ]]; then
     echo "Operation aborted."
     exit 1;
 fi
+
+immutable-gl
 
 for kernel in `ls /lib/modules`; do
     echo ":: Locking drivers for: $kernel"
