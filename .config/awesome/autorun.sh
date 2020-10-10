@@ -6,7 +6,7 @@
 if [[ $(hostname) == "starfox" ]]; then
     setxkbmap -model abnt2 -layout br
     setxkbmap -option compose:rctrl
-elif [[ $(hostname) == "celeste" ]]; then
+elif [[ $(hostname) == "celeste" || $(hostname) == PC* ]]; then
     setxkbmap -model thinkpad60 -layout br
     setxkbmap -option
 fi
