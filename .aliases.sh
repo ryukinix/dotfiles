@@ -18,6 +18,12 @@ gclone () {
     git clone "git@github.com:$repo.git"
 }
 
+function dropbox-bind {
+    local host="$1"
+    mkdir -p ~/Dropbox
+    sshfs ${host}:Dropbox ~/Dropbox
+}
+
 function ftp-start {
     sudo service pure-ftpd start
 }
@@ -267,11 +273,11 @@ alias dic=sdcv
 
 # don't use nosetests anymore, is legacy broken and fucked
 alias nosetests='nose2'
-alias deadstar-bind-up='ssh -Y lerax@deadstar -t "x2x -north -to :0.0"'
-alias deadstar-bind-left='ssh -Y lerax@deadstar -t "x2x -west -to :0.0"'
-alias deadstar-bind-right='ssh -Y lerax@deadstar -t "x2x -east -to :0.0"'
-alias deadstar-bind-down='ssh -Y lerax@deadstar -t "x2x -south -to :0.0"'
-alias deadstar='ssh lerax@deadstar'
+alias workstar-bind-up='ssh -Y lerax@workstar -t "x2x -north -to :0.0"'
+alias workstar-bind-left='ssh -Y lerax@workstar -t "x2x -west -to :0.0"'
+alias workstar-bind-right='ssh -Y lerax@workstar -t "x2x -east -to :0.0"'
+alias workstar-bind-down='ssh -Y lerax@workstar -t "x2x -south -to :0.0"'
+alias workstar='ssh lerax@workstar'
 alias starfox-bind-up='ssh -C -Y lerax@starfox -t "x2x -north -to :0.0"'
 alias starfox-bind-left='ssh -C -Y lerax@starfox -t "x2x -west -to :0.0"'
 alias starfox-bind-right='ssh -C -Y lerax@starfox -t "x2x -east -to :0.0"'
