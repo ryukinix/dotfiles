@@ -19,3 +19,6 @@
 [submodule ".emacs.d.lite"]
 	path = .emacs.d.lite
 	url = https://github.com/ryukinix/emacsd-lite.git
+[submodule ".config/awesome/freedesktop"]
+	path = .config/awesome/freedesktop
+	url = https://github.com/lcpz/awesome-freedesktop.git
