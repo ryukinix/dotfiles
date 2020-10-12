@@ -18,6 +18,14 @@ gclone () {
     git clone "git@github.com:$repo.git"
 }
 
+function chroot-bind {
+    sudo mount --rbind /dev dev
+    sudo mount --rbind /run run
+    sudo mount --rbind /proc proc
+    sudo mount --rbind /sys sys
+    sudo mount --rbind /home home
+}
+
 function dropbox-bind {
     local host="$1"
     mkdir -p ~/Dropbox
