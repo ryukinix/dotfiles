@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 set -ux
-w=1438
+w=2390
 h=858
 counter=0
 limit=500
@@ -19,6 +19,6 @@ while [ "$win" = "" ]; do
     sleep 0.1s
 done
 
-sleep 1s
+delay 2s
 xdotool windowmove "$win" 0 20
 xdotool windowsize "$win" $w $h
