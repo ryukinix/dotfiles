@@ -38,15 +38,14 @@
 
 ;; accessing a package repo over https on Windows is a no go, so we
 ;; fallback to http there
-(when nil
-  (unless package--initialized
-   (if (eq system-type 'windows-nt)
-       (add-to-list 'package-archives
-                    '("melpa" . "http://melpa.org/packages/") t)
-     (add-to-list 'package-archives
-                  '("melpa" . "https://melpa.org/packages/") t))
+(unless package--initialized
+  (if (eq system-type 'windows-nt)
+      (add-to-list 'package-archives
+                   '("melpa" . "http://melpa.org/packages/") t)
+    (add-to-list 'package-archives
+                 '("melpa" . "https://melpa.org/packages/") t))
 
-   (package-initialize)))
+  (package-initialize))
 
 (defgroup lerax nil
   "My variable group collection"
