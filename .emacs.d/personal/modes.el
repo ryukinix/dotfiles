@@ -9,7 +9,7 @@
                           company-c-headers
                           xclip
                           pyvenv
-                          simple-modeline-mode
+                          simple-modeline
                           ox-gfm
                           flycheck
                           htmlize))
