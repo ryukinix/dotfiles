@@ -5,11 +5,11 @@
                           forge
                           ssh-agency
                           ix
-                          telephone-line
                           company-quickhelp
                           company-c-headers
                           xclip
                           pyvenv
+                          simple-modeline-mode
                           ox-gfm
                           flycheck
                           htmlize))
@@ -174,8 +174,6 @@
   (setq python-shell-interpreter "python3")
   (setq flycheck-python-pycompile-executable "python3"))
 
-(telephone-line-mode +1)
-
 ;; I hate these asdf.txt~ files
 (setq make-backup-files nil)
 
@@ -201,3 +199,4 @@
 ;; prelude shitstorm on 1.1
 (global-nlinum-mode -1)
 (menu-bar-mode -1)
+(simple-modeline-mode +1)
