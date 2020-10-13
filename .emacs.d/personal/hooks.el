@@ -46,10 +46,10 @@
                      (or (getenv "CFLAGS") " -Wall -g")
                      file)))
       (set (make-local-variable 'gud-gud-gdb-history)
-           (cons (format "gdb --fullname \"%s.%s\"" file-basename extension)
+           (cons (format "gdb --nx --fullname \"%s.%s\"" file-basename extension)
                  gud-gud-gdb-history))
       (set (make-local-variable 'gud-gdb-history)
-           (cons (format "gdb -i=mi \"%s.%s\"" file-basename extension)
+           (cons (format "gdb --nx -i=mi \"%s.%s\"" file-basename extension)
                  gud-gdb-history)))))
 
 (defun lerax-setup-c-project ()
