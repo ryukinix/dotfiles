@@ -302,6 +302,12 @@ alias celeste='ssh lerax@celeste'
 alias xcopy='xclip -selection clipboard'
 alias xpaste='xclip -o -selection clipboard'
 
+function xcopy-ssh {
+    local host="$1"
+    ssh -q -X "$host" -t "DISPLAY=:0 xclip -o -selection clipboard" \
+        | xcopy
+}
+
 alias ufc='cd ~/Dropbox/University/Courses/UFC/'
 
 # you need tmate to use that
