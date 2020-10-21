@@ -19,13 +19,8 @@ while [ "$win" = "" ]; do
     sleep 0.1s
 done
 
-xdotool windowmove "$win" 0 20
-xdotool windowsize "$win" $w $h
-
-sleep 10s
-xdotool windowmove "$win" 0 20
-xdotool windowsize "$win" $w $h
-
-sleep 30s
-xdotool windowmove "$win" 0 20
-xdotool windowsize "$win" $w $h
+for i in `seq 1 6`; do
+    xdotool windowmove "$win" 0 20
+    xdotool windowsize "$win" $w $h
+    sleep 5s
+done
