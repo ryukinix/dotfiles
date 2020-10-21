@@ -21,6 +21,7 @@
 (require 'erc-log)
 (require 'org)
 (require 'org-mouse) ;; enable mouse features on org-mode
+(require 'org-agenda) ;; required to make right-click works
 (require 'python)
 (require 'company)
 (require 'company-quickhelp)
