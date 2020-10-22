@@ -389,3 +389,4 @@
   (global-set-key (kbd "<f11>") 'toggle-frame-fullscreen))
 
 (global-set-key (kbd "C-S-k") 'sp-kill-whole-line)
+(global-set-key (kbd "M-<f6>") 'whitespace-mode)
