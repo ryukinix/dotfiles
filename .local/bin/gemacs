@@ -32,7 +32,7 @@ raise-frames () {
 
 restart-emacs () {
     notify-send "Emacs daemon crashed :(" "restarting"
-    openrc-run "/etc/init.d/emacs.$(whoami)" restart
+    sudo openrc-run "/etc/init.d/emacs.$(whoami)" restart
 }
 
 if-crashed-restart-emacs () {
