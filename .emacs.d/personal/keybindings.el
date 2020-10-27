@@ -6,12 +6,10 @@
 ;; installing: yasnippet-snippets destroy all my software ↓ fuckups everything, please don't do that
 ;; docker-lerax related bug at bootstraping package install
 (lerax-require-packages '(multiple-cursors linum-relative
-                          fsharp-mode neotree treemacs
-                          darkroom  key-chord
-                          yasnippet))
+                          neotree treemacs
+                          darkroom yasnippet))
 
 (require 'company)
-(require 'fsharp-mode)
 (require 'prelude-custom "~/.emacs.d/core/prelude-custom.el") ;; definition of prelude-user-init-file
 (require 'yasnippet) ;; template system
 (require 'multiple-cursors)
@@ -22,6 +20,7 @@
 (require 'projectile)
 (require 'key-chord)
 (require 'slime)
+(require 'cl-lib)
 (require 'slime-repl)
 (require 'python)
 
@@ -256,7 +255,7 @@
 ;; mouse-5 -> wheel-down
 ;; mouse-8 -> mouse-4
 ;; mouse-9 -> mouse-5
-(labels ((meta-kbd (meta bind &optional (key "@key"))
+(cl-labels ((meta-kbd (meta bind &optional (key "@key"))
                    (kbd (replace-regexp-in-string key bind meta))))
   (let* ((windows-p (eq (system-name) 'windows-nt))
          (wheel-up (if windows-p "wheel-up" "mouse-4"))
@@ -274,7 +273,6 @@
     (global-set-key (meta-kbd "<C-M-@key>" mouse-forward) 'text-scale-reset)
     (global-set-key (meta-kbd "<C-M-@key>" mouse-backforward) 'text-scale-reset)))
 
-(define-key fsharp-mode-map (kbd "C-c C-z") 'fsharp-show-subshell)
 
 ;; lisp interaction keybinds
 (define-key lisp-interaction-mode-map (kbd "C-c C-z") 'prelude-visit-ielm)
@@ -332,41 +330,6 @@
 (setq key-chord-two-keys-delay .015
       key-chord-one-key-delay .010)
 
-
-(dolist (binding
-         `((" i" . previous-multiframe-window)
-           (" o" . next-multiframe-window)
-           (" l" . ibuffer)
-
-           (" m" . magit-status)
-
-           (" e" . er/expand-region)
-
-           (" 0" . delete-window)
-           (" 1" . delete-other-windows)
-           (" 2" . split-window-below)
-           (" 3" . split-window-right)
-           (" =" . winstack-push)
-           (" -" . winstack-pop)
-
-           (" w" . whitespace-mode)
-
-           ("ji" . undo-tree-undo)
-           ("jo" . undo-tree-redo)
-           ("jk" . undo-tree-switch-branch)
-           ("j;" . undo-tree-visualize)
-
-           (" b" . ido-switch-buffer)
-           (" f" . ido-find-file)
-           ("rf" . recentf-open-files)
-           (" s" . save-buffer)
-           (" k" . kill-this-buffer-and-window)
-
-           (" t" . yas-insert-snippet)
-           (" x" . shell)
-
-           (" r" . recompile)))
-  (key-chord-define-global (car binding) (cdr binding)))
 ;; enable key chord
 ;; disabled because I type too fast --ahahha
 ;;(key-chord-mode +1)
@@ -374,8 +337,8 @@
 ;; enable yasnippet globally
 (yas-global-mode +1)
 
-;; disable this random shit to paste with mouse, i do not use this shit!
-(global-unset-key (kbd "<mouse-2>"))
+;; ;; disable this random shit to paste with mouse, i do not use this shit!
+;; (global-unset-key (kbd "<mouse-2>"))
 
 ;; I don't like this keybinding, it minimizes the emacs
 (global-unset-key (kbd "C-z"))

@@ -1,7 +1,7 @@
 ;; set of hooks made to keep the life more easy
 
 (require 'manoel "~/.emacs.d/personal/preload/mano.el")
-(lerax-require-packages '(geiser pyvenv flycheck company-c-headers restclient))
+(lerax-require-packages '(pyvenv flycheck company-c-headers restclient))
 
 (require 'python)
 (require 'pyvenv)
@@ -11,8 +11,6 @@
 (require 'gdb-mi)
 (require 'helm-projectile)
 (require 'company)
-(require 'geiser)
-(require 'geiser-impl)
 (require 'flycheck)
 (require 'company-clang)
 (require 'company-c-headers)
@@ -103,14 +101,6 @@
 
   (add-to-list 'helm-projectile-sources-list helm-source-file-not-found t))
 
-;; make flycheck on racket less agressive
-(defun cooldown-flycheck-on-racket (&rest _)
-  (message "%s" geiser-impl--implementation)
-  (if (eq geiser-impl--implementation 'racket)
-      (setq-local flycheck-check-syntax-automatically '(save mode-enabled))
-    (setq flycheck-check-syntax-automatically
-          (default-value 'flycheck-check-syntax-automatically))))
-
 
 (defun lerax-setup-terminal-session (&optional frame)
   "SETUP-TERMINAL-SESSION fix wrong theme colors in terminal frame."
@@ -150,11 +140,6 @@
                                 (whitespace-toggle-options 'lines-tail)
                                 (auto-fill-mode)))
 
-
-(add-hook 'geiser-mode-hook 'cooldown-flycheck-on-racket)
-(add-hook 'geiser-mode-hook (lambda ()
-                              (company-quickhelp-mode 0)))
-(advice-add 'geiser-set-scheme :after 'cooldown-flycheck-on-racket)
 
 
 ;; force xml-mode to msbuild project files
