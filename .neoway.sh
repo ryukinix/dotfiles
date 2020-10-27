@@ -65,6 +65,9 @@ sparkui () {
 }
 
 alias vpn='2fa -clip neoway | xcopy; sudo openvpn /etc/openvpn/neoway.conf'
+alias vpn-gateway='sudo /bin/ip route add 10.0.0.0/8 via 192.168.1.100'
+alias wifipowersave='sudo iwconfig wlp5s0 power'
+alias wifipowersave-off='sudo iwconfig wlp5s0 power off'
 alias dataproc='cd /home/lerax/Desktop/workspace/townplanner-troublemaker/project_gcp/neoway-data-science/dataproc'
 # alias jupyter-gateway-tunnel='ssh -v -nNT -L 8321:10.251.64.200:80 manoel.vilela@10.240.0.10'
 alias jupyter-gateway-tunnel='neoway-tunnel jupyter-gateway'
