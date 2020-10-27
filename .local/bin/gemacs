@@ -9,9 +9,10 @@ if [ -n "$EXWM" ]; then
 fi
 
 has-frame () {
-    emacsclient -n -e "(plusp (length (remove-if (lambda (x) \
-                                                         (null (window-system x))) \
-                                                 (frame-list))))"
+    emacsclient -n -e "(< 0 (length (cl-remove-if \
+                                      (lambda (x) \
+                                        (null (window-system x))) \
+                                      (frame-list))))"
 }
 
 new-frame () {
