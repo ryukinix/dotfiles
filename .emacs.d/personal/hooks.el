@@ -9,6 +9,7 @@
 (require 'gud)
 (require 'compile)
 (require 'gdb-mi)
+(require 'cl-lib)
 (require 'helm-projectile)
 (require 'company)
 (require 'flycheck)
@@ -36,9 +37,10 @@
              ;; variables:
              ;; $(CC) -c -o $@ $(CPPFLAGS) $(CFLAGS) $<
              (format "%s -o '%s.%s' %s %s '%s'"
-                     (or (getenv "CC") (case c-buffer-is-cc-mode
-                                         (c++-mode "g++")
-                                         (c-mode "gcc")))
+                     (or (getenv "CC")
+                         (cl-case c-buffer-is-cc-mode
+                           (c++-mode "g++")
+                           (c-mode "gcc")))
                      file-basename extension
                      (or (getenv "CPPFLAGS") "-DDEBUG=9")
                      (or (getenv "CFLAGS") " -Wall -g")
