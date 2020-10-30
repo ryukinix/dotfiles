@@ -409,3 +409,4 @@ alias ptime="ps -o etime= -p"
 alias rsync-ssh-push='rsync -r ~/.ssh /keybase/private/lerax/.ssh'
 alias rsync-ssh-pull='rsync -r /keybase/private/lerax/.ssh ~/.ssh'
 alias wemacs='ssh -Y workstar -t gemacs -c'
+alias git-message='git log --format=%B -n 1'
