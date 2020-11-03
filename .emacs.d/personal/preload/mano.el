@@ -158,6 +158,35 @@ Missing packages are installed automatically."
     (string-to-number
      (shell-command-to-string "free --giga  | grep Mem | awk '{print $2}'"))))
 
+(defun lerax-remove-tags (text)
+  (replace-regexp-in-string "</?[A-Z]+>" "" text))
+
+(defun lerax-add-tag (tag)
+  "Wrap a XML-like TAG into a specific text region"
+  (interactive (list
+                (completing-read "TAG: " '("PERSON" "JOB" "DATE"))))
+  (let* ((begin (region-beginning))
+         (end (region-end))
+         (text (buffer-substring-no-properties begin end)))
+    (delete-region (region-beginning) (region-end))
+    (insert
+     (format "<%s>" tag)
+     (lerax-remove-tags text)
+     (format "</%s>" tag))
+    (skip-chars-forward "\n")))
+
+(defun lerax-delete-tag ()
+  "Delete a XML-like TAG of a specific text region"
+  (interactive)
+  (let* ((begin (region-beginning))
+         (end (region-end))
+         (text (buffer-substring-no-properties begin end)))
+    (delete-region (region-beginning) (region-end))
+    (insert (lerax-remove-tags text))
+    (skip-chars-forward "\n")))
+
+
+
 
 (provide 'manoel)
 ;;; mano.el ends here
