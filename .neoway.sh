@@ -64,6 +64,13 @@ sparkui () {
     kubectl port-forward -n spark $driver 4040:4040
 }
 
+nwclone () {
+    local repo="$1"
+    local base=$(echo "ffu://tvg@tvgyno.arbjnl.pbz.oe:10022" | rot13)
+    local host="$base/$repo"
+    git clone "$host"
+}
+
 alias vpn='2fa -clip neoway | xcopy; sudo openvpn /etc/openvpn/neoway.conf'
 alias vpn-gateway='sudo /bin/ip route add 10.0.0.0/8 via 192.168.1.100'
 alias wifipowersave='sudo iwconfig wlp5s0 power'
