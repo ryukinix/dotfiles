@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -ex
-
 # HACK: EXWM requirement to work properly with gemacs script
 if [ -n "$EXWM" ]; then
     function emacsclient {
