@@ -1,10 +1,11 @@
 #!/bin/bash
 
-# TODO: BUG FROM HELL
-# If I define this shitty, it will bug all
+set -ex
+
+# HACK: EXWM requirement to work properly with gemacs script
 if [ -n "$EXWM" ]; then
     function emacsclient {
-        emacsclient -s exwm $@
+        $(which emacsclient) -s exwm $@
     }
 fi
 
@@ -31,18 +32,30 @@ raise-frames () {
                            (frame-list))"
 }
 
-restart-emacs () {
-    notify-send "Emacs daemon crashed :(" "restarting"
-    sudo openrc-run "/etc/init.d/emacs.$(whoami)" restart
+restart-emacs-openrc () {
+    notify-send "Emacs daemon crashed :(" "Restarting via OpenRc"
+    sudo "/etc/init.d/emacs.$(whoami)" restart
 }
 
-if-crashed-restart-emacs () {
-    [[ $(rc-status --crashed) == *emacs.* || -z "$(pgrep emacs)" ]] && restart-emacs
+restart-emacs-systemd () {
+    notify-send "Emacs daemon crashed :(" "Restarting via SystemD"
+    systemctl --user emacs restart
+}
+
+emacs-server-running () {
+    emacsclient -e '(+)'
+}
+
+restart-emacs () {
+    if [[ -f /usr/bin/openrc ]]; then
+        restart-emacs-openrc
+    elif [[ ! `systemctl --user is-active --quiet emacs` ]]; then
+        restart-emacs-systemd
+    fi
 }
 
 main () {
-    # use only if using openrc
-    [[ -f /usr/bin/openrc ]] && (if-crashed-restart-emacs || exit 0)
+    [[ `emacs-server-running` != "0" ]] && (restart-emacs || exit 0)
 
     if [ -n "$EXWM" ]; then
         open-frame "$@" 2> /dev/null
