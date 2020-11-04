@@ -164,7 +164,7 @@ Missing packages are installed automatically."
 (defun lerax-add-tag (tag)
   "Wrap a XML-like TAG into a specific text region"
   (interactive (list
-                (completing-read "TAG: " '("PERSON" "JOB" "DATE"))))
+                (completing-read "TAG: " '("JOB" "PERSON" "DATE"))))
   (let* ((begin (region-beginning))
          (end (region-end))
          (text (buffer-substring-no-properties begin end)))
