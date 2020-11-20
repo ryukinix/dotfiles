@@ -244,9 +244,12 @@ git-remember() {
 
 git-branch-clean() {
     git checkout master
-    [[ ! -z $1 ]] && git push --delete origin $1
     git remote prune origin
-    git branch --merged | egrep -v "(^\*|master|dev)" | xargs -r git branch -d
+    if [[ $1 == '-f' ]]; then
+        git branch | egrep -v "(^\*|master|dev)" | xargs -r git branch -D
+    else
+        git branch --merged | egrep -v "(^\*|master|dev)" | xargs -r git branch -d
+    fi
 }
 
 # save definition of dot (graphviz language)
@@ -410,3 +413,5 @@ alias rsync-ssh-push='rsync -r ~/.ssh /keybase/private/lerax/.ssh'
 alias rsync-ssh-pull='rsync -r /keybase/private/lerax/.ssh ~/.ssh'
 alias wemacs='ssh -Y workstar -t gemacs -c'
 alias git-message='git log --format=%B -n 1'
+alias dcshell='docker run --rm -it --entrypoint=/bin/bash'
+alias battery-headset='bluetooth_battery $(bluetoothctl devices | grep TUNE500BT | cut -d " " -f2).1'
