@@ -3,12 +3,21 @@
 
 # MANOEL HELL HERE, be careful or just delete this
 
+
+function synaptics-device {
+    xinput list --name-only | grep Synaptics | head -n1
+}
+
+function enable-synaptics-touchpad {
+    xinput set-prop "$(synaptics-device)" "libinput Tapping Enabled" 1
+}
+
 if [[ $(hostname) == "starfox" ]]; then
     setxkbmap -model abnt2 -layout br
     setxkbmap -option compose:rctrl
 elif [[ $(hostname) == "celeste" || $(hostname) == PC* ]]; then
     setxkbmap -model thinkpad60 -layout br
-    setxkbmap -option
+    enable-synapitcs-touchpad
 fi
 
 userresources=$HOME/.Xdefaults
