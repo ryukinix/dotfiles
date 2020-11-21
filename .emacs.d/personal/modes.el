@@ -189,9 +189,9 @@
 (when (version<= "26.1" emacs-version)
   (setq confirm-kill-processes nil))
 
-(advice-add 'helm-M-x :before
-            (lambda (_)
-              (setq-local extended-command-history nil)))
+;; (advice-add 'helm-M-x :before
+;;             (lambda (_)
+;;               (setq-local extended-command-history nil)))
 
 (display-battery-mode +1)
 
