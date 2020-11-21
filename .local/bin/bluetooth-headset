@@ -1,0 +1,48 @@
+#!/bin/bash
+
+set -e
+
+if ! command -v bluetoothctl > /dev/null; then
+    echo "error: bluetoothctl not found, install bluez."
+fi
+
+if ! command -v pacmd > /dev/null; then
+    echo "error: pacmd not found, install pulseaudio."
+fi
+
+function turn-on {
+    rfkill unblock bluetooth
+    bluetoothctl power on
+    bluetoothctl agent on
+}
+
+function find-mac {
+    local headset_keyword="$1"
+    bluetoothctl paired-devices | grep "${headset_keyword}" | awk '{print $2}'
+}
+
+function find-name {
+    local headset_mac="$1"
+    bluetoothctl paired-devices | grep "${headset_mac}" | cut -d ' ' -f3-
+}
+
+function connect {
+    local mac="$1"
+    bluetoothctl connect "${mac}"
+    bluetoothctl gatt.register-service 0000110b-0000-1000-8000-00805f9b34fb
+    pacmd set-card-profile "bluez_card.${headset_mac//:/_}" a2dp_sink
+}
+
+function main {
+    local headset_keyword=${1-TUNE500BT}
+    local headset_mac=$(find-mac ${headset_keyword})
+    local headset_name=$(find-name ${headset_mac})
+    echo "== Found: ${headset_name} :: ${headset_mac}"
+    echo "== Turning on..."
+    turn-on
+    echo "== Connecting..."
+    connect ${headset_mac}
+    echo "== Connected!"
+}
+
+main "$@"
