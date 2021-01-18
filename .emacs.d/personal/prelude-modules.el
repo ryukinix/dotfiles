@@ -29,7 +29,7 @@
 ;; (require 'prelude-erlang)
 ;; (require 'prelude-elixir)
 ;; (require 'prelude-js)
-;; (require 'prelude-latex)
+(require 'prelude-latex)
 ;; (require 'prelude-ocaml)
 ;; (require 'prelude-perl)
 ;; (require 'prelude-ruby)
