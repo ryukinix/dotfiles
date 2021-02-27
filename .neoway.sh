@@ -7,6 +7,7 @@ if [[ -f ~/.ssh/config_neoway ]]; then
     NEOWAY_SSH_CONFIG=~/.ssh/config_neoway
     NEOWAY_HOSTS=$(cat "$NEOWAY_SSH_CONFIG" | grep '^Host.*' | cut -d ' ' -f 2 | xargs echo)
 
+
     neoway-tunnel () {
         ssh -nNT -F "$NEOWAY_SSH_CONFIG" "$@"
 
@@ -47,13 +48,28 @@ replica () {
     fi
 }
 
-databook () {
+feature-store-prd () {
     if command -v pgcli > /dev/null; then
-        env $(decrypt ~/.credentials/databook.txt.gpg | sed 's/export //g') pgcli
+        env $(decrypt ~/.credentials/featurestore.txt.gpg | sed 's/export //g') pgcli
     else
         echo "error: install pgcli not found, fix it: yay -Sa pgcli"
     fi
 }
+
+feature-store-db () {
+    neoway-tunnel -n feature-store-db;
+    feature-store-prd
+    killall
+}
+
+feature-store-local () {
+    if command -v pgcli > /dev/null; then
+        env $(decrypt ~/.credentials/featurestore-local.txt.gpg | sed 's/export //g') pgcli
+    else
+        echo "error: install pgcli not found, fix it: yay -Sa pgcli"
+    fi
+}
+
 
 sparkui () {
     local spark_app_name=$1
