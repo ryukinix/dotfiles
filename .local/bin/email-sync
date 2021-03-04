@@ -1,0 +1,4 @@
+#!/bin/bash
+
+offlineimap
+notmuch new
