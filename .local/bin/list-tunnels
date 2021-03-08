@@ -1,0 +1,15 @@
+#!/bin/bash
+
+ssh_config_file=$1
+hostname=$2
+depth_search=${3:-10}
+
+if [[ -z ${hostname} ]]; then
+    printf "$0: error: hostname can not be empty" >&2
+    exit 1;
+fi
+
+grep -A "${depth_search}" "${hostname}" "${ssh_config_file}" \
+      | grep -E -zo 'Host.*Host' \
+      | grep -a LocalForward \
+      | awk '{printf "localhost:%d => %s\n", $2, $3}'

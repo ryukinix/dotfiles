@@ -9,6 +9,10 @@ if [[ -f ~/.ssh/config_neoway ]]; then
 
 
     neoway-tunnel () {
+        echo "== TUNNELS"
+        local host_name=`for q in "$@"; do [[ $q != -* ]] && echo $q && break; done;`
+        list-tunnels "${NEOWAY_SSH_CONFIG}" ${host_name}
+        echo "============================================"
         ssh -nNT -F "$NEOWAY_SSH_CONFIG" "$@"
 
     }
@@ -48,7 +52,7 @@ replica () {
     fi
 }
 
-feature-store-prd () {
+feature-store-db () {
     if command -v pgcli > /dev/null; then
         env $(decrypt ~/.credentials/featurestore.txt.gpg | sed 's/export //g') pgcli
     else
@@ -56,10 +60,12 @@ feature-store-prd () {
     fi
 }
 
-feature-store-db () {
-    neoway-tunnel -n feature-store-db;
-    feature-store-prd
-    killall
+delivery-db () {
+    if command -v pgcli > /dev/null; then
+        env $(decrypt ~/.credentials/delivery.txt.gpg | sed 's/export //g') pgcli
+    else
+        echo "error: install pgcli not found, fix it: yay -Sa pgcli"
+    fi
 }
 
 feature-store-local () {
