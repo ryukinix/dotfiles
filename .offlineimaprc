@@ -27,8 +27,8 @@ nametrans = lambda foldername: re.sub ('^\[gmail\]', 'bak',
 # avoid already exists errors 
 createfolders = False
 folderfilter = lambda foldername: foldername not in ['[Gmail]/All Mail']
-maxsyncaccounts = 4
 maxconnections = 4
+singlethreadperfolder = yes
 # Necessary as of OfflineIMAP 6.5.4
 sslcacertfile = /etc/ssl/certs/ca-certificates.crt
 # Necessary to work around https://github.com/OfflineIMAP/offlineimap/issues/573 (versions 7.0.12, 7.2.1)
