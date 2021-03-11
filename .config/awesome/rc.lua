@@ -677,6 +677,9 @@ awful.rules.rules = {
      }
     },
 
+    { rule = { class = "Xfdesktop" },
+      properties = { sticky = true } },
+
     -- Titlebars
     { rule_any = { type = { "dialog", "normal" } },
       properties = { titlebars_enabled = false } },

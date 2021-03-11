@@ -127,6 +127,9 @@ theme.weather = lain.widget.weather({
 -- / fs
 local fsicon = wibox.widget.imagebox(theme.widget_fs)
 theme.fs = lain.widget.fs({
+      partition = "/",
+      showpopup = "off",
+      threshold = 90,
       notification_preset = { font = theme.font, fg = theme.fg_normal },
       settings  = function()
          widget:set_markup(markup.fontfg(theme.font, "#80d9d8", string.format("%.1f", fs_now["/"].percentage) .. "% "))
@@ -212,7 +215,7 @@ local netupinfo = lain.widget.net({
 })
 
 local net_wireless = net_widgets.wireless({
-      interface="wlan0",
+      interface="wlp5s0",
       font=theme.font
 })
 
