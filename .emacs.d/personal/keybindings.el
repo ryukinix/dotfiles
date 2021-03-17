@@ -131,7 +131,7 @@
 
 
 ;; favorite directories
-(let ((courses-dir (expand-file-name "~/Dropbox/University/Courses/UFC/"))
+(let ((courses-dir (expand-file-name "~/Dropbox/University/TCC/"))
       (todo-dir (expand-file-name"~/Dropbox/todo.txt"))
       (did-dir (expand-file-name "~/Dropbox/did.txt")))
   ;; favorite directories
