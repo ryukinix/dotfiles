@@ -30,6 +30,12 @@ raise-frames () {
                            (frame-list))"
 }
 
+reopen-frame () {
+    echo "Reopen frame"
+    open-frame -e "(delete-frame nil)"
+    new-frame
+}
+
 restart-emacs-openrc () {
     notify-send "Emacs daemon crashed :(" "Restarting via OpenRc"
     sudo "/etc/init.d/emacs.$(whoami)" restart
@@ -58,7 +64,8 @@ main () {
     if [ -n "$EXWM" ]; then
         open-frame "$@" 2> /dev/null
     elif [ "$(has-frame)" == "t" ]; then
-        open-frame "$@" 2> /dev/null || raise-frames 1> /dev/null
+        open-frame "$@"
+        raise-frames || reopen-frame
     else
         new-frame "$@" 2> /dev/null
         raise-frames 1> /dev/null
