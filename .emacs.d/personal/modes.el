@@ -28,6 +28,7 @@
 (require 'slime)
 (require 'ssh-agency)
 (require 'dbus)
+(require 'git-commit)
 
 ;; My modes
 (message "Modos do Manoel")
