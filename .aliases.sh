@@ -417,3 +417,4 @@ alias battery-headset='bluetooth_battery $(bluetoothctl paired-devices | grep TU
 alias pulseaudio-restart='pulseaudio -k; pulseaudio -D'
 alias telegram-off="sudo chmod -x `which -m telegram-desktop`"
 alias telegram-on="sudo chmod +x `which -m telegram-desktop`"
+alias awesome-quit="awesome-client 'awesome.quit()'"

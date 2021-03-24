@@ -80,7 +80,7 @@ local gui_editor   = "/home/lerax/.local/bin/gemacs"
 local browser      = "exo-open --launch WebBrowser"
 
 awful.util.terminal = terminal
-awful.util.tagnames = { "main", "dev", "tmp" }
+awful.util.tagnames = { "main", "dev", "etc" }
 awful.layout.layouts = {
    awful.layout.suit.floating,
    awful.layout.suit.tile,
@@ -422,7 +422,7 @@ globalkeys = awful.util.table.join(
          awful.spawn.with_shell("pactl set-source-mute 1 toggle") end),
    awful.key({ }, "XF86Launch1", function ()
          awful.spawn.with_shell("dm-tool lock") end),
-   awful.key({modkey, altkey}, "l", function ()
+   awful.key({modkey, "Ctrl"}, "l", function ()
          awful.spawn.with_shell("slock") end),
    -- Widgets popups
    -- awful.key({ altkey, }, "c", function () lain.widget.calendar.show(7) end),
