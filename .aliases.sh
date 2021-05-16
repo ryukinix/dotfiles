@@ -252,6 +252,11 @@ git-branch-clean() {
     fi
 }
 
+researching () {
+    local f="$1"
+    ln -v -s "$(readlink -f "$f")" /home/lerax/Dropbox/University/TCC/research/
+}
+
 # save definition of dot (graphviz language)
 alias dot-graph='/usr/bin/dot'
 alias dot-tig='GIT_DIR=$HOME/.dot/ tig'
@@ -418,3 +423,4 @@ alias pulseaudio-restart='pulseaudio -k; pulseaudio -D'
 alias telegram-off="sudo chmod -x `which -m telegram-desktop`"
 alias telegram-on="sudo chmod +x `which -m telegram-desktop`"
 alias awesome-quit="awesome-client 'awesome.quit()'"
+alias tcc='cd ~/Dropbox/University/TCC'
