@@ -3,9 +3,9 @@
 
 (require 'manoel "~/.emacs.d/personal/preload/mano.el")
 
-(lerax-require-packages '(doom-themes))
+(lerax-require-packages '(doom-themes kaolin-themes))
 
-(defcustom lerax-theme 'doom-nord
+(defcustom lerax-theme 'kaolin-bubblegum
   "My theme: only loaded in initialization"
   :group 'lerax
   :type 'symbol)
