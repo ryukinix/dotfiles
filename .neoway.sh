@@ -108,3 +108,5 @@ alias dl='gsutil -u analytics-k8s-dev-4742'
 alias kubetop='kubectl top pod -n spark --containers'
 alias vpnip="ip addr | grep tun0 | grep inet | awk '{print $2}'"
 alias sparkjob-logs='kubectl logs -n spark'
+alias fs-logs='kubectl logs -f -n services $(kubectl get pods -n services | awk "{print \$1}" | grep featurestore)'
+alias delivery-logs='kubectl logs -f -n services $(kubectl get pods -n services | awk "{print \$1}" | grep delivery)'
