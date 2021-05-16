@@ -1,4 +1,4 @@
-<?xml encoding="UTF-8" version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <actions>
 <action>
 	<icon>utilities-terminal</icon>
@@ -153,7 +153,7 @@
 	<icon>mail-archive</icon>
 	<name>Downcase</name>
 	<unique-id>1552098470583441-1</unique-id>
-	<command>python /home/lerax/.local/bin/downcase %N</command>
+	<command>python3 /home/lerax/.local/bin/downcase %N</command>
 	<description>Downcase files</description>
 	<patterns>*</patterns>
 	<directories/>
