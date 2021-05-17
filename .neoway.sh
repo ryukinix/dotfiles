@@ -98,7 +98,6 @@ alias vpn-gateway='sudo /bin/ip route add 10.0.0.0/8 via 192.168.1.100'
 alias wifipowersave='sudo iwconfig wlp5s0 power'
 alias wifipowersave-off='sudo iwconfig wlp5s0 power off'
 alias dataproc='cd /home/lerax/Desktop/workspace/townplanner-troublemaker/project_gcp/neoway-data-science/dataproc'
-# alias jupyter-gateway-tunnel='ssh -v -nNT -L 8321:10.251.64.200:80 manoel.vilela@10.240.0.10'
 alias jupyter-gateway-tunnel='neoway-tunnel jupyter-gateway'
 alias jupyter-gateway-create="jupyter notebook --ip='*' --NotebookApp.token='' --NotebookApp.password='' --gateway-url=http://localhost:8321 --GatewayClient.http_user=${USER} --GatewayClient.http_pwd=${USER}-password"
 alias jupyter-gateway-install="pip install jupyter_enterprise_gateway"
