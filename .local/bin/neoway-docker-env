@@ -1,6 +1,0 @@
-#!/bin/bash
-
-gcloud auth activate-service-account --key-file=/keybase/team/neoway.bigdata.cloud.google.datascience.service/gitlab-runner.json
-gcloud config set account gitlab-runner@neoway-data-science.iam.gserviceaccount.com
-gcloud auth print-access-token | docker login -u oauth2accesstoken --password-stdin http://gcr.io/analytics-k8s-prod-3592
-# gcloud auth configure-docker
