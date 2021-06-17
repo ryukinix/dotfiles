@@ -23,12 +23,10 @@ chmod +x coursier
                             lsp-ui
                             lsp-treemacs
                             company-posframe
-                            company-lsp
                             dap-mode))
   ;; Enable nice rendering of documentation on hover
   (use-package lsp-ui)
   ;; Add company-lsp backend for metals
-  (use-package company-lsp)
   (use-package lsp-mode
     ;; Optional - enable lsp-mode automatically in scala files
     :hook  (scala-mode . lsp)

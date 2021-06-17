@@ -11,7 +11,7 @@
   :type 'symbol)
 
 
-(defcustom lerax-theme-font "Hack"
+(defcustom lerax-theme-font "JuliaMono"
   "My default font: only loaded in initialization"
   :group 'lerax
   :type 'string)
