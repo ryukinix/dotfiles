@@ -2,11 +2,9 @@
 #+OPTIONS: todo:nil tasks:("IN-PROGRESS" "DONE") tags:nil
 #+AUTHOR: Manoel Vilela
 #+TITLE: Primeiro título @@latex:\\@@ Segundo título
-#+EXCLUDE_TAGS: TOC_3
-#+LANGUAGE: bt-br
+#+LANGUAGE: pt-br
 #+LATEX_HEADER: \usepackage[]{babel}
 #+LATEX_HEADER: \usepackage{indentfirst}
-#+LATEX_HEADER: \renewcommand\listingscaption{Código}
 #+OPTIONS: toc:nil
 [[./pics/ufc.png]]
 
@@ -15,14 +13,6 @@
 Descreva aqui o resumo
 
 #+END_abstract
-#+TOC: headlines=2
-
-
-* Sumário                                                             :TOC_3:
-:PROPERTIES:
-:CUSTOM_ID: toc-org
-:END:
-- [[#introdução][Introdução]]
 
 * Introdução
 
