@@ -3,6 +3,8 @@
 (require 'erc)
 (require 'subr-x)
 
+(setq erc-default-server "irc.libera.chat")
+
 (defconst lerax-erc-password-file
   (expand-file-name "/keybase/private/lerax/secrets/irc.txt.gpg"))
 
