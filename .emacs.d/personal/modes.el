@@ -152,12 +152,16 @@
  '((emacs-lisp . t)
    (python . t)))
 
-(setq-default flycheck-check-syntax-automatically '(mode-enabled save))
+
 (setq-default prelude-flyspell nil) ;; disable flyspell as default
 
 
 (with-eval-after-load 'flycheck
-  (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc))
+  ;; wtf, who adds this shit to the python-mode-hook?
+  (remove-hook 'python-mode-hook 'pylint-add-menu-items)
+  (remove-hook 'python-mode-hook 'pylint-add-key-bindings)
+  ;;(setq-default flycheck-check-syntax-automatically '(mode-enabled save))
+  (setq-default flycheck-disabled-checkers '(python-pylint emacs-lisp-checkdoc))
   (setq-default flycheck-scheme-chicken-executable "chicken-csc"))
 
 ;; not available in emacs-nox package
@@ -171,10 +175,6 @@
                 '(chicken racket guile chez mit chibi))
   (add-hook 'geiser-repl-mode-hook (lambda ()
                                     (smartparens-mode +1))))
-
-(with-eval-after-load 'python
-  (setq python-shell-interpreter "python3")
-  (setq flycheck-python-pycompile-executable "python3"))
 
 ;; I hate these asdf.txt~ files
 (setq make-backup-files nil)
@@ -194,7 +194,7 @@
 ;;             (lambda (_)
 ;;               (setq-local extended-command-history nil)))
 
-(display-battery-mode +1)
+;; (display-battery-mode +1)
 
 (with-eval-after-load 'magit
   (require 'forge))
