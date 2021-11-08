@@ -24,3 +24,6 @@ safe-source ~/.economy-mode.sh
 safe-source ~/.neoway.sh
 safe-source ~/.local.sh
 [[ -f `which fzf` ]] && safe-source ~/.fzf.zsh
+
+
+export DOCKER_BUILDKIT=1
