@@ -5,6 +5,12 @@
 (require 'cl-lib)
 (require 'subr-x)
 
+
+;; related with not expand <s blocks on org-mode with emacs27
+;; ref: https://github.com/syl20bnr/spacemacs/issues/11798#issuecomment-454941024
+(when (version<= "9.2" (org-version))
+  (require 'org-tempo))
+
 ;; ref: https://github.com/bbatsov/prelude/issues/1225
 ;; error: Package ‘undo-tree-’ is unavailable
 ;; affects emacs 26.1 and 26.2, fixed in emacs 26.3

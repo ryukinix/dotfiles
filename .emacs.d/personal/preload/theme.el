@@ -4,6 +4,7 @@
 (require 'manoel "~/.emacs.d/personal/preload/mano.el")
 
 (lerax-require-packages '(doom-themes kaolin-themes))
+(defvar prelude-minimalistic-ui 't)
 
 (defcustom lerax-theme 'kaolin-bubblegum
   "My theme: only loaded in initialization"
