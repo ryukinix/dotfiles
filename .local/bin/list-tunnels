@@ -12,4 +12,4 @@ fi
 grep -A "${depth_search}" "Host ${hostname}" "${ssh_config_file}" \
       | grep -E -zo 'Host.*Host' \
       | grep -a LocalForward \
-      | awk '{printf "localhost:%d => %s\n", $2, $3}'
+      | awk '{printf "http://localhost:%d => %s\n", $2, $3}'
