@@ -7,6 +7,11 @@ dosrun () {
     dosbox "$@" -fullscreen -exit
 }
 
+loadenv () {
+    local env_file="$1"
+    export $(cat ${env_file} | xargs)
+}
+
 emacs-lite () {
     local lite="~/.emacs.d.lite"
     emacs -q --eval "(setq user-emacs-directory \"$lite\")" \
