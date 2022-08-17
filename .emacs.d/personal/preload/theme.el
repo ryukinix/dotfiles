@@ -6,7 +6,7 @@
 (lerax-require-packages '(doom-themes kaolin-themes))
 (defvar prelude-minimalistic-ui 't)
 
-(defcustom lerax-theme 'kaolin-bubblegum
+(defcustom lerax-theme 'kaolin-galaxy
   "My theme: only loaded in initialization"
   :group 'lerax
   :type 'symbol)
