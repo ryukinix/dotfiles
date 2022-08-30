@@ -38,7 +38,7 @@
 
 ;; accessing a package repo over https on Windows is a no go, so we
 ;; fallback to http there
-(unless package--initialized
+(unless t ; package--initialized
   (if (eq system-type 'windows-nt)
       (add-to-list 'package-archives
                    '("melpa" . "http://melpa.org/packages/") t)
