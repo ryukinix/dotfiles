@@ -429,3 +429,4 @@ alias telegram-off="sudo chmod -x `which -m telegram-desktop`"
 alias telegram-on="sudo chmod +x `which -m telegram-desktop`"
 alias awesome-quit="awesome-client 'awesome.quit()'"
 alias tcc='cd ~/Dropbox/University/TCC'
+alias python-linters-install='pip install flake8 mypy black black-macchiato'
