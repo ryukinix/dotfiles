@@ -203,3 +203,4 @@
 (menu-bar-mode -1)
 (simple-modeline-mode +1)
 (super-save-mode -1)
+(setenv "DOCKER_BUILDKIT" "1")
