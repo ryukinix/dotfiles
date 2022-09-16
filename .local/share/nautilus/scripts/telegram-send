@@ -1,0 +1,2 @@
+#!/bin/sh
+echo "$NAUTILUS_SCRIPT_SELECTED_FILE_PATHS" | sed 's/ /\\ /g' | xargs telegram-send -f

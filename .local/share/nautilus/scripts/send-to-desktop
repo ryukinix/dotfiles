@@ -1,0 +1,4 @@
+#!/bin/bash
+
+files=$(echo "$NAUTILUS_SCRIPT_SELECTED_FILE_PATHS" | sed 's/ /\\ /g')
+ln -s $files ~/Desktop/
