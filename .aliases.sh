@@ -430,3 +430,6 @@ alias telegram-on="sudo chmod +x `which -m telegram-desktop`"
 alias awesome-quit="awesome-client 'awesome.quit()'"
 alias tcc='cd ~/Dropbox/University/TCC'
 alias python-linters-install='pip install flake8 mypy black black-macchiato'
+alias docker-kill-all="docker ps | awk '{print \$1}' | tail -n +2 | xargs docker kill"
+alias prun='pdm run'
+alias raspberry-bind='ssh -C -Y lerax@raspberry -t "x2x -north -to :0.0"'
