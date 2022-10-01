@@ -143,6 +143,7 @@ BODY is the rest of eval forms to be used FUNC memoized."
 
 (defun lerax-require-package (package)
   "Install PACKAGE unless already installed."
+  (push package package-selected-packages)
   (unless (package-installed-p package)
     (package-refresh-contents-once)
     (package-install package)))
