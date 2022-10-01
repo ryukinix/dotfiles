@@ -433,3 +433,6 @@ alias python-linters-install='pip install flake8 mypy black black-macchiato'
 alias docker-kill-all="docker ps | awk '{print \$1}' | tail -n +2 | xargs docker kill"
 alias prun='pdm run'
 alias raspberry-bind='ssh -C -Y lerax@raspberry -t "x2x -north -to :0.0"'
+alias dropbox-ignore='attr -s com.dropbox.ignored -V 1'
+alias dropbox-ignore-undo='attr -r com.dropbox.ignored'
+alias raspberry="ssh lerax@raspberry"
