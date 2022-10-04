@@ -2,7 +2,6 @@
 (require 'manoel "~/.emacs.d/personal/preload/mano.el")
 
 (lerax-require-packages '(slime-company
-                          forge
                           ssh-agency
                           ix
                           company-quickhelp
@@ -196,8 +195,6 @@
 
 ;; (display-battery-mode +1)
 
-(with-eval-after-load 'magit
-  (require 'forge))
 ;; prelude shitstorm on 1.1
 (global-nlinum-mode -1)
 (menu-bar-mode -1)
