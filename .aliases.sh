@@ -162,6 +162,11 @@ dot () {
     GIT_DIR=$HOME/.dot GIT_WORK_TREE=$HOME git "$@"
 }
 
+sys () {
+    GIT_DIR=/cfg GIT_WORK_TREE=/ git "$@"
+}
+
+
 dotk () {
     GIT_DIR=$HOME/.dot GIT_WORK_TREE=$HOME gitk "$@"
 }
