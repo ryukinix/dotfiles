@@ -18,7 +18,6 @@
 (require 'neotree)
 (require 'ox-beamer)
 (require 'projectile)
-(require 'key-chord)
 (require 'slime)
 (require 'cl-lib)
 (require 'slime-repl)
@@ -326,13 +325,6 @@
 ;; install packages easy
 (global-set-key (kbd "M-p") 'package-install)
 
-
-(setq key-chord-two-keys-delay .015
-      key-chord-one-key-delay .010)
-
-;; enable key chord
-;; disabled because I type too fast --ahahha
-;;(key-chord-mode +1)
 
 ;; enable yasnippet globally
 (yas-global-mode +1)

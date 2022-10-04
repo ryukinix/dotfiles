@@ -3,7 +3,7 @@
 
 (lerax-require-packages '(org-ref auctex))
 
-(require 'org-ref)
+;(require 'org-ref)
 (require 'ox-latex)
 
 

@@ -36,9 +36,14 @@
 (require 'cl-lib)
 (require 'package)
 
+;; FIXME: remove me
+(when (and (= emacs-major-version 26)
+           (< emacs-minor-version 3))
+  (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3"))
+
 ;; accessing a package repo over https on Windows is a no go, so we
 ;; fallback to http there
-(unless t ; package--initialized
+(unless nil ; package--initialized
   (if (eq system-type 'windows-nt)
       (add-to-list 'package-archives
                    '("melpa" . "http://melpa.org/packages/") t)

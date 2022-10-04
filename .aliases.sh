@@ -436,3 +436,6 @@ alias raspberry-bind='ssh -C -Y lerax@raspberry -t "x2x -north -to :0.0"'
 alias dropbox-ignore='attr -s com.dropbox.ignored -V 1'
 alias dropbox-ignore-undo='attr -r com.dropbox.ignored'
 alias raspberry="ssh lerax@raspberry"
+alias rasp-temp="vcgencmd measure_temp | egrep -o '[0-9]*\.[0-9]*' "
+alias retropie="cd ~/Desktop/RetroPie-Setup/; sudo bash retropie_setup.sh"
+alias apps="cd ~/RetroPie/roms/apps"

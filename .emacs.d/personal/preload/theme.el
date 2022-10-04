@@ -3,7 +3,7 @@
 
 (require 'manoel "~/.emacs.d/personal/preload/mano.el")
 
-(lerax-require-packages '(doom-themes kaolin-themes))
+(lerax-require-packages '(kaolin-themes))
 (defvar prelude-minimalistic-ui 't)
 
 (defcustom lerax-theme 'kaolin-ocean
