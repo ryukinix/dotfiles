@@ -436,3 +436,7 @@ alias raspberry-bind='ssh -C -Y lerax@raspberry -t "x2x -north -to :0.0"'
 alias dropbox-ignore='attr -s com.dropbox.ignored -V 1'
 alias dropbox-ignore-undo='attr -r com.dropbox.ignored'
 alias raspberry="ssh lerax@raspberry"
+
+# ref: https://www.reddit.com/r/gnome/comments/h9drsb/disable_superp_or_change_default_display_layout/
+alias disable-super-p="gsettings set org.gnome.mutter.keybindings switch-monitor \"['XF86Display']\""
+alias enable-super-p="gsettings reset org.gnome.mutter.keybindings switch-monitor"
