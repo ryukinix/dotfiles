@@ -440,3 +440,4 @@ alias raspberry="ssh lerax@raspberry"
 # ref: https://www.reddit.com/r/gnome/comments/h9drsb/disable_superp_or_change_default_display_layout/
 alias disable-super-p="gsettings set org.gnome.mutter.keybindings switch-monitor \"['XF86Display']\""
 alias enable-super-p="gsettings reset org.gnome.mutter.keybindings switch-monitor"
+alias fix-wayland-not-show-snap-apps="gsettings reset org.gnome.shell app-picker-layout"
