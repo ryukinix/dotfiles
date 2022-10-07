@@ -40,7 +40,7 @@ set-default-emacs () {
         return 1
     fi
 
-    ln -v -s "${new_emacs_d}" "${emacs_d}"
+    ln -r -v -s "${new_emacs_d}" "${emacs_d}"
 }
 
 gclone () {
