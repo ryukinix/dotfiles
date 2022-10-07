@@ -19,7 +19,7 @@ emacs-lite () {
 }
 
 emacs-prelude () {
-    local prelude="~/.emacs.d.prelude"
+    local prelude="$HOME/.emacs.d.prelude"
     emacs -q --eval "(setq user-emacs-directory \"$prelude\")" \
           -l "$prelude/init.el" "$@"
 }
