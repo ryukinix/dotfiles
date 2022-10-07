@@ -18,6 +18,31 @@ emacs-lite () {
           -l "$lite/init.el" "$@"
 }
 
+emacs-prelude () {
+    local prelude="~/.emacs.d.prelude"
+    emacs -q --eval "(setq user-emacs-directory \"$prelude\")" \
+          -l "$prelude/init.el" "$@"
+}
+
+set-default-emacs () {
+    local emacs_type="$1"
+    local emacs_d="$HOME/.emacs.d"
+    local new_emacs_d="$HOME/.emacs.d.${emacs_type}"
+    if [[ ! -d "$new_emacs_d" ]]; then
+        printf "error: dir $new_emacs_d not found"
+        return 1
+    fi
+
+    if [[ -L "${emacs_d}" ]]; then
+        unlink $emacs_d
+    elif [[ -d "${emacs_d}" ]]; then
+        echo "error: ${emacs_d} not a symlink, not a modular emacs config"
+        return 1
+    fi
+
+    ln -v -s "${new_emacs_d}" "${emacs_d}"
+}
+
 gclone () {
     local repo="$1"
     git clone "git@github.com:$repo.git"
