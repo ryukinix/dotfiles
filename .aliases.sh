@@ -450,8 +450,8 @@ alias git-message='git log --format=%B -n 1'
 alias dcshell='docker run --rm -it --entrypoint=/bin/bash'
 alias battery-headset='bluetooth_battery $(bluetoothctl paired-devices | grep TUNE500BT | cut -d " " -f2).1'
 alias pulseaudio-restart='pulseaudio -k; pulseaudio -D'
-alias telegram-off="sudo chmod -x `which -m telegram-desktop`"
-alias telegram-on="sudo chmod +x `which -m telegram-desktop`"
+alias telegram-off='sudo chmod -x `which telegram-desktop | head -n 1`'
+alias telegram-on='sudo chmod +x `which telegram-desktop | head -n 1`'
 alias awesome-quit="awesome-client 'awesome.quit()'"
 alias tcc='cd ~/Dropbox/University/TCC'
 alias python-linters-install='pip install flake8 mypy black black-macchiato'
