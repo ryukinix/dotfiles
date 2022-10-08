@@ -18,7 +18,6 @@
 (require 'neotree)
 (require 'ox-beamer)
 (require 'projectile)
-(require 'key-chord)
 (require 'slime)
 (require 'cl-lib)
 (require 'slime-repl)
