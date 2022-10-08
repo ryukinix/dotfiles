@@ -294,7 +294,7 @@ alias dot-tig='GIT_DIR=$HOME/.dot/ tig'
 
 # ustar is my server
 if [ "$(hostname)" != "ustar" ]; then
-    alias emacs='emacsclient -nw -a nano'
+    alias emacs='emacsclient -nw -a emacs'
     alias semacs='SUDO_EDITOR="emacsclient -t -a vim" sudoedit'
     alias svim='SUDO_EDITOR=vim sudoedit'
 else
@@ -466,3 +466,8 @@ alias raspberry="ssh lerax@raspberry"
 alias disable-super-p="gsettings set org.gnome.mutter.keybindings switch-monitor \"['XF86Display']\""
 alias enable-super-p="gsettings reset org.gnome.mutter.keybindings switch-monitor"
 alias fix-wayland-not-show-snap-apps="gsettings reset org.gnome.shell app-picker-layout"
+
+
+alias apps="cd ~/RetroPie/roms/apps"
+alias raspi-temp="vcgencmd measure_temp | egrep -o '[0-9]*\.[0-9]*'"
+alias retropie-setup="cd ~/Desktop/RetroPie-Setup/; sudo ./retropie_setup.sh"
