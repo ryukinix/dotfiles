@@ -17,7 +17,7 @@ if [[ $(hostname) == "starfox" ]]; then
     setxkbmap -option compose:rctrl
 elif [[ $(hostname) == "celeste" || $(hostname) == PC* ]]; then
     setxkbmap -model thinkpad60 -layout br
-    enable-synapitcs-touchpad
+    enable-synapitcs-touchpad || true
 fi
 
 userresources=$HOME/.Xdefaults
@@ -53,12 +53,12 @@ autostart=(
     /etc/xdg/autostart/gnome-keyring-ssh.desktop
     /etc/xdg/autostart/at-spi-dbus-bus.desktop
     /usr/share/applications/xfce4-clipman.desktop
-    ~/.config/autostart/Compton.desktop
     ~/.config/autostart/dropbox.desktop
 )
 
 commands=(
     "xfdesktop --disable-wm-check"
+    "picom"
     "thunar --daemon"
     "pulseaudio -D"
     "volumeicon"

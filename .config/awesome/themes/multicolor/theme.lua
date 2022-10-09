@@ -214,11 +214,7 @@ local netupinfo = lain.widget.net({
       end
 })
 
-local net_wireless = net_widgets.wireless({
-      interface="wlp5s0",
-      font=theme.font
-})
-
+local net_indicator = net_widgets.wireless({interface="wlan0", font=theme.font})
 
 -- Memory RAM
 local memicon = wibox.widget.imagebox(theme.widget_mem)
@@ -311,7 +307,7 @@ function theme.at_screen_connect(s)
          temp.widget,
          fsicon,
          theme.fs.widget,
-         net_wireless,
+         net_indicator,
          baticon,
          bat.widget,
          clockicon,
