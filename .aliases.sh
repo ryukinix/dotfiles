@@ -476,3 +476,4 @@ alias fix-wayland-not-show-snap-apps="gsettings reset org.gnome.shell app-picker
 alias apps="cd ~/RetroPie/roms/apps"
 alias raspi-temp="vcgencmd measure_temp | egrep -o '[0-9]*\.[0-9]*'"
 alias retropie-setup="cd ~/Desktop/RetroPie-Setup/; sudo ./retropie_setup.sh"
+alias dbx=distrobox
