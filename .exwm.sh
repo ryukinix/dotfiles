@@ -35,10 +35,11 @@ exwm () {
     xset r rate 200 60
 
     # Finally start Emacs
-    exec dbus-launch emacs --eval "(lerax-exwm-start nil t)"
+    # exec dbus-launch emacs --eval "(lerax-exwm-start nil t)"
+    exec emacsclient --create-frame -a "emacs --fullscreen" --eval "(toggle-frame-fullscreen)"
 
 }
 
-start_daemons
-setup_keyboard
+# start_daemons
+# setup_keyboard
 exwm
