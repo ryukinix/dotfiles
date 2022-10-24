@@ -345,3 +345,8 @@
 (global-set-key (kbd "C-S-k") 'sp-kill-whole-line)
 (global-set-key (kbd "M-<f6>") 'whitespace-mode)
 (global-set-key (kbd "C-x C-d") 'helm-browse-project)
+
+;; windmove
+(require 'windmove)
+(windmove-mode +1)
+(windmove-default-keybindings '(control shift)) ;; avoid keybinding collision
