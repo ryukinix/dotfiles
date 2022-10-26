@@ -1,7 +1,6 @@
 ;; -*- lexical-binding: t -*-
 ;; Workarounds: making my packages working on any emacs version
 
-(require 'manoel "~/.emacs.d/personal/preload/mano.el")
 (require 'cl-lib)
 (require 'subr-x)
 

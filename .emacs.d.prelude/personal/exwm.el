@@ -1,6 +1,6 @@
 ;; -*- lexical-binding: t -*-
 ;; manual: https://github.com/ch11ng/exwm/wiki
-(require 'manoel "~/.emacs.d/personal/preload/mano.el")
+(require 'lerax)
 
 (defcustom lerax-exwm-autostart-programs
     (let ((host (system-name)))

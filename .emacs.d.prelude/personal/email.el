@@ -1,7 +1,6 @@
-(lerax-require-packages '(notmuch))
-
 (require 'notmuch)
 (require 'smtpmail)
+
 ;; setup the mail address and use name
 (setq mail-user-agent 'message-user-agent)
 (setq user-mail-address "manoelnt0@gmail.com"

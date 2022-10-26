@@ -1,4 +1,4 @@
-(require 'manoel "~/.emacs.d/personal/preload/mano.el")
+(require 'lerax)
 
 (defun scala-metals ()
   "You will need emacs-metals in $PATH to work properly.
@@ -73,4 +73,4 @@ chmod +x coursier
                                     '(save idle-change new-line mode-enabled))))))
 
 
-(scala-setup)
+;; (scala-setup)

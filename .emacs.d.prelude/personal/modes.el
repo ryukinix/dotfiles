@@ -1,19 +1,4 @@
 ;; fetching personal defined packages
-(require 'manoel "~/.emacs.d/personal/preload/mano.el")
-
-(lerax-require-packages '(slime-company
-                          ssh-agency
-                          ix
-                          company-quickhelp
-                          company-c-headers
-                          xclip
-                          pyvenv
-                          simple-modeline
-                          ox-gfm
-                          flycheck
-                          htmlize))
-
-
 
 
 (require 'erc)
@@ -205,4 +190,4 @@
 (menu-bar-mode -1)
 (simple-modeline-mode +1)
 (super-save-mode -1)
-(setenv "DOCKER_BUILDKIT" "1")
+(setenv "DOCKER_BUILDKIT" "0")

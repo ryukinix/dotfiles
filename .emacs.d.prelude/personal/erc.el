@@ -1,5 +1,3 @@
-;; my setup for erc
-
 (require 'erc)
 (require 'subr-x)
 

@@ -1,7 +1,4 @@
 ;; this enable syntax highlight on org-mode org |> latex |> pdf
-(require 'manoel "~/.emacs.d/personal/preload/mano.el")
-
-(lerax-require-packages '(org-ref auctex))
 
 (require 'org-ref)
 (require 'ox-latex)

@@ -1,9 +1,7 @@
 ;; configuration about my personal theme
 ;; theme
 
-(require 'manoel "~/.emacs.d/personal/preload/mano.el")
 
-(lerax-require-packages '(doom-themes kaolin-themes))
 (defvar prelude-minimalistic-ui 't)
 
 (defcustom lerax-theme 'kaolin-ocean
@@ -42,7 +40,6 @@
   (load-theme lerax-theme t)
   (lerax-theme-set-font)
   (enable-theme lerax-theme))
-
 
 
 ;; this code is not very efficient and not pretty,

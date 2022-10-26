@@ -1,8 +1,3 @@
-(require 'manoel "~/.emacs.d/personal/preload/mano.el")
-
-(lerax-require-packages '(org2jekyll
-                          toc-org))
-
 (require 'org)
 (require 'org2jekyll)
 
