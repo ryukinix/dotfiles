@@ -45,6 +45,7 @@
                    '("melpa" . "http://melpa.org/packages/") t)
     (add-to-list 'package-archives
                  '("melpa" . "https://melpa.org/packages/") t))
+
   (package-initialize)
   (setq package--initialized nil))
 

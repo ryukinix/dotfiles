@@ -31,7 +31,7 @@
   (when (font-exists-p lerax-theme-font)
     (set-face-attribute 'default nil
                         :family lerax-theme-font
-                        :height 110
+                        :height 120
                         :weight 'normal
                         :width 'normal)))
 

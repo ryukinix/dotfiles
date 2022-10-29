@@ -34,5 +34,9 @@
    yasnippet
    org-ref
    auctex
+   org-present
+   visual-fill-column
+   gif-screencast
+   zeal-at-point
    )
  )
