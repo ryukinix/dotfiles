@@ -53,6 +53,7 @@ path=(
   ~/Android/Sdk/platform-tools/
   ~/.fzf/bin/
   ~/.git-fuzzy/bin
+  ~/.emacs.d.doomemacs/bin
   $path
 )
 
