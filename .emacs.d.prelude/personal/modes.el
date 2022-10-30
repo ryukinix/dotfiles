@@ -1,8 +1,6 @@
 ;; fetching personal defined packages
 
 
-(require 'erc)
-(require 'erc-log)
 (require 'org)
 (require 'org-mouse) ;; enable mouse features on org-mode
 (require 'org-agenda) ;; required to make right-click works
@@ -75,23 +73,6 @@
 (push 'slime-asdf slime-contribs)
 (push 'slime-quicklisp slime-contribs)
 
-;; setup irc autologin channels
-;;(setq erc-autojoin-channels-alist '(("freenode.net" "#artix")))
-(setq erc-prompt "λ>")
-
-;; enable notifications -- only if have dbus
-;; (add-to-list 'erc-modules 'notifications)
-(add-to-list 'erc-modules 'log) ;; enable
-
-;; == ERC LOG SETUP
-(with-eval-after-load 'erc
-  (setq erc-save-buffer-on-part nil)
-  (setq erc-save-queries-on-quit nil)
-  (when (getenv "EXWM")
-    (erc-notify-mode))
-  (setq erc-log-write-after-insert t)
-  (setq erc-log-write-after-send t)
-  (setq erc-log-insert-log-on-open t))
 
 (setq initial-scratch-message
 ";; ▓█████  ███▄ ▄███▓ ▄▄▄       ▄████▄    ██████

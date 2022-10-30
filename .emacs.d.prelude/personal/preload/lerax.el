@@ -249,7 +249,7 @@ Missing packages are installed automatically."
 
 
 ;; only available after emacs 26.X
-(defvar lerax-optimal-linum-mode
+(defun lerax-get-optimal-linum-mode ()
   (if (fboundp 'display-line-numbers-mode)
       'display-line-numbers-mode
     'linum-mode))

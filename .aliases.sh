@@ -45,7 +45,7 @@ set-default-emacs () {
 
 gclone () {
     local repo="$1"
-    git clone "git@github.com:$repo.git"
+    git clone "git@github.com:$repo.git" "${@:2}"
 }
 
 function chroot-bind {
@@ -287,7 +287,7 @@ git-branch-clean() {
     fi
 }
 
-researching () {
+research () {
     local f="$1"
     ln -v -s "$(readlink -f "$f")" /home/lerax/Dropbox/University/TCC/research/
 }

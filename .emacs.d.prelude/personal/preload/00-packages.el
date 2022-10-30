@@ -9,34 +9,37 @@
 ;; docker-lerax related bug at bootstraping package install
 (lerax-require-packages
  '(
+   auctex
    company-c-headers
    company-quickhelp
+   cov
    darkroom
    doom-themes
    flycheck
+   gif-screencast
    htmlize
    ix
    kaolin-themes
    linum-relative
    multiple-cursors
-   neotree treemacs
+   neotree
    notmuch
+   org-present
+   org-ref
    org2jekyll
    ox-gfm
-   pyvenv
    pyvenv
    restclient
    simple-modeline
    slime-company
    ssh-agency
    toc-org
+   treemacs
+   visual-fill-column
    xclip
    yasnippet
-   org-ref
-   auctex
-   org-present
-   visual-fill-column
-   gif-screencast
    zeal-at-point
+
+   load-env-vars
    )
  )
