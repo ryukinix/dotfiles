@@ -95,8 +95,8 @@
 
 ;; favorite directories
 (let ((courses-dir (expand-file-name "~/Dropbox/University/TCC/"))
-      (todo-dir (expand-file-name"~/Dropbox/todo.txt"))
-      (did-dir (expand-file-name "~/Dropbox/did.txt")))
+      (todo-dir (expand-file-name"~/Sync/todo.org"))
+      (did-dir (expand-file-name "~/Sync/did.org")))
   ;; favorite directories
   (global-set-key (kbd "<f5>") (favorite-dir todo-dir))
   (global-set-key (kbd "<f6>") (favorite-dir did-dir))
