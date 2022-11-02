@@ -478,3 +478,4 @@ alias raspi-temp="vcgencmd measure_temp | egrep -o '[0-9]*\.[0-9]*'"
 alias retropie-setup="cd ~/Desktop/RetroPie-Setup/; sudo ./retropie_setup.sh"
 alias dbx=distrobox
 alias workspace="cd ~/Desktop/workspace"
+alias ubuntu-upgrade="sudo apt update; sudo apt upgrade -y; sudo apt dist-upgrade -y"
