@@ -349,7 +349,24 @@ Missing packages are installed automatically."
                           :background background
                           :foreground foreground))))
 
-
+(defun lerax-comment-or-uncomment-region-or-line ()
+  "Comments or uncomments the region or the current line if there's no active region.
+  If there is region, set region beginning and region end to
+  respective beginning and end of the line
+"
+  (interactive)
+  (let (beg end)
+    (if (region-active-p)
+        (setq beg (save-excursion (goto-char (region-beginning))
+                                  (line-beginning-position))
+              end (save-excursion (goto-char (region-end))
+                                  (line-end-position)))
+      (setq beg (line-beginning-position)
+            end (line-end-position)))
+    (comment-or-uncomment-region beg end)
+    (when (and (comment-only-p beg end)
+               (null (region-active-p)))
+      (next-logical-line))))
 
 (provide 'lerax)
 ;;; lerax.el ends here

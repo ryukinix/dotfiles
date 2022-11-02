@@ -265,3 +265,5 @@
 
 (with-eval-after-load 'windmove
   (windmove-default-keybindings '(control shift))) ;; avoid keybinding collision
+
+(global-set-key (kbd "C-M-;") 'lerax-comment-or-uncomment-region-or-line)
