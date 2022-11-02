@@ -11,6 +11,7 @@
 (require 'ssh-agency)
 (require 'dbus)
 (require 'git-commit)
+(require 'cov)
 
 ;; My modes
 (message "Modos do Manoel")
@@ -166,10 +167,11 @@
 ;; (with-eval-after-load 'magit
 ;;   (require 'forge))
 ;; prelude shitstorm on 1.1
+(setq cov-coverage-mode t)
 (global-nlinum-mode -1)
 (global-display-line-numbers-mode -1)
 (menu-bar-mode -1)
-(simple-modeline-mode +1)               ;
+(simple-modeline-mode +1)
 (super-save-mode -1)
 (setenv "DOCKER_BUILDKIT" "0")
 (setq cursor-type 'bar)

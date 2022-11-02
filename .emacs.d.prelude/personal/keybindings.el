@@ -251,6 +251,7 @@
 ;; I don't like this keybinding, it minimizes the emacs
 (global-unset-key (kbd "C-z"))
 
+
 ;; horizontal scroll in emacs is weird
 (global-unset-key (kbd "<C-prior>"))
 (global-unset-key (kbd "<C-next>"))
@@ -266,4 +267,9 @@
 (with-eval-after-load 'windmove
   (windmove-default-keybindings '(control shift))) ;; avoid keybinding collision
 
+;; comment region with partial line selection
+;; and if there is no region-active only comment the line
 (global-set-key (kbd "C-M-;") 'lerax-comment-or-uncomment-region-or-line)
+
+;; select whole line
+(global-set-key (kbd "C-M-=") (kbd "C-a C-S-n"))
