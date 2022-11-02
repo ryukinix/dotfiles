@@ -15,6 +15,6 @@ export ANDROID_HOME="$HOME/Android/Sdk"
 export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
 export ANDROID_AVD_HOME="$HOME/.android/avd"
 export TERM=xterm-256color
-export SSH_AUTH_SOCK=/run/user/1000/keyring/ssh
+export SSH_AUTH_SOCK=/run/user/$(id -u)/keyring/ssh
 export MYPY_CACHE_DIR=/tmp
 export PYTHONDONTWRITEBYTECODE=1
