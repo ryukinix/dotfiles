@@ -142,7 +142,7 @@
 (global-set-key (kbd "C-M-S-k") 'lerax-kill-this-buffer-and-window)
 (global-set-key (kbd "<M-f4>") 'lerax-intelligent-close)
 
-(global-set-key (kbd "M-N") 'lerax-optimal-linum-mode)
+(global-set-key (kbd "M-N") (lerax-get-optimal-linum-mode))
 (global-unset-key (kbd "M-R"))
 (global-set-key (kbd "M-R") 'lerax-optimal-linum-relative-mode)
 
