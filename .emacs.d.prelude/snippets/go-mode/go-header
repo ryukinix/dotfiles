@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: go license header
+# key: go-header
+# --
+// Copyright `(s-trim-right (shell-command-to-string "date +%Y"))` to ${1:Manoel Vilela} All rights reserved
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
