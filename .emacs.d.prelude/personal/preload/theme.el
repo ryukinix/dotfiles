@@ -4,7 +4,7 @@
 
 (defvar prelude-minimalistic-ui 't)
 
-(defcustom lerax-theme 'kaolin-ocean
+(defcustom lerax-theme 'doom-sourcerer
   "My theme: only loaded in initialization"
   :group 'lerax
   :type 'symbol)
