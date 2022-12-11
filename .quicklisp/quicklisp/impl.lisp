@@ -189,7 +189,7 @@
   (:reexport-from #:socket
                   #:socket-connect)
   (:reexport-from #:ext
-                  #:delete-dir
+                  #:delete-directory
                   #:rename-directory
                   #:probe-directory
                   #:probe-pathname
@@ -258,6 +258,14 @@
                   #:inet-socket
                   #:socket-connect
                   #:socket-make-stream))
+
+;;; Mezzano
+
+(define-implementation-package :mezzano #:ql-mezzano
+  (:documentation "Mezzano Lisp Operating System - https://github.com/froggey/Mezzano")
+  (:class mezzano)
+  (:reexport-from #:mezzano.network.tcp
+                  #:tcp-stream-connect))
 
 ;;; MKCL
 
