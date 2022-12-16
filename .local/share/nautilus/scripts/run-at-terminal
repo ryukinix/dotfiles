@@ -1,0 +1,5 @@
+#!/bin/bash
+
+files=$(echo "$NAUTILUS_SCRIPT_SELECTED_FILE_PATHS" | sed 's/ /\\ /g')
+cmd="${files}; echo; echo Press enter to exit...; read -s"
+xfce4-terminal -e "bash -c '${cmd}'"
