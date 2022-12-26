@@ -479,3 +479,4 @@ alias retropie-setup="cd ~/Desktop/RetroPie-Setup/; sudo ./retropie_setup.sh"
 alias dbx=distrobox
 alias workspace="cd ~/Desktop/workspace"
 alias ubuntu-upgrade="sudo apt update; sudo apt upgrade -y; sudo apt dist-upgrade -y"
+alias apt-remove-all="sudo apt purge --auto-remove"
