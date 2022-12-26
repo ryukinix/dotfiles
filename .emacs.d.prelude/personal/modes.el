@@ -175,7 +175,10 @@
 (super-save-mode -1)
 (setenv "DOCKER_BUILDKIT" "0")
 (setq cursor-type 'bar)
-
+;; i think it's related to the simple modeline]:
+(with-eval-after-load which-function-mode
+  (which-function-mode -1))
+;; which-func-ff-hook error: (wrong-type-argument arrayp nil)
 ;; remove annoying headerline wavy line
 (with-eval-after-load lsp-mode
   (setq-local lsp-headerline-breadcrumb-enable-diagnostics nil))

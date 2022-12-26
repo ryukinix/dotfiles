@@ -368,5 +368,15 @@ Missing packages are installed automatically."
                (null (region-active-p)))
       (next-logical-line))))
 
+(defun lerax-build-histogram (words)
+  "Create a assoc list a histogram of the elements ordered by frequency"
+  (let ((hist '()))
+    (cl-loop for word in words
+             if (assoc word hist)
+               do (incf (cdr (assoc word hist)))
+             else
+               do (push (cons word 1) hist))
+    (sort hist '(lambda (x y) (> (cdr x) (cdr y))))))
+
 (provide 'lerax)
 ;;; lerax.el ends here
