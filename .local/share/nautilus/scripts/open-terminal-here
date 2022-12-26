@@ -1,0 +1,4 @@
+#!/bin/bash
+
+
+tmux has-session && tmux new-window && exo-open --working-directory `pwd` --launch TerminalEmulator
