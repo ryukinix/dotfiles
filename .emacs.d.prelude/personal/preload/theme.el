@@ -4,7 +4,7 @@
 
 (defvar prelude-minimalistic-ui 't)
 
-(defcustom lerax-theme 'doom-sourcerer
+(defcustom lerax-theme 'doom-meltbus
   "My theme: only loaded in initialization"
   :group 'lerax
   :type 'symbol)
@@ -38,8 +38,10 @@
 (defun lerax-theme-reload ()
   (interactive)
   (load-theme lerax-theme t)
+  (load-theme 'leraxy t)
   (lerax-theme-set-font)
-  (enable-theme lerax-theme))
+  (enable-theme lerax-theme)
+  (enable-theme 'leraxy))
 
 
 ;; this code is not very efficient and not pretty,
