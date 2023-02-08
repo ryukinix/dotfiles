@@ -21,6 +21,7 @@ local menubar       = require("menubar")
 local freedesktop   = require("freedesktop")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
 local cyclefocus    = require('cyclefocus')
+local spotify_shell = require("awesome-wm-widgets.spotify-shell.spotify-shell")
 -- }}}
 
 -- Manoel here
@@ -424,14 +425,23 @@ globalkeys = awful.util.table.join(
          awful.spawn.with_shell("dm-tool lock") end),
    awful.key({modkey, "Ctrl"}, "l", function ()
          awful.spawn.with_shell("slock") end),
+
+
+   -- multimedia keyboard shortcuts
+   awful.key({ modkey,   "Control"  }, "s", function () spotify_shell.launch() end, {description = "spotify shell", group = "music"}),
+   awful.key({ }, "XF86AudioPlay", function () awful.util.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause", false) end),
+   awful.key({ }, "XF86AudioNext", function () awful.util.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next", false) end),
+   awful.key({ }, "XF86AudioPrev", function () awful.util.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous", false) end),
+   awful.key({ }, "XF86AudioStop", function () awful.util.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Stop", false) end),
+
    -- Widgets popups
    -- awful.key({ altkey, }, "c", function () lain.widget.calendar.show(7) end),
    awful.key({ altkey, }, "h", function () if beautiful.fs then beautiful.fs.show(7) end end),
       -- awful.key({ altkey, }, "w", function () if beautiful.weather then beautiful.weather.show(7) end end),
 
       -- Brightess
-      awful.key({ }, "XF86MonBrightnessUp", function () awful.util.spawn("xbacklight -inc 10") end),
-      awful.key({ }, "XF86MonBrightnessDown", function () awful.util.spawn("xbacklight -dec 10") end),
+   awful.key({ }, "XF86MonBrightnessUp", function () awful.util.spawn("xbacklight -inc 10") end),
+   awful.key({ }, "XF86MonBrightnessDown", function () awful.util.spawn("xbacklight -dec 10") end),
 
       -- ALSA volume control (disabled because I use emacs and this key bindings is shitty too)
       -- awful.key({ altkey }, "Up",

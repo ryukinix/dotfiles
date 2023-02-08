@@ -16,8 +16,8 @@ local calendar_widget = require("awesome-wm-widgets.calendar-widget.calendar")
 local fs_widget = require("awesome-wm-widgets.fs-widget.fs-widget")
 -- you need: luarocks install lua-json
 local jira_widget = require("awesome-wm-widgets.jira-widget.jira")
-
-
+local vpn = require("vpn")
+local spotify_widget = require("awesome-wm-widgets.spotify-widget.spotify")
 
 local os    = { getenv = os.getenv, setlocale = os.setlocale }
 
@@ -220,6 +220,9 @@ local net_indicator = net_widgets.wireless({
       font=theme.font
 })
 
+-- vpn
+vpn.font = theme.font
+
 -- Memory RAM
 local memicon = wibox.widget.imagebox(theme.widget_mem)
 local memory = lain.widget.mem({
@@ -281,28 +284,37 @@ function theme.at_screen_connect(s)
    -- Add widgets to the wibox
    s.mywibox:setup {
       layout = wibox.layout.align.horizontal,
-      expand = "left",
+      expand = "none",
       { -- Left widgets
          layout = wibox.layout.fixed.horizontal,
+         expand = "left",
          s.rofibutton,
          --s.mylayoutbox,
          s.mytaglist,
          s.mypromptbox,
-      },
-      --s.mytasklist, -- Middle widget
-      { -- Right widgets
-         layout = wibox.layout.fixed.horizontal,
+         wibox.widget.textbox("|"),
          netdownicon,
          netdowninfo,
          netupicon,
          netupinfo.widget,
+         wibox.widget.textbox("|"),
          memicon,
          memory.widget,
          cpuicon,
          cpu.widget,
       },
+      -- Middle widget
+      spotify_widget(
+         {
+            font = theme.font,
+            max_length = -1,
+            play_icon = '/usr/share/icons/Numix-Circle/48/apps/spotify.svg',
+            pause_icon = '/usr/share/icons/Numix-Light/22/status/renamed-spotify-client.svg'
+         }
+      ),
       {
          layout = wibox.layout.fixed.horizontal,
+         expand = "right",
          wibox.widget.systray(),
          tempicon,
          temp.widget,
@@ -313,6 +325,7 @@ function theme.at_screen_connect(s)
          jira,
          clockicon,
          mytextclock,
+         vpn,
          logout_menu_widget({onlock = function() awful.spawn.with_shell("slock") end})
       }
    }
