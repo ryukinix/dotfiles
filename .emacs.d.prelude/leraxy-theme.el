@@ -3,7 +3,6 @@
 
 (custom-theme-set-faces
  'leraxy
- '(default ((t (:family "JuliaMono" :foundry "UKWN" :width normal :height 120 :weight normal :slant normal :underline nil :overline nil :extend nil :strike-through nil :box nil :inverse-video nil :foreground "#dddddd" :background "black" :stipple nil :inherit nil))))
  '(cursor ((t (:background "#cecece"))))
  '(fixed-pitch ((t (:family "Monospace"))))
  '(variable-pitch ((((type w32)) (:foundry "outline" :family "Arial")) (t (:family "Sans Serif"))))
@@ -21,7 +20,7 @@
  '(font-lock-constant-face ((t (:foreground "#8a8a8a"))))
  '(font-lock-doc-face ((t (:foreground "#8a8a8a" :inherit (font-lock-comment-face)))))
  '(font-lock-doc-markup-face ((t (:inherit (font-lock-constant-face)))))
- '(font-lock-function-name-face ((t (:foreground "#8a8a8a"))))
+ '(font-lock-function-name-face ((t (:foreground "#ffffff" :width semi-expanded))))
  '(font-lock-keyword-face ((t (:foreground "dodger blue"))))
  '(font-lock-negation-char-face ((t (:foreground "#8a8a8a" :inherit (bold)))))
  '(font-lock-preprocessor-face ((t (:foreground "#8a8a8a" :inherit (bold)))))
@@ -47,6 +46,7 @@
  '(lazy-highlight ((t (:weight bold :foreground "#efefef" :background "#5e7ab2"))))
  '(match ((t (:weight bold :foreground "#448844" :background "black"))))
  '(next-error ((t (:inherit (region)))))
- '(query-replace ((t (:inherit (isearch))))))
+ '(query-replace ((t (:inherit (isearch)))))
+ '(default ((t (:family "JuliaMono" :foundry "UKWN" :width normal :height 120 :weight normal :slant normal :underline nil :overline nil :extend nil :strike-through nil :box nil :inverse-video nil :foreground "#dddddd" :background "black" :stipple nil :inherit nil)))))
 
 (provide-theme 'leraxy)
