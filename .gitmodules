@@ -25,3 +25,9 @@
 [submodule ".fzf"]
 	path = .fzf
 	url = https://github.com/junegunn/fzf.git
+[submodule ".config/awesome/awesome-wm-widgets"]
+	path = .config/awesome/awesome-wm-widgets
+	url = https://github.com/streetturtle/awesome-wm-widgets
+[submodule ".config/awesome/json"]
+	path = .config/awesome/json
+	url = git@github.com:rxi/json.lua.git

@@ -57,12 +57,12 @@ autostart=(
 )
 
 commands=(
+    "xfsettingsd --replace"
     "xfdesktop --disable-wm-check"
     "picom"
     "thunar --daemon"
     "pulseaudio -D"
     "volumeicon"
-    "run_keybase -g -a" # keybase kbfs no gui
 )
 
 
