@@ -275,3 +275,7 @@
 (global-set-key (kbd "C-M-=") (kbd "C-a C-S-n"))
 (global-set-key (kbd "C-,") #'xref-find-references)
 (define-key lsp-mode-map (kbd "M-.") #'lsp-find-definition)
+
+(with-eval-after-load 'org-mode
+  (define-key org-mode-map (kbd "C-M-<return>") 'org-insert-heading)
+  )
