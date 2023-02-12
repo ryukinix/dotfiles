@@ -10,3 +10,4 @@ latlong=""
 [[ ! `pgrep blueman-applet` ]] && blueman-applet&
 [[ ! `pgrep xfce4-power-manager` ]] && xfce4-power-manager&
 [[ ! `pgrep epp-client` ]] && /opt/cososys/bin/epp-client&
+[[ `pgrep xfdesktop` ]] && ~/.config/awesome/autostart/xfdesktop-fix.sh

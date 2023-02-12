@@ -276,7 +276,7 @@ function theme.at_screen_connect(s)
    s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, awful.util.tasklist_buttons)
 
    -- Create the wibox
-   s.mywibox = awful.wibar({ position = "top", screen = s, height = 20, bg = theme.bg_normal, fg = theme.fg_normal })
+   s.mywibox = awful.wibar({ position = "top", screen = s, height = 25, bg = theme.bg_normal, fg = theme.fg_normal })
 
    s.rofibutton = awful.widget.launcher({command = "rofi -show drun",
                                          image = theme.menu_submenu_icon })
@@ -333,7 +333,7 @@ function theme.at_screen_connect(s)
 
    -- Create the bottom wibox
    s.mybottomwibox = awful.wibar({ position = "bottom", screen = s,
-                                   border_width = 0, height = 20,
+                                   border_width = 0, height = 25,
                                    bg = theme.bg_normal, fg = theme.fg_normal })
 
    -- Add widgets to the bottom wibox
