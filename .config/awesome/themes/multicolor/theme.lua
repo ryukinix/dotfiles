@@ -302,6 +302,7 @@ function theme.at_screen_connect(s)
          memory.widget,
          cpuicon,
          cpu.widget,
+         wibox.widget.textbox("|"),
       },
       -- Middle widget
       spotify_widget(
@@ -322,10 +323,10 @@ function theme.at_screen_connect(s)
          net_indicator,
          baticon,
          bat.widget,
+         vpn,
          jira,
          clockicon,
          mytextclock,
-         vpn,
          logout_menu_widget({onlock = function() awful.spawn.with_shell("slock") end})
       }
    }
