@@ -11,14 +11,6 @@ local lain  = require("lain")
 local awful = require("awful")
 local wibox = require("wibox")
 local net_widgets = require("net_widgets")
-local logout_menu_widget = require("awesome-wm-widgets.logout-menu-widget.logout-menu")
-local calendar_widget = require("awesome-wm-widgets.calendar-widget.calendar")
-local fs_widget = require("awesome-wm-widgets.fs-widget.fs-widget")
--- you need: luarocks install lua-json
-local jira_widget = require("awesome-wm-widgets.jira-widget.jira")
-local vpn = require("modules.vpn")
-local spotify_widget = require("awesome-wm-widgets.spotify-widget.spotify")
-
 local os    = { getenv = os.getenv, setlocale = os.setlocale }
 
 local theme                                     = {}
@@ -100,13 +92,6 @@ theme.titlebar_maximized_button_normal_active   = theme.confdir .. "/icons/title
 theme.titlebar_maximized_button_focus_active    = theme.confdir .. "/icons/titlebar/maximized_focus_active.png"
 
 local markup = lain.util.markup
-function get_hostname()
-   local f = assert(io.open("/etc/hostname", "r"))
-   local content = f:read("*all")
-   f:close()
-   return content:match("[^\n]*")
-end
-local hostname = get_hostname()
 
 -- Textclock
 os.setlocale(os.getenv("LANG")) -- to localize the clock
@@ -117,27 +102,40 @@ local mytextclock = wibox.widget.textclock(
 mytextclock.font = theme.font
 
 -- Calendar
--- default
-local cw = calendar_widget()
--- or customized
-local cw = calendar_widget({
-      theme = 'dark',
-      placement = 'top_right',
-      start_sunday = true,
-      radius = 8,
-      -- with customized next/previous (see table above)
-      previous_month_button = 1,
-      next_month_button = 3,
+theme.cal = lain.widget.cal({
+      attach_to = { mytextclock },
+      notification_preset = {
+         font = theme.font,
+         fg   = theme.fg_normal,
+         bg   = theme.bg_normal
+      }
 })
-mytextclock:connect_signal(
-   "button::press",
-   function(_, _, _, button)
-      if button == 1 then cw.toggle() end
-   end
-)
 
+-- Weather
+local weathericon = wibox.widget.imagebox(theme.widget_weather)
+theme.weather = lain.widget.weather({
+      city_id = 2643743, -- placeholder (London)
+      notification_preset = { font = theme.font, fg = theme.fg_normal },
+      weather_na_markup = markup.fontfg(theme.font, "#eca4c4", "N/A "),
+      settings = function()
+         descr = weather_now["weather"][1]["description"]:lower()
+         units = math.floor(weather_now["main"]["temp"])
+         widget:set_markup(markup.fontfg(theme.font, "#eca4c4", descr .. " @ " .. units .. "°C "))
+      end
+})
 
-theme.cal = cw
+-- / fs
+local fsicon = wibox.widget.imagebox(theme.widget_fs)
+theme.fs = lain.widget.fs({
+      partition = "/",
+      showpopup = "off",
+      threshold = 90,
+      notification_preset = { font = theme.font, fg = theme.fg_normal },
+      settings  = function()
+         widget:set_markup(markup.fontfg(theme.font, "#80d9d8", string.format("%.1f", fs_now["/"].percentage) .. "% "))
+      end
+})
+
 
 
 -- CPU
@@ -195,6 +193,12 @@ local netdowninfo = wibox.widget.textbox()
 local netupicon = wibox.widget.imagebox(theme.widget_netup)
 local netupinfo = lain.widget.net({
       settings = function()
+         if iface ~= "network off" and
+            string.match(theme.weather.widget.text, "N/A")
+         then
+            theme.weather.update()
+         end
+
          local function formatted (x)
             local k = tonumber(x);
             if k < 1024 then
@@ -210,18 +214,10 @@ local netupinfo = lain.widget.net({
       end
 })
 
-local interface_name = "wlan0"
-if hostname == "PC-002653" then
-   interface_name = "wlp5s0"
-end
-
 local net_indicator = net_widgets.wireless({
-      interface=interface_name,
+      interface="wlp5s0",
       font=theme.font
 })
-
--- vpn
-vpn.font = theme.font
 
 -- Memory RAM
 local memicon = wibox.widget.imagebox(theme.widget_mem)
@@ -239,11 +235,6 @@ local memory = lain.widget.mem({
          widget:set_markup(markup.fontfg(theme.font, "#e0da37", m))
       end
 })
-
-local jira = jira_widget({
-      host = 'https://neoway.atlassian.net',
-      query = 'jql=assignee=currentuser()+AND+statusCategory!=done'}
-)
 
 function theme.at_screen_connect(s)
    -- Quake application
@@ -276,7 +267,7 @@ function theme.at_screen_connect(s)
    s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, awful.util.tasklist_buttons)
 
    -- Create the wibox
-   s.mywibox = awful.wibar({ position = "top", screen = s, height = 25, bg = theme.bg_normal, fg = theme.fg_normal })
+   s.mywibox = awful.wibar({ position = "top", screen = s, height = 20, bg = theme.bg_normal, fg = theme.fg_normal })
 
    s.rofibutton = awful.widget.launcher({command = "rofi -show drun",
                                          image = theme.menu_submenu_icon })
@@ -284,56 +275,52 @@ function theme.at_screen_connect(s)
    -- Add widgets to the wibox
    s.mywibox:setup {
       layout = wibox.layout.align.horizontal,
-      expand = "none",
+      expand = "left",
       { -- Left widgets
          layout = wibox.layout.fixed.horizontal,
-         expand = "left",
          s.rofibutton,
          --s.mylayoutbox,
          s.mytaglist,
          s.mypromptbox,
-         wibox.widget.textbox("|"),
+      },
+      --s.mytasklist, -- Middle widget
+      { -- Right widgets
+         layout = wibox.layout.fixed.horizontal,
+         --mailicon,
+         --mail.widget,
          netdownicon,
          netdowninfo,
          netupicon,
          netupinfo.widget,
-         wibox.widget.textbox("|"),
+         -- volicon,
+         -- theme.volume.widget,
          memicon,
          memory.widget,
          cpuicon,
          cpu.widget,
-         wibox.widget.textbox("|"),
+
+         -- weathericon,
+         -- theme.weather.widget,
+
       },
-      -- Middle widget
-      spotify_widget(
-         {
-            font = theme.font,
-            max_length = -1,
-            play_icon = '/usr/share/icons/Numix-Circle/48/apps/spotify.svg',
-            pause_icon = '/usr/share/icons/Numix-Light/22/status/renamed-spotify-client.svg'
-         }
-      ),
       {
          layout = wibox.layout.fixed.horizontal,
-         expand = "right",
          wibox.widget.systray(),
          tempicon,
          temp.widget,
-         fs_widget({ mounts = { '/', } }),
+         fsicon,
+         theme.fs.widget,
          net_indicator,
          baticon,
          bat.widget,
-         vpn,
-         jira,
          clockicon,
          mytextclock,
-         logout_menu_widget({onlock = function() awful.spawn.with_shell("slock") end})
       }
    }
 
    -- Create the bottom wibox
    s.mybottomwibox = awful.wibar({ position = "bottom", screen = s,
-                                   border_width = 0, height = 25,
+                                   border_width = 0, height = 20,
                                    bg = theme.bg_normal, fg = theme.fg_normal })
 
    -- Add widgets to the bottom wibox
