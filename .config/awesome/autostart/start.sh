@@ -1,7 +1,7 @@
 #!/bin/bash
 
-#latlong="-l -3.779500:-49.567810"
-latlong=""
+#latlong=""
+latlong="-l -3.779500:-49.567810"
 
 [[ ! `pgrep redshift-gtk` ]] && redshift-gtk ${latlong}&
 [[ ! `pgrep nm-applet` ]] && nm-applet&
@@ -11,3 +11,5 @@ latlong=""
 [[ ! `pgrep xfce4-power-manager` ]] && xfce4-power-manager&
 [[ ! `pgrep epp-client` ]] && /opt/cososys/bin/epp-client&
 [[ `pgrep xfdesktop` ]] && ~/.config/awesome/autostart/xfdesktop-fix.sh
+
+xrandr --output HDMI-1 --rotate left --auto

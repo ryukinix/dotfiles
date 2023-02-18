@@ -4,13 +4,14 @@ local naughty = require("naughty")
 local watch = require("awful.widget.watch")
 local vpn_on = false
 
+
 function update_vpn_status(widget, stdout, stderr, exitreason, exitcode)
    if(stdout == '' or stdout==nil or stdout=='Device "tun0" does not exist.') then
       vpn_on = false
-      widget.text= "VPN[🛡]"
+      widget.text= "🖧🛡"
    else
       vpn_on = true
-      widget.text= "VPN[⛨]"
+      widget.text= "🖧⛨"
    end
 end
 

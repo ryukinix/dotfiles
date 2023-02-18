@@ -62,8 +62,11 @@ globalkeys = awful.util.table.join(
       {description = "show the menubar", group = "launcher"}),
    -- Rofi client
    awful.key({ modkey, "Ctrl" }, "p",
-      function() awful.spawn("rofi -show combi -async-pre-load 100") end,
+      function() awful.spawn("env XDG_CURRENT_DESKTOP=XFCE rofi -show combi -async-pre-load 100") end,
       {description = "show the window menu", group = "client"}),
+   awful.key({ modkey, "Shift" }, "p",
+      function() awful.spawn("rofi -show window -async-pre-load 100") end,
+      {description = "show open windows", group = "client"}),
    -- Hotkeys
    awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
       {description="show help", group="awesome"}),

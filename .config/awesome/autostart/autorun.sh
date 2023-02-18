@@ -3,7 +3,6 @@
 
 # MANOEL HELL HERE, be careful or just delete this
 
-
 function synaptics-device {
     xinput list --name-only | grep Synaptics | head -n1
 }

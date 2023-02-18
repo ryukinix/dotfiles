@@ -18,6 +18,9 @@ local fs_widget = require("awesome-wm-widgets.fs-widget.fs-widget")
 local jira_widget = require("awesome-wm-widgets.jira-widget.jira")
 local vpn = require("modules.vpn")
 local spotify_widget = require("awesome-wm-widgets.spotify-widget.spotify")
+local net_speed_widget = require("awesome-wm-widgets.net-speed-widget.net-speed")
+local cpu_widget = require("awesome-wm-widgets.cpu-widget.cpu-widget")
+local gitlab_widget = require("awesome-wm-widgets.gitlab-widget.gitlab")
 
 local os    = { getenv = os.getenv, setlocale = os.setlocale }
 
@@ -100,12 +103,19 @@ theme.titlebar_maximized_button_normal_active   = theme.confdir .. "/icons/title
 theme.titlebar_maximized_button_focus_active    = theme.confdir .. "/icons/titlebar/maximized_focus_active.png"
 
 local markup = lain.util.markup
-function get_hostname()
-   local f = assert(io.open("/etc/hostname", "r"))
+
+function get_file_contents(fname)
+   local fname = string.gsub(fname, "~", os.getenv("HOME"))
+   local f = assert(io.open(fname, "r"))
    local content = f:read("*all")
    f:close()
    return content:match("[^\n]*")
 end
+
+function get_hostname()
+   return get_file_contents("/etc/hostname")
+end
+
 local hostname = get_hostname()
 
 -- Textclock
@@ -144,7 +154,7 @@ theme.cal = cw
 local cpuicon = wibox.widget.imagebox(theme.widget_cpu)
 local cpu = lain.widget.cpu({
       settings = function()
-         widget:set_markup(markup.fontfg(theme.font, "#e33a6e", string.format("%03d%% ", cpu_now.usage)))
+         widget:set_markup(markup.fontfg(theme.font, "#e33a6e", string.format("%02d%% ", cpu_now.usage)))
       end
 })
 
@@ -163,11 +173,6 @@ local baticon = wibox.widget.imagebox(theme.widget_batt)
 local bat = lain.widget.bat({
       settings = function()
          local perc = bat_now.perc ~= "N/A" and bat_now.perc .. "%" or bat_now.perc
-
-         -- -- !debug
-         -- for k,v in pairs(bat_now) do
-         --    io.stderr:write(string.format("%s\t%s\n",k,v))
-         -- end
 
          if bat_now.status == "Charging" then
             perc = "+" .. perc
@@ -198,11 +203,11 @@ local netupinfo = lain.widget.net({
          local function formatted (x)
             local k = tonumber(x);
             if k < 1024 then
-               return string.format("%05.1f KB/s", k)
+               return string.format("%04.1f KB/s", k)
             elseif k < 1024*1024 then
-               return string.format("%05.2f MB/s", k/1024)
+               return string.format("%04.1f MB/s", k/1024)
             else
-               return string.format("%05.2f GB/s", k/(1024*1024))
+               return string.format("%04.1f GB/s", k/(1024*1024))
             end
          end
          widget:set_markup(markup.fontfg(theme.font, "#e54c62", formatted(net_now.sent)))
@@ -244,6 +249,10 @@ local jira = jira_widget({
       host = 'https://neoway.atlassian.net',
       query = 'jql=assignee=currentuser()+AND+statusCategory!=done'}
 )
+local gitlab = gitlab_widget{
+   host = "https://gitlab.neoway.com.br",
+   access_token = get_file_contents("~/.gitlab.neoway.token")
+}
 
 function theme.at_screen_connect(s)
    -- Quake application
@@ -292,23 +301,16 @@ function theme.at_screen_connect(s)
          --s.mylayoutbox,
          s.mytaglist,
          s.mypromptbox,
-         wibox.widget.textbox("|"),
-         netdownicon,
-         netdowninfo,
-         netupicon,
-         netupinfo.widget,
-         wibox.widget.textbox("|"),
-         memicon,
-         memory.widget,
-         cpuicon,
-         cpu.widget,
-         wibox.widget.textbox("|"),
+         net_speed_widget(),
+         cpu_widget(),
+         tempicon,
+         temp.widget,
       },
       -- Middle widget
       spotify_widget(
          {
             font = theme.font,
-            max_length = -1,
+            max_length = 15,
             play_icon = '/usr/share/icons/Numix-Circle/48/apps/spotify.svg',
             pause_icon = '/usr/share/icons/Numix-Light/22/status/renamed-spotify-client.svg'
          }
@@ -317,13 +319,13 @@ function theme.at_screen_connect(s)
          layout = wibox.layout.fixed.horizontal,
          expand = "right",
          wibox.widget.systray(),
-         tempicon,
-         temp.widget,
+
          fs_widget({ mounts = { '/', } }),
          net_indicator,
          baticon,
          bat.widget,
          vpn,
+         gitlab,
          jira,
          clockicon,
          mytextclock,
