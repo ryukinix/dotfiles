@@ -54,6 +54,7 @@ path=(
   ~/.fzf/bin/
   ~/.git-fuzzy/bin
   ~/.emacs.d.doomemacs/bin
+  ~/.local/share/flatpak/exports/share
   $path
 )
 
