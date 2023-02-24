@@ -2,32 +2,35 @@ local wibox = require("wibox")
 local awful = require("awful")
 local naughty = require("naughty")
 local watch = require("awful.widget.watch")
-local vpn_on = false
 
+local connect_command = "openvpn3 session-start --config /etc/openvpn3/neoway.ovpn;"
+local disconnect_command = "openvpn3 sessions-list | grep Path | cut -d : -f 2 | tr -d ' ' | xargs -P 5 -I@ openvpn3 session-manage --session-path @ --disconnect;"
 
-function update_vpn_status(widget, stdout, stderr, exitreason, exitcode)
-   if(stdout == '' or stdout==nil or stdout=='Device "tun0" does not exist.') then
-      vpn_on = false
-      widget.text= "🖧🛡"
-   else
-      vpn_on = true
-      widget.text= "🖧⛨"
-   end
-end
 
 vpn_widget = wibox.widget.textbox()
+vpn_widget.vpn_on = false
 vpn_widget:connect_signal(
    "button::press",
    function(_, _, _, button)
       if button == 1 then
-         if vpn_on ==  false then
-            awful.spawn.with_shell("notify-send VPN connecting; openvpn3 session-start --config /etc/openvpn3/neoway.ovpn; notify-send VPN connected")
-         else
-            awful.spawn.with_shell("openvpn3 session-manage --disconnect --config /etc/openvpn3/neoway.ovpn; notify-send VPN disconnected")
+         local cmd = "notify-send VPN connecting;" .. connect_command .. "notify-send VPN connected"
+         if vpn_widget.vpn_on ==  true then
+            cmd = "notify-send VPN disconnecting;" .. disconnect_command .. "notify-send VPN disconnected"
          end
+         awful.spawn.with_shell(cmd)
       end
    end
 )
+
+function update_vpn_status(widget, stdout, stderr, exitreason, exitcode)
+   if(stdout == '' or stdout==nil or stdout=='Device "tun0" does not exist.') then
+      widget.vpn_on = false
+      widget.text= "🖧🛡"
+   else
+      widget.vpn_on = true
+      widget.text= "🖧⛨"
+   end
+end
 
 watch(
    "ip addr show tun0", 2,

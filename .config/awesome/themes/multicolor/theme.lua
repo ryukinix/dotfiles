@@ -10,6 +10,7 @@ local gears = require("gears")
 local lain  = require("lain")
 local awful = require("awful")
 local wibox = require("wibox")
+local watch = require("awful.widget.watch")
 local net_widgets = require("net_widgets")
 local logout_menu_widget = require("awesome-wm-widgets.logout-menu-widget.logout-menu")
 local calendar_widget = require("awesome-wm-widgets.calendar-widget.calendar")
@@ -25,6 +26,13 @@ local gitlab_widget = require("awesome-wm-widgets.gitlab-widget.gitlab")
 local os    = { getenv = os.getenv, setlocale = os.setlocale }
 
 local theme                                     = {}
+theme.lain_icons                                = os.getenv("HOME") .. "/.config/awesome/lain/icons/layout/zenburn/"
+theme.layout_termfair                           = theme.lain_icons .. "termfair.png"
+theme.layout_centerfair                         = theme.lain_icons .. "centerfair.png"  -- termfair.center
+theme.layout_cascade                            = theme.lain_icons .. "cascade.png"
+theme.layout_cascadetile                        = theme.lain_icons .. "cascadetile.png" -- cascade.tile
+theme.layout_centerwork                         = theme.lain_icons .. "centerwork.png"
+theme.layout_centerworkh                        = theme.lain_icons .. "centerworkh.png" -- centerwork.horizontal
 theme.confdir                                   = os.getenv("HOME") .. "/.config/awesome/themes/multicolor"
 theme.wallpaper                                 = theme.confdir .. "/wall.jpg"
 theme.font                                      = "Terminus (TTF) 12"
@@ -182,38 +190,6 @@ local bat = lain.widget.bat({
       end
 })
 
--- ALSA volume
-local volicon = wibox.widget.imagebox(theme.widget_vol)
-theme.volume = lain.widget.alsa({
-      settings = function()
-         if volume_now.status == "off" then
-            volume_now.level = volume_now.level .. "M"
-         end
-
-         widget:set_markup(markup.fontfg(theme.font, "#7493d2", volume_now.level .. "% "))
-      end
-})
-
--- Net
-local netdownicon = wibox.widget.imagebox(theme.widget_netdown)
-local netdowninfo = wibox.widget.textbox()
-local netupicon = wibox.widget.imagebox(theme.widget_netup)
-local netupinfo = lain.widget.net({
-      settings = function()
-         local function formatted (x)
-            local k = tonumber(x);
-            if k < 1024 then
-               return string.format("%04.1f KB/s", k)
-            elseif k < 1024*1024 then
-               return string.format("%04.1f MB/s", k/1024)
-            else
-               return string.format("%04.1f GB/s", k/(1024*1024))
-            end
-         end
-         widget:set_markup(markup.fontfg(theme.font, "#e54c62", formatted(net_now.sent)))
-         netdowninfo:set_markup(markup.fontfg(theme.font, "#87af5f",formatted(net_now.received)))
-      end
-})
 
 local interface_name = "wlan0"
 if hostname == "PC-002653" then
@@ -253,11 +229,24 @@ local gitlab = gitlab_widget{
    host = "https://gitlab.neoway.com.br",
    access_token = get_file_contents("~/.gitlab.neoway.token")
 }
+gitlab:set_visible(false)
+
+vpn:connect_signal(
+   "button::press",
+   function(_, _, _, button)
+      if button == 1 then
+         if vpn.vpn_on == false then
+            gitlab:set_visible(true)
+         else
+            gitlab:set_visible(false)
+         end
+      end
+   end
+)
 
 function theme.at_screen_connect(s)
    -- Quake application
    s.quake = lain.util.quake({ app = awful.util.terminal })
-
    -- If wallpaper is a function, call it with the screen
    local wallpaper = theme.wallpaper
    if type(wallpaper) == "function" then
@@ -305,6 +294,9 @@ function theme.at_screen_connect(s)
          cpu_widget(),
          tempicon,
          temp.widget,
+         baticon,
+         bat.widget,
+         fs_widget({ mounts = { '/', }, popup_bg = '#000000cc' }),
       },
       -- Middle widget
       spotify_widget(
@@ -319,11 +311,7 @@ function theme.at_screen_connect(s)
          layout = wibox.layout.fixed.horizontal,
          expand = "right",
          wibox.widget.systray(),
-
-         fs_widget({ mounts = { '/', } }),
          net_indicator,
-         baticon,
-         bat.widget,
          vpn,
          gitlab,
          jira,

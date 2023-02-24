@@ -3,7 +3,7 @@
 #latlong=""
 latlong="-l -3.779500:-49.567810"
 
-[[ ! `pgrep redshift-gtk` ]] && redshift-gtk ${latlong}&
+[[ ! `pgrep redshift` ]] && redshift ${latlong} &
 [[ ! `pgrep nm-applet` ]] && nm-applet&
 # [[ ! `pgrep barrier` ]] && barrier&
 [[ ! `pgrep pulseaudio` ]] && pulseaudio -D &
