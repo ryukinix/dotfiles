@@ -22,9 +22,9 @@ awful.util.terminal = terminal
 awful.util.tagnames = { "main", "dev", "etc" }
 awful.layout.layouts = {
    awful.layout.suit.floating,
-   awful.layout.suit.tile,
-   lain.layout.centerwork.horizontal,
-   awful.layout.suit.magnifier,
+   -- awful.layout.suit.tile,
+   -- lain.layout.centerwork.horizontal,
+   -- awful.layout.suit.magnifier,
    -- awful.layout.suit.tile.left,
    -- awful.layout.suit.tile.bottom,
    -- awful.layout.suit.tile.top,
@@ -38,7 +38,7 @@ awful.layout.layouts = {
    --awful.layout.suit.corner.ne,
    --awful.layout.suit.corner.sw,
    --awful.layout.suit.corner.se,
-   -- lain.layout.cascade,
+   lain.layout.cascade,
    -- lain.layout.cascade.tile,
    -- lain.layout.centerwork,
    -- lain.layout.termfair,

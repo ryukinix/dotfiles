@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 set -ux
-w=2448
-h=1920
+w=$(expr 1920 + 1366)
+h=1080
 counter=0
 limit=500
 regex='^Desktop$'

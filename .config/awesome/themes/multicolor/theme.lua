@@ -312,9 +312,9 @@ function theme.at_screen_connect(s)
          expand = "right",
          wibox.widget.systray(),
          net_indicator,
-         vpn,
          gitlab,
          jira,
+         vpn,
          clockicon,
          mytextclock,
          logout_menu_widget({onlock = function() awful.spawn.with_shell("slock") end})

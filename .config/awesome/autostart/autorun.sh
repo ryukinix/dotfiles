@@ -61,7 +61,6 @@ commands=(
     "picom"
     "thunar --daemon"
     "pulseaudio -D"
-    "volumeicon"
 )
 
 
