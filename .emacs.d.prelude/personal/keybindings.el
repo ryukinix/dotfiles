@@ -119,19 +119,27 @@
                   (neotree-refresh)
                   (neotree)))
 (global-set-key (kbd "C-x t") 'treemacs)
+
+;; FIXME: that's not working as properly, it should only add when necessary, once
 (global-set-key (kbd "C-x T")
                 (lambda ()
                   (interactive)
-                  (let ((original-state (treemacs-current-visibility)))
-                    (treemacs-add-and-display-current-project-exclusively)
-                    (treemacs--follow)
-                    (when (eq (treemacs-current-visibility) original-state)
-                      (treemacs)))))
+                  (let* ((workspace (treemacs-current-workspace))
+                         (current-project (string-trim-right (projectile-project-root) "\/"))
+                         (projects (treemacs-workspace->projects workspace)))
+                    (unless (find current-project (mapcar #'treemacs-project->path projects) :test #'equal)
+                      (message "treemacs: add %s" current-project)
+                      (treemacs-add-project-to-workspace current-project)))
+                  (treemacs--follow)
+                  (treemacs)))
 
+
+(string-trim-right (projectile-project-root) "\/")
 
 ;; universal compile command
 ;;(global-set-key (kbd "<f9>") 'compile)
 (global-set-key (kbd "<f9>") 'projectile-compile-project)
+(global-set-key (kbd "M-<f9>") 'projectile-test-project)
 (global-set-key (kbd "C-M-S-x") 'edebug-eval-top-level-form)
 (global-set-key (kbd "<C-f9>") 'flyspell-buffer)
 

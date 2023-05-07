@@ -305,6 +305,9 @@ Missing packages are installed automatically."
   (interactive)
   (let* ((basepath (or (projectile-project-root) default-directory))
          (venvpath (concat basepath ".venv/")))
+    ;; NOTE(@lerax): qua 29 mar 2023 11:22:05
+    ;; I should do this here? Well, make check it's the more useful command
+    ;; I usually use with compile
     (when (and (not (string-equal venvpath pyvenv-virtual-env))
                (file-exists-p venvpath))
       (pyvenv-activate venvpath))))
