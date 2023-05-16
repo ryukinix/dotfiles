@@ -1,0 +1,4 @@
+#!/bin/sh
+: "${PI_SCALE:=5}";u(){ echo "Usage: ${0##*/} [-h] [-n scale]">&2;exit 1;}
+while getopts hn: f;do case "$f" in n)PI_SCALE="$OPTARG";;*) u;esac;done
+echo "scale=$PI_SCALE;4*a(1)"|BC_LINE_LENGTH=$((${PI_SCALE}+4)) bc -l
