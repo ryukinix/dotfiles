@@ -480,3 +480,4 @@ alias dbx=distrobox
 alias workspace="cd ~/Desktop/workspace"
 alias ubuntu-upgrade="sudo apt update; sudo apt upgrade -y; sudo apt dist-upgrade -y"
 alias apt-remove-all="sudo apt purge --auto-remove"
+alias web="cd ~/Dropbox/Programming/Projects/Website/ryukinix.github.io/"
