@@ -23,6 +23,8 @@ safe-source ~/.python-venv-autoswitch.zsh
 safe-source ~/.economy-mode.sh
 safe-source ~/.neoway.sh
 safe-source ~/.local.sh
+safe-source ~/.fuck.sh
+safe-source ~/.bun.sh
 [[ -f ~/.pyenv ]] && safe-source ~/.pyenv.sh
 [[ -f `which fzf` ]] && safe-source ~/.fzf.zsh
 
