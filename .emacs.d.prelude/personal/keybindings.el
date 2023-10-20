@@ -285,3 +285,7 @@
 (define-key lsp-mode-map (kbd "M-.") #'lsp-find-definition)
 
 (define-key org-mode-map (kbd "C-M-<return>") 'org-insert-heading)
+
+;; disable annoying move drag-drop of treemacs (i do a lot of mistakes with this)
+(with-eval-after-load 'treemacs
+  (define-key treemacs-mode-map [drag-mouse-1] nil))
