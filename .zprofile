@@ -47,6 +47,7 @@ path=(
   ~/go/bin
   ~/.local/bin
   ~/.cargo/bin
+  ~/.ghcup/bin
   ~/.roswell/bin
   ~/Android/Sdk/tools/
   ~/Android/Sdk/tools/bin/
