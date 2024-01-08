@@ -60,7 +60,6 @@ commands=(
     "xfdesktop --disable-wm-check"
     "picom"
     "thunar --daemon"
-    "pulseaudio -D"
 )
 
 
