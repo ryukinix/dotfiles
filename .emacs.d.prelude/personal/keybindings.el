@@ -134,8 +134,6 @@
                   (treemacs)))
 
 
-(string-trim-right (projectile-project-root) "\/")
-
 ;; universal compile command
 ;;(global-set-key (kbd "<f9>") 'compile)
 (global-set-key (kbd "<f9>") 'projectile-compile-project)
