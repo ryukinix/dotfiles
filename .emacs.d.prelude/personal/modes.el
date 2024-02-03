@@ -182,3 +182,12 @@
 
 ;; i think it's related to the simple modeline:
 (which-function-mode -1)
+
+;; M-x customize-variable simple-modeline-segments
+;; '(simple-modeline-segments
+;;   '((simple-modeline-segment-modified simple-modeline-segment-buffer-name simple-modeline-segment-position)
+;;     (simple-modeline-segment-vc
+;;      simple-modeline-segment-misc-info
+;;      simple-modeline-segment-process
+;;      simple-modeline-segment-major-mode)))
+;;
