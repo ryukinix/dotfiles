@@ -2,7 +2,8 @@
 
 workstar=PC-002653
 
-[[ ! `pgrep redshift` ]] && redshift -l -3.779500:-49.567810 &
+[[ ! `pgrep agent` && -f /usr/lib/geoclue-2.0/demos/agent ]] && /usr/lib/geoclue-2.0/demos/agent&
+[[ ! `pgrep redshift` ]] && redshift-gtk -l -3.779500:-49.567810 &
 [[ ! `pgrep nm-applet` ]] && nm-applet&
 [[ ! `pgrep pipewire` ]] && pipewire &
 [[ ! `pgrep pipewire-pulse` ]] && pipewire-pulse &
