@@ -17,10 +17,13 @@
    doom-themes
    flycheck
    gif-screencast
+   git-commit
+   hl-todo
    htmlize
    ix
    kaolin-themes
    linum-relative
+   load-env-vars
    multiple-cursors
    neotree
    notmuch
@@ -39,7 +42,5 @@
    xclip
    yasnippet
    zeal-at-point
-
-   load-env-vars
    )
  )
