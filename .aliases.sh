@@ -87,6 +87,14 @@ function hack-chat {
            mcgriddle/hack-chat:latest
 }
 
+function lisp-inference-server {
+    docker run --name logic \
+           -p 40000:40000 \
+           --restart=unless-stopped \
+           -d -t \
+           ryukinix/lisp-inference
+}
+
 restart-network () {
     killall -q -9 nm-applet || true
     sudo rc-service -s NetworkManager stop
