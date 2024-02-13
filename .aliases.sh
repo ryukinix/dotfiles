@@ -75,7 +75,7 @@ function ftp-status {
 }
 
 function hack-chat {
-    docker run --rm -d --name hchat \
+    docker run -d --name hchat \
            --restart=unless-stopped \
            -p 8001:8080 \
            -p 6060:6060 \
