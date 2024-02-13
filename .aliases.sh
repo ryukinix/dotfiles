@@ -75,8 +75,9 @@ function ftp-status {
 }
 
 function hack-chat {
-    docker run -d --name hchat \
-           -p 80:8080 \
+    docker run --rm -d --name hchat \
+           --restart=unless-stopped \
+           -p 8001:8080 \
            -p 6060:6060 \
            -e WSPROTOCOL="ws://" \
            -e WSPORT="6060" \
