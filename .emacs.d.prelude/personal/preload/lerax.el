@@ -381,5 +381,11 @@ Missing packages are installed automatically."
                do (push (cons word 1) hist))
     (sort hist '(lambda (x y) (> (cdr x) (cdr y))))))
 
+(defun lerax-insert-uuid ()
+  "Insert a uuid in the buffer."
+  (interactive)
+  (insert (s-trim (shell-command-to-string "uuidgen"))))
+
+
 (provide 'lerax)
 ;;; lerax.el ends here
