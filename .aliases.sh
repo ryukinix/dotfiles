@@ -103,6 +103,18 @@ function hack-chat-nginx {
            mcgriddle/hack-chat:latest
 }
 
+function filebrowser {
+    touch $HOME/.filebrowser.db
+    docker run -d --name filebrowser \
+           --restart=unless-stopped \
+           -v $HOME:/srv \
+           -v $HOME/.filebrowser.db:/database.db \
+           -v /mnt:/srv/mnt \
+           -u $(id -u):$(id -g) \
+           -p 9000:80 \
+           filebrowser/filebrowser
+}
+
 # for monitoring
 function netdata {
     docker run -d --name=netdata \
