@@ -88,6 +88,21 @@ function hack-chat {
            mcgriddle/hack-chat:latest
 }
 
+function hack-chat-nginx {
+    # to deploy over internet
+    docker run -d --name hchat \
+           -p 8001:8080 \
+           -p 6060:6060 \
+           --restart=unless-stopped \
+           -e WSPROTOCOL="wss://" \
+           -e WSPORT="443" \
+           -e WSBASEURL="/chat-ws" \
+           -e ADMIN_NAME="boop" \
+           -e PASSWORD="pass" \
+           -e SALT="2dSg4kS" \
+           mcgriddle/hack-chat:latest
+}
+
 # for monitoring
 function netdata {
     docker run -d --name=netdata \
