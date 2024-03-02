@@ -541,3 +541,4 @@ alias workspace="cd ~/Desktop/workspace"
 alias ubuntu-upgrade="sudo apt update; sudo apt upgrade -y; sudo apt dist-upgrade -y"
 alias apt-remove-all="sudo apt purge --auto-remove"
 alias web="cd ~/Dropbox/Programming/Projects/Website/ryukinix.github.io/"
+alias avi2mkv='ls -b -1 | grep avi | xargs -I@ echo ffmpeg -fflags +genpts -i @ -c:v libx265 -crf 22 -preset slow -c:a libopus -b:a 192k @x | sed "s/avix/mkv/g" | xargs -I@ bash -c "@"'
