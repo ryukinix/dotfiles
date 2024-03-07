@@ -356,7 +356,7 @@ alias dot-graph='/usr/bin/dot'
 alias dot-tig='GIT_DIR=$HOME/.dot/ tig'
 
 
-
+alias emacs="emacsclient -nw -a emacs"
 alias semacs='SUDO_EDITOR="emacs-lite -nw" sudoedit' #
 alias svim='SUDO_EDITOR="vim" sudoedit'
 
@@ -536,4 +536,3 @@ alias ubuntu-upgrade="sudo apt update; sudo apt upgrade -y; sudo apt dist-upgrad
 alias apt-remove-all="sudo apt purge --auto-remove"
 alias web="cd ~/Dropbox/Programming/Projects/Website/ryukinix.github.io/"
 alias avi2mkv='ls -b -1 | grep avi | xargs -I@ echo ffmpeg -fflags +genpts -i @ -c:v libx265 -crf 22 -preset slow -c:a libopus -b:a 192k @x | sed "s/avix/mkv/g" | xargs -I@ bash -c "@"'
-alias emacs=gemacs
