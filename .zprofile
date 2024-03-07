@@ -17,8 +17,8 @@ fi
 # Editors
 #
 
-export EDITOR='emacsclient -nw'
-export VISUAL='emacsclient -nw'
+export EDITOR='nano'
+export VISUAL='nano'
 export PAGER='less'
 
 #

@@ -356,15 +356,10 @@ alias dot-graph='/usr/bin/dot'
 alias dot-tig='GIT_DIR=$HOME/.dot/ tig'
 
 
-# ustar is my server
-if [ "$(hostname)" != "ustar" ]; then
-    alias emacs='emacsclient -nw -a emacs'
-    alias semacs='SUDO_EDITOR="emacsclient -t -a vim" sudoedit'
-    alias svim='SUDO_EDITOR=vim sudoedit'
-else
-    alias semacs='SUDO_EDITOR="emacs" sudoedit'
-    alias svim='SUDO_EDITOR="vim" sudoedit'
-fi
+
+alias semacs='SUDO_EDITOR="emacs-lite -nw" sudoedit' #
+alias svim='SUDO_EDITOR="vim" sudoedit'
+
 
 
 alias remacs='sudo /etc/init.d/emacs.lerax restart'
@@ -486,7 +481,6 @@ alias merge='meld'
 alias artix-news-summary='artix-news -s'
 alias awesome-restart='echo awesome.restart() | awesome-client'
 alias no='yes | tr "y" "n"'
-alias ge='gemacs'
 alias git-push-all='git remote | xargs -L 1  -I@ git push'
 alias python-server='python -m http.server'
 alias dr='docker run --rm -it'
@@ -542,3 +536,4 @@ alias ubuntu-upgrade="sudo apt update; sudo apt upgrade -y; sudo apt dist-upgrad
 alias apt-remove-all="sudo apt purge --auto-remove"
 alias web="cd ~/Dropbox/Programming/Projects/Website/ryukinix.github.io/"
 alias avi2mkv='ls -b -1 | grep avi | xargs -I@ echo ffmpeg -fflags +genpts -i @ -c:v libx265 -crf 22 -preset slow -c:a libopus -b:a 192k @x | sed "s/avix/mkv/g" | xargs -I@ bash -c "@"'
+alias emacs=gemacs
