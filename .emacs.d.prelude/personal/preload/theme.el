@@ -4,7 +4,7 @@
 
 (defvar prelude-minimalistic-ui 't)
 
-(defcustom lerax-theme 'doom-meltbus
+(defcustom lerax-theme 'leraxy
   "My theme: only loaded in initialization"
   :group 'lerax
   :type 'symbol)
@@ -37,11 +37,11 @@
 
 (defun lerax-theme-reload ()
   (interactive)
+  (load-theme 'doom-meltbus t)
   (load-theme lerax-theme t)
-  (load-theme 'leraxy t)
   (lerax-theme-set-font)
-  (enable-theme lerax-theme)
-  (enable-theme 'leraxy))
+  (enable-theme 'doom-meltbus)
+  (enable-theme lerax-theme))
 
 
 ;; this code is not very efficient and not pretty,
@@ -49,19 +49,24 @@
 ;; using the daemon way
 ;; ref: https://stackoverflow.com/oquestions/18904529/after-emacs-deamon-i-can-not-see-new-theme-in-emacsclient-frame-it-works-fr
 (lerax-theme-set-font)
+
+(defun lerax-setup-frame-theme (frame)
+  (select-frame frame)
+  (if (display-graphic-p frame)
+      (unless lerax-theme-window-loaded
+        (lerax-theme-reload)
+        (setq lerax-theme-window-loaded t))
+    (when lerax-theme-terminal-loaded
+      (winner-mode -1)
+      (lerax-theme-reload)
+      (setq lerax-theme-terminal-loaded t))))
+
 (if (daemonp)
     (add-hook 'after-make-frame-functions
-              (lambda (frame)
-                (select-frame frame)
-                (if (display-graphic-p frame)
-                    (unless lerax-theme-window-loaded
-                      (lerax-theme-reload)
-                      (setq lerax-theme-window-loaded t))
-                  (unless lerax-theme-terminal-loaded
-                    (lerax-theme-reload)
-                    (setq lerax-theme-terminal-loaded t)))))
+            #'lerax-setup-frame-theme)
   (progn
-    (load-theme lerax-theme t)
+    (lerax-theme-reload)
     (if (display-graphic-p)
         (setq lerax-theme-window-loaded t)
-      (setq lerax-theme-terminal-loaded t))))
+      (setq lerax-theme-terminal-loaded t)))
+  )

@@ -173,7 +173,7 @@
 (menu-bar-mode -1)
 (simple-modeline-mode +1)
 (super-save-mode -1)
-(setenv "DOCKER_BUILDKIT" "0")
+(setenv "BUILDKIT_PROGRESS" "plain")
 (setq cursor-type 'bar)
 ;; which-func-ff-hook error: (wrong-type-argument arrayp nil)
 ;; remove annoying headerline wavy line

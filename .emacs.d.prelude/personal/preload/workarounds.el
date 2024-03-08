@@ -3,7 +3,7 @@
 
 (require 'cl-lib)
 (require 'subr-x)
-
+(require 'dash)
 
 ;; related with not expand <s blocks on org-mode with emacs27
 ;; ref: https://github.com/syl20bnr/spacemacs/issues/11798#issuecomment-454941024
@@ -106,3 +106,23 @@ parses and set DBUS_SESSION_BUS_ADDRES to its expected value."
               (define-key arrow-keys-map "B" 'next-line)
               (define-key arrow-keys-map "C" 'forward-char)
               (define-key arrow-keys-map "D" 'backward-char))))
+
+(progn ;; necessary to fix version of some buggy packages
+  (defvar package-menu-exclude-packages '("helm-descbinds" "treemacs"))
+  ;; reasons of fix:
+  ;; qui 07 mar 2024 21:45:36: helm-descbinds
+  ;; in 202402XX version break daemoned terminal sessions
+  ;;
+  ;; qui 07 mar 2024 21:45:36: treemacs
+  ;; in 202402XX introduces a bug in lerax-theme-reload about treemacs-run-everywhere
+
+  (defun package-menu--remove-excluded-packages (orig)
+    (let ((included (-filter
+                     (lambda (entry)
+                       (let ((name (symbol-name (package-desc-name (car entry)))))
+                         (not (member name package-menu-exclude-packages))))
+                     tabulated-list-entries)))
+      (setq-local tabulated-list-entries included)
+      (funcall orig)))
+
+  (advice-add 'package-menu--find-upgrades :around #'package-menu--remove-excluded-packages))

@@ -19,15 +19,21 @@ new-frame () {
 }
 
 open-frame () {
-    emacsclient -n -a "emacs" "$@"
+    emacsclient -n -a "emacs" "$@" 2> /dev/null
 }
 
 raise-frames () {
-    open-frame -e "(mapcan (lambda (x) \
+    local fname=`basename $@ 2> /dev/null || printf ''`
+    open-frame -e "(progn \
+                      (mapcan (lambda (x) \
                                (when (window-system x) \
                                 (progn (x-focus-frame x) \
                                        (raise-frame x)))) \
-                           (frame-list))"
+                              (frame-list)) \
+                       (when (> (length \"$fname\") 0) \
+                             (switch-to-buffer \
+                                 (or (car (match-buffers \"$fname\")) \
+                                          \"$fname\"))))" > /dev/null
 }
 
 reopen-frame () {
@@ -65,7 +71,7 @@ main () {
         open-frame "$@" 2> /dev/null
     elif [ "$(has-frame)" == "t" ]; then
         open-frame "$@"
-        raise-frames || reopen-frame
+        raise-frames "$@" || reopen-frame
     else
         new-frame "$@" 2> /dev/null
         raise-frames 1> /dev/null
