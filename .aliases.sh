@@ -346,6 +346,12 @@ git-branch-clean() {
     fi
 }
 
+ipv6-disable() {
+    sudo sysctl -w net.ipv6.conf.all.disable_ipv6=1
+    sudo sysctl -w net.ipv6.conf.default.disable_ipv6=1
+    sudo sysctl -w net.ipv6.conf.lo.disable_ipv6=1
+}
+
 research () {
     local f="$1"
     ln -v -s "$(readlink -f "$f")" /home/lerax/Dropbox/University/TCC/research/
