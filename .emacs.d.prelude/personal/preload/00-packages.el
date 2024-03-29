@@ -47,6 +47,7 @@
      treemacs
      treemacs-projectile
      visual-fill-column
+     wakatime-mode
      which-key
      whitespace-cleanup-mode
      xclip

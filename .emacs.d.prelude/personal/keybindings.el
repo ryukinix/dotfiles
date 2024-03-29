@@ -287,3 +287,6 @@
 ;; disable annoying move drag-drop of treemacs (i do a lot of mistakes with this)
 (with-eval-after-load 'treemacs
   (define-key treemacs-mode-map [drag-mouse-1] nil))
+
+(with-eval-after-load 'zeal-at-point
+  (global-set-key (kbd "C-z") 'zeal-at-point))
