@@ -1,2 +1,3 @@
 /home/lerax/.config/awesome/autostart/start.sh
 /etc/xdg/autostart/xfce-polkit-gnome-authentication-agent-1.desktop
+/home/lerax/.config/awesome/autostart/celeste.sh
