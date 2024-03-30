@@ -191,3 +191,4 @@
 ;;      simple-modeline-segment-process
 ;;      simple-modeline-segment-major-mode)))
 ;;
+(setq-default notmuch-search-oldest-first nil)
