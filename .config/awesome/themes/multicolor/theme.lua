@@ -317,7 +317,14 @@ function theme.at_screen_connect(s)
          vpn,
          clockicon,
          mytextclock,
-         logout_menu_widget({onlock = function() awful.spawn.with_shell("slock") end})
+         logout_menu_widget(
+            {
+               onlock = function() awful.spawn.with_shell("dm-tool lock") end,
+               onreboot = function() awful.spawn.with_shell("loginctl reboot") end,
+               onsuspend = function() awful.spawn.with_shell("loginctl suspend") end,
+               onpoweroff = function() awful.spawn.with_shell("loginctl poweroff") end,
+            }
+         )
       }
    }
 
