@@ -357,6 +357,13 @@ research () {
     ln -v -s "$(readlink -f "$f")" /home/lerax/Dropbox/University/TCC/research/
 }
 
+docker-inspect-command () {
+    local name="$1"
+    docker inspect \
+           --format "$(curl -s https://gist.githubusercontent.com/efrecon/8ce9c75d518b6eb863f667442d7bc679/raw/run.tpl)" \
+           "$name"
+}
+
 # save definition of dot (graphviz language)
 alias dot-graph='/usr/bin/dot'
 alias dot-tig='GIT_DIR=$HOME/.dot/ tig'
