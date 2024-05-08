@@ -270,6 +270,12 @@ ssh-auth () {
 
     if [[ $SSH_AUTH_SOCK == *"/keyring/ssh" ]]; then
         echo "[info] SSH auth with gnome-keyring-daemon."
+
+        if ! ssh-add -L; then
+            echo "[warn] no ssh credentials was found, setting up implicitly"
+            gnome-keyring-daemon -c ssh
+            ssh-add
+        fi
     else
         if [[ -z $(check-ssh-agent-pid) ]]; then
             # read session-wise variable
