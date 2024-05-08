@@ -1,0 +1,29 @@
+#!/bin/bash
+
+restart-emacs-openrc () {
+    echo "[emacs] Restarting via OpenRC"
+    sudo "/etc/init.d/emacs.$(whoami)" restart
+}
+
+restart-emacs-systemd () {
+    echo "[emacs] Restarting via SystemD"
+    systemctl --user emacs restart
+}
+
+emacs-server-running () {
+    emacsclient -e '(+)'
+}
+
+restart-emacs () {
+    if [[ -f /usr/bin/openrc ]]; then
+        restart-emacs-openrc
+    elif [[ ! `systemctl --user is-active --quiet emacs` ]]; then
+        restart-emacs-systemd
+    fi
+}
+
+main () {
+    [[ `emacs-server-running` != "0" ]] && (restart-emacs || exit 0)
+}
+
+main
