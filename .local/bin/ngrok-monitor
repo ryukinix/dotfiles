@@ -1,0 +1,36 @@
+#!/bin/bash
+
+## == NGROK MONITOR ======
+# This program try to detect if a new ssh tunnel was configured
+# and send the new tunnel through stdout and telegram.
+##
+
+export PATH="/home/lerax/.local/bin/:$PATH"
+cache_file=/home/lerax/.cache/ngrok-22
+
+
+function get-latest-tunnel () {
+    ngrok api endpoints list | jq ".endpoints[0].public_url" | tr -d '"' 2> /dev/null
+}
+
+function get-tunnel-port () {
+    local t="$1"
+    echo "$t" | cut -d : -f 3
+}
+
+function update-latest-tunnel () {
+    local t="$1"
+    echo "$t" > "$cache_file"
+}
+
+function main () {
+    local t=$(get-latest-tunnel)
+    local cache=$(cat $cache_file)
+    if [[ "$t" != "null" && "$t" != "$cache" ]]; then
+        local msg="New tunnel found: $t | Port: <code>$(get-tunnel-port $t)</code>"
+        echo "$msg"
+        telegram-send --format html "$msg" && update-latest-tunnel "$t"
+    fi
+}
+
+main
