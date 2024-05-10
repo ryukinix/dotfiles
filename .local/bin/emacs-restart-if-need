@@ -24,6 +24,7 @@ restart-emacs () {
 
 main () {
     [[ `emacs-server-running` != "0" ]] && (restart-emacs || exit 0)
+    exit 0
 }
 
 main
