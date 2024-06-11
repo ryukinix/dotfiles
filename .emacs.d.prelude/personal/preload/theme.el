@@ -15,9 +15,18 @@
   :group 'lerax
   :type 'string)
 
+(defcustom lerax-theme-font-size 12
+  "My default font: only loaded in initialization"
+  :group 'lerax
+  :type 'integer)
+
+
 (defvar lerax-theme-window-loaded nil)
 (defvar lerax-theme-terminal-loaded nil)
-(defconst prelude-theme lerax-theme)
+
+;; HACK(@lerax): Mon 10 Jun 2024 11:07:14 PM -03
+;; avoid prelude resetting incorrectly the theme
+(defconst prelude-theme nil)
 
 
 (defun font-exists-p (font)
@@ -28,42 +37,32 @@
     t))
 
 (defun lerax-theme-set-font ()
+  (interactive)
   (when (font-exists-p lerax-theme-font)
-    (set-face-attribute 'default nil
-                        :family lerax-theme-font
-                        :height 120
-                        :weight 'normal
-                        :width 'normal)))
+    (let ((font-string (format "%s-%s" lerax-theme-font lerax-theme-font-size)))
+      (set-frame-font font-string t nil))))
 
 (defun lerax-theme-reload ()
   (interactive)
   (load-theme 'doom-meltbus t)
   (load-theme lerax-theme t)
-  (lerax-theme-set-font)
   (enable-theme 'doom-meltbus)
-  (enable-theme lerax-theme))
-
-
-;; this code is not very efficient and not pretty,
-;; but solve my problem about handling crazy themes
-;; using the daemon way
-;; ref: https://stackoverflow.com/oquestions/18904529/after-emacs-deamon-i-can-not-see-new-theme-in-emacsclient-frame-it-works-fr
-(lerax-theme-set-font)
+  (enable-theme lerax-theme)
+  (lerax-theme-set-font))
 
 (defun lerax-setup-frame-theme (frame)
   (select-frame frame)
-  (if (display-graphic-p frame)
-      (unless lerax-theme-window-loaded
-        (lerax-theme-reload)
-        (setq lerax-theme-window-loaded t))
-    (when lerax-theme-terminal-loaded
-      (winner-mode -1)
-      (lerax-theme-reload)
-      (setq lerax-theme-terminal-loaded t))))
+  (unless (display-graphic-p frame)
+    (winner-mode -1))
+  (if (not lerax-theme-window-loaded)
+      (progn (lerax-theme-reload)
+             (setq lerax-theme-window-loaded t))
+    ;; force font reload to fix potential issues
+    (lerax-theme-set-font)))
 
 (if (daemonp)
     (add-hook 'after-make-frame-functions
-            #'lerax-setup-frame-theme)
+              #'lerax-setup-frame-theme)
   (progn
     (lerax-theme-reload)
     (if (display-graphic-p)
