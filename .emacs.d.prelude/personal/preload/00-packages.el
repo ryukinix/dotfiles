@@ -10,6 +10,7 @@
   ;; docker-lerax related bug at bootstraping package install
   (lerax-require-packages
    '(
+     tok-theme ;; for my own light mode
      gpt
      ag ;; not sure why I use this package
      auctex

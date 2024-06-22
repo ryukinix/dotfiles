@@ -1,7 +1,6 @@
 ;; configuration about my personal theme
 ;; theme
 
-
 (defvar prelude-minimalistic-ui 't)
 
 (defcustom lerax-theme 'leraxy
@@ -9,6 +8,20 @@
   :group 'lerax
   :type 'symbol)
 
+(defcustom lerax-theme-base-dark 'doom-meltbus
+  "Base dark theme"
+  :group 'lerax
+  :type 'symbol)
+
+(defcustom lerax-theme-base-light 'tok
+  "Base light theme"
+  :group 'lerax
+  :type 'symbol)
+
+(defcustom lerax-theme-base lerax-theme-base-dark
+  "Base theme"
+  :group 'lerax
+  :type 'symbol)
 
 (defcustom lerax-theme-font "JuliaMono Medium"
   "My default font: only loaded in initialization"
@@ -42,13 +55,30 @@
     (let ((font-string (format "%s-%s" lerax-theme-font lerax-theme-font-size)))
       (set-frame-font font-string t nil))))
 
+(defun lerax-disable-all-themes ()
+  "Disable all base active themes."
+  (dolist (i (remove-if-not #'custom-theme-enabled-p
+                        (list lerax-theme-base-dark lerax-theme-base-light)))
+    (disable-theme i)))
+
 (defun lerax-theme-reload ()
   (interactive)
-  (load-theme 'doom-meltbus t)
+  (lerax-disable-all-themes)
+  (load-theme lerax-base-theme t)
   (load-theme lerax-theme t)
-  (enable-theme 'doom-meltbus)
+  (enable-theme lerax-base-theme)
   (enable-theme lerax-theme)
   (lerax-theme-set-font))
+
+(defun lerax-get-theme-to-toggle ()
+  (let* ((themes (list lerax-theme-base-dark lerax-theme-base-light))
+         (theme-to-load (car (remove-if #'custom-theme-enabled-p themes))))
+    theme-to-load))
+
+(defun lerax-theme-light-dark-toggle ()
+  (interactive)
+  (setq lerax-base-theme (lerax-get-theme-to-toggle))
+  (lerax-theme-reload))
 
 (defun lerax-setup-frame-theme (frame)
   (select-frame frame)
@@ -67,5 +97,4 @@
     (lerax-theme-reload)
     (if (display-graphic-p)
         (setq lerax-theme-window-loaded t)
-      (setq lerax-theme-terminal-loaded t)))
-  )
+      (setq lerax-theme-terminal-loaded t))))
