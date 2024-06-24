@@ -290,3 +290,5 @@
 
 (with-eval-after-load 'zeal-at-point
   (global-set-key (kbd "C-z") 'zeal-at-point))
+
+(global-set-key (kbd "M-<f12>") 'lerax-theme-light-dark-toggle)

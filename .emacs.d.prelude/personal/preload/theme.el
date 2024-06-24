@@ -77,7 +77,7 @@
 
 (defun lerax-theme-light-dark-toggle ()
   (interactive)
-  (setq lerax-base-theme (lerax-get-theme-to-toggle))
+  (setq lerax-theme-base (lerax-get-theme-to-toggle))
   (lerax-theme-reload))
 
 (defun lerax-setup-frame-theme (frame)
