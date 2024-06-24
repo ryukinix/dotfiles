@@ -64,9 +64,9 @@
 (defun lerax-theme-reload ()
   (interactive)
   (lerax-disable-all-themes)
-  (load-theme lerax-base-theme t)
+  (load-theme lerax-theme-base t)
   (load-theme lerax-theme t)
-  (enable-theme lerax-base-theme)
+  (enable-theme lerax-theme-base)
   (enable-theme lerax-theme)
   (lerax-theme-set-font))
 
