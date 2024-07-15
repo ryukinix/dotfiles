@@ -3,6 +3,13 @@
 # shellcheck disable=SC2155
 # shellcheck disable=SC2050
 
+proton() {
+    export STEAM_COMPAT_CLIENT_INSTALL_PATH="$HOME/.steam/steam"
+    export STEAM_COMPAT_DATA_PATH=$PWD
+    local proton_bin="$HOME/.steam/root/compatibilitytools.d/GE-Proton9-5/proton"
+    "${proton_bin}" run $@
+}
+
 dosrun () {
     dosbox "$@" -fullscreen -exit
 }
@@ -212,11 +219,6 @@ termbin () {
     _pastebin-generic 'nc termbin.com 9999'
 }
 
-ixx () {
-    _pastebin-generic 'ix'
-}
-
-
 dot () {
     GIT_DIR=$HOME/.dot GIT_WORK_TREE=$HOME git "$@"
 }
@@ -342,13 +344,18 @@ git-remember() {
     git config --global credential.helper 'cache --timeout=604800'
 }
 
+git-default-branch() {
+    git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@'
+}
+
 git-branch-clean() {
-    git checkout master
+    local default_branch=`get-default-branch`
+    git checkout ${default_branch}
     git remote prune origin
     if [[ $1 == '-f' ]]; then
-        git branch | egrep -v "(^\*|master|dev)" | xargs -r git branch -D
+        git branch | egrep -v "(^\*|${default_branch}|dev)" | xargs -r git branch -D
     else
-        git branch --merged | egrep -v "(^\*|master|dev)" | xargs -r git branch -d
+        git branch --merged | egrep -v "(^\*|${default_branch}|dev)" | xargs -r git branch -d
     fi
 }
 
@@ -437,7 +444,7 @@ alias dc=docker
 alias dcp='docker-compose'
 alias sprunge="curl -F 'sprunge=<-' http://sprunge.us"
 alias sprungex='sprunge | xcopy'
-alias pastebin=ixx
+alias pastebin=termbin
 
 alias tmate="tmux detach-client -E 'tmate;tmux'"
 alias stack-size='ulimit -s'
@@ -555,3 +562,4 @@ alias ubuntu-upgrade="sudo apt update; sudo apt upgrade -y; sudo apt dist-upgrad
 alias apt-remove-all="sudo apt purge --auto-remove"
 alias web="cd ~/Dropbox/Programming/Projects/Website/ryukinix.github.io/"
 alias avi2mkv='ls -b -1 | grep avi | xargs -I@ echo ffmpeg -fflags +genpts -i @ -c:v libx265 -crf 22 -preset slow -c:a libopus -b:a 192k @x | sed "s/avix/mkv/g" | xargs -I@ bash -c "@"'
+alias git-tag-latest="git describe --tags --abbrev=0 2> /dev/null "
