@@ -5,7 +5,7 @@
 
 --]]
 
-
+require("modules.config")
 local gears = require("gears")
 local lain  = require("lain")
 local awful = require("awful")
@@ -16,12 +16,11 @@ local logout_menu_widget = require("awesome-wm-widgets.logout-menu-widget.logout
 local calendar_widget = require("awesome-wm-widgets.calendar-widget.calendar")
 local fs_widget = require("awesome-wm-widgets.fs-widget.fs-widget")
 -- you need: luarocks install lua-json
-local jira_widget = require("awesome-wm-widgets.jira-widget.jira")
-local vpn = require("modules.vpn")
 local spotify_widget = require("awesome-wm-widgets.spotify-widget.spotify")
 local net_speed_widget = require("awesome-wm-widgets.net-speed-widget.net-speed")
 local cpu_widget = require("awesome-wm-widgets.cpu-widget.cpu-widget")
-local gitlab_widget = require("awesome-wm-widgets.gitlab-widget.gitlab")
+local work = require("modules.work")
+local lib = require("modules.lib")
 
 local os    = { getenv = os.getenv, setlocale = os.setlocale }
 
@@ -112,19 +111,7 @@ theme.titlebar_maximized_button_focus_active    = theme.confdir .. "/icons/title
 
 local markup = lain.util.markup
 
-function get_file_contents(fname)
-   local fname = string.gsub(fname, "~", os.getenv("HOME"))
-   local f = assert(io.open(fname, "r"))
-   local content = f:read("*all")
-   f:close()
-   return content:match("[^\n]*")
-end
-
-function get_hostname()
-   return get_file_contents("/etc/hostname")
-end
-
-local hostname = get_hostname()
+local hostname = lib.get_hostname()
 
 -- Textclock
 os.setlocale(os.getenv("LANG")) -- to localize the clock
@@ -201,9 +188,6 @@ local net_indicator = net_widgets.wireless({
       font=theme.font
 })
 
--- vpn
-vpn.font = theme.font
-
 -- Memory RAM
 local memicon = wibox.widget.imagebox(theme.widget_mem)
 local memory = lain.widget.mem({
@@ -221,28 +205,6 @@ local memory = lain.widget.mem({
       end
 })
 
-local jira = jira_widget({
-      host = 'https://neoway.atlassian.net',
-      query = 'jql=assignee=currentuser()+AND+statusCategory!=done'}
-)
-local gitlab = gitlab_widget{
-   host = "https://gitlab.neoway.com.br",
-   access_token = get_file_contents("~/.gitlab.neoway.token")
-}
-gitlab:set_visible(false)
-
-vpn:connect_signal(
-   "button::press",
-   function(_, _, _, button)
-      if button == 1 then
-         if vpn.vpn_on == false then
-            gitlab:set_visible(true)
-         else
-            gitlab:set_visible(false)
-         end
-      end
-   end
-)
 
 function theme.at_screen_connect(s)
    -- Quake application
@@ -279,6 +241,29 @@ function theme.at_screen_connect(s)
    s.rofibutton = awful.widget.launcher({command = "rofi -show drun",
                                          image = theme.menu_submenu_icon })
 
+   right_widgets = {  -- Right widgets
+      layout = wibox.layout.fixed.horizontal,
+      expand = "right",
+      wibox.widget.systray(),
+      net_indicator,
+      clockicon,
+      mytextclock,
+      logout_menu_widget(
+         {
+            onlock = function() awful.spawn.with_shell(locker) end,
+            onreboot = function() awful.spawn.with_shell("loginctl reboot") end,
+            onsuspend = function() awful.spawn.with_shell("loginctl suspend") end,
+            onpoweroff = function() awful.spawn.with_shell("loginctl poweroff") end,
+         }
+      )
+   }
+   if hostname == "PC-002653" then
+      work.vpn.font = theme.font
+      table.insert(right_widgets, 2, work.vpn)
+      table.insert(right_widgets, 2, work.gitlab)
+      table.insert(right_widgets, 2, work.jira)
+   end
+
    -- Add widgets to the wibox
    s.mywibox:setup {
       layout = wibox.layout.align.horizontal,
@@ -307,25 +292,7 @@ function theme.at_screen_connect(s)
             pause_icon = '/usr/share/icons/Numix-Light/22/status/renamed-spotify-client.svg'
          }
       ),
-      {
-         layout = wibox.layout.fixed.horizontal,
-         expand = "right",
-         wibox.widget.systray(),
-         net_indicator,
-         gitlab,
-         jira,
-         vpn,
-         clockicon,
-         mytextclock,
-         logout_menu_widget(
-            {
-               onlock = function() awful.spawn.with_shell("dm-tool lock") end,
-               onreboot = function() awful.spawn.with_shell("loginctl reboot") end,
-               onsuspend = function() awful.spawn.with_shell("loginctl suspend") end,
-               onpoweroff = function() awful.spawn.with_shell("loginctl poweroff") end,
-            }
-         )
-      }
+      right_widgets
    }
 
    -- Create the bottom wibox

@@ -52,7 +52,6 @@ autostart=(
     /etc/xdg/autostart/gnome-keyring-ssh.desktop
     /etc/xdg/autostart/at-spi-dbus-bus.desktop
     /usr/share/applications/xfce4-clipman.desktop
-    ~/.config/autostart/dropbox.desktop
 )
 
 commands=(

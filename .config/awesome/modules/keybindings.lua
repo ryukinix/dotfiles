@@ -220,9 +220,9 @@ globalkeys = awful.util.table.join(
    awful.key({ }, "XF86AudioMicMute", function ()
          awful.spawn.with_shell("pactl set-source-mute 1 toggle") end),
    awful.key({ }, "XF86Launch1", function ()
-         awful.spawn.with_shell("dm-tool lock") end),
+         awful.spawn.with_shell(locker) end),
    awful.key({modkey}, "l", function ()
-         awful.spawn.with_shell("dm-tool lock") end),
+         awful.spawn.with_shell(locker) end),
 
 
    -- multimedia keyboard shortcuts
