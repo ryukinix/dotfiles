@@ -6,5 +6,5 @@ async_pyenv_init() {
 async_pyenv_virtualenv_init() {
     eval "$(pyenv virtualenv-init -)"
 }
-async_pyenv_init&
-async_pyenv_virtualenv_init&
+(async_pyenv_init&)
+(async_pyenv_virtualenv_init&)
