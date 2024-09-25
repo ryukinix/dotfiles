@@ -15,12 +15,21 @@ local net_widgets = require("net_widgets")
 local logout_menu_widget = require("awesome-wm-widgets.logout-menu-widget.logout-menu")
 local calendar_widget = require("awesome-wm-widgets.calendar-widget.calendar")
 local fs_widget = require("awesome-wm-widgets.fs-widget.fs-widget")
+<<<<<<< Updated upstream
 -- you need: luarocks install lua-json
 local spotify_widget = require("awesome-wm-widgets.spotify-widget.spotify")
 local net_speed_widget = require("awesome-wm-widgets.net-speed-widget.net-speed")
 local cpu_widget = require("awesome-wm-widgets.cpu-widget.cpu-widget")
 local work = require("modules.work")
 local lib = require("modules.lib")
+=======
+-- local jira_widget = require("awesome-wm-widgets.jira-widget.jira")
+-- local vpn = require("modules.vpn")
+local spotify_widget = require("awesome-wm-widgets.spotify-widget.spotify")
+local net_speed_widget = require("awesome-wm-widgets.net-speed-widget.net-speed")
+local cpu_widget = require("awesome-wm-widgets.cpu-widget.cpu-widget")
+-- local gitlab_widget = require("awesome-wm-widgets.gitlab-widget.gitlab")
+>>>>>>> Stashed changes
 
 local os    = { getenv = os.getenv, setlocale = os.setlocale }
 
@@ -156,6 +165,7 @@ local cpu = lain.widget.cpu({
 -- Coretemp
 local tempicon = wibox.widget.imagebox(theme.widget_temp)
 local temp = lain.widget.temp({
+      tempfile = "/sys/devices/platform/coretemp.0/hwmon/hwmon0/temp2_input",
       settings = function()
          if coretemp_now ~= "N/A" then
             widget:set_markup(markup.fontfg(theme.font, "#f1af5f", coretemp_now .. "°C "))
@@ -163,19 +173,45 @@ local temp = lain.widget.temp({
       end
 })
 
+-- local tempgpu = lain.widget.temp({
+--       settings = function()
+--          if coretemp_now ~= "N/A" then
+--             widget:set_markup(markup.fontfg(theme.font, "#f1af5f", "GPU " .. coretemp_now .. "°C "))
+--          end
+--       end
+-- })
+
+
+-- -- nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits
+-- tempgpu.temp.update = function ()
+--    helpers.async(
+--       {"nvidia-smi", "--query-gpu=temperature.gpu", "--format=csv,noheader,nounit"},
+--       function(x)
+--          temp_now = x
+--          if temp_now then
+--             tempgpu.coretemp_now = string.format(format, temp_now)
+--          else
+--             tempgpu.coretemp_now = "N/A"
+--          end
+--          tempgpu.widget = tempgpu.temp.widget
+--          tempgpu.settings()
+--       end
+--    )
+-- end
+
 -- Battery
-local baticon = wibox.widget.imagebox(theme.widget_batt)
-local bat = lain.widget.bat({
-      settings = function()
-         local perc = bat_now.perc ~= "N/A" and bat_now.perc .. "%" or bat_now.perc
+-- local baticon = wibox.widget.imagebox(theme.widget_batt)
+-- local bat = lain.widget.bat({
+--       settings = function()
+--          local perc = bat_now.perc ~= "N/A" and bat_now.perc .. "%" or bat_now.perc
 
-         if bat_now.status == "Charging" then
-            perc = "+" .. perc
-         end
+--          if bat_now.status == "Charging" then
+--             perc = "+" .. perc
+--          end
 
-         widget:set_markup(markup.fontfg(theme.font, theme.fg_normal, perc .. " "))
-      end
-})
+--          widget:set_markup(markup.fontfg(theme.font, theme.fg_normal, perc .. " "))
+--       end
+-- })
 
 
 local interface_name = "wlan0"
@@ -188,6 +224,12 @@ local net_indicator = net_widgets.wireless({
       font=theme.font
 })
 
+<<<<<<< Updated upstream
+=======
+-- vpn
+-- vpn.font = theme.font
+
+>>>>>>> Stashed changes
 -- Memory RAM
 local memicon = wibox.widget.imagebox(theme.widget_mem)
 local memory = lain.widget.mem({
@@ -205,6 +247,31 @@ local memory = lain.widget.mem({
       end
 })
 
+<<<<<<< Updated upstream
+=======
+-- local jira = jira_widget({
+--       host = 'https://neoway.atlassian.net',
+--       query = 'jql=assignee=currentuser()+AND+statusCategory!=done'}
+-- )
+-- local gitlab = gitlab_widget{
+--    host = "https://gitlab.neoway.com.br",
+--    access_token = get_file_contents("~/.gitlab.neoway.token")
+-- }
+-- gitlab:set_visible(false)
+
+-- vpn:connect_signal(
+--    "button::press",
+--    function(_, _, _, button)
+--       if button == 1 then
+--          if vpn.vpn_on == false then
+--             gitlab:set_visible(true)
+--          else
+--             gitlab:set_visible(false)
+--          end
+--       end
+--    end
+-- )
+>>>>>>> Stashed changes
 
 function theme.at_screen_connect(s)
    -- Quake application
@@ -275,24 +342,56 @@ function theme.at_screen_connect(s)
          --s.mylayoutbox,
          s.mytaglist,
          s.mypromptbox,
-         net_speed_widget(),
          cpu_widget(),
+         memicon,
+         memory.widget,
          tempicon,
          temp.widget,
-         baticon,
-         bat.widget,
-         fs_widget({ mounts = { '/', }, popup_bg = '#000000cc' }),
+         -- tempgpu.widget,
+         -- baticon,
+         -- bat.widget,
+         fs_widget(
+            {
+               mounts = { '/', '/home',
+                          '/mnt/deadstar', '/mnt/extra', '/mnt/datastorm' },
+               popup_bg = '#000000cc'
+            }
+         ),
       },
       -- Middle widget
       spotify_widget(
          {
+            sp_bin = "/home/lerax/.local/bin/sp",
             font = theme.font,
             max_length = 15,
             play_icon = '/usr/share/icons/Numix-Circle/48/apps/spotify.svg',
             pause_icon = '/usr/share/icons/Numix-Light/22/status/renamed-spotify-client.svg'
          }
       ),
+<<<<<<< Updated upstream
       right_widgets
+=======
+      {
+         layout = wibox.layout.fixed.horizontal,
+         expand = "right",
+         wibox.widget.systray(),
+         net_speed_widget(),
+         net_indicator,
+         -- gitlab,
+         -- jira,
+         -- vpn,
+         clockicon,
+         mytextclock,
+         logout_menu_widget(
+            {
+               onlock = function() awful.spawn.with_shell("dm-tool lock") end,
+               onreboot = function() awful.spawn.with_shell("loginctl reboot") end,
+               onsuspend = function() awful.spawn.with_shell("loginctl suspend") end,
+               onpoweroff = function() awful.spawn.with_shell("loginctl poweroff") end,
+            }
+         )
+      }
+>>>>>>> Stashed changes
    }
 
    -- Create the bottom wibox

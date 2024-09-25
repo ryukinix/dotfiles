@@ -455,11 +455,7 @@ alias pacman-update='sudo pacman -Sy'
 alias pacman-upgrade='sudo pacman -Syuu'
 alias pacman-search='pacman -Ss'
 alias pacman-remove='sudo pacman -Rsu'
-alias pcmi='pacman-install'
-alias pcmu='pacman-update'
-alias pcmuu='pacman-upgrade'
-alias pcms='pacman-search'
-alias pcmr='pacman-remove'
+alias pacman-reinstall-all='sudo pacman -S $(pacman -Qeqn) --noconfirm'
 alias service='sudo rc-service'
 alias aur=yay
 alias aur-install='aur -S'
@@ -563,3 +559,4 @@ alias apt-remove-all="sudo apt purge --auto-remove"
 alias web="cd ~/Dropbox/Programming/Projects/Website/ryukinix.github.io/"
 alias avi2mkv='ls -b -1 | grep avi | xargs -I@ echo ffmpeg -fflags +genpts -i @ -c:v libx265 -crf 22 -preset slow -c:a libopus -b:a 192k @x | sed "s/avix/mkv/g" | xargs -I@ bash -c "@"'
 alias git-tag-latest="git describe --tags --abbrev=0 2> /dev/null "
+alias dfx="df -x overlay -x tmpfs -x devtmpfs"

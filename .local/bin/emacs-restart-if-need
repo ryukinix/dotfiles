@@ -11,7 +11,7 @@ restart-emacs-systemd () {
 }
 
 emacs-server-running () {
-    emacsclient -e '(+)'
+    emacsclient -s /run/user/1000/emacs/server -e '(+)'
 }
 
 restart-emacs () {

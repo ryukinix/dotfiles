@@ -19,7 +19,7 @@ new-frame () {
 }
 
 open-frame () {
-    emacsclient -n -a "emacs" "$@" 2> /dev/null
+    emacsclient -n -a "emacs" "$@" # 2> /dev/null
 }
 
 raise-frames () {

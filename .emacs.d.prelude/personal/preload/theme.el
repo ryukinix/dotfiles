@@ -1,6 +1,8 @@
 ;; configuration about my personal theme
 ;; theme
 
+(require 'cl-lib)
+
 (defvar prelude-minimalistic-ui 't)
 
 (defcustom lerax-theme 'leraxy
@@ -57,7 +59,7 @@
 
 (defun lerax-disable-all-themes ()
   "Disable all base active themes."
-  (dolist (i (remove-if-not #'custom-theme-enabled-p
+  (dolist (i (cl-remove-if-not #'custom-theme-enabled-p
                         (list lerax-theme-base-dark lerax-theme-base-light)))
     (disable-theme i)))
 
@@ -72,7 +74,7 @@
 
 (defun lerax-get-theme-to-toggle ()
   (let* ((themes (list lerax-theme-base-dark lerax-theme-base-light))
-         (theme-to-load (car (remove-if #'custom-theme-enabled-p themes))))
+         (theme-to-load (car (cl-remove-if #'custom-theme-enabled-p themes))))
     theme-to-load))
 
 (defun lerax-theme-light-dark-toggle ()
