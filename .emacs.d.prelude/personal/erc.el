@@ -3,6 +3,7 @@
   (add-to-list 'erc-modules 'notifications)
   (setq erc-default-server "irc.libera.chat")
   (setq erc-prompt "λ>")
+  (setq erc-nick "lerax")
   (setq erc-save-buffer-on-part nil)
   (setq erc-save-queries-on-quit nil))
 
