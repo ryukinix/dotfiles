@@ -15,21 +15,10 @@ local net_widgets = require("net_widgets")
 local logout_menu_widget = require("awesome-wm-widgets.logout-menu-widget.logout-menu")
 local calendar_widget = require("awesome-wm-widgets.calendar-widget.calendar")
 local fs_widget = require("awesome-wm-widgets.fs-widget.fs-widget")
-<<<<<<< Updated upstream
--- you need: luarocks install lua-json
 local spotify_widget = require("awesome-wm-widgets.spotify-widget.spotify")
 local net_speed_widget = require("awesome-wm-widgets.net-speed-widget.net-speed")
 local cpu_widget = require("awesome-wm-widgets.cpu-widget.cpu-widget")
-local work = require("modules.work")
-local lib = require("modules.lib")
-=======
--- local jira_widget = require("awesome-wm-widgets.jira-widget.jira")
--- local vpn = require("modules.vpn")
-local spotify_widget = require("awesome-wm-widgets.spotify-widget.spotify")
-local net_speed_widget = require("awesome-wm-widgets.net-speed-widget.net-speed")
-local cpu_widget = require("awesome-wm-widgets.cpu-widget.cpu-widget")
--- local gitlab_widget = require("awesome-wm-widgets.gitlab-widget.gitlab")
->>>>>>> Stashed changes
+
 
 local os    = { getenv = os.getenv, setlocale = os.setlocale }
 
@@ -120,8 +109,6 @@ theme.titlebar_maximized_button_focus_active    = theme.confdir .. "/icons/title
 
 local markup = lain.util.markup
 
-local hostname = lib.get_hostname()
-
 -- Textclock
 os.setlocale(os.getenv("LANG")) -- to localize the clock
 local clockicon = wibox.widget.imagebox(theme.widget_clock)
@@ -173,63 +160,13 @@ local temp = lain.widget.temp({
       end
 })
 
--- local tempgpu = lain.widget.temp({
---       settings = function()
---          if coretemp_now ~= "N/A" then
---             widget:set_markup(markup.fontfg(theme.font, "#f1af5f", "GPU " .. coretemp_now .. "°C "))
---          end
---       end
--- })
-
-
--- -- nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits
--- tempgpu.temp.update = function ()
---    helpers.async(
---       {"nvidia-smi", "--query-gpu=temperature.gpu", "--format=csv,noheader,nounit"},
---       function(x)
---          temp_now = x
---          if temp_now then
---             tempgpu.coretemp_now = string.format(format, temp_now)
---          else
---             tempgpu.coretemp_now = "N/A"
---          end
---          tempgpu.widget = tempgpu.temp.widget
---          tempgpu.settings()
---       end
---    )
--- end
-
--- Battery
--- local baticon = wibox.widget.imagebox(theme.widget_batt)
--- local bat = lain.widget.bat({
---       settings = function()
---          local perc = bat_now.perc ~= "N/A" and bat_now.perc .. "%" or bat_now.perc
-
---          if bat_now.status == "Charging" then
---             perc = "+" .. perc
---          end
-
---          widget:set_markup(markup.fontfg(theme.font, theme.fg_normal, perc .. " "))
---       end
--- })
-
-
-local interface_name = "wlan0"
-if hostname == "PC-002653" then
-   interface_name = "wlp5s0"
-end
 
 local net_indicator = net_widgets.wireless({
       interface=interface_name,
       font=theme.font
 })
 
-<<<<<<< Updated upstream
-=======
--- vpn
--- vpn.font = theme.font
 
->>>>>>> Stashed changes
 -- Memory RAM
 local memicon = wibox.widget.imagebox(theme.widget_mem)
 local memory = lain.widget.mem({
@@ -246,32 +183,6 @@ local memory = lain.widget.mem({
          widget:set_markup(markup.fontfg(theme.font, "#e0da37", m))
       end
 })
-
-<<<<<<< Updated upstream
-=======
--- local jira = jira_widget({
---       host = 'https://neoway.atlassian.net',
---       query = 'jql=assignee=currentuser()+AND+statusCategory!=done'}
--- )
--- local gitlab = gitlab_widget{
---    host = "https://gitlab.neoway.com.br",
---    access_token = get_file_contents("~/.gitlab.neoway.token")
--- }
--- gitlab:set_visible(false)
-
--- vpn:connect_signal(
---    "button::press",
---    function(_, _, _, button)
---       if button == 1 then
---          if vpn.vpn_on == false then
---             gitlab:set_visible(true)
---          else
---             gitlab:set_visible(false)
---          end
---       end
---    end
--- )
->>>>>>> Stashed changes
 
 function theme.at_screen_connect(s)
    -- Quake application
@@ -308,29 +219,6 @@ function theme.at_screen_connect(s)
    s.rofibutton = awful.widget.launcher({command = "rofi -show drun",
                                          image = theme.menu_submenu_icon })
 
-   right_widgets = {  -- Right widgets
-      layout = wibox.layout.fixed.horizontal,
-      expand = "right",
-      wibox.widget.systray(),
-      net_indicator,
-      clockicon,
-      mytextclock,
-      logout_menu_widget(
-         {
-            onlock = function() awful.spawn.with_shell(locker) end,
-            onreboot = function() awful.spawn.with_shell("loginctl reboot") end,
-            onsuspend = function() awful.spawn.with_shell("loginctl suspend") end,
-            onpoweroff = function() awful.spawn.with_shell("loginctl poweroff") end,
-         }
-      )
-   }
-   if hostname == "PC-002653" then
-      work.vpn.font = theme.font
-      table.insert(right_widgets, 2, work.vpn)
-      table.insert(right_widgets, 2, work.gitlab)
-      table.insert(right_widgets, 2, work.jira)
-   end
-
    -- Add widgets to the wibox
    s.mywibox:setup {
       layout = wibox.layout.align.horizontal,
@@ -347,9 +235,6 @@ function theme.at_screen_connect(s)
          memory.widget,
          tempicon,
          temp.widget,
-         -- tempgpu.widget,
-         -- baticon,
-         -- bat.widget,
          fs_widget(
             {
                mounts = { '/', '/home',
@@ -368,18 +253,12 @@ function theme.at_screen_connect(s)
             pause_icon = '/usr/share/icons/Numix-Light/22/status/renamed-spotify-client.svg'
          }
       ),
-<<<<<<< Updated upstream
-      right_widgets
-=======
       {
          layout = wibox.layout.fixed.horizontal,
          expand = "right",
          wibox.widget.systray(),
          net_speed_widget(),
          net_indicator,
-         -- gitlab,
-         -- jira,
-         -- vpn,
          clockicon,
          mytextclock,
          logout_menu_widget(
@@ -391,7 +270,6 @@ function theme.at_screen_connect(s)
             }
          )
       }
->>>>>>> Stashed changes
    }
 
    -- Create the bottom wibox
