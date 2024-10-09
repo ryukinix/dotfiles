@@ -349,7 +349,7 @@ git-default-branch() {
 }
 
 git-branch-clean() {
-    local default_branch=`get-default-branch`
+    local default_branch=`git-default-branch`
     git checkout ${default_branch}
     git remote prune origin
     if [[ $1 == '-f' ]]; then
