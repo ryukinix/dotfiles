@@ -10,7 +10,6 @@
 (require 'slime)
 (require 'ssh-agency)
 (require 'dbus)
-(require 'git-commit)
 (require 'cov)
 
 ;; My modes
@@ -91,8 +90,6 @@
 ;; set tab size to 4 (I don't like it 8, very big for me)
 (setq-default tab-width 4)
 
-;; this works to use git on command line with core.editor=emacs
-(global-git-commit-mode +1)
 ;; add company quickhelp mode
 (company-quickhelp-mode +1)
 (add-to-list 'company-backends 'company-c-headers)
@@ -192,3 +189,9 @@
 ;;      simple-modeline-segment-major-mode)))
 ;;
 (setq-default notmuch-search-oldest-first nil)
+
+;; work in terminal properly
+(progn
+  (require 'git-commit)
+  (require 'magit-process)
+  (global-git-commit-mode +1))
