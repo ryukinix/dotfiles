@@ -9,7 +9,7 @@ if [[ -z ${hostname} ]]; then
     exit 1;
 fi
 
-grep -A "${depth_search}" "Host ${hostname}" "${ssh_config_file}" \
+grep -A "${depth_search}" "Host ${hostname}$" "${ssh_config_file}" \
       | grep -E -zo 'Host.*Host' \
       | grep -a LocalForward \
       | awk '{printf "http://localhost:%d => %s\n", $2, $3}'
