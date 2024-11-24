@@ -56,6 +56,7 @@ path=(
   ~/.git-fuzzy/bin
   ~/.emacs.d.doomemacs/bin
   ~/.local/share/flatpak/exports/share
+  /usr/local/texlive/2024/bin/x86_64-linux
   $path
 )
 
