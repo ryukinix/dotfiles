@@ -128,10 +128,13 @@
                          (current-project (string-trim-right (projectile-project-root) "\/"))
                          (projects (treemacs-workspace->projects workspace)))
                     (unless (find current-project (mapcar #'treemacs-project->path projects) :test #'equal)
-                      (message "treemacs: add %s" current-project)
-                      (treemacs-add-project-to-workspace current-project)))
-                  (treemacs--follow)
-                  (treemacs)))
+                      (condition-case nil
+                          (progn
+                            (treemacs-add-project-to-workspace current-project)
+                            (message "treemacs project added: '%s'" current-project))
+                        (error nil)))
+                    (treemacs--follow)
+                    (treemacs))))
 
 
 ;; universal compile command
