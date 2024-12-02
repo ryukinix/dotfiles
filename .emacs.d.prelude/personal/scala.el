@@ -3,7 +3,7 @@
 (defun scala-metals ()
   "Enable advanced IDE-like features for scala
    # Get quickly the entire scala dev environment!
-   > curl -fL "https://github.com/coursier/launchers/raw/master/cs-x86_64-pc-linux.gz" | gzip -d > cs
+   > curl -fL 'https://github.com/coursier/launchers/raw/master/cs-x86_64-pc-linux.gz' | gzip -d > cs
    > chmod +x cs
    ./cs setup \
 
@@ -53,6 +53,8 @@
   (use-package company
     :hook (scala-mode . company-mode)
     :config
+    (define-key scala-mode-map (kbd "<tab>") 'company-indent-or-complete-common)
+    (define-key scala-mode-map (kbd "TAB") 'company-indent-or-complete-common)
     (setq lsp-completion-provider :capf))
 
   (progn ;; dap-mode for debugging
