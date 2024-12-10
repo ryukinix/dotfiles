@@ -7,6 +7,28 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "languages": {
+    "Python": {
+      "language_servers": ["!pyright", "..."]
+    }
+  },
+  "lsp": {
+    "pylsp": {
+      "settings": {
+        "plugins": {
+          "mypy": {
+            "enabled": true
+          },
+          "flake8": {
+            "enabled": true
+          },
+          "pycodestyle": {
+            "enabled": false
+          }
+        }
+      }
+    }
+  },
   "assistant": {
     "default_model": {
       "provider": "openai",
@@ -19,7 +41,7 @@
   "buffer_font_size": 16,
   "theme": {
     "mode": "system",
-    "light": "Andromeda",
+    "light": "Summercamp",
     "dark": "One Dark"
   }
 }
