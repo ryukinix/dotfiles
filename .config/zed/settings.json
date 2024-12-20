@@ -7,6 +7,25 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "file_scan_exclusions": [
+    "**/.git",
+    "**/.svn",
+    "**/.hg",
+    "**/CVS",
+    "**/.DS_Store",
+    "**/Thumbs.db",
+    "**/.classpath",
+    "**/.settings",
+    "**/*.bin",
+    "**/*.o"
+  ],
+  "format_on_save": "on",
+  "terminal": {
+    "cursor_shape": "bar"
+  },
+  "features": {
+    "notebooks": true
+  },
   "languages": {
     "Python": {
       "language_servers": ["!pyright", "..."]
@@ -23,6 +42,9 @@
             "enabled": true
           },
           "pycodestyle": {
+            "enabled": false
+          },
+          "pyflakes": {
             "enabled": false
           }
         }
@@ -41,7 +63,7 @@
   "buffer_font_size": 16,
   "theme": {
     "mode": "system",
-    "light": "Summercamp",
+    "light": "Iceberg",
     "dark": "One Dark"
   }
 }
