@@ -195,3 +195,6 @@
   (require 'git-commit)
   (require 'magit-process)
   (global-git-commit-mode +1))
+
+(with-eval-after-load 'magit
+  (setq magit-blame-echo-style 'headings))

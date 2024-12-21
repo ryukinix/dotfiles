@@ -132,9 +132,9 @@
                           (progn
                             (treemacs-add-project-to-workspace current-project)
                             (message "treemacs project added: '%s'" current-project))
-                        (error nil)))
+                        (error nil))))
                     (treemacs--follow)
-                    (treemacs))))
+                    (treemacs)))
 
 
 ;; universal compile command
@@ -291,6 +291,8 @@
 (with-eval-after-load 'treemacs
   (define-key treemacs-mode-map [drag-mouse-1] nil))
 
+;; FIXME: xxx
+(require 'zeal-at-point)
 (with-eval-after-load 'zeal-at-point
   (global-set-key (kbd "C-z") 'zeal-at-point))
 

@@ -53,8 +53,6 @@
   (use-package company
     :hook (scala-mode . company-mode)
     :config
-    (define-key scala-mode-map (kbd "<tab>") 'company-indent-or-complete-common)
-    (define-key scala-mode-map (kbd "TAB") 'company-indent-or-complete-common)
     (setq lsp-completion-provider :capf))
 
   (progn ;; dap-mode for debugging
@@ -102,6 +100,9 @@
     (setq sbt:program-options '("-Dsbt.supershell=false")))
 
   (use-package scala-mode
+    ;; :bind (:map company-mode-map
+    ;;            ("TAB" . company-indent-or-complete-common)
+    ;;            ("<tab>" . company-indent-or-complete-common))
     :hook
     (scala-mode . (lambda () (whitespace-toggle-options 'lines-tail)))
     (scala-mode . (lambda () (setq-local flycheck-check-syntax-automatically
@@ -109,3 +110,9 @@
 
 
 (scala-setup)
+
+(defun scalafmt ()
+  (interactive)
+  (let ((command "scalafmt")
+        (current-file (buffer-file-name (current-buffer))))
+    (shell-command (format "%s %s" command current-file))))
