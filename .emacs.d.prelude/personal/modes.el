@@ -198,3 +198,5 @@
 
 (with-eval-after-load 'magit
   (setq magit-blame-echo-style 'headings))
+
+(setq server-client-instructions nil)
