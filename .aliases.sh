@@ -345,7 +345,8 @@ git-remember() {
 }
 
 git-default-branch() {
-    git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@'
+    (git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@') \
+        || printf master
 }
 
 git-branch-clean() {
@@ -363,6 +364,13 @@ ipv6-disable() {
     sudo sysctl -w net.ipv6.conf.all.disable_ipv6=1
     sudo sysctl -w net.ipv6.conf.default.disable_ipv6=1
     sudo sysctl -w net.ipv6.conf.lo.disable_ipv6=1
+}
+
+nvidia-recompile-and-restart-x() {
+    local nvidia_module=`dkms status | grep nvidia | cut -d ',' -f 1`
+    local kernel_version=$(uname -r)
+    sudo dkms install $nvidia_module -k $kernel_version --force
+    sudo rc-service xdm restart
 }
 
 research () {
