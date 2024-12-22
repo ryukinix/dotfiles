@@ -205,6 +205,8 @@ function tmux_should_start() {
         echo no
     elif [[ "$TERM_PROGRAM" == "zed" ]]; then
         echo no
+    elif [[ "$TERM_PROGRAM" == "tmux" ]]; then
+        echo no
     else
         echo yes
     fi
