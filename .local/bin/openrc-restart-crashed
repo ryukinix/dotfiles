@@ -1,0 +1,34 @@
+#!/bin/bash
+
+logging () {
+    local message="$1"
+    # ANSI escape code for green
+    local green="\033[0;32m"
+    # ANSI escape code to reset color
+    local reset="\033[0m"
+    # Print the message with a green plus sign
+    echo -e "[${green}+${reset}] $message"
+}
+
+main() {
+    local default_services=$(rc-update show default | awk '{print $1}' | tr '\n' ' ')
+
+    # Loop through each service
+    for service in ${default_services}; do
+        # Check the status of the service
+        status=$(sudo rc-service "$service" status)
+
+        # Restart the service if it's stopped or crashed
+        if [[ $status == *"stopped"* || $status == *"crashed"* ]]; then
+            logging "Restarting $service..."
+            sudo rc-service "$service" restart
+        else
+            logging "'$service' is running."
+        fi
+    done
+
+    echo "Finished processing all services."
+}
+
+
+main
