@@ -1,0 +1,10 @@
+(require 'gpt)
+
+(setq-default gpt-openai-key (getenv "OPENAI_KEY"))
+(setq-default gpt-openai-engine "gpt-4o")
+(global-set-key (kbd "C-M-g") 'gpt-dwim-no-context)
+(global-set-key (kbd "C-M-S-g") 'gpt-dwim)
+(add-hook 'gpt-mode-hook (lambda ()
+                          (interactive)
+                          (whitespace-mode -1)
+                          (pyvenv-deactivate)))
