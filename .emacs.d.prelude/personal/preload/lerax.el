@@ -386,6 +386,16 @@ Missing packages are installed automatically."
   (interactive)
   (insert (s-trim (shell-command-to-string "uuidgen"))))
 
+(defun lerax-load-init-env-if-exists ()
+  "Used to load  emacs.d/.env if exists."
+  (require 'load-env-vars)
+  (let ((env-file-path (expand-file-name ".env" user-emacs-directory)))
+    (if (file-exists-p env-file-path)
+        (progn
+          (message "Loading %s env file..." env-file-path)
+          (load-env-vars env-file-path)))))
+
+(lerax-load-init-env-if-exists)
 
 (provide 'lerax)
 ;;; lerax.el ends here
