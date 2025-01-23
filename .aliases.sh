@@ -16,6 +16,10 @@ dosrun () {
 
 loadenv () {
     local env_file="$1"
+    if [[ ! -f $env_file ]]; then
+        printf "File '$env_file' doesn't exists!"
+        return 1
+    fi
     export $(cat ${env_file} | xargs)
 }
 
@@ -345,8 +349,8 @@ git-remember() {
 }
 
 git-default-branch() {
-    (git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@') \
-        || printf master
+    git remote set-head origin --auto &> /dev/null
+    git symbolic-ref refs/remotes/origin/HEAD | cut -d / -f 4
 }
 
 git-branch-clean() {
