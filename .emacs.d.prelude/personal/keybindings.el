@@ -177,7 +177,8 @@
 (define-key yas-minor-mode-map [M-return] 'yas-insert-snippet)
 
 ;; open a terminal full-featured on emacs
-(global-set-key (kbd "C-x M") 'term)
+(global-set-key (kbd "C-c T") 'vterm)
+;; BUGGY: (define-key term-mode-map (kbd "C-c T") 'vterm)
 
 
 ;; multiple-cursors
@@ -285,7 +286,11 @@
 (global-set-key (kbd "C-,") #'xref-find-references)
 (define-key lsp-mode-map (kbd "M-.") #'lsp-find-definition)
 
-(define-key org-mode-map (kbd "C-M-<return>") 'org-insert-heading)
+(define-key org-mode-map (kbd "C-M-<return>")
+  (lambda ()
+    (interactive)
+    (org-insert-heading)
+    (crux-insert-date)))
 
 ;; disable annoying move drag-drop of treemacs (i do a lot of mistakes with this)
 (with-eval-after-load 'treemacs
