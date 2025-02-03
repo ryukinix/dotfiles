@@ -392,6 +392,7 @@ docker-inspect-command () {
 # save definition of dot (graphviz language)
 alias dot-graph='/usr/bin/dot'
 alias dot-tig='GIT_DIR=$HOME/.dot/ tig'
+alias dot-gitg='GIT_DIR=$HOME/.dot/ gitg'
 
 
 alias emacs="emacsclient -nw -a emacs"
