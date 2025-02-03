@@ -105,7 +105,9 @@
     ;;            ("<tab>" . company-indent-or-complete-common))
     :hook
     (scala-mode . (lambda () (whitespace-toggle-options 'lines-tail)))
-    (scala-mode . (lambda () (setq-local flycheck-check-syntax-automatically
+    (scala-mode . (lambda ()
+                    (setq-local lsp-signature-auto-activate nil)
+                    (setq-local flycheck-check-syntax-automatically
                                     '(save idle-change new-line mode-enabled))))))
 
 
