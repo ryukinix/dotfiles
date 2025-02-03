@@ -199,3 +199,8 @@
   (setq magit-blame-echo-style 'headings))
 
 (setq server-client-instructions nil)
+
+;; move line of M-x and helm search without need of using C-o
+(with-eval-after-load 'helm
+  (setq-default history-delete-duplicates t)
+  (setq-default helm-move-to-line-cycle-in-source nil))
