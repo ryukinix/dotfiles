@@ -13,7 +13,7 @@ cache_file=/home/lerax/.cache/ngrok-22
 
 function get-latest-tunnel () {
     local endpoints=`ngrok api endpoints list`
-    if [[ $? == 0 ]]; then
+    if [[ $(echo "${endpoints}" | jq ".uri" | tr -d '"') == "https://api.ngrok.com/endpoints" ]]; then
         echo "${endpoints}" | jq ".endpoints[0].public_url" | tr -d '"'
     else
         exit 1
@@ -33,7 +33,7 @@ function update-latest-tunnel () {
 function main () {
     local t=$(get-latest-tunnel)
     local cache=$(cat $cache_file)
-    if [[ ! -z "$t" && "$t" != "$cache" ]]; then
+    if [[ ! -z "$t" && "$t" != "null" && "$t" != "$cache" ]]; then
         local msg="New tunnel found: $t | Port: <code>$(get-tunnel-port $t)</code>"
         echo "$msg"
         telegram-send --format html "$msg" && update-latest-tunnel "$t"
