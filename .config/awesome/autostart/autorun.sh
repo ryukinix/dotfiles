@@ -12,6 +12,7 @@ function enable-synaptics-touchpad {
 }
 
 if [[ $(hostname) == "starfox" ]]; then
+    echo "> starfox: keyboard being modified"
     setxkbmap -model abnt2 -layout br
     setxkbmap -option compose:rctrl
 elif [[ $(hostname) == "celeste" || $(hostname) == PC* ]]; then
@@ -100,7 +101,7 @@ function array-to-lines {
 
 # first arg is the size of pool
 function execution-pool {
-    xargs -L 1 -I{in} -P $1 bash -c "({in} &> /dev/null &)"
+    xargs -I{in} -P $1 bash -c "({in} &> /dev/null &)"
 }
 
 function run-desktop {

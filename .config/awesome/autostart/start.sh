@@ -13,6 +13,7 @@ workstar=PC-002653
 [[ `hostname` == $workstar &&  ! `pgrep epp-client` ]] && /opt/cososys/bin/epp-client&
 [[ ! `pgrep volumeicon` ]] && volumeicon&
 [[ `pgrep xfdesktop` ]] && ~/.config/awesome/autostart/xfdesktop-fix.sh
+[[ ! $(pgrep polkit-gnome-au) ]] && /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
 if [[ `hostname` != $workstar ]]; then
     [[ `rc-service emacs.lerax status` != *started* ]] && sudo /etc/init.d/emacs.lerax restart&
