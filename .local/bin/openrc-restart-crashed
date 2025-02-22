@@ -16,7 +16,7 @@ main() {
     # Loop through each service
     for service in ${default_services}; do
         # Check the status of the service
-        status=$(sudo rc-service "$service" status)
+        status=$(sudo rc-service "$service" status 2>&1)
 
         # Restart the service if it's stopped or crashed
         if [[ $status == *"stopped"* || $status == *"crashed"* ]]; then
