@@ -79,8 +79,8 @@
                              scala-mode))
 
   ;; that is only for NASA COMPUTERS
-  ;; be careful, it your EATS RAM REALLY FAST!
-  ;; 8gb ram do you have? This is not enough!
+  ;; be careful, it eats your available RAM REALLY FAST!
+  ;; do you have 8gb or less? This is not enough!
   (when (and (not (version< emacs-version "26.1"))
              (>= (lerax-memory-ram) 16))
     (scala-metals))
@@ -110,11 +110,11 @@
                     (setq-local flycheck-check-syntax-automatically
                                     '(save idle-change new-line mode-enabled))))))
 
-
-(scala-setup)
-
 (defun scalafmt ()
   (interactive)
   (let ((command "scalafmt")
         (current-file (buffer-file-name (current-buffer))))
     (shell-command (format "%s %s" command current-file))))
+
+
+(scala-setup)
