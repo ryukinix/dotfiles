@@ -2,6 +2,11 @@
 
 
 (require 'org)
+(progn ;; citations
+ (require 'oc-biblatex)
+ (require 'oc-natbib)
+ (require 'oc-csl)
+ )
 (require 'org-mouse) ;; enable mouse features on org-mode
 (require 'org-agenda) ;; required to make right-click works
 (require 'python)
@@ -204,3 +209,11 @@
 (with-eval-after-load 'helm
   (setq-default history-delete-duplicates t)
   (setq-default helm-move-to-line-cycle-in-source nil))
+
+;; remove autocomplete of numbers in company-mode
+;; ref: https://emacs.stackexchange.com/a/61125
+(progn
+  (push (apply-partially #'cl-remove-if
+                         (lambda (c) (string-match-p "\\`[0-9]+\\'" c)))
+        company-transformers)
+  )

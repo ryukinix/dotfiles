@@ -14,7 +14,7 @@
                         (whitespace-mode -1))))
 (use-package gpt
   :bind (("C-M-g" . gpt-chat-no-context)
-         ("C-M-S-g" . gpt-dwi))
+         ("C-M-S-g" . gpt-chat))
 
   :config
   (setq-default gpt-openai-key (getenv "OPENAI_KEY"))
