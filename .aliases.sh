@@ -353,6 +353,12 @@ git-default-branch() {
     git symbolic-ref refs/remotes/origin/HEAD | cut -d / -f 4
 }
 
+webm2gif() {
+    ffmpeg -y -i "$1" -vf palettegen _tmp_palette.png
+    ffmpeg -y -i "$1" -i _tmp_palette.png -filter_complex paletteuse -r 10  "${1%.webm}.gif"
+    rm -f _tmp_palette.png
+}
+
 git-branch-clean() {
     local default_branch=`git-default-branch`
     git checkout ${default_branch}
@@ -496,7 +502,7 @@ alias pyenv-init='eval "$(pyenv init -)"'
 alias pipi='pip install --user'
 alias rot13="tr 'A-Za-z' 'N-ZA-Mn-za-m'"
 alias xfdesktop-shadow-fix='xfconf-query -c xfce4-desktop -p /desktop-icons/center-text -n -t bool -s false'
-alias docker-clean='docker system prune'
+alias docker-clean='docker system prune -a && docker volume remove $(docker volume ls -qf dangling=true)'
 alias android-up='jmtpfs'
 alias android-down='fusermount -u'
 alias json=gron
@@ -573,3 +579,10 @@ alias web="cd ~/Dropbox/Programming/Projects/Website/ryukinix.github.io/"
 alias avi2mkv='ls -b -1 | grep avi | xargs -I@ echo ffmpeg -fflags +genpts -i @ -c:v libx265 -crf 22 -preset slow -c:a libopus -b:a 192k @x | sed "s/avix/mkv/g" | xargs -I@ bash -c "@"'
 alias git-tag-latest="git describe --tags --abbrev=0 2> /dev/null "
 alias dfx="df -x overlay -x tmpfs -x devtmpfs"
+alias git-fix="git commit --amend --no-edit; git push -f"
+alias fixup="git commit --fixup=@; git push"
+alias fuckfuck='eval $(thefuck --alias)'
+alias qrcode="zbarimg"
+alias logs="journalctl -f"
+alias thesis="cd ~/Sync/ita/masters-thesis/"
+alias gnome-restart="killall -HUP gnome-shell"
