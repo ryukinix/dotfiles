@@ -179,6 +179,8 @@
 ;; which-func-ff-hook error: (wrong-type-argument arrayp nil)
 ;; remove annoying headerline wavy line
 (with-eval-after-load lsp-mode
+  ;; doesn't work globally:
+  ; (lsp-modeline-code-actions-mode nil)   ; Show code actions on modeline
   (setq-local lsp-headerline-breadcrumb-enable-diagnostics nil))
 
 ;; i think it's related to the simple modeline:
