@@ -1,4 +1,9 @@
 (in-package :lem-user)
+
+(define-color-theme "leraxy" ("black-metal-immortal")
+  (:background nil))
+
+(load-theme "lem-dark")
 (load-theme "black-metal-immortal")
 
 (in-package :lem)
