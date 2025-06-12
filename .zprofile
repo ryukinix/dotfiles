@@ -57,6 +57,7 @@ path=(
   ~/.emacs.d.doomemacs/bin
   ~/.local/share/flatpak/exports/share
   ~/.local/share/coursier/bin
+  ~/.qlot/bin
   /usr/local/texlive/2024/bin/x86_64-linux
   $path
 )
