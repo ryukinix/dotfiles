@@ -263,7 +263,7 @@ function theme.at_screen_connect(s)
          mytextclock,
          logout_menu_widget(
             {
-               onlock = function() awful.spawn.with_shell("dm-tool lock") end,
+               onlock = function() awful.spawn.with_shell(locker) end,
                onreboot = function() awful.spawn.with_shell("loginctl reboot") end,
                onsuspend = function() awful.spawn.with_shell("loginctl suspend") end,
                onpoweroff = function() awful.spawn.with_shell("loginctl poweroff") end,

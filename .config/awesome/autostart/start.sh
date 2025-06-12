@@ -20,3 +20,8 @@ if [[ `hostname` != $workstar ]]; then
     [[ ! `pgrep pamac-tray` ]] && pamac-tray&
     [[ ! `pgrep udiskie` ]] && udiskie&
 fi
+
+# to autolock session after sometime idle
+[[ ! $(pgrep xfce4-screensaver) ]] && xfce4-screensaver&
+# xfce4-screensaver works better with xfce4-based env (like mine)
+# xautolock and light-locker didn't work well
