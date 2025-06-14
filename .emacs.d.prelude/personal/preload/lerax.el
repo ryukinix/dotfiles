@@ -395,7 +395,5 @@ Missing packages are installed automatically."
           (message "Loading %s env file..." env-file-path)
           (load-env-vars env-file-path)))))
 
-(lerax-load-init-env-if-exists)
-
 (provide 'lerax)
 ;;; lerax.el ends here

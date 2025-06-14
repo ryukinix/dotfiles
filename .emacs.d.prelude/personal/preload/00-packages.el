@@ -58,3 +58,4 @@
    ))
 
 (lerax-require-packages-run)
+(lerax-load-init-env-if-exists)
