@@ -1,1 +1,2 @@
+/home/lerax/.config/awesome/autostart/display.sh
 /home/lerax/.config/awesome/autostart/start.sh
