@@ -58,7 +58,7 @@ path=(
   ~/.local/share/flatpak/exports/share
   ~/.local/share/coursier/bin
   ~/.qlot/bin
-  /usr/local/texlive/2024/bin/x86_64-linux
+  /usr/local/texlive/2025/bin/x86_64-linux
   $path
 )
 
@@ -76,3 +76,8 @@ export LESS='-F -g -i -M -R -S -w -X -z-4'
 if (( $#commands[(i)lesspipe(|.sh)] )); then
   export LESSOPEN="| /usr/bin/env $commands[(i)lesspipe(|.sh)] %s 2>&-"
 fi
+
+# >>> JVM installed by coursier >>>
+export JAVA_HOME="/home/manoel-neto/.cache/coursier/arc/https/github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.15%252B6/OpenJDK17U-jdk_x64_linux_hotspot_17.0.15_6.tar.gz/jdk-17.0.15+6"
+export PATH="$PATH:/home/manoel-neto/.cache/coursier/arc/https/github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.15%252B6/OpenJDK17U-jdk_x64_linux_hotspot_17.0.15_6.tar.gz/jdk-17.0.15+6/bin"
+# <<< JVM installed by coursier <<<
