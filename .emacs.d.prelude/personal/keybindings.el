@@ -94,13 +94,15 @@
 
 
 ;; favorite directories
-(let ((courses-dir (expand-file-name "~/Dropbox/University/TCC/"))
+(let ((masters-dir (expand-file-name "~/Sync/ita/masters-thesis/"))
       (todo-dir (expand-file-name"~/Sync/todo.org"))
       (did-dir (expand-file-name "~/Sync/did.org")))
   ;; favorite directories
   (global-set-key (kbd "<f5>") (favorite-dir todo-dir))
   (global-set-key (kbd "<f6>") (favorite-dir did-dir))
-  (global-set-key (kbd "<f7>") (favorite-dir courses-dir)))
+  (global-set-key (kbd "<f7>") (favorite-dir masters-dir)))
+
+(global-set-key (kbd "M-<f1>") (lambda () (interactive) (switch-to-buffer "*scratch*")))
 
 (let ((init (if (eq system-type 'windows-nt)
                 (expand-file-name "~/.dotfiles/.emacs.d/personal/")

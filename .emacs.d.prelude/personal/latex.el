@@ -1,7 +1,11 @@
 ;; this enable syntax highlight on org-mode org |> latex |> pdf
 
-(require 'org-ref)
 (require 'ox-latex)
+(progn ;; citations
+  (require 'oc-biblatex)
+  (require 'oc-natbib)
+  (require 'oc-csl)
+  )
 
 
 (defcustom lerax-latex-listing 'minted
@@ -19,7 +23,10 @@
 (plist-put org-format-latex-options :scale 1.2)
 
 (defun clean-export-pdf (&rest _)
-  (call-process-shell-command "rm -rf *.tex* *.fdb* &" nil 0))
+  (let* ((fname (file-name-base (buffer-name)))
+        (pattern (format "%s.!(pdf|org)" fname))
+        (cmd (format "bash -c 'shopt -s extglob; rm -rf %s &'" pattern)))
+   (call-process-shell-command cmd nil 0)))
 
 (advice-add 'org-latex-export-to-pdf :after #'clean-export-pdf)
 (advice-add 'org-beamer-export-to-pdf :after #'clean-export-pdf)

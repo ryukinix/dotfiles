@@ -2,11 +2,6 @@
 
 
 (require 'org)
-(progn ;; citations
- (require 'oc-biblatex)
- (require 'oc-natbib)
- (require 'oc-csl)
- )
 (require 'org-mouse) ;; enable mouse features on org-mode
 (require 'org-agenda) ;; required to make right-click works
 (require 'python)
@@ -80,17 +75,18 @@
 
 
 (setq initial-scratch-message
-";; ▓█████  ███▄ ▄███▓ ▄▄▄       ▄████▄    ██████
-;; ▓█   ▀ ▓██▒▀█▀ ██▒▒████▄    ▒██▀ ▀█  ▒██    ▒
-;; ▒███   ▓██    ▓██░▒██  ▀█▄  ▒▓█    ▄ ░ ▓██▄
-;; ▒▓█  ▄ ▒██    ▒██ ░██▄▄▄▄██ ▒▓▓▄ ▄██▒  ▒   ██▒
-;; ░▒████▒▒██▒   ░██▒ ▓█   ▓██▒▒ ▓███▀ ░▒██████▒▒
-;; ░░ ▒░ ░░ ▒░   ░  ░ ▒▒   ▓▒█░░ ░▒ ▒  ░▒ ▒▓▒ ▒ ░
-;; ░ ░  ░░  ░      ░  ▒   ▒▒ ░  ░  ▒   ░ ░▒  ░ ░
-;; ░   ░      ░     ░   ▒   ░        ░  ░  ░
-;; ░  ░       ░         ░  ░░ ░            ░
+"#  ▓█████  ███▄ ▄███▓ ▄▄▄       ▄████▄    ██████
+# ▓█   ▀ ▓██▒▀█▀ ██▒▒████▄    ▒██▀ ▀█  ▒██    ▒
+# ▒███   ▓██    ▓██░▒██  ▀█▄  ▒▓█    ▄ ░ ▓██▄
+# ▒▓█  ▄ ▒██    ▒██ ░██▄▄▄▄██ ▒▓▓▄ ▄██▒  ▒   ██▒
+# ░▒████▒▒██▒   ░██▒ ▓█   ▓██▒▒ ▓███▀ ░▒██████▒▒
+# ░░ ▒░ ░░ ▒░   ░  ░ ▒▒   ▓▒█░░ ░▒ ▒  ░▒ ▒▓▒ ▒ ░
+# ░ ░  ░░  ░      ░  ▒   ▒▒ ░  ░  ▒   ░ ░▒  ░ ░
+# ░   ░      ░     ░   ▒   ░        ░  ░  ░
+# ░  ░       ░         ░  ░░ ░            ░
 ")
 
+(setq initial-major-mode 'org-mode)
 
 ;; set tab size to 4 (I don't like it 8, very big for me)
 (setq-default tab-width 4)
@@ -219,3 +215,12 @@
                          (lambda (c) (string-match-p "\\`[0-9]+\\'" c)))
         company-transformers)
   )
+
+(org-babel-do-load-languages
+    'org-babel-load-languages
+        '(
+          (shell . t)
+          (python . t)
+            ;; Other languages...
+        )
+    )
