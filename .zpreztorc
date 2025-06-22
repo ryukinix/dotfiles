@@ -205,6 +205,8 @@ function tmux_should_start() {
         echo no
     elif [[ "$TERM_PROGRAM" == "zed" ]]; then
         echo no
+    elif [[ "$SDL_VIDEO_X11_WMCLASS" == "Lem SDL2" ]]; then
+        echo no
     elif [[ ! -z "$TERMUX_VERSION" ]]; then
         echo no
     else
