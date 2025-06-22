@@ -385,7 +385,13 @@ nvidia-recompile-and-restart-x() {
 
 research () {
     local f="$1"
-    ln -v -s "$(readlink -f "$f")" /home/lerax/Dropbox/University/TCC/research/
+    if [[ -z "$f" ]]; then
+        echo "error: you should use as research <file.pdf>"
+        echo "this will create a hard-link into research folder"
+        return 1
+    fi
+
+    ln -v "$(readlink -f "$f")" /home/lerax/Sync/ita/masters-thesis/research/
 }
 
 docker-inspect-command () {
@@ -394,6 +400,11 @@ docker-inspect-command () {
            --format "$(curl -s https://gist.githubusercontent.com/efrecon/8ce9c75d518b6eb863f667442d7bc679/raw/run.tpl)" \
            "$name"
 }
+
+duhere () {
+    du -h -d 1 $@ | sort -h -k 1
+}
+
 
 # save definition of dot (graphviz language)
 alias dot-graph='/usr/bin/dot'
@@ -517,7 +528,6 @@ alias keyboard-thinkpad='setxkbmap -model thinkpad60 -layout br'
 alias keyboard-abnt2='setxkbmap -model abnt2 -layout br'
 alias open='xdg-open'
 alias ssh-ustar="gcloud compute ssh --zone=us-central1-c lerax@ustar"
-alias duhere="du -h -d 1 | sort -h -k 1"
 alias git-amend="git commit --amend --no-edit"
 alias merge='meld'
 alias artix-news-summary='artix-news -s'
@@ -587,3 +597,4 @@ alias qrcode="zbarimg"
 alias logs="journalctl -f"
 alias thesis="cd ~/Sync/ita/masters-thesis/"
 alias gnome-restart="killall -HUP gnome-shell"
+alias masters="~/Sync/ita/masters-thesis/"
