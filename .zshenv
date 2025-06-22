@@ -18,3 +18,4 @@ export TERM=xterm-256color
 export SSH_AUTH_SOCK=/run/user/$(id -u)/keyring/ssh
 export MYPY_CACHE_DIR=/tmp
 export PYTHONDONTWRITEBYTECODE=1
+export LOCAL_NOTEBOOK_DEV=1
