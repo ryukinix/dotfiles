@@ -51,7 +51,7 @@
       }
     }
   },
-  "assistant": {
+  "agent": {
     "default_model": {
       "provider": "openai",
       "model": "gpt-4o-mini"
