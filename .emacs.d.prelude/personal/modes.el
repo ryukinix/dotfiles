@@ -216,11 +216,10 @@
         company-transformers)
   )
 
-(org-babel-do-load-languages
-    'org-babel-load-languages
-        '(
-          (shell . t)
-          (python . t)
-            ;; Other languages...
-        )
-    )
+(org-babel-do-load-languages 'org-babel-load-languages
+                             '(
+                               (shell . t)
+                               (python . t)
+                               ))
+
+(add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
