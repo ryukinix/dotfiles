@@ -292,6 +292,7 @@
 (define-key org-mode-map (kbd "C-M-<return>")
   (lambda ()
     (interactive)
+    (end-of-buffer)
     (org-insert-heading)
     (crux-insert-date)))
 
