@@ -8,7 +8,7 @@
   :config
   (setq-default le-gpt-openai-key (getenv "OPENAI_KEY"))
   (setq-default le-gpt-api-type 'openai)
-  (setq-default le-gpt-python-path "/usr/bin/python")
+  (setq-default le-gpt-python-path "/usr/bin/python3")
   :hook
   (le-gpt-chat-mode . (lambda ()
                         (interactive)
@@ -43,4 +43,5 @@
   (require 'gpt-mode) ;; otherwise raise error of gpt-mode is not defined!
   (setq gpt-api-type 'openai)
   (setq gpt-openai-key (getenv "OPENAI_KEY"))
-  (setq gpt-model "gpt-4o"))
+  (setq gpt-model "gpt-4o")
+  (setq gpt-python-path "/usr/bin/python3"))
