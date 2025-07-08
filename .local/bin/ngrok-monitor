@@ -34,8 +34,12 @@ function main () {
     local t=$(get-latest-tunnel)
     local cache=$(cat $cache_file)
     if [[ ! -z "$t" && "$t" != "null" && "$t" != "$cache" ]]; then
-        local msg="New tunnel found: $t | Port: <code>$(get-tunnel-port $t)</code>"
-        echo "$msg"
+        local msg="\
+[ngrok] New tunnel found:
+
+URL: $t
+Port: <code>$(get-tunnel-port $t)</code>"
+        echo -e "$msg"
         telegram-send --format html "$msg" && update-latest-tunnel "$t"
     fi
 }
