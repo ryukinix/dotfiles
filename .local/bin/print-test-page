@@ -1,0 +1,22 @@
+#!/bin/bash
+# usage: print-test-page <PRINTER_NAME> <PDF_FILE>
+#
+# By default PRINTER_NAME is assume the first enabled printer in the system
+# PDF_FILE is assumed to be the default testpage on the system
+#
+
+# set -eux
+
+get-default-enabled-printer () {
+    lpstat -p | grep enabled | cut -d ' ' -f 2
+}
+
+
+DEFAULT_PRINTER=$(get-default-enabled-printer)
+PRINTER_NAME="${1:-${DEFAULT_PRINTER}}"
+TEST_FILE="/usr/share/cups/data/default-testpage.pdf"
+
+
+lp -d "${PRINTER_NAME}" -o prettyprint=true "${TEST_FILE}"
+
+echo "Default test page sent to the printer $PRINTER_NAME."
