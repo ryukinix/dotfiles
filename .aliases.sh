@@ -54,6 +54,14 @@ set-default-emacs () {
     ln -r -v -s "${new_emacs_d}" "${emacs_d}"
 }
 
+magit () {
+    emacsclient -nw -e '(prog2 (magit) (delete-other-windows))'
+}
+
+gmagit () {
+    gemacs -e '(prog2 (magit) (delete-other-windows))'
+}
+
 gclone () {
     local repo="$1"
     git clone "git@github.com:$repo.git" "${@:2}"
@@ -85,77 +93,6 @@ function ftp-status {
     sudo service pure-ftpd status
 }
 
-function hack-chat {
-    docker run -d --name hchat \
-           --restart=unless-stopped \
-           -p 8001:8080 \
-           -p 6060:6060 \
-           -e WSPROTOCOL="ws://" \
-           -e WSPORT="6060" \
-           -e WSBASEURL="" \
-           -e ADMIN_NAME="boop" \
-           -e PASSWORD="pass" \
-           -e SALT="2dSg4kS" \
-           mcgriddle/hack-chat:latest
-}
-
-function hack-chat-nginx {
-    # to deploy over internet
-    docker run -d --name hchat \
-           -p 8001:8080 \
-           -p 6060:6060 \
-           --restart=unless-stopped \
-           -e WSPROTOCOL="wss://" \
-           -e WSPORT="443" \
-           -e WSBASEURL="/chat-ws" \
-           -e ADMIN_NAME="boop" \
-           -e PASSWORD="pass" \
-           -e SALT="2dSg4kS" \
-           mcgriddle/hack-chat:latest
-}
-
-function filebrowser {
-    touch $HOME/.filebrowser.db
-    docker run -d --name filebrowser \
-           --restart=unless-stopped \
-           -v $HOME:/srv \
-           -v $HOME/.filebrowser.db:/database.db \
-           -v /mnt:/srv/mnt \
-           -u $(id -u):$(id -g) \
-           -p 9000:80 \
-           filebrowser/filebrowser
-}
-
-# for monitoring
-function netdata {
-    docker run -d --name=netdata \
-           --pid=host \
-           --network=host \
-           -v netdataconfig:/etc/netdata \
-           -v netdatalib:/var/lib/netdata \
-           -v netdatacache:/var/cache/netdata \
-           -v /etc/passwd:/host/etc/passwd:ro \
-           -v /etc/group:/host/etc/group:ro \
-           -v /etc/localtime:/etc/localtime:ro \
-           -v /proc:/host/proc:ro \
-           -v /sys:/host/sys:ro \
-           -v /etc/os-release:/host/etc/os-release:ro \
-           -v /var/log:/host/var/log:ro \
-           -v /var/run/docker.sock:/var/run/docker.sock:ro \
-           --restart unless-stopped \
-           --cap-add SYS_PTRACE \
-           --cap-add SYS_ADMIN \
-           --security-opt apparmor=unconfined \
-           netdata/netdata
-}
-
-function lisp-inference-server {
-    docker run --name logic \
-           -p 40000:40000 \
-           --restart=unless-stopped \
-           -d -t \
-           ryukinix/lisp-inference
-}
 
 restart-network () {
     killall -q -9 nm-applet || true
@@ -214,8 +151,12 @@ _pastebin-generic () {
     link=$(eval "$1" 2> /dev/null | tr -d "\n")
     # shellcheck disable=SC2181
     if [ "$?" -eq '0' ]; then
-        printf "%s" "$link" | xclip -selection clipboard
-        printf "Copied '%s' to X clipboard.\n" "$link"
+        if [ ! -z "$DISPLAY" ]; then
+            printf "%s" "$link" | xclip -selection clipboard
+            printf "Copied '%s' to X clipboard.\n" "$link"
+        else
+            printf "%s" "$link"
+        fi
     fi
 }
 
