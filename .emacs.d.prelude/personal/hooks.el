@@ -12,7 +12,6 @@
 (require 'cl-lib)
 (require 'helm-projectile)
 (require 'company)
-(require 'flycheck)
 (require 'company-clang)
 (require 'company-c-headers)
 
