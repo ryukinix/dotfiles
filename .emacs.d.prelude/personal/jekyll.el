@@ -69,6 +69,8 @@
    ((eq format 'html)
     (format "<img src=\"/assets/posts/%s\" alt=\"%s\"/>" path desc))))
 
+;; img:lisp-inference/lisp-inference.png
+;; img:<post-name/<file>
 (org-add-link-type "img" 'org-custom-link-img-follow 'org-custom-link-img-export)
 
 ;; active toc-org when open a buffer with org-mode enabled
