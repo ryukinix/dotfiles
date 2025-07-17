@@ -62,6 +62,10 @@ dot-magit () {
     emacsclient -nw -e '(prog2 (lerax-dotfiles) (delete-other-windows))'
 }
 
+dot-gmagit () {
+    gemacs -e '(prog2 (lerax-dotfiles) (delete-other-windows))'
+}
+
 gmagit () {
     gemacs -e '(prog2 (magit) (delete-other-windows))'
 }
