@@ -1,12 +1,15 @@
 ;; this enable syntax highlight on org-mode org |> latex |> pdf
 
 (require 'ox-latex)
-(progn ;; citations
+
+
+(with-eval-after-load 'org
+  ;; require ob-latex for exporting org-latex blocks correctly
   (require 'oc-biblatex)
   (require 'oc-natbib)
   (require 'oc-csl)
-  )
-
+  (require 'ob-latex)
+  (require 'ox-gfm nil t))
 
 (defcustom lerax-latex-listing 'minted
   "If `lerax-latex-listing' is minted enable syntax highlight"
