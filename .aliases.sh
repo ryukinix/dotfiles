@@ -58,6 +58,10 @@ magit () {
     emacsclient -nw -e '(prog2 (magit) (delete-other-windows))'
 }
 
+dot-magit () {
+    emacsclient -nw -e '(prog2 (lerax-dotfiles) (delete-other-windows))'
+}
+
 gmagit () {
     gemacs -e '(prog2 (magit) (delete-other-windows))'
 }
