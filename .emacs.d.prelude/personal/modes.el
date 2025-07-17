@@ -170,7 +170,7 @@
 (global-display-line-numbers-mode -1)
 (menu-bar-mode -1)
 (simple-modeline-mode +1)
-(super-save-mode -1)
+(super-save-mode +1) ;; pq eu tinha desativado isso mesmo?
 (setq cursor-type 'bar)
 ;; which-func-ff-hook error: (wrong-type-argument arrayp nil)
 ;; remove annoying headerline wavy line
@@ -199,13 +199,42 @@
   (global-git-commit-mode +1))
 
 (with-eval-after-load 'magit
-  (setq magit-blame-echo-style 'headings))
+  (setq magit-blame-echo-style 'headings)
+
+  (defun lerax-magit-process-environment (env)
+    "Detect and set git -bare repo env vars when in tracked dotfile directories."
+    (let* ((default (file-name-as-directory (expand-file-name default-directory)))
+           (git-dir (expand-file-name "~/.dot/"))
+           (work-tree (expand-file-name "~/"))
+           (dotfile-dirs
+            (-map (apply-partially 'concat work-tree)
+                  (-uniq (-keep #'file-name-directory
+                                (split-string (shell-command-to-string
+                                               (format "/usr/bin/git --git-dir=%s --work-tree=%s ls-tree --full-tree --name-only -r HEAD"
+                                                       git-dir work-tree))))))))
+      (push work-tree dotfile-dirs)
+      (when (member default dotfile-dirs)
+        (push (format "GIT_WORK_TREE=%s" work-tree) env)
+        (push (format "GIT_DIR=%s" git-dir) env)))
+    env)
+
+  (advice-add 'magit-process-environment
+              :filter-return #'lerax-magit-process-environment)
+  )
+
+(defun lerax-dotfiles ()
+  (interactive)
+  (magit "~/"))
 
 (setq server-client-instructions nil)
 
 ;; move line of M-x and helm search without need of using C-o
 (with-eval-after-load 'helm
   (setq-default history-delete-duplicates t)
+  (setq-default helm-apropos-show-short-doc t
+                helm-completion-style 'helm
+                completions-detailed t
+                helm-commands-using-frame (remove 'helm-apropos helm-commands-using-frame))
   (setq-default helm-move-to-line-cycle-in-source nil))
 
 ;; remove autocomplete of numbers in company-mode
@@ -223,3 +252,6 @@
                                ))
 
 (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
+
+;; ref: https://github.com/mvdan/gofumpt
+(setq lsp-go-use-gofumpt t)
