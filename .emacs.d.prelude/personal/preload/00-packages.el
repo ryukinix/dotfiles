@@ -10,6 +10,8 @@
   ;; docker-lerax related bug at bootstraping package install
   (lerax-require-packages
    '(
+    ;; sly ;; conflict with slime using prelude, see: https://github.com/bbatsov/prelude/issues/1440
+    ;; sly-quicklisp
      tok-theme ;; for my own light mode
      gpt
      ag ;; not sure why I use this package
