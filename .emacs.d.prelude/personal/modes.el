@@ -248,3 +248,6 @@
 
 ;; ref: https://github.com/mvdan/gofumpt
 (setq lsp-go-use-gofumpt t)
+
+(remove-hook 'after-save-hook
+             'executable-make-buffer-file-executable-if-script-p)
