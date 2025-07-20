@@ -75,3 +75,5 @@
 
 ;; active toc-org when open a buffer with org-mode enabled
 (add-hook 'org-mode-hook 'toc-org-enable)
+
+(define-key org2jekyll-mode-map (kbd "<f9>") 'org2jekyll-publish)
