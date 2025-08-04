@@ -28,6 +28,12 @@
   (setq erc-save-queries-on-quit nil)
   (erc-autojoin-mode +1)
   (setq erc-autojoin-channels-alist
-        '(("libera.chat" "#emacs-social" "#linux" "#emacs"))
+        '(("libera.chat" "#emacs-social" "#lisp" "#linux" "#emacs"))
         erc-autojoin-timing 'ident
         erc-autojoin-delay 10))
+
+(use-package erc-hl-nicks
+  :after erc)
+
+(use-package erc-image
+  :after erc)

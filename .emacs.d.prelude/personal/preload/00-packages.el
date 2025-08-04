@@ -1,6 +1,7 @@
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/personal/preload"))
 
 (require 'lerax)
+(require 'use-package)
 
 (lerax-init-melpa)
 
@@ -61,3 +62,5 @@
 
 (lerax-require-packages-run)
 (lerax-load-init-env-if-exists)
+
+(setq use-package-always-ensure t)
