@@ -5,7 +5,7 @@
 
 (load-theme "leraxy")
 
-(lem-if:set-font-name "JuliaMono")
+(lem-core:set-font-name "JuliaMono")
 
 (define-command open-init-file () ()
   ;; @sasanidas
