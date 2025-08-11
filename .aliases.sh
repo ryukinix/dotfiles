@@ -354,6 +354,13 @@ duhere () {
     du -h -d 1 $@ | sort -h -k 1
 }
 
+lem-webkit-update () {
+    local fpath="$HOME/.local/bin/lem-webkit"
+    wget "https://github.com/lem-project/lem/releases/download/nightly-latest/Lem-x86_64.AppImage" \
+         --backups=1 \
+         -O "$fpath"
+}
+
 
 # save definition of dot (graphviz language)
 alias dot-graph='/usr/bin/dot'

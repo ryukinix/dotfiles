@@ -1,10 +1,10 @@
 [Desktop Entry]
-Name=Lem
+Name=Lem Webkit
 Comment=Common Lisp editor/IDE with high expansibility
-Exec=/home/lerax/common-lisp/lem/lem -i sdl2 %F
+Exec=/home/lerax/.local/bin/lem-webkit %F
 MimeType=text/english;text/plain;text/x-makefile;text/x-c++hdr;text/x-c++src;application/x-shellscript;text/x-c;text/x-c++;
 Icon=/home/lerax/common-lisp/lem/resources/lem.png
 Terminal=false
 Type=Application
 Categories=Development;TextEditor;
-StartupWMClass=Lem SDL2
+StartupWMClass=Lem.real
