@@ -355,10 +355,12 @@ duhere () {
 }
 
 lem-webkit-update () {
+    # sudo apt install webkit2gtk-driver
     local fpath="$HOME/.local/bin/lem-webkit"
     wget "https://github.com/lem-project/lem/releases/download/nightly-latest/Lem-x86_64.AppImage" \
          --backups=1 \
          -O "$fpath"
+    chmod +x "$fpath"
 }
 
 
