@@ -143,6 +143,7 @@
 ;;(global-set-key (kbd "<f9>") 'compile)
 (global-set-key (kbd "<f9>") 'projectile-compile-project)
 (global-set-key (kbd "M-<f9>") 'projectile-test-project)
+(global-set-key (kbd "M-S-<f9>") 'compile)
 (global-set-key (kbd "C-M-S-x") 'edebug-eval-top-level-form)
 (global-set-key (kbd "<C-f9>") 'flyspell-buffer)
 

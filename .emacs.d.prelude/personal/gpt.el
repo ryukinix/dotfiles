@@ -16,7 +16,7 @@
 ;;; NOTE(@lerax): dom 01 jun 2025 12:50:08
 ;; after upgrade version 20250525 stopped to work
 ;; - gpt-model custom var points to claude even with setq-default pointing to gpt-4o
-;; - gpt-mode major mode is not found when called
+;; - gpt-mode major mode Lis not found when called
 ;;
 ;; using le-gpt as alternative until got this fixed
 ;;
@@ -41,5 +41,5 @@
   (require 'gpt-mode) ;; otherwise raise error of gpt-mode is not defined!
   (setq gpt-api-type 'openai)
   (setq gpt-openai-key (getenv "OPENAI_KEY"))
-  (setq gpt-model "gpt-5")
+  (setq gpt-model "gpt-4o")
   (setq gpt-python-path "/usr/bin/python3"))

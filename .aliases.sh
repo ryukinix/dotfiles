@@ -356,8 +356,13 @@ duhere () {
 
 lem-webkit-update () {
     # sudo apt install webkit2gtk-driver
+    local version="${1:-latest}"
+    local remote_filename="Lem-x86_64.AppImage"
+    if [[ "$version" != "latest" ]]; then
+           remote_filename="Lem-x86_64-nightly.AppImage"
+    fi
     local fpath="$HOME/.local/bin/lem-webkit"
-    wget "https://github.com/lem-project/lem/releases/download/nightly-latest/Lem-x86_64.AppImage" \
+    wget "https://github.com/lem-project/lem/releases/download/nightly-${version}/${remote_filename}" \
          --backups=1 \
          -O "$fpath"
     chmod +x "$fpath"
@@ -557,3 +562,4 @@ alias thesis="cd ~/Sync/ita/masters-thesis/"
 alias gnome-restart="killall -HUP gnome-shell"
 alias masters="~/Sync/ita/masters-thesis/"
 alias lem-src="cd ~/common-lisp/lem"
+alias pdm-lock="pdm lock -G:all --update-reuse"

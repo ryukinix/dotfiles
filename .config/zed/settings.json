@@ -23,9 +23,6 @@
   "terminal": {
     "cursor_shape": "bar"
   },
-  "features": {
-    "notebooks": true
-  },
   "languages": {
     "Python": {
       "language_servers": ["!pyright", "..."]
@@ -55,8 +52,7 @@
     "default_model": {
       "provider": "openai",
       "model": "gpt-4o-mini"
-    },
-    "version": "2"
+    }
   },
   "ui_font_size": 16,
   "buffer_font_family": "JuliaMono",

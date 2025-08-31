@@ -201,9 +201,11 @@ zstyle ':prezto:module:syntax-highlighting' pattern \
 # Tmux
 #
 function tmux_should_start() {
-    if [[ `hostname` == "raspberrypi" ]]; then
+    if [[ -o login ]]; then # not interactive
+       echo no
+    elif [[ `hostname` == "raspberrypi" ]]; then
         echo no
-    elif [[ "$TERM_PROGRAM" == "zed" ]]; then
+    elif [[ "$TERM_PROGRAM" == "zed" || "$ZED_TERM" == "true" || -v "$ZED_FORCE_CLI_MODE" ]]; then
         echo no
     elif [[ "$SDL_VIDEO_X11_WMCLASS" == "Lem SDL2" ]]; then
         echo no
