@@ -229,6 +229,11 @@
     (global-set-key (meta-kbd "<@key>" mouse-forward) 'text-scale-increase)
     (global-set-key (meta-kbd "<@key>" mouse-backforward) 'text-scale-decrease)
     (global-set-key (kbd "C-*") 'text-scale-reset)
+    ;; HACK: dom 14 set 2025 20:15:30
+    ;; redefining previous C-+ / C-- to control font size
+    (global-set-key (kbd "C-+") 'text-scale-increase)
+    (global-set-key (kbd "C--") 'text-scale-decrease)
+
     (global-set-key (kbd "<C-Scroll_Lock>") 'text-scale-reset)
     (global-set-key (kbd "<C-pause>") 'text-scale-decrease)
     (global-set-key (meta-kbd "<C-M-@key>" mouse-forward) 'text-scale-reset)
