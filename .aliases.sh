@@ -376,7 +376,7 @@ alias dot-gitg='GIT_DIR=$HOME/.dot/ gitg'
 
 
 alias emacs="emacsclient -nw -a emacs"
-alias semacs='SUDO_EDITOR="emacs-lite -nw" sudoedit' #
+alias semacs='SUDO_EDITOR="emacsclient -nw" sudoedit' #
 alias svim='SUDO_EDITOR="vim" sudoedit'
 
 
@@ -406,7 +406,7 @@ alias starfox-bind-up='ssh -C -Y lerax@starfox -t "x2x -north -to :0.0"'
 alias starfox-bind-left='ssh -C -Y lerax@starfox -t "x2x -west -to :0.0"'
 alias starfox-bind-right='ssh -C -Y lerax@starfox -t "x2x -east -to :0.0"'
 alias starfox-bind-down='ssh -C -Y lerax@starfox -t "x2x -south -to :0.0"'
-alias starfox='ssh lerax@starfox'
+alias starfox='ssh lerax@starfox-ngrok'
 alias celeste-bind-up='ssh -C -Y lerax@celeste -t "x2x -north -completeregionlow 768 -to :0.0"'
 alias celeste-bind-left='ssh -C -Y lerax@celeste -t "x2x -west -completeregionlow 768 -to :0.0"'
 alias celeste-bind-right='ssh -C -Y lerax@celeste -t "x2x -east -completeregionlow 768 -to :0.0"'
@@ -554,8 +554,8 @@ alias avi2mkv='ls -b -1 | grep avi | xargs -I@ echo ffmpeg -fflags +genpts -i @ 
 alias git-tag-latest="git describe --tags --abbrev=0 2> /dev/null "
 alias dfx="df -x overlay -x tmpfs -x devtmpfs"
 alias git-fix="git commit --amend --no-edit; git push -f"
+alias fuckfuck='last=$(fc -nl -1); eval $(thefuck --alias); eval $last; fuck'
 alias fixup="git commit --fixup=@; git push"
-alias fuckfuck='eval $(thefuck --alias)'
 alias qrcode="zbarimg"
 alias logs="journalctl -f"
 alias thesis="cd ~/Sync/ita/masters-thesis/"
