@@ -57,6 +57,7 @@
      xclip
      yasnippet
      zeal-at-point
+     ripgrep
      )
    ))
 
