@@ -23,7 +23,10 @@ open-frame () {
 }
 
 raise-frames () {
-    local fname=`basename $@ 2> /dev/null || printf ''`
+    local fpath="$@"
+    local fdir=`dirname $fpath > /dev/null || printf ''`
+    local fname=`basename $fpath > /dev/null || printf ''`
+    local fname_with_parent="$fdir/$fname"
     open-frame -e "(progn \
                       (mapcan (lambda (x) \
                                (when (window-system x) \
@@ -32,7 +35,7 @@ raise-frames () {
                               (frame-list)) \
                        (when (> (length \"$fname\") 0) \
                              (switch-to-buffer \
-                                 (or (car (match-buffers \"$fname\")) \
+                                 (or (car (match-buffers \"${fname_with_parent}\")) (match-buffers \"$fname\") \
                                           \"$fname\"))))" > /dev/null
 }
 
