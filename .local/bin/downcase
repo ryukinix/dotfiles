@@ -15,10 +15,17 @@ def usage():
     sys.stderr.write(__doc__)
 
 
+def fname_lower(fpath: str) -> str:
+    fname_lower = os.path.basename(fpath).lower()
+    fdir = os.path.dirname(fpath)
+    return os.path.join(fdir, fname_lower)
+
+
 def downcase_files(args):
     for f in args:
-        if f != f.lower():
-            os.system(f"mv -v '{f}' '{f.lower()}'")
+        new_f = fname_lower(f)
+        if f != new_f:
+            os.system(f"mv -v '{f}' '{new_f}'")
 
 
 def downcase_io():
