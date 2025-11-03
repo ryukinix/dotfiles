@@ -1,0 +1,23 @@
+#!/bin/bash
+
+function convert2mp4 {
+    local fname="$1"
+    local basename="${fname%.*}"
+    ffmpeg -i "$fname" \
+           -preset slow \
+           -b:a 128k \
+           -codec:v libx264 \
+           -pix_fmt yuv420p \
+           -b:v 4500k \
+           -minrate 4500k \
+           -maxrate 9000k \
+           -bufsize 9000k \
+           -vf scale=-1:1080 \
+           "$basename".mp4
+}
+
+for fname in "${@}"; do
+    printf "\033[1;32m[+]\033[0m"
+    echo "Converting $fname to MP4"
+    convert2mp4 "$fname"
+done
