@@ -1,11 +1,15 @@
 (in-package :lem-user)
 
 (define-color-theme "leraxy" ("black-metal-immortal")
+  (:foreground "#c1c1c1") 
+  (:background "#000000")
   (syntax-keyword-attribute :foreground "dodger blue"))
 
 (load-theme "leraxy")
 (lem-core:set-font-name "JuliaMono")
-
+;; TODO: set only on webview, how can I use reader macro here for this?
+#-sdl2
+(lem-core:set-font-size 14)
 
 (define-command open-init-file () ()
   (find-file
@@ -29,8 +33,12 @@
   (kill-buffer (current-buffer)))
 
 (define-command duplicate-region-or-line () ()
-  (copy-region)
+  (let* ((point (current-point))
+         (start (cursor-region-beginning point))
+         (end (cursor-region-end point)))
+   (copy-region start end))
   (yank))
+
 
 (define-keys *global-keymap*
   ("C-h b" 'describe-bindings)
