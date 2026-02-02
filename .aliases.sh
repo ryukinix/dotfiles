@@ -374,7 +374,6 @@ alias dot-graph='/usr/bin/dot'
 alias dot-tig='GIT_DIR=$HOME/.dot/ tig'
 alias dot-gitg='GIT_DIR=$HOME/.dot/ gitg'
 
-
 alias emacs="emacsclient -nw -a emacs"
 alias semacs='SUDO_EDITOR="emacsclient -nw" sudoedit' #
 alias svim='SUDO_EDITOR="vim" sudoedit'
@@ -450,6 +449,7 @@ alias pacman-upgrade-kernel='sudo pacman -Syu linux-lts linux linux-lts-headers 
 alias pacman-search='pacman -Ss'
 alias pacman-remove='sudo pacman -Rsu'
 alias pacman-reinstall-all='sudo pacman -S $(pacman -Qeqn) --noconfirm'
+alias pacman-check='sudo pacman -Dk'
 alias service='sudo rc-service'
 alias aur=yay
 alias aur-install='aur -S'
