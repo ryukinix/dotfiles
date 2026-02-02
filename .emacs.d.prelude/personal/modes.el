@@ -261,8 +261,9 @@
 ;;   (push 'company-etags company--disabled-backends)
 ;;   (push 'company-gtags company--disabled-backends))
 
-(use-package magit-delta
-  :hook (magit-mode . magit-delta-mode))
+(when (executable-find "delta")
+  (use-package magit-delta
+    :hook (magit-mode . magit-delta-mode)))
 
 
 ;; (setq simple-modeline-segments
