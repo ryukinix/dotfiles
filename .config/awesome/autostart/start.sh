@@ -1,21 +1,26 @@
 #!/bin/bash
+# shellcheck disable=SC2006
 
 workstar=PC-002653
 
 [[ ! `pgrep agent` && -f /usr/lib/geoclue-2.0/demos/agent ]] && /usr/lib/geoclue-2.0/demos/agent&
 [[ ! `pgrep redshift` ]] && redshift-gtk -l -3.779500:-49.567810 &
 [[ ! `pgrep nm-applet` ]] && nm-applet&
-[[ ! `pgrep pipewire` ]] && pipewire &
-[[ ! `pgrep pipewire-pulse` ]] && pipewire-pulse &
+
+if [[ ! -f /etc/user/init.d/pipewire ]]; then
+    [[ ! `pgrep pipewire` ]] && pipewire &
+    [[ ! `pgrep pipewire-pulse` ]] && pipewire-pulse &
+fi
+
 [[ ! `pgrep wireplumber` ]] && wireplumber &
 [[ ! `pgrep blueman-applet` ]] && blueman-applet&
 [[ ! `pgrep xfce4-power-manager` ]] && xfce4-power-manager&
-[[ `hostname` == $workstar &&  ! `pgrep epp-client` ]] && /opt/cososys/bin/epp-client&
+[[ "`hostname`" == "$workstar" &&  ! `pgrep epp-client` ]] && /opt/cososys/bin/epp-client&
 [[ ! `pgrep volumeicon` ]] && volumeicon&
-[[ `pgrep xfdesktop` ]] && ~/.config/awesome/autostart/xfdesktop-fix.sh
+[[ "`pgrep xfdesktop`" ]] && ~/.config/awesome/autostart/xfdesktop-fix.sh
 [[ ! $(pgrep polkit-gnome-au) ]] && /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
-if [[ `hostname` != $workstar ]]; then
+if [[ `hostname` != "$workstar" ]]; then
     [[ `rc-service emacs.lerax status` != *started* ]] && sudo /etc/init.d/emacs.lerax restart&
     [[ ! `pgrep pamac-tray` ]] && pamac-tray&
     [[ ! `pgrep udiskie` ]] && udiskie&
