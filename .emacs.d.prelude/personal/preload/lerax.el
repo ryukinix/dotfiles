@@ -395,5 +395,18 @@ Missing packages are installed automatically."
           (message "Loading %s env file..." env-file-path)
           (load-env-vars env-file-path)))))
 
+(defun lerax-open-pull-request ()
+  (interactive)
+  (let ((command "BROWSER=firefox hub pr show"))
+    (shell-command command)))
+
+(defun lerax-delete-all-empty-lines-in-buffer ()
+  "Delete all empty lines in the current buffer."
+  (interactive)
+  (save-excursion
+    (goto-char (point-min))
+    (flush-lines "^[[:space:]]*$")))
+
+
 (provide 'lerax)
 ;;; lerax.el ends here

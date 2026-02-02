@@ -1,5 +1,6 @@
 (require 'org)
 (require 'org2jekyll)
+;; (setq org-html-htmlize-output-type 'css) -> default inline-css
 
 (defcustom lerax-blog-basepath
   (expand-file-name "~/Dropbox/Programming/Projects/Website/ryukinix.github.io")
@@ -77,3 +78,14 @@
 (add-hook 'org-mode-hook 'toc-org-enable)
 
 (define-key org2jekyll-mode-map (kbd "<f9>") 'org2jekyll-publish)
+
+;; NOTE(@lerax): dom 09 nov 2025 18:12:12
+;; fix bug on css export of ocaml in post due tuareg weird face lock
+;; debug with M-x htmlize-buffer in a ocaml buffer
+;; ref: https://chatgpt.com/share/69116d9b-f238-8003-a195-622414a0e15c
+(defun fix-tuareg-background-at-export ()
+  (require 'tuareg)
+  (copy-face 'font-lock-type-face 'tuareg-font-lock-constructor-face)
+  (set-face-attribute 'tuareg-font-lock-constructor-face nil :background nil))
+
+(add-hook 'htmlize-before-hook #'fix-tuareg-background-at-export)

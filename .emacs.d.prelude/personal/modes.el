@@ -69,9 +69,10 @@
 (setq company-tooltip-idle-delay 0.1)
 
 ;; add slime-company completion tool to slime-contribs
-(push 'slime-company slime-contribs)
-(push 'slime-asdf slime-contribs)
-(push 'slime-quicklisp slime-contribs)
+(use-package slime-company
+  :after (slime company)
+  :config
+  (slime-setup '(slime-asdf slime-quicklisp slime-fancy slime-company)))
 
 
 (setq initial-scratch-message
@@ -251,3 +252,23 @@
 
 (remove-hook 'after-save-hook
              'executable-make-buffer-file-executable-if-script-p)
+
+;; using gtags may generate duplicated entries for c/c++ autocomplete
+;; THIS DOESN'T WORKS
+;; Used: M-x customize-variable company-backends
+;; Removed: GNU Global + Etags, save for future session reference
+;; (with-eval-after-load 'company
+;;   (push 'company-etags company--disabled-backends)
+;;   (push 'company-gtags company--disabled-backends))
+
+(use-package magit-delta
+  :hook (magit-mode . magit-delta-mode))
+
+
+;; (setq simple-modeline-segments
+;;       '((simple-modeline-segment-modified
+;;          simple-modeline-segment-buffer-name
+;;          simple-modeline-segment-position)
+;;         (simple-modeline-segment-vc simple-modeline-segment-misc-info
+;;                                     simple-modeline-segment-process
+;;                                     simple-modeline-segment-major-mode)))

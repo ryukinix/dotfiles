@@ -30,7 +30,7 @@
 ;; (require 'prelude-elixir)
 ;; (require 'prelude-js)
 (require 'prelude-latex)
-;; (require 'prelude-ocaml)
+(require 'prelude-ocaml)
 ;; (require 'prelude-perl)
 ;; (require 'prelude-ruby)
 ;; (require 'prelude-scala)

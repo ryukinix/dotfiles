@@ -18,8 +18,7 @@
 
 (setq-default find-header-file-header-file-prefixes (list "/usr/include/"
                                                           "/usr/local/include/"
-                                                          "/usr/include/c++/7.1.2/"
-                                                          "/usr/lib/gcc/x86_64-pc-linux-gnu/7.2.1/include/"))
+                                                          "/usr/local/gcc-15.2.0/include/c++/15.2.0/"))
 
 (defun find-header-file-current-char ()
   "Get the next char after point and return as string."
@@ -66,11 +65,14 @@
           (t nil))
     (if (null header-file-buffer)
         (message "not found header file")
-      (switch-to-buffer header-file-buffer))))
+      (prog2 (xref-push-marker-stack)
+       (switch-to-buffer header-file-buffer)))))
 
 ;; binding keys for C and C++ to C-c C-. on `find-header-file' function
-(define-key c++-mode-map (kbd "C-c C-.") 'find-header-file)
-(define-key c-mode-map (kbd "C-c C-.") 'find-header-file)
+(cl-loop for mode in (list c++-mode-map c-mode-map)
+         do (progn
+              (define-key mode (kbd "M-s-.") 'find-header-file)
+              (define-key mode (kbd "M-s-,") 'xref-go-back)))
 
 (provide 'find-header)
 
