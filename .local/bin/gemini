@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Init:
+# install nvm and init the home config
+# nvm install node
+# npm install -g @google/gemini-cli
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
+
+if [[ " $@ " =~ " --update " || " ~@ " =~ " -u " ]]; then
+    npm install -g @google/gemini-cli
+else
+    gemini $@
+fi
