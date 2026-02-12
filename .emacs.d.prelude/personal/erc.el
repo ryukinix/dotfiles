@@ -28,7 +28,8 @@
   (setq erc-save-queries-on-quit nil)
   (erc-autojoin-mode +1)
   (setq erc-autojoin-channels-alist
-        '(("libera.chat" "#emacs-social" "#lisp" "#linux" "#emacs"))
+        '(("libera.chat" "#emacs-social" "#lisp" "#linux" "#emacs")
+          ("irc.oftc.net" "#bolhadev"))
         erc-autojoin-timing 'ident
         erc-autojoin-delay 10))
 
