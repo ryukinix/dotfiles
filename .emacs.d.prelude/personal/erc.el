@@ -29,7 +29,7 @@
   (erc-autojoin-mode +1)
   (setq erc-autojoin-channels-alist
         '(("libera.chat" "#emacs-social" "#lisp" "#linux" "#emacs")
-          ("irc.oftc.net" "#bolhadev"))
+          ("oftc.net" "#bolhadev"))
         erc-autojoin-timing 'ident
         erc-autojoin-delay 10))
 
@@ -38,3 +38,11 @@
 
 (use-package erc-image
   :after erc)
+
+(defun erc-bolhadev ()
+  (interactive)
+  ;; oftc doesn't support SASL auth plain!
+  ;; for some reason auth-source is not working properly for oftc as well
+  (erc-tls :server "irc.oftc.net"
+           :nick "ryukinix"
+           :port 6697))
