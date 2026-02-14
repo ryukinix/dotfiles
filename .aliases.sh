@@ -405,7 +405,7 @@ alias starfox-bind-up='ssh -C -Y lerax@starfox -t "x2x -north -to :0.0"'
 alias starfox-bind-left='ssh -C -Y lerax@starfox -t "x2x -west -to :0.0"'
 alias starfox-bind-right='ssh -C -Y lerax@starfox -t "x2x -east -to :0.0"'
 alias starfox-bind-down='ssh -C -Y lerax@starfox -t "x2x -south -to :0.0"'
-alias starfox='ssh lerax@starfox-ngrok'
+alias starfox='ssh lerax@starfox'
 alias celeste-bind-up='ssh -C -Y lerax@celeste -t "x2x -north -completeregionlow 768 -to :0.0"'
 alias celeste-bind-left='ssh -C -Y lerax@celeste -t "x2x -west -completeregionlow 768 -to :0.0"'
 alias celeste-bind-right='ssh -C -Y lerax@celeste -t "x2x -east -completeregionlow 768 -to :0.0"'
@@ -565,3 +565,39 @@ alias lem-src="cd ~/common-lisp/lem"
 alias pdm-lock="pdm lock -G:all --update-reuse"
 alias mallet="mallet --format line"
 alias find-regex="find . -regextype posix-extended -regex"
+
+starfox-upload() {
+    local fpath_src="$1"
+    local fpath_src_basename=$(basename "$fpath_src")
+    local fpath_dst="${2:-storage}"
+    scp -R ${fpath_src} starfox-ngrok:Public/${fpath_dst}
+    echo "https://server.manoel.dev/${fpath_dst}/${fpath_src_basename}"
+}
+
+exercism-autocomplete() {
+    source ~/.exercism/shell/exercism.zsh
+}
+
+alias ocaml-top="utop"
+
+# Universal extractor
+extract() {
+    local f="$1"
+    [ -f "$f" ] || { echo "error: file not found: $f"; return 1; }
+    case "$f" in
+        *.tar.bz2)   tar xjf "$f"   ;;
+        *.tar.gz)    tar xzf "$f"   ;;
+        *.tar.xz)    tar xJf "$f"   ;;
+        *.tar.zst)   tar --zstd -xvf "$f" ;;
+        *.bz2)       bunzip2 "$f"   ;;
+        *.rar)       unrar x "$f"   ;;
+        *.gz)        gunzip "$f"    ;;
+        *.tar)       tar xf "$f"    ;;
+        *.tbz2)      tar xjf "$f"   ;;
+        *.tgz)       tar xzf "$f"   ;;
+        *.zip)       unzip "$f"     ;;
+        *.Z)         uncompress "$f";;
+        *.7z)        7z x "$f"      ;;
+        *)           echo "error: don't know how to extract '$f'"; return 2 ;;
+    esac
+}
