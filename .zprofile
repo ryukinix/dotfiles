@@ -59,6 +59,7 @@ path=(
   ~/.local/share/coursier/bin
   ~/.qlot/bin
   /usr/local/texlive/2025/bin/x86_64-linux
+  ~/.opam/exercism/bin/
   $path
 )
 

@@ -27,6 +27,8 @@ safe-source ~/.local.sh
 safe-source ~/.bun.sh
 [[ -d ~/.pyenv ]] && safe-source ~/.pyenv.sh
 [[ -f `which fzf` ]] && safe-source ~/.fzf.zsh
-
-
+safe-source ~/.exercism/shell/exercism_completion.zsh
 export DOCKER_BUILDKIT=1
+
+# opam configuration
+[[ ! -r ~/.opam/opam-init/init.zsh ]] || source ~/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
