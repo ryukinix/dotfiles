@@ -1,0 +1,20 @@
+#!/bin/bash
+
+source ~/.aliases.sh
+
+export DISPLAY=:0
+
+echo "$NAUTILUS_SCRIPT_SELECTED_FILE_PATHS" | while IFS= read -r file_path; do
+    # Skip empty lines (Nautilus often adds a trailing newline)
+    [ -z "$file_path" ] && continue
+
+    # Call your alias or command here
+    fpath=$(starfox-upload "$file_path" 2>&1)
+    if [ $? == 0 ]; then
+        echo "$fpath" | xclip -selection clipboard
+        notify-send "starfox-upload" "'$fpath' copied to clipboard"
+    else
+
+        notify-send "starfox-upload" "error: $fpath"
+    fi
+done
