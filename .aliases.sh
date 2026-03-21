@@ -368,6 +368,11 @@ lem-webkit-update () {
     chmod +x "$fpath"
 }
 
+ntpd-fix () {
+    sudo rc-service stpd stop
+    sudo ntpd -gq
+    sudo rc-service stpd start
+}
 
 # save definition of dot (graphviz language)
 alias dot-graph='/usr/bin/dot'
@@ -393,6 +398,16 @@ alias lisp='sbcl'
 alias lain=lein
 alias dic=sdcv
 
+# xclipboard
+alias xcopy='xclip -selection clipboard'
+alias xpaste='xclip -o -selection clipboard'
+
+function xcopy-ssh {
+    local host="$1"
+    ssh -q -X "$host" -t "DISPLAY=:0 xclip -o -selection clipboard" \
+        | xcopy
+}
+
 
 # don't use nosetests anymore, is legacy broken and fucked
 alias nosetests='nose2'
@@ -411,17 +426,6 @@ alias celeste-bind-left='ssh -C -Y lerax@celeste -t "x2x -west -completeregionlo
 alias celeste-bind-right='ssh -C -Y lerax@celeste -t "x2x -east -completeregionlow 768 -to :0.0"'
 alias celeste-bind-down='ssh -C -Y lerax@celeste -t "x2x -south -completeregionlow 768 -to :0.0"'
 alias celeste='ssh lerax@celeste'
-
-
-# xclipboard
-alias xcopy='xclip -selection clipboard'
-alias xpaste='xclip -o -selection clipboard'
-
-function xcopy-ssh {
-    local host="$1"
-    ssh -q -X "$host" -t "DISPLAY=:0 xclip -o -selection clipboard" \
-        | xcopy
-}
 
 alias ufc='cd ~/Dropbox/University/Courses/UFC/'
 
