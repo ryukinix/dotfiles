@@ -8,11 +8,18 @@ workstar=PC-002653
 [[ ! `pgrep nm-applet` ]] && nm-applet&
 
 if [[ ! -f /etc/user/init.d/pipewire ]]; then
+    # NOTE(@lerax): Tue 17 Mar 2026 11:52:07 PM -03
+    # using artix, use this to setup as openrc:
+    # sudo pacman Syuu pipewire-openrc pipewire-pulse-openrc wireplumber-openrc
+    # rc-update add -U pipewire default
+    # rc-update add -U pipewire-pulse default
+    # rc-update add -U wireplumber default
+
     [[ ! `pgrep pipewire` ]] && pipewire &
     [[ ! `pgrep pipewire-pulse` ]] && pipewire-pulse &
+    [[ ! `pgrep wireplumber` ]] && wireplumber &
 fi
 
-[[ ! `pgrep wireplumber` ]] && wireplumber &
 [[ ! `pgrep blueman-applet` ]] && blueman-applet&
 [[ ! `pgrep xfce4-power-manager` ]] && xfce4-power-manager&
 [[ "`hostname`" == "$workstar" &&  ! `pgrep epp-client` ]] && /opt/cososys/bin/epp-client&
