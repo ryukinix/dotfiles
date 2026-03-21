@@ -25,7 +25,7 @@ safe-source ~/.neoway.sh
 safe-source ~/.local.sh
 # safe-source ~/.fuck.sh
 safe-source ~/.bun.sh
-[[ -d ~/.pyenv ]] && safe-source ~/.pyenv.sh
+[[ -d ~/.pyenv ]] && command -v pyenv &> /dev/null && safe-source ~/.pyenv.sh
 [[ -f `which fzf` ]] && safe-source ~/.fzf.zsh
 safe-source ~/.exercism/shell/exercism_completion.zsh
 export DOCKER_BUILDKIT=1
