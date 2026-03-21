@@ -119,9 +119,6 @@ local mytextclock = wibox.widget.textclock(
 mytextclock.font = theme.font
 
 -- Calendar
--- default
-local cw = calendar_widget()
--- or customized
 local cw = calendar_widget({
       theme = 'dark',
       placement = 'top_right',
