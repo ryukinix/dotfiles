@@ -16,7 +16,11 @@ fi
 [[ ! `pgrep blueman-applet` ]] && blueman-applet&
 [[ ! `pgrep xfce4-power-manager` ]] && xfce4-power-manager&
 [[ "`hostname`" == "$workstar" &&  ! `pgrep epp-client` ]] && /opt/cososys/bin/epp-client&
-[[ ! `pgrep volumeicon` ]] && volumeicon&
+
+# NOTE(@lerax): Tue 03 Feb 2026 05:46:14 PM -03
+# it's not working anymore on artix linux on celeste host
+# [[ ! `pgrep volumeicon` ]] && volumeicon&
+
 [[ "`pgrep xfdesktop`" ]] && ~/.config/awesome/autostart/xfdesktop-fix.sh
 [[ ! $(pgrep polkit-gnome-au) ]] && /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 

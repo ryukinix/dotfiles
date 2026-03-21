@@ -219,6 +219,16 @@ globalkeys = awful.util.table.join(
          awful.spawn.with_shell("pactl set-sink-mute 1 toggle || pactl set-sink-mute 0 toggle") end),
    awful.key({ }, "XF86AudioMicMute", function ()
          awful.spawn.with_shell("pactl set-source-mute 1 toggle") end),
+
+   awful.key({ }, "XF86AudioRaiseVolume",
+      function()
+         awful.spawn.with_shell("amixer -D pulse sset Master 5%+")
+   end),
+   awful.key({ }, "XF86AudioLowerVolume",
+      function()
+         awful.spawn.with_shell("amixer -D pulse sset Master 5%-")
+      end
+   ),
    awful.key({modkey}, "l", function () awful.spawn.with_shell(locker) end),
    awful.key({modkey, altkey}, "l", function () awful.spawn.with_shell(locker) end),
 
@@ -235,32 +245,9 @@ globalkeys = awful.util.table.join(
    awful.key({ altkey, }, "h", function () if beautiful.fs then beautiful.fs.show(7) end end),
       -- awful.key({ altkey, }, "w", function () if beautiful.weather then beautiful.weather.show(7) end end),
 
-      -- Brightess
+   -- Brightness
    awful.key({ }, "XF86MonBrightnessUp", function () awful.util.spawn("xbacklight -inc 10") end),
    awful.key({ }, "XF86MonBrightnessDown", function () awful.util.spawn("xbacklight -dec 10") end),
-   -- Rhythmbox
-   awful.key({modkey},  "XF86AudioPlay",
-      function ()
-         awful.spawn("rhythmbox")
-      end,
-      {description = "open media player", group = "applications"}
-   ),
-
-   -- Rhythmbox
-   awful.key({"Ctrl"},  "XF86AudioPlay",
-      function ()
-         awful.spawn("rhythmbox")
-      end,
-      {description = "open media player", group = "applications"}
-   ),
-
-   -- Geary
-   awful.key({modkey}, "a",
-      function ()
-         awful.spawn("geary")
-      end,
-      {description = "open email client", group = "applications"}
-   ),
 
    -- Copy primary to clipboard (terminals to gtk)
    awful.key({ modkey }, "c", function () awful.spawn("xclip | xclip -i -b") end),

@@ -19,6 +19,7 @@ local spotify_widget = require("awesome-wm-widgets.spotify-widget.spotify")
 local net_speed_widget = require("awesome-wm-widgets.net-speed-widget.net-speed")
 local cpu_widget = require("awesome-wm-widgets.cpu-widget.cpu-widget")
 
+local volume_widget = require('awesome-wm-widgets.volume-widget.volume')
 
 local os    = { getenv = os.getenv, setlocale = os.setlocale }
 
@@ -257,6 +258,9 @@ function theme.at_screen_connect(s)
          layout = wibox.layout.fixed.horizontal,
          expand = "right",
          wibox.widget.systray(),
+         volume_widget{
+            widget_type = 'arc'
+         },
          net_speed_widget(),
          net_indicator,
          clockicon,
