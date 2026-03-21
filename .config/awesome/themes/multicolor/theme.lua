@@ -223,7 +223,6 @@ function theme.at_screen_connect(s)
    local left_widgets =
       {
          layout = wibox.layout.fixed.horizontal,
-         expand = "left",
          s.rofibutton,
          --s.mylayoutbox,
          s.mytaglist,
@@ -244,7 +243,6 @@ function theme.at_screen_connect(s)
    local right_widgets =
       {
          layout = wibox.layout.fixed.horizontal,
-         expand = "right",
          wibox.widget.systray(),
          volume_widget{
             widget_type = 'arc'
@@ -280,6 +278,7 @@ function theme.at_screen_connect(s)
       layout = wibox.layout.align.horizontal,
       expand = "none",
       left_widgets,
+      nil,
       right_widgets
    }
 
