@@ -15,13 +15,16 @@ local net_widgets = require("net_widgets")
 local logout_menu_widget = require("awesome-wm-widgets.logout-menu-widget.logout-menu")
 local calendar_widget = require("awesome-wm-widgets.calendar-widget.calendar")
 local fs_widget = require("awesome-wm-widgets.fs-widget.fs-widget")
-local spotify_widget = require("awesome-wm-widgets.spotify-widget.spotify")
 local net_speed_widget = require("awesome-wm-widgets.net-speed-widget.net-speed")
+local battery_widget = require("awesome-wm-widgets.batteryarc-widget.batteryarc")
 local cpu_widget = require("awesome-wm-widgets.cpu-widget.cpu-widget")
-
 local volume_widget = require('awesome-wm-widgets.volume-widget.volume')
 
 local os    = { getenv = os.getenv, setlocale = os.setlocale }
+
+local f_host = io.popen("hostname")
+local hostname = f_host and f_host:read("*l") or ""
+if f_host then f_host:close() end
 
 local theme                                     = {}
 theme.lain_icons                                = os.getenv("HOME") .. "/.config/awesome/lain/icons/layout/zenburn/"
@@ -208,7 +211,7 @@ function theme.at_screen_connect(s)
    -- Create a taglist widget
    s.mytaglist = awful.widget.taglist(s, awful.widget.taglist.filter.all, awful.util.taglist_buttons)
 
-   -- Create a tasklist widget
+   -- create a tasklist widget
    s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, awful.util.tasklist_buttons)
 
    -- Create the wibox
@@ -217,11 +220,8 @@ function theme.at_screen_connect(s)
    s.rofibutton = awful.widget.launcher({command = "rofi -show drun",
                                          image = theme.menu_submenu_icon })
 
-   -- Add widgets to the wibox
-   s.mywibox:setup {
-      layout = wibox.layout.align.horizontal,
-      expand = "none",
-      { -- Left widgets
+   local left_widgets =
+      {
          layout = wibox.layout.fixed.horizontal,
          expand = "left",
          s.rofibutton,
@@ -235,22 +235,13 @@ function theme.at_screen_connect(s)
          temp.widget,
          fs_widget(
             {
-               mounts = { '/', '/home',
-                          '/mnt/deadstar', '/mnt/extra', '/mnt/datastorm' },
+               mounts = { '/', '/home' },
                popup_bg = '#000000cc'
             }
          ),
-      },
-      -- Middle widget
-      spotify_widget(
-         {
-            sp_bin = "/home/lerax/.local/bin/sp",
-            font = theme.font,
-            max_length = 15,
-            play_icon = '/usr/share/icons/Numix-Circle/48/apps/spotify.svg',
-            pause_icon = '/usr/share/icons/Numix-Light/22/status/renamed-spotify-client.svg'
-         }
-      ),
+      }
+
+   local right_widgets =
       {
          layout = wibox.layout.fixed.horizontal,
          expand = "right",
@@ -262,15 +253,34 @@ function theme.at_screen_connect(s)
          net_indicator,
          clockicon,
          mytextclock,
-         logout_menu_widget(
-            {
-               onlock = function() awful.spawn.with_shell(locker) end,
-               onreboot = function() awful.spawn.with_shell("loginctl reboot") end,
-               onsuspend = function() awful.spawn.with_shell("loginctl suspend") end,
-               onpoweroff = function() awful.spawn.with_shell("loginctl poweroff") end,
-            }
-         )
       }
+
+   if hostname == "celeste" then
+      table.insert(right_widgets, battery_widget(
+         {
+            arc_thickness = 1,
+            font = theme.font,
+            size = 24,
+            show_current_level = true,
+         }
+      ))
+   end
+
+   table.insert(right_widgets, logout_menu_widget(
+      {
+         onlock = function() awful.spawn.with_shell(locker) end,
+         onreboot = function() awful.spawn.with_shell("loginctl reboot") end,
+         onsuspend = function() awful.spawn.with_shell("loginctl suspend") end,
+         onpoweroff = function() awful.spawn.with_shell("loginctl poweroff") end,
+      }
+   ))
+
+   -- Add widgets to the wibox
+   s.mywibox:setup {
+      layout = wibox.layout.align.horizontal,
+      expand = "none",
+      left_widgets,
+      right_widgets
    }
 
    -- Create the bottom wibox
