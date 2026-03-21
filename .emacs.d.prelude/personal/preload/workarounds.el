@@ -106,3 +106,6 @@ parses and set DBUS_SESSION_BUS_ADDRES to its expected value."
               (define-key arrow-keys-map "B" 'next-line)
               (define-key arrow-keys-map "C" 'forward-char)
               (define-key arrow-keys-map "D" 'backward-char))))
+
+;; Fix GPG pinentry issues in Emacs (prevents hangs during auth)
+(setq epa-pinentry-mode 'loopback)
