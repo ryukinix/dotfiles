@@ -153,7 +153,6 @@ local cpu = lain.widget.cpu({
 -- Coretemp
 local tempicon = wibox.widget.imagebox(theme.widget_temp)
 local temp = lain.widget.temp({
-      tempfile = "/sys/devices/platform/coretemp.0/hwmon/hwmon0/temp2_input",
       settings = function()
          if coretemp_now ~= "N/A" then
             widget:set_markup(markup.fontfg(theme.font, "#f1af5f", coretemp_now .. "°C "))
