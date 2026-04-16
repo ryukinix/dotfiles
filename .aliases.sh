@@ -605,3 +605,9 @@ extract() {
         *)           echo "error: don't know how to extract '$f'"; return 2 ;;
     esac
 }
+
+reload-sata() {
+    echo "- - -" | sudo tee /sys/class/scsi_host/host*/scan
+}
+
+alias cron-logs="tail -f /var/log/crond.log"
