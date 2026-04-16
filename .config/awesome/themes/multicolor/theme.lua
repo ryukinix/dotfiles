@@ -15,9 +15,9 @@ local net_widgets = require("net_widgets")
 local logout_menu_widget = require("awesome-wm-widgets.logout-menu-widget.logout-menu")
 local calendar_widget = require("awesome-wm-widgets.calendar-widget.calendar")
 local fs_widget = require("awesome-wm-widgets.fs-widget.fs-widget")
-local net_speed_widget = require("awesome-wm-widgets.net-speed-widget.net-speed")
+-- local net_speed_widget = require("awesome-wm-widgets.net-speed-widget.net-speed")
 local battery_widget = require("awesome-wm-widgets.batteryarc-widget.batteryarc")
-local cpu_widget = require("awesome-wm-widgets.cpu-widget.cpu-widget")
+-- local cpu_widget = require("awesome-wm-widgets.cpu-widget.cpu-widget")
 local volume_widget = require('awesome-wm-widgets.volume-widget.volume')
 
 local os    = { getenv = os.getenv, setlocale = os.setlocale }
@@ -226,7 +226,8 @@ function theme.at_screen_connect(s)
          --s.mylayoutbox,
          s.mytaglist,
          s.mypromptbox,
-         cpu_widget(),
+         cpuicon,
+         cpu.widget,
          memicon,
          memory.widget,
          tempicon,
@@ -246,7 +247,6 @@ function theme.at_screen_connect(s)
          volume_widget{
             widget_type = 'arc'
          },
-         net_speed_widget(),
          net_indicator,
          clockicon,
          mytextclock,
