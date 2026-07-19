@@ -1,6 +1,5 @@
 ;;; -*- lexical-binding: t -*-
 ;;; latex.el --- LaTeX and Org-mode PDF exports
-;;; -*- lexical-binding: t -*-
 
 (defcustom lerax-latex-listing 'minted
   "If `lerax-latex-listing' is minted enable syntax highlight"

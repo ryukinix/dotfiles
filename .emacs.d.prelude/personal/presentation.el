@@ -1,6 +1,5 @@
 ;;; -*- lexical-binding: t -*-
 ;;; presentation.el --- Org-present configuration for presentations
-;;; -*- lexical-binding: t -*-
 
 (require 'lerax)
 

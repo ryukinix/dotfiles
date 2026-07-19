@@ -1,6 +1,5 @@
 ;;; -*- lexical-binding: t -*-
 ;;; jekyll.el --- Org to Jekyll publishing setup
-;;; -*- lexical-binding: t -*-
 
 (defcustom lerax-blog-basepath
   (expand-file-name "~/Dropbox/Programming/Projects/Website/ryukinix.github.io")
@@ -71,12 +70,12 @@
 (with-eval-after-load 'org
   (defun org-custom-link-img-follow (path)
     (org-open-file (format "../assets/posts/%s" path)))
-  
+
   (defun org-custom-link-img-export (path desc format)
     (cond
      ((eq format 'html)
       (format "<img src=\"/assets/posts/%s\" alt=\"%s\"/>" path desc))))
-  
+
   (org-link-set-parameters "img"
                            :follow 'org-custom-link-img-follow
                            :export 'org-custom-link-img-export))

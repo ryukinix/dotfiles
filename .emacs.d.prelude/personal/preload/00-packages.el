@@ -1,13 +1,12 @@
 ;;; -*- lexical-binding: t -*-
-;;; 00-packages.el --- Setup Melpa and Ensure packages 
-;;; -*- lexical-binding: t -*-
+;;; 00-packages.el --- Setup Melpa and Ensure packages
 
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/personal/preload"))
 
 (require 'lerax)
 (require 'use-package) ; Native in 29.1+
 
-(lerax-init-melpa)
+; (lerax-init-melpa)
 
 (defun lerax-require-packages-run ()
   (lerax-require-packages

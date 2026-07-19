@@ -1,6 +1,5 @@
 ;;; -*- lexical-binding: t -*-
 ;;; scala.el --- Scala environment configuration
-;;; -*- lexical-binding: t -*-
 
 (require 'lerax)
 

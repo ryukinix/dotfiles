@@ -271,36 +271,6 @@ Missing packages are installed automatically."
   (when (active-minibuffer-window)
     (select-window (active-minibuffer-window))))
 
-(defun lerax-setup-c-mode-make ()
-  "Generate strings for 'compile and 'gud-gdb commands on C/C++ mode"
-  (interactive)
-  (define-key (current-local-map) (kbd "\C-c C-c") 'compile)
-  (define-key (current-local-map) [M-f9] 'gud-gdb)
-  (when buffer-file-name
-    (let* ((file (file-name-nondirectory buffer-file-name))
-          (file-basename (file-name-sans-extension file))
-          (extension (if (eq system-type 'windows-nt) "exe" "bin")))
-      (unless (or (file-exists-p "Makefile") (file-exists-p "makefile"))
-        (set (make-local-variable 'compile-command)
-             ;; emulate make's .c.o implicit pattern rule, but with
-             ;; different defaults for the CC, CPPFLAGS, and CFLAGS
-             ;; variables:
-             ;; $(CC) -c -o $@ $(CPPFLAGS) $(CFLAGS) $<
-             (format "%s -o '%s.%s' %s %s '%s'"
-                     (or (getenv "CC")
-                         (cl-case c-buffer-is-cc-mode
-                           (c++-mode "g++")
-                           (c-mode "gcc")))
-                     file-basename extension
-                     (or (getenv "CPPFLAGS") "-DDEBUG=9")
-                     (or (getenv "CFLAGS") " -Wall -g")
-                     file)))
-      (set (make-local-variable 'gud-gud-gdb-history)
-           (cons (format "gdb --nx --fullname \"%s.%s\"" file-basename extension)
-                 gud-gud-gdb-history))
-      (set (make-local-variable 'gud-gdb-history)
-           (cons (format "gdb --nx -i=mi \"%s.%s\"" file-basename extension)
-                 gud-gdb-history)))))
 
 (defun lerax-python-venv-auto-activate ()
   (interactive)
@@ -312,25 +282,6 @@ Missing packages are installed automatically."
     (when (and (not (string-equal venvpath pyvenv-virtual-env))
                (file-exists-p venvpath))
       (pyvenv-activate venvpath))))
-
-(defun lerax-setup-c-project ()
-  (interactive)
-  (defconst src-path (concat (projectile-project-root) "src/"))
-  (when (file-exists-p src-path)
-    (message "Setup C/C++ project!")
-    (let* ((include-path (list src-path
-                               "/usr/include/SDL2/"))
-           (clang-argument (list
-                            (format "-I%s"
-                                    src-path))))
-      (local-set-key (kbd "\C-c C-c") 'projectile-compile-project)
-      (local-set-key (kbd "<f9>") 'projectile-compile-project)
-      (setq-local flycheck-clang-include-path include-path)
-      (setq-local flycheck-gcc-include-path include-path)
-      (setq-local company-clang-arguments clang-argument)
-      (setq-local company-c-headers-path-user
-                  (append company-c-headers-path-user
-                          include-path)))))
 
 (defun lerax-setup-python-pdb-command ()
   "Set gud-pdb-command-name variable according the file buffer name"

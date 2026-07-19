@@ -1,5 +1,4 @@
 ;;; -*- lexical-binding: t -*-
-;;; -*- lexical-binding: t -*-
 ;;; keybindings.el --- Global personal keybindings
 
 (require 'lerax)

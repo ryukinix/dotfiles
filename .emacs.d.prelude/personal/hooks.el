@@ -41,11 +41,6 @@
          ("C-M-." . godef-jump-other-window))
   :hook (go-mode . (lambda () (whitespace-toggle-options 'lines-tail))))
 
-(use-package cc-mode
-  :defer t
-  :hook ((c-mode-common . lerax-setup-c-mode-make)
-         (c-mode-common . lerax-setup-c-project)))
-
 (use-package pyvenv
   :defer t)
 
