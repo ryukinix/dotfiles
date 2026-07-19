@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t -*-
 ;; configuration about my personal theme
 ;; theme
 

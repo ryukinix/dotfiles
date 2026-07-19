@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t -*-
 ;; -*- lexical-binding: t -*-
 ;; Workarounds: making my packages working on any emacs version
 

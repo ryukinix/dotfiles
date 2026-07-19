@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t -*-
 ;; set all the defaults about coding system to utf-8 with unix endlines
 ;; this is only necessary on windows
 (when (eq system-type 'windows-nt)

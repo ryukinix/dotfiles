@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t -*-
 (defun projectile-todo ()
   (interactive)
   (projectile-ripgrep "\\b(TODO|FIXME)\\b" t))

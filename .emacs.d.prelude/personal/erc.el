@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t -*-
 (with-eval-after-load 'erc
   (require 'erc-join)
   (require 'erc-log)

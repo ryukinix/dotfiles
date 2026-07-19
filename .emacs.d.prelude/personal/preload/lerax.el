@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t -*-
 ;;; lerax.el -- useful macros and functions made by me, Mano.el
 
 ;; Copyright © 2017-2022 Manoel Vilela

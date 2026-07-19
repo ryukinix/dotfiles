@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t -*-
 ;; -*- lexical-binding: t -*-
 
 (require 'ispell)

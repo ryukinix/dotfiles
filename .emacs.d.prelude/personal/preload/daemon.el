@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t -*-
 ;; Start Daemon on system if is not running
 ;; Author: Manoel Vilela
 

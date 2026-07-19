@@ -1,21 +1,19 @@
+;;; -*- lexical-binding: t -*-
+;;; 00-packages.el --- Setup Melpa and Ensure packages 
+;;; -*- lexical-binding: t -*-
+
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/personal/preload"))
 
 (require 'lerax)
-(require 'use-package)
+(require 'use-package) ; Native in 29.1+
 
 (lerax-init-melpa)
 
 (defun lerax-require-packages-run ()
-  ;; NOTE: Sat 20 Jun 2020 05:21:37 PM -03
-  ;; installing: yasnippet-snippets destroy all my software ↓ fuckups everything, please don't do that
-  ;; docker-lerax related bug at bootstraping package install
   (lerax-require-packages
-   '(
-    ;; sly ;; conflict with slime using prelude, see: https://github.com/bbatsov/prelude/issues/1440
-    ;; sly-quicklisp
-     tok-theme ;; for my own light mode
+   '(tok-theme
      gpt
-     ag ;; not sure why I use this package
+     ag
      auctex
      company-c-headers
      company-quickhelp
@@ -34,7 +32,6 @@
      load-env-vars
      multiple-cursors
      neotree
-     nlinum
      notmuch
      org-present
      org-ref
@@ -44,7 +41,6 @@
      pyvenv
      restclient
      simple-modeline
-     slime-company
      slime-company
      ssh-agency
      toc-org
@@ -58,10 +54,13 @@
      yasnippet
      zeal-at-point
      ripgrep
-     )
-   ))
+     ;; treesit local plugins
+     treesit-auto)))
 
 (lerax-require-packages-run)
 (lerax-load-init-env-if-exists)
 
 (setq use-package-always-ensure t)
+
+;; Pre-configure Prelude modules settings for LSP (required on Prelude 2.0 fallback)
+(setq prelude-lsp-client 'lsp-mode) ; Force lsp-mode as fallback if you'd like (though Eglot is default now)
