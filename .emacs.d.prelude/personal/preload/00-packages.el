@@ -63,3 +63,4 @@
 
 ;; Pre-configure Prelude modules settings for LSP (required on Prelude 2.0 fallback)
 (setq prelude-lsp-client 'lsp-mode) ; Force lsp-mode as fallback if you'd like (though Eglot is default now)
+(setq prelude-welcome-screen nil) ; disable welcome screen, I want my scratch buffer!
