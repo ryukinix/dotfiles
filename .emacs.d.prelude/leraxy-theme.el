@@ -9,7 +9,7 @@
  '(tuareg-font-lock-governing-face ((t (:foreground "dodger blue"))))
  '(tuareg-font-lock-governing-face ((t (:foreground "dodger blue"))))
  '(tuareg-font-lock-operator-face ((t (:foreground "dodger blue"))))
- '(orderless-match-face-0 ((t (:foreground "white"))))
+ '(orderless-match-face-0 ((t (:foreground "white" :background "dodger blue"))))
  '(orderless-match-face-1 ((t (:foreground "white"))))
  '(orderless-match-face-2 ((t (:foreground "white"))))
  '(orderless-match-face-3 ((t (:foreground "white"))))
