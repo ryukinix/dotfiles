@@ -9,7 +9,16 @@
 (setq-default tab-width 4)
 (setq python-shell-completion-native-enable nil)
 (setq initial-scratch-message
-      "#  ▓█████  ███▄ ▄███▓ ▄▄▄       ▄████▄    ██████\n# ▓█   ▀ ▓██▒▀█▀ ██▒▒████▄    ▒██▀ ▀█  ▒██    ▒\n# ▒███   ▓██    ▓██░▒██  ▀█▄  ▒▓█    ▄ ░ ▓██▄\n# ▒▓█  ▄ ▒██    ▒██ ░██▄▄▄▄██ ▒▓▓▄ ▄██▒  ▒   ██▒\n# ░▒████▒▒██▒   ░██▒ ▓█   ▓██▒▒ ▓███▀ ░▒██████▒▒\n# ░░ ▒░ ░░ ▒░   ░  ░ ▒▒   ▓▒█░░ ░▒ ▒  ░▒ ▒▓▒ ▒ ░\n# ░ ░  ░░  ░      ░  ▒   ▒▒ ░  ░  ▒   ░ ░▒  ░ ░\n# ░   ░      ░     ░   ▒   ░        ░  ░  ░\n# ░  ░       ░         ░  ░░ ░            ░\n")
+"#  ▓█████  ███▄ ▄███▓ ▄▄▄       ▄████▄    ██████
+# ▓█   ▀ ▓██▒▀█▀ ██▒▒████▄    ▒██▀ ▀█  ▒██    ▒
+# ▒███   ▓██    ▓██░▒██  ▀█▄  ▒▓█    ▄ ░ ▓██▄
+# ▒▓█  ▄ ▒██    ▒██ ░██▄▄▄▄██ ▒▓▓▄ ▄██▒  ▒   ██▒
+# ░▒████▒▒██▒   ░██▒ ▓█   ▓██▒▒ ▓███▀ ░▒██████▒▒
+# ░░ ▒░ ░░ ▒░   ░  ░ ▒▒   ▓▒█░░ ░▒ ▒  ░▒ ▒▓▒ ▒ ░
+# ░ ░  ░░  ░      ░  ▒   ▒▒ ░  ░  ▒   ░ ░▒  ░ ░
+# ░   ░      ░     ░   ▒   ░        ░  ░  ░
+# ░  ░       ░         ░  ░░ ░            ░
+")
 (setq initial-major-mode 'org-mode)
 (global-prettify-symbols-mode +1)
 (setq confirm-nonexistent-file-or-buffer nil)
@@ -117,9 +126,9 @@
   (advice-add 'magit-process-environment :filter-return #'lerax-magit-process-environment))
 
 (use-package git-commit
-  :defer t
+  :demand t
   :config (global-git-commit-mode +1))
-  
+
 (use-package magit-delta
   :if (executable-find "delta")
   :hook (magit-mode . magit-delta-mode))
