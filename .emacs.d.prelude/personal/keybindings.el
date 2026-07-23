@@ -3,6 +3,9 @@
 
 (require 'lerax)
 
+;;; keybindings.el --- Global personal keybindings
+
+
 ;; some functions and useful macros
 (defmacro favorite-dir (path)
   "Retorna um comando interativo para abrir o PATH."
@@ -124,5 +127,18 @@
 
 (global-set-key (kbd "M-<f12>") 'lerax-theme-light-dark-toggle)
 
-(provide 'keybindings)
-;;; keybindings.el ends here
+;; --- From spellchecker.el (global keybindings) ---
+;; HACK: Inside the spellchecker definition these were bound.
+(with-eval-after-load 'ispell
+  ;; enable hunspell shit thing
+  (global-set-key [C-f6]
+                  (lambda ()
+                    (interactive)
+                    (spellchecker:select-spell-program spellchecker:hunspell-name)))
+
+  ;; enable aspell program
+  (global-set-key [C-f5]
+                  (lambda ()
+                    (interactive)
+                    (spellchecker:select-spell-program spellchecker:aspell-name)))
+  (global-set-key [M-f5] 'flyspell-mode))

@@ -1,7 +1,7 @@
 ;;; -*- lexical-binding: t -*-
 ;;; lerax.el -- useful macros and functions made by me, Mano.el
 
-;; Copyright © 2017-2022 Manoel Vilela
+;; Copyright © 2017-2026 Manoel Vilela
 ;;
 ;; Author: Manoel Vilela <manoel_vilela@engineer.com>
 ;; URL: https://github.com/ryukinix/dotfiles

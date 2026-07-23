@@ -110,3 +110,13 @@ parses and set DBUS_SESSION_BUS_ADDRES to its expected value."
 
 ;; Fix GPG pinentry issues in Emacs (prevents hangs during auth)
 (setq epa-pinentry-mode 'loopback)
+
+(when (eq system-type 'windows-nt)
+  (prefer-coding-system 'utf-8-unix)
+  (set-default-coding-systems 'utf-8-unix)
+  (set-terminal-coding-system 'utf-8-unix)
+  (set-keyboard-coding-system 'utf-8-unix)
+  (setq-default buffer-file-coding-system 'utf-8-unix)
+
+  ;; Treat clipboard input as UTF-8 string first; compound text next, etc.
+  (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING)))
