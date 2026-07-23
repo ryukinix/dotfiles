@@ -3,7 +3,256 @@
 
 (require 'lerax)
 
-;; --- From modes.el (use-package blocks) ---
+;; C-x C-d from helm needs replacement for Vertico, map to project-find-dir
+(global-set-key (kbd "C-x C-d") 'project-find-dir)
+
+;;; UI & Editing
+
+(use-package multiple-cursors
+  :bind (("C-S-<mouse-1>" . mc/add-cursor-on-click)
+         ("C-M->" . mc/mark-next-like-this)
+         ("C-M-<" . mc/mark-previous-like-this)
+         ("C->" . mc/mark-next-like-this-word)
+         ("C-<" . mc/mark-previous-like-this-word)
+         ("C-S-l" . mc/edit-lines)
+         ("C-ç" . mc/skip-to-next-like-this)
+         ("C-M-ç" . mc/skip-to-previous-like-this)
+         ("C-c C->" . mc/mark-all-like-this)
+         ("C-c C-<" . mc/mark-all-like-this)
+         ("C-c <" . mc/mark-previous-like-this-word)
+         ("C-c >" . mc/mark-next-like-this-word))
+  :config
+  (setq mc/always-run-for-all '(crux-kill-whole-line
+                                forward-sentence
+                                sp-backward-delete-char
+                                sp-delete-char
+                                sp-forward-sexp
+                                sp-kill-word))
+  (setq mc/cmds-to-run-once '(execute-extended-command)))
+
+(use-package darkroom
+  :bind ("<S-f11>" . darkroom-tentative-mode)
+  :hook (darkroom-tentative-mode . (lambda () (setq-local truncate-lines t)))
+  :config (setq-default darkroom-text-scale-increase 1.2))
+
+(use-package visual-fill-column
+  :defer t
+  :config
+  (setq-default visual-fill-column-center-text t)
+  (setq visual-fill-column-width 110
+        visual-fill-column-center-text t))
+
+(use-package smartparens
+  :demand t
+  :config
+  (sp-use-paredit-bindings))
+
+(use-package wakatime-mode
+  :demand t
+  :if (package-installed-p 'wakatime-mode)
+  :config (global-wakatime-mode))
+
+(use-package emacs
+  :demand t
+  :hook (after-make-frame-functions . lerax-set-emoji-font)
+  :config
+  (defun lerax-set-emoji-font (frame)
+    "Adjust the font settings of FRAME so Emacs can display emoji properly."
+    (when (fboundp 'set-fontset-font)
+      (if (eq system-type 'darwin)
+          (set-fontset-font t 'symbol (font-spec :family "Apple Color Emoji") frame 'prepend)
+        (set-fontset-font t 'symbol (font-spec :family "Symbola") frame 'prepend))))
+  (lerax-set-emoji-font nil))
+
+;;; Project & Tools
+
+(use-package treemacs
+  :bind (("C-x t" . treemacs)
+         ("C-x T" . (lambda ()
+                      (interactive)
+                      (let* ((workspace (treemacs-current-workspace))
+                             (current-project (string-trim-right (projectile-project-root) "\/"))
+                             (projects (treemacs-workspace->projects workspace)))
+                        (unless (cl-find current-project (mapcar #'treemacs-project->path projects) :test #'equal)
+                          (condition-case nil
+                              (progn
+                                (treemacs-add-project-to-workspace current-project)
+                                (message "treemacs project added: '%s'" current-project))
+                            (error nil)))
+                        (treemacs--follow)
+                        (treemacs)))))
+  :config
+  (define-key treemacs-mode-map [drag-mouse-1] nil))
+
+(use-package neotree
+  :bind (("C-x y" . neotree-toggle)
+         ("C-x Y" . (lambda () (interactive) (neotree-refresh) (neotree)))))
+
+(use-package projectile
+  :bind (("C-c p" . projectile-command-map)
+         ("<f9>" . projectile-compile-project)
+         ("M-<f9>" . projectile-test-project)
+         :map projectile-mode-map
+         ("C-c C-p" . nil))
+  :demand t
+  :config
+  (custom-set-default 'projectile-keymap-prefix (kbd "C-c p"))
+
+  (defun projectile-todo ()
+    (interactive)
+    (projectile-ripgrep "\\b(TODO|FIXME)\\b" t))
+
+  (defun projectile-todo-all ()
+    (interactive)
+    (let ((pattern (string-join (map 'list 'car hl-todo-keyword-faces) "|")))
+      (projectile-ripgrep (format "\\b(%s)\\b"pattern) t))))
+
+(use-package magit
+  :demand t
+  :config
+  (setq magit-blame-echo-style 'headings)
+  (defun lerax-dotfiles () (interactive) (magit "~/"))
+  (defun lerax-magit-process-environment (env)
+    (when (equal default-directory (expand-file-name "~/"))
+     (let* ((default (file-name-as-directory (expand-file-name default-directory)))
+            (git-dir (expand-file-name "~/.dot/"))
+            (work-tree (expand-file-name "~/")))
+       (push (format "GIT_WORK_TREE=%s" work-tree) env)
+       (push (format "GIT_DIR=%s" git-dir) env)))
+    env)
+  (advice-add 'magit-process-environment :filter-return #'lerax-magit-process-environment))
+
+(use-package git-commit
+  :demand t
+  :config (global-git-commit-mode +1))
+
+(use-package magit-delta
+  :if (executable-find "delta")
+  :hook (magit-mode . magit-delta-mode))
+
+(use-package yasnippet
+  :demand t
+  :config (yas-global-mode +1)
+  :bind (:map yas-minor-mode-map
+         ("C-<return>" . yas-expand)
+         ("M-<return>" . yas-insert-snippet)))
+
+(use-package vterm
+  :defer t
+  :bind ("C-c T" . vterm))
+
+(use-package zeal-at-point
+  :defer t
+  :bind ("C-z" . zeal-at-point))
+
+(use-package xclip
+  :demand t
+  :if (executable-find "xclip")
+  :config (xclip-mode +1))
+
+;;; Languages & Development
+
+(use-package python
+  :bind (:map inferior-python-mode-map
+              ("C-c C-z" . other-window))
+  :hook ((python-mode . lerax-python-venv-auto-activate)
+         (python-mode . pyvenv-mode))
+  :config
+  (setq python-shell-completion-native-enable nil)
+  (when (package-installed-p 'python-black)
+    (define-key python-mode-map (kbd "C-c C-f") 'python-black-buffer)))
+(use-package go-mode
+  :defer t
+  :bind (:map go-mode-map
+         ("M-." . godef-jump)
+         ("C-M-." . godef-jump-other-window))
+  :hook (go-mode . (lambda () (whitespace-toggle-options 'lines-tail))))
+
+(use-package scala-mode
+  :defer t
+  :hook ((scala-mode . eglot-ensure)
+         (scala-mode . (lambda ()
+                         (whitespace-toggle-options 'lines-tail)
+                         (setq-local flycheck-check-syntax-automatically
+                                     '(save idle-change new-line mode-enabled)))))
+  :config
+  (defun scalafmt ()
+    (interactive)
+    (let ((command "scalafmt")
+          (current-file (buffer-file-name (current-buffer))))
+      (shell-command (format "%s %s" command current-file)))))
+
+(use-package sbt-mode
+  :defer t
+  :commands (sbt-start sbt-command)
+  :config
+  ;; WORKAROUND: https://github.com/ensime/emacs-sbt-mode/issues/31
+  (substitute-key-definition
+   'minibuffer-complete-word
+   'self-insert-command
+   minibuffer-local-completion-map)
+  ;; sbt-supershell kills sbt-mode: https://github.com/hvesalai/emacs-sbt-mode/issues/152
+  (setq sbt:program-options '("-Dsbt.supershell=false")))
+
+(use-package geiser
+  :config
+  (setq-default geiser-chicken-binary "chicken-csi")
+  (setq-default geiser-active-implementations '(chicken racket guile chez mit chibi))
+  (add-hook 'geiser-repl-mode-hook #'smartparens-mode))
+
+(use-package slime
+  :demand t
+  :config
+  (slime-setup '(slime-asdf slime-quicklisp slime-fancy)))
+
+(use-package slime-repl
+  :after slime
+  :ensure nil
+  :defer t
+  :bind (:map slime-repl-mode-map
+         ("C-c C-z" . (lambda () (interactive) (select-window (previous-window))))))
+
+(use-package lisp-interaction-mode
+  :ensure nil
+  :defer t
+  :bind (:map lisp-interaction-mode-map
+         ("C-c C-z" . prelude-visit-ielm)))
+
+;; C-x C-d from helm needs replacement for Vertico, map to project-find-dir
+(global-set-key (kbd "C-x C-d") 'project-find-dir)
+
+(use-package gud
+  :defer t)
+
+(use-package compile
+  :defer t)
+
+(use-package gdb-mi
+  :defer t)
+
+(use-package pyvenv
+  :defer t)
+
+(use-package flycheck
+  :demand t
+  :config
+  (remove-hook 'python-mode-hook 'pylint-add-menu-items)
+  (remove-hook 'python-mode-hook 'pylint-add-key-bindings)
+  (setq-default flycheck-disabled-checkers '(python-pylint emacs-lisp-checkdoc))
+  (setq-default flycheck-scheme-chicken-executable "chicken-csc"))
+
+(use-package with-editor
+  :defer t
+  :hook (with-editor-mode . (lambda () (whitespace-toggle-options 'tabs))))
+
+(use-package markdown-mode
+  :defer t
+  :hook (markdown-mode . (lambda ()
+                           (whitespace-toggle-options 'lines-tail)
+                           (auto-fill-mode))))
+
+;;; Applications (Org, Mail, Chat, AI)
+
 (use-package org
   :demand t
   :bind (("<f9>" . org-latex-export-to-pdf)
@@ -63,236 +312,6 @@
   :config
   (require 'ox-beamer))
 
-(use-package python
-  :bind (:map inferior-python-mode-map
-         ("C-c C-z" . other-window))
-  :config
-  (setq python-shell-completion-native-enable nil)
-  (when (package-installed-p 'python-black)
-    (define-key python-mode-map (kbd "C-c C-f") 'python-black-buffer)))
-
-(use-package wakatime-mode
-  :demand t
-  :if (package-installed-p 'wakatime-mode)
-  :config (global-wakatime-mode))
-
-(use-package xclip
-  :demand t
-  :if (executable-find "xclip")
-  :config (xclip-mode +1))
-
-(use-package flycheck
-  :demand t
-  :config
-  (remove-hook 'python-mode-hook 'pylint-add-menu-items)
-  (remove-hook 'python-mode-hook 'pylint-add-key-bindings)
-  (setq-default flycheck-disabled-checkers '(python-pylint emacs-lisp-checkdoc))
-  (setq-default flycheck-scheme-chicken-executable "chicken-csc"))
-
-(use-package geiser
-  :config
-  (setq-default geiser-chicken-binary "chicken-csi")
-  (setq-default geiser-active-implementations '(chicken racket guile chez mit chibi))
-  (add-hook 'geiser-repl-mode-hook #'smartparens-mode))
-
-(use-package magit
-  :demand t
-  :config
-  (setq magit-blame-echo-style 'headings)
-  (defun lerax-dotfiles () (interactive) (magit "~/"))
-  (defun lerax-magit-process-environment (env)
-    (when (equal default-directory (expand-file-name "~/"))
-     (let* ((default (file-name-as-directory (expand-file-name default-directory)))
-            (git-dir (expand-file-name "~/.dot/"))
-            (work-tree (expand-file-name "~/")))
-       (push (format "GIT_WORK_TREE=%s" work-tree) env)
-       (push (format "GIT_DIR=%s" git-dir) env)))
-    env)
-  (advice-add 'magit-process-environment :filter-return #'lerax-magit-process-environment))
-
-(use-package git-commit
-  :demand t
-  :config (global-git-commit-mode +1))
-
-(use-package magit-delta
-  :if (executable-find "delta")
-  :hook (magit-mode . magit-delta-mode))
-
-(use-package multiple-cursors
-  :bind (("C-S-<mouse-1>" . mc/add-cursor-on-click)
-         ("C-M->" . mc/mark-next-like-this)
-         ("C-M-<" . mc/mark-previous-like-this)
-         ("C->" . mc/mark-next-like-this-word)
-         ("C-<" . mc/mark-previous-like-this-word)
-         ("C-S-l" . mc/edit-lines)
-         ("C-ç" . mc/skip-to-next-like-this)
-         ("C-M-ç" . mc/skip-to-previous-like-this)
-         ("C-c C->" . mc/mark-all-like-this)
-         ("C-c C-<" . mc/mark-all-like-this)
-         ("C-c <" . mc/mark-previous-like-this-word)
-         ("C-c >" . mc/mark-next-like-this-word))
-  :config
-  (setq mc/always-run-for-all '(crux-kill-whole-line
-                                forward-sentence
-                                sp-backward-delete-char
-                                sp-delete-char
-                                sp-forward-sexp
-                                sp-kill-word))
-  (setq mc/cmds-to-run-once '(execute-extended-command)))
-
-(use-package treemacs
-  :bind (("C-x t" . treemacs)
-         ("C-x T" . (lambda ()
-                      (interactive)
-                      (let* ((workspace (treemacs-current-workspace))
-                             (current-project (string-trim-right (projectile-project-root) "\/"))
-                             (projects (treemacs-workspace->projects workspace)))
-                        (unless (cl-find current-project (mapcar #'treemacs-project->path projects) :test #'equal)
-                          (condition-case nil
-                              (progn
-                                (treemacs-add-project-to-workspace current-project)
-                                (message "treemacs project added: '%s'" current-project))
-                            (error nil)))
-                        (treemacs--follow)
-                        (treemacs)))))
-  :config
-  (define-key treemacs-mode-map [drag-mouse-1] nil))
-
-(use-package neotree
-  :bind (("C-x y" . neotree-toggle)
-         ("C-x Y" . (lambda () (interactive) (neotree-refresh) (neotree)))))
-
-(use-package darkroom
-  :bind ("<S-f11>" . darkroom-tentative-mode)
-  :hook (darkroom-tentative-mode . (lambda () (setq-local truncate-lines t)))
-  :config (setq-default darkroom-text-scale-increase 1.2))
-
-(use-package projectile
-  :bind (("C-c p" . projectile-command-map)
-         ("<f9>" . projectile-compile-project)
-         ("M-<f9>" . projectile-test-project)
-         :map projectile-mode-map
-         ("C-c C-p" . nil))
-  :demand t
-  :config
-  (custom-set-default 'projectile-keymap-prefix (kbd "C-c p"))
-
-  (defun projectile-todo ()
-    (interactive)
-    (projectile-ripgrep "\\b(TODO|FIXME)\\b" t))
-
-  (defun projectile-todo-all ()
-    (interactive)
-    (let ((pattern (string-join (map 'list 'car hl-todo-keyword-faces) "|")))
-      (projectile-ripgrep (format "\\b(%s)\\b"pattern) t))))
-
-(use-package slime
-  :demand t
-  :config
-  (slime-setup '(slime-asdf slime-quicklisp slime-fancy)))
-
-(use-package slime-repl
-  :after slime
-  :ensure nil
-  :defer t
-  :bind (:map slime-repl-mode-map
-         ("C-c C-z" . (lambda () (interactive) (select-window (previous-window))))))
-
-(use-package yasnippet
-  :demand t
-  :config (yas-global-mode +1)
-  :bind (:map yas-minor-mode-map
-         ("C-<return>" . yas-expand)
-         ("M-<return>" . yas-insert-snippet)))
-
-
-(use-package vterm
-  :defer t
-  :bind ("C-c T" . vterm))
-
-(use-package zeal-at-point
-  :defer t
-  :bind ("C-z" . zeal-at-point))
-
-(use-package lisp-interaction-mode
-  :ensure nil
-  :defer t
-  :bind (:map lisp-interaction-mode-map
-         ("C-c C-z" . prelude-visit-ielm)))
-
-;; C-x C-d from helm needs replacement for Vertico, map to project-find-dir
-(global-set-key (kbd "C-x C-d") 'project-find-dir)
-
-;; --- From hooks.el (use-package rewrites) ---
-(use-package gud
-  :defer t)
-(use-package compile
-  :defer t)
-(use-package gdb-mi
-  :defer t)
-
-(use-package with-editor
-  :defer t
-  :hook (with-editor-mode . (lambda () (whitespace-toggle-options 'tabs))))
-
-(use-package go-mode
-  :defer t
-  :bind (:map go-mode-map
-         ("M-." . godef-jump)
-         ("C-M-." . godef-jump-other-window))
-  :hook (go-mode . (lambda () (whitespace-toggle-options 'lines-tail))))
-
-(use-package pyvenv
-  :defer t)
-
-(use-package python
-  :defer t
-  :hook ((python-mode . lerax-python-venv-auto-activate)
-         (python-mode . pyvenv-mode)))
-
-
-(use-package markdown-mode
-  :defer t
-  :hook (markdown-mode . (lambda ()
-                           (whitespace-toggle-options 'lines-tail)
-                           (auto-fill-mode))))
-
-;; --- From erc.el ---
-(with-eval-after-load 'erc
-  (require 'erc-join)
-  (require 'erc-log)
-  (add-to-list 'erc-modules 'log)
-  (add-to-list 'erc-modules 'notifications) ;; enable notifications -- only if have dbus
-  (erc-update-modules)
-
-  ; (setq erc-fill-function 'erc-fill-static)
-  ; (setq erc-fill-static-center 22)
-  (setq erc-hide-list '("JOIN" "PART" "QUIT"))
-  (setq erc-lurker-hide-list '("JOIN" "PART" "QUIT"))
-  (setq erc-lurker-threshold-time 43200)
-  (setq erc-prompt-for-nickserv-password nil)
-  (setq erc-prompt-for-password nil)
-  (setq erc-prompt-for-channel-key nil)
-  (setq erc-server-reconnect-attempts 5)
-  (setq erc-server-reconnect-timeout 3)
-  (setq erc-track-exclude-types
-        '("JOIN" "MODE" "NICK" "PART" "QUIT"
-          "324" "329" "332" "333" "353" "477"))
-  (setq erc-log-write-after-insert t)
-  (setq erc-log-write-after-send t)
-  (setq erc-log-insert-log-on-open t)
-  (setq erc-default-server "irc.libera.chat")
-  (setq erc-prompt "λ>")
-  (setq erc-nick '("lerax" "ryukinix"))
-  (setq erc-save-buffer-on-part nil)
-  (setq erc-save-queries-on-quit nil)
-  (erc-autojoin-mode +1)
-  (setq erc-autojoin-channels-alist
-        '(("libera.chat" "#emacs-social" "#lisp" "#linux" "#emacs")
-          ("oftc.net" "#bolhadev"))
-        erc-autojoin-timing 'ident
-        erc-autojoin-delay 10))
-
 (use-package erc-hl-nicks
   :after erc)
 
@@ -306,86 +325,6 @@
   (erc-tls :server "irc.oftc.net"
            :nick "ryukinix"
            :port 6697))
-
-;; --- From find-header.el ---
-;;; find-header.el --- Find header of C/C++ files
-;; Author: Tatsuhiko Kubo
-;; This elisp can open header file on current line.
-
-;; This program is free software; you can redistribute it and/or modify
-;; it under the terms of the GNU General Public License as published by
-;; the Free Software Foundation; either version 2, or (at your option)
-;; any later version.
-
-
-;;; Commentary:
-;; This is useful as fuck, but would be nice bind the M-, to go back
-;; on stack pointer cursor.  That way calling nested find-header
-;; would not be messy.
-
-(require 'cc-mode)
-;;; Code:
-
-(setq-default find-header-file-header-file-prefixes (list "/usr/include/"
-                                                          "/usr/local/include/"
-                                                          "/usr/local/gcc-15.2.0/include/c++/15.2.0/"))
-
-(defun find-header-file-current-char ()
-  "Get the next char after point and return as string."
-  (char-to-string (char-after (point))))
-
-(defun find-header-file-current-line-string ()
-  "Get current line as string."
-  (let ((line-string ""))
-    (save-excursion
-      (while (not (bolp))
-       (backward-char))
-      (while (not (eolp))
-       (setq line-string (concat line-string (find-header-file-current-char)))
-       (forward-char)))
-    line-string))
-
-(defun find-header-file-buffer-on-path (prefix-list filename)
-  "Get path of the header from PREFIX-LIST paths based on FILENAME string."
-  (if (null (car prefix-list))
-      nil
-    (if (file-exists-p (concat (car prefix-list) filename))
-       (find-file-noselect (concat (car prefix-list) filename))
-      (find-header-file-buffer-on-path (cdr prefix-list) filename))))
-
-(defun find-header-file ()
-  "Open the buffer of the current cursor line header."
-  (interactive)
-  (let ((current-line-string (find-header-file-current-line-string))
-        (header-file-buffer nil))
-    (cond ((string-match "^\\s-*#\\s-*include\\s-*<\\s-*\\([^< ]+\\)\\s-*>" current-line-string)
-           (let ((header-file-path (match-string 1 current-line-string)))
-             (setq header-file-buffer (find-header-file-buffer-on-path find-header-file-header-file-prefixes
-                                                                       header-file-path))))
-          ((string-match "^\\s-*#\\s-*include\\s-*\"\\([^\"]+\\)\"\\s-*" current-line-string)
-           (let* ((header-file-path (match-string 1 current-line-string))
-                  (buffer           (if (file-exists-p (concat default-directory header-file-path))
-                                        (find-file-noselect (concat default-directory header-file-path))
-                                      nil)))
-             (setq header-file-buffer buffer)
-             (if (null header-file-buffer)
-                 (setq header-file-buffer (find-header-file-buffer-on-path find-header-file-header-file-prefixes
-                                                                           header-file-path))
-               nil)))
-          (t nil))
-    (if (null header-file-buffer)
-        (message "not found header file")
-      (prog2 (xref-push-marker-stack)
-       (switch-to-buffer header-file-buffer)))))
-
-;; binding keys for C and C++ to C-c C-. on `find-header-file' function
-(cl-loop for mode in (list c++-mode-map c-mode-map)
-         do (progn
-              (define-key mode (kbd "M-s-.") 'find-header-file)
-              (define-key mode (kbd "M-s-,") 'xref-go-back)))
-
-;; --- From gpt.el ---
-;;; gpt.el --- AI and GPT integrations
 
 (use-package gptel
   :defer t
@@ -404,15 +343,6 @@
   :config
   (setq agent-shell-google-authentication
         (agent-shell-google-make-authentication :api-key (lambda () (getenv "GEMINI_KEY")))))
-
-;; --- From jekyll.el ---
-;;; jekyll.el --- Org to Jekyll publishing setup
-
-(defcustom lerax-blog-basepath
-  (expand-file-name "~/Dropbox/Programming/Projects/Website/ryukinix.github.io")
-  "My blog base path"
-  :group 'lerax
-  :type 'string)
 
 (use-package toc-org
   :hook (org-mode . toc-org-enable))
@@ -481,36 +411,6 @@
 
 (add-hook 'htmlize-before-hook #'fix-tuareg-background-at-export)
 
-;; --- From latex.el ---
-;;; latex.el --- LaTeX and Org-mode PDF exports
-
-(defcustom lerax-latex-listing 'minted
-  "If `lerax-latex-listing' is minted enable syntax highlight"
-  :group 'lerax
-  :type 'symbol)
-
-
-
-(defun clean-export-pdf (&rest _)
-  (let* ((fname (file-name-base (buffer-name)))
-        (pattern (format "%s.!(pdf|org)" fname))
-        (cmd (format "bash -c 'shopt -s extglob; rm -rf %s &'" pattern)))
-   (call-process-shell-command cmd nil 0)))
-
-(advice-add 'org-latex-export-to-pdf :after #'clean-export-pdf)
-(advice-add 'org-beamer-export-to-pdf :after #'clean-export-pdf)
-
-;; --- From presentation.el ---
-;;; presentation.el --- Org-present configuration for presentations
-
-
-(use-package visual-fill-column
-  :defer t
-  :config
-  (setq-default visual-fill-column-center-text t)
-  (setq visual-fill-column-width 110
-        visual-fill-column-center-text t))
-
 (use-package org-present
   :defer t
   :bind (:map org-mode-map
@@ -545,42 +445,6 @@
     (visual-fill-column-mode 0)
     (visual-line-mode 0)))
 
-;; --- From scala.el ---
-;;; scala.el --- Scala environment configuration
-
-
-(use-package sbt-mode
-  :defer t
-  :commands (sbt-start sbt-command)
-  :config
-  ;; WORKAROUND: https://github.com/ensime/emacs-sbt-mode/issues/31
-  (substitute-key-definition
-   'minibuffer-complete-word
-   'self-insert-command
-   minibuffer-local-completion-map)
-  ;; sbt-supershell kills sbt-mode: https://github.com/hvesalai/emacs-sbt-mode/issues/152
-  (setq sbt:program-options '("-Dsbt.supershell=false")))
-
-(use-package scala-mode
-  :defer t
-  :hook ((scala-mode . eglot-ensure)
-         (scala-mode . (lambda ()
-                         (whitespace-toggle-options 'lines-tail)
-                         (setq-local flycheck-check-syntax-automatically
-                                     '(save idle-change new-line mode-enabled)))))
-  :config
-  (defun scalafmt ()
-    (interactive)
-    (let ((command "scalafmt")
-          (current-file (buffer-file-name (current-buffer))))
-      (shell-command (format "%s %s" command current-file)))))
-
-(use-package smartparens
-  :demand t
-  :config
-  (sp-use-paredit-bindings))
-
-;; --- Email Configuration ---
 (use-package notmuch
   :demand t
   :config
@@ -596,20 +460,6 @@
         message-send-mail-function 'message-smtpmail-send-it
         smtpmail-debug-info t))
 
-;; --- Emoji Configuration ---
-(use-package emacs
-  :demand t
-  :hook (after-make-frame-functions . lerax-set-emoji-font)
-  :config
-  (defun lerax-set-emoji-font (frame)
-    "Adjust the font settings of FRAME so Emacs can display emoji properly."
-    (when (fboundp 'set-fontset-font)
-      (if (eq system-type 'darwin)
-          (set-fontset-font t 'symbol (font-spec :family "Apple Color Emoji") frame 'prepend)
-        (set-fontset-font t 'symbol (font-spec :family "Symbola") frame 'prepend))))
-  (lerax-set-emoji-font nil))
-
-;; --- Spellchecker Configuration ---
 (use-package ispell
   :demand t
   :config
@@ -639,3 +489,62 @@
 
   (when (eq system-type 'gnu/linux)
     (spellchecker:activate)))
+
+(with-eval-after-load 'erc
+  (require 'erc-join)
+  (require 'erc-log)
+  (add-to-list 'erc-modules 'log)
+  (add-to-list 'erc-modules 'notifications) ;; enable notifications -- only if have dbus
+  (erc-update-modules)
+
+  ; (setq erc-fill-function 'erc-fill-static)
+  ; (setq erc-fill-static-center 22)
+  (setq erc-hide-list '("JOIN" "PART" "QUIT"))
+  (setq erc-lurker-hide-list '("JOIN" "PART" "QUIT"))
+  (setq erc-lurker-threshold-time 43200)
+  (setq erc-prompt-for-nickserv-password nil)
+  (setq erc-prompt-for-password nil)
+  (setq erc-prompt-for-channel-key nil)
+  (setq erc-server-reconnect-attempts 5)
+  (setq erc-server-reconnect-timeout 3)
+  (setq erc-track-exclude-types
+        '("JOIN" "MODE" "NICK" "PART" "QUIT"
+          "324" "329" "332" "333" "353" "477"))
+  (setq erc-log-write-after-insert t)
+  (setq erc-log-write-after-send t)
+  (setq erc-log-insert-log-on-open t)
+  (setq erc-default-server "irc.libera.chat")
+  (setq erc-prompt "λ>")
+  (setq erc-nick '("lerax" "ryukinix"))
+  (setq erc-save-buffer-on-part nil)
+  (setq erc-save-queries-on-quit nil)
+  (erc-autojoin-mode +1)
+  (setq erc-autojoin-channels-alist
+        '(("libera.chat" "#emacs-social" "#lisp" "#linux" "#emacs")
+          ("oftc.net" "#bolhadev"))
+        erc-autojoin-timing 'ident
+        erc-autojoin-delay 10))
+
+(defcustom lerax-latex-listing 'minted
+  "If `lerax-latex-listing' is minted enable syntax highlight"
+  :group 'lerax
+  :type 'symbol)
+
+(defun clean-export-pdf (&rest _)
+  (let* ((fname (file-name-base (buffer-name)))
+        (pattern (format "%s.!(pdf|org)" fname))
+        (cmd (format "bash -c 'shopt -s extglob; rm -rf %s &'" pattern)))
+   (call-process-shell-command cmd nil 0)))
+
+(advice-add 'org-latex-export-to-pdf :after #'clean-export-pdf)
+(advice-add 'org-beamer-export-to-pdf :after #'clean-export-pdf)
+
+(defcustom lerax-blog-basepath
+  (expand-file-name "~/Dropbox/Programming/Projects/Website/ryukinix.github.io")
+  "My blog base path"
+  :group 'lerax
+  :type 'string)
+
+
+
+;;; Miscellaneous
