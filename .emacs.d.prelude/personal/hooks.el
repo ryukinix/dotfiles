@@ -47,7 +47,6 @@
 (use-package python
   :defer t
   :hook ((python-mode . lerax-python-venv-auto-activate)
-         (python-mode . lerax-setup-python-pdb-command)
          (python-mode . pyvenv-mode)))
 
 (use-package org

@@ -283,15 +283,6 @@ Missing packages are installed automatically."
                (file-exists-p venvpath))
       (pyvenv-activate venvpath))))
 
-(defun lerax-setup-python-pdb-command ()
-  "Set gud-pdb-command-name variable according the file buffer name"
-  (define-key (current-local-map) [M-f9] 'pdb)
-  (when buffer-file-name
-    (set (make-local-variable 'gud-pdb-history)
-         (let ((file (file-name-nondirectory buffer-file-name)))
-           (cons (format "python -m pdb %s" file)
-                 gud-pdb-history)))))
-
 (defun lerax-setup-terminal-session (&optional frame)
   "SETUP-TERMINAL-SESSION fix wrong theme colors in terminal frame."
   (interactive) ;; make callable as command by M-x
