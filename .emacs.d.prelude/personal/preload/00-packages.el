@@ -14,12 +14,9 @@
      gpt
      ag
      auctex
-     company-c-headers
-     company-quickhelp
      cov
      darkroom
      doom-themes
-     flycheck
      gif-screencast
      git-modes
      helm-bibtex
@@ -40,7 +37,6 @@
      pyvenv
      restclient
      simple-modeline
-     slime-company
      ssh-agency
      toc-org
      treemacs
@@ -61,6 +57,4 @@
 
 (setq use-package-always-ensure t)
 
-;; Pre-configure Prelude modules settings for LSP (required on Prelude 2.0 fallback)
-(setq prelude-lsp-client 'lsp-mode) ; Force lsp-mode as fallback if you'd like (though Eglot is default now)
 (setq prelude-welcome-screen nil) ; disable welcome screen, I want my scratch buffer!
