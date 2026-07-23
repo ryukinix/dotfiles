@@ -13,5 +13,11 @@
                         :key (getenv "GEMINI_KEY")
                         :stream t)))
 
+(use-package agent-shell
+  :ensure t
+  :config
+  (setq agent-shell-google-authentication
+        (agent-shell-google-make-authentication :api-key (lambda () (getenv "GEMINI_KEY")))))
+
 (provide 'gpt)
 ;;; gpt.el ends here
