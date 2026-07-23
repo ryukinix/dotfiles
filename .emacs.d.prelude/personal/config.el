@@ -148,9 +148,13 @@
   :config
   (custom-set-default 'projectile-keymap-prefix (kbd "C-c p")))
 
-(use-package slime)
+(use-package slime
+  :demand t
+  :config
+  (slime-setup '(slime-asdf slime-quicklisp slime-fancy)))
 
 (use-package slime-repl
+  :after slime
   :ensure nil
   :defer t
   :bind (:map slime-repl-mode-map
