@@ -5,29 +5,54 @@
 
 ;; --- From modes.el (use-package blocks) ---
 (use-package org
+  :demand t
   :bind (("<f9>" . org-latex-export-to-pdf)
          ("C-M-<return>" . (lambda ()
                              (interactive)
                              (end-of-buffer)
                              (org-insert-heading)
                              (crux-insert-date))))
+  :hook (org-mode . (lambda ()
+                      (whitespace-toggle-options 'lines-tail)
+                      (auto-fill-mode)))
   :config
+  ;; Base requires
   (require 'org-mouse)
   (require 'org-agenda)
-  (setq org-src-fontify-natively t)
-  (setq org-todo-keywords '((sequence "TODO" "IN-PROGRESS" "WAITING" "DONE")))
+
+  ;; Babel configuration
   (org-babel-do-load-languages 'org-babel-load-languages
                                '((emacs-lisp . t)
                                  (python . t)
-                                 (shell . t))))
+                                 (shell . t)))
 
-(with-eval-after-load 'org
-  (require 'ox-gfm nil t)
+  ;; Base UI/Keywords
+  (setq org-src-fontify-natively t)
+  (setq org-todo-keywords '((sequence "TODO" "IN-PROGRESS" "WAITING" "DONE")))
+
+  ;; LaTeX and Exporting Overrides
+  (require 'ox-latex)
+  (require 'oc-biblatex)
+  (require 'oc-natbib)
+  (require 'oc-csl)
   (require 'ob-latex)
-  (setq org-latex-listings 'minted)
-  (setq org-latex-minted-options '(("frame" "lines") ("linenos" "true"))
+  (require 'ox-gfm nil t)
+  (setq org-latex-listings (or (bound-and-true-p lerax-latex-listing) 'minted))
+  (setq org-latex-minted-options '(("frame" "lines")
+                                   ("linenos" "true"))
         org-preview-latex-default-process 'imagemagick)
-  (plist-put org-format-latex-options :scale 1.2))
+  (plist-put org-format-latex-options :scale 1.2)
+
+  ;; Jekyll Custom Links Overrides
+  (defun org-custom-link-img-follow (path)
+    (org-open-file (format "../assets/posts/%s" path)))
+  (defun org-custom-link-img-export (path desc format)
+    (cond
+     ((eq format 'html)
+      (format "<img src=\"/assets/posts/%s\" alt=\"%s\"/>" path desc))))
+  (org-link-set-parameters "img"
+                           :follow 'org-custom-link-img-follow
+                           :export 'org-custom-link-img-export))
 
 (use-package ox-beamer
   :ensure nil
@@ -47,14 +72,17 @@
     (define-key python-mode-map (kbd "C-c C-f") 'python-black-buffer)))
 
 (use-package wakatime-mode
+  :demand t
   :if (package-installed-p 'wakatime-mode)
   :config (global-wakatime-mode))
 
 (use-package xclip
+  :demand t
   :if (executable-find "xclip")
   :config (xclip-mode +1))
 
 (use-package flycheck
+  :demand t
   :config
   (remove-hook 'python-mode-hook 'pylint-add-menu-items)
   (remove-hook 'python-mode-hook 'pylint-add-key-bindings)
@@ -145,8 +173,18 @@
          ("M-<f9>" . projectile-test-project)
          :map projectile-mode-map
          ("C-c C-p" . nil))
+  :demand t
   :config
-  (custom-set-default 'projectile-keymap-prefix (kbd "C-c p")))
+  (custom-set-default 'projectile-keymap-prefix (kbd "C-c p"))
+
+  (defun projectile-todo ()
+    (interactive)
+    (projectile-ripgrep "\\b(TODO|FIXME)\\b" t))
+
+  (defun projectile-todo-all ()
+    (interactive)
+    (let ((pattern (string-join (map 'list 'car hl-todo-keyword-faces) "|")))
+      (projectile-ripgrep (format "\\b(%s)\\b"pattern) t))))
 
 (use-package slime
   :demand t
@@ -161,11 +199,12 @@
          ("C-c C-z" . (lambda () (interactive) (select-window (previous-window))))))
 
 (use-package yasnippet
-  :defer t
+  :demand t
   :config (yas-global-mode +1)
   :bind (:map yas-minor-mode-map
          ("C-<return>" . yas-expand)
          ("M-<return>" . yas-insert-snippet)))
+
 
 (use-package vterm
   :defer t
@@ -192,14 +231,6 @@
 (use-package gdb-mi
   :defer t)
 
-(use-package helm-projectile
-  :defer t
-  :config
-  (defvar helm-source-file-not-found
-    (helm-build-dummy-source "Create file"
-      :action (lambda (cand) (find-file cand))))
-  (add-to-list 'helm-projectile-sources-list helm-source-file-not-found t))
-
 (use-package with-editor
   :defer t
   :hook (with-editor-mode . (lambda () (whitespace-toggle-options 'tabs))))
@@ -219,11 +250,6 @@
   :hook ((python-mode . lerax-python-venv-auto-activate)
          (python-mode . pyvenv-mode)))
 
-(use-package org
-  :defer t
-  :hook (org-mode . (lambda ()
-                      (whitespace-toggle-options 'lines-tail)
-                      (auto-fill-mode))))
 
 (use-package markdown-mode
   :defer t
@@ -448,19 +474,6 @@
            :recursive t)
           ("web" :components ("images" "js" "css")))))
 
-(with-eval-after-load 'org
-  (defun org-custom-link-img-follow (path)
-    (org-open-file (format "../assets/posts/%s" path)))
-
-  (defun org-custom-link-img-export (path desc format)
-    (cond
-     ((eq format 'html)
-      (format "<img src=\"/assets/posts/%s\" alt=\"%s\"/>" path desc))))
-
-  (org-link-set-parameters "img"
-                           :follow 'org-custom-link-img-follow
-                           :export 'org-custom-link-img-export))
-
 (defun fix-tuareg-background-at-export ()
   (require 'tuareg)
   (copy-face 'font-lock-type-face 'tuareg-font-lock-constructor-face)
@@ -477,21 +490,6 @@
   :type 'symbol)
 
 
-
-(use-package org
-  :defer t
-  :config
-  (require 'ox-latex)
-  (require 'oc-biblatex)
-  (require 'oc-natbib)
-  (require 'oc-csl)
-  (require 'ob-latex)
-  (require 'ox-gfm nil t)
-  (setq org-latex-listings lerax-latex-listing
-        org-latex-minted-options '(("frame" "lines")
-                                   ("linenos" "true"))
-        org-preview-latex-default-process 'imagemagick)
-  (plist-put org-format-latex-options :scale 1.2))
 
 (defun clean-export-pdf (&rest _)
   (let* ((fname (file-name-base (buffer-name)))
@@ -569,20 +567,75 @@
          (scala-mode . (lambda ()
                          (whitespace-toggle-options 'lines-tail)
                          (setq-local flycheck-check-syntax-automatically
-                                     '(save idle-change new-line mode-enabled))))))
+                                     '(save idle-change new-line mode-enabled)))))
+  :config
+  (defun scalafmt ()
+    (interactive)
+    (let ((command "scalafmt")
+          (current-file (buffer-file-name (current-buffer))))
+      (shell-command (format "%s %s" command current-file)))))
 
-(defun scalafmt ()
-  (interactive)
-  (let ((command "scalafmt")
-        (current-file (buffer-file-name (current-buffer))))
-    (shell-command (format "%s %s" command current-file))))
+(use-package smartparens
+  :demand t
+  :config
+  (sp-use-paredit-bindings))
 
-;; --- From todo.el ---
-(defun projectile-todo ()
-  (interactive)
-  (projectile-ripgrep "\\b(TODO|FIXME)\\b" t))
+;; --- Email Configuration ---
+(use-package notmuch
+  :demand t
+  :config
+  (setq-default notmuch-search-oldest-first nil)
+  (setq mail-user-agent 'message-user-agent
+        user-mail-address "manoelnt0@gmail.com"
+        user-full-name "Manoel Vilela"
+        message-default-mail-headers "Cc: \nBcc: \n"
+        message-auto-save-directory "~/mail/draft"
+        message-kill-buffer-on-exit t
+        message-directory "~/mail/")
+  (setq smtpmail-smtp-server "smtp.gmail.com"
+        message-send-mail-function 'message-smtpmail-send-it
+        smtpmail-debug-info t))
 
-(defun projectile-todo-all ()
-  (interactive)
-  (let ((pattern (string-join (map 'list 'car hl-todo-keyword-faces) "|")))
-    (projectile-ripgrep (format "\\b(%s)\\b"pattern) t)))
+;; --- Emoji Configuration ---
+(use-package emacs
+  :demand t
+  :hook (after-make-frame-functions . lerax-set-emoji-font)
+  :config
+  (defun lerax-set-emoji-font (frame)
+    "Adjust the font settings of FRAME so Emacs can display emoji properly."
+    (when (fboundp 'set-fontset-font)
+      (if (eq system-type 'darwin)
+          (set-fontset-font t 'symbol (font-spec :family "Apple Color Emoji") frame 'prepend)
+        (set-fontset-font t 'symbol (font-spec :family "Symbola") frame 'prepend))))
+  (lerax-set-emoji-font nil))
+
+;; --- Spellchecker Configuration ---
+(use-package ispell
+  :demand t
+  :config
+  (defvar spellchecker:extension (if (eq system-type 'windows-nt) ".exe" ""))
+  (defvar spellchecker:hunspell-name (format "hunspell%s" spellchecker:extension))
+  (defvar spellchecker:aspell-name (format "aspell%s" spellchecker:extension))
+
+  (defvar spellchecker:hunspell-exists
+    (file-exists-p (or (executable-find spellchecker:hunspell-name) "/not/found/")))
+
+  (defvar spellchecker:default-spell-program spellchecker:aspell-name)
+  (defvar spellchecker:hunspell-dict "pt_BR")
+  (defvar spellchecker:aspell-dict "en_US")
+
+  (defun spellchecker:select-spell-program (spell-name)
+    (message "%s"
+             (print (cond ((equal spell-name spellchecker:hunspell-name)
+                           (setq ispell-program-name spellchecker:hunspell-name))
+                          ((equal spell-name spellchecker:aspell-name)
+                           (setq ispell-program-name spellchecker:aspell-name))))))
+
+  (defun spellchecker:activate ()
+    (when (and spellchecker:hunspell-exists
+               (equal spellchecker:default-spell-program spellchecker:hunspell-name))
+      (setq ispell-dictionary spellchecker:hunspell-dict)
+      (spellchecker:select-spell-program spellchecker:hunspell-name)))
+
+  (when (eq system-type 'gnu/linux)
+    (spellchecker:activate)))
