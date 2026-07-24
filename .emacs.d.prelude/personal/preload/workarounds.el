@@ -2,10 +2,6 @@
 ;; -*- lexical-binding: t -*-
 ;; Workarounds: making my packages working on any emacs version
 
-(require 'cl-lib)
-(require 'subr-x)
-(require 'dash)
-
 ;; related with not expand <s blocks on org-mode with emacs27
 ;; ref: https://github.com/syl20bnr/spacemacs/issues/11798#issuecomment-454941024
 (when (version<= "9.2" (org-version))
@@ -98,15 +94,20 @@ parses and set DBUS_SESSION_BUS_ADDRES to its expected value."
 
 ;; Sat 18 Jul 2020 08:47:28 AM -03
 ;; arrow keys is not working on terminal
-(add-hook 'after-make-frame-functions
-          (lambda (frame)
-            (when (not (display-graphic-p frame))		;; Only use in tty-sessions.
-              (defvar arrow-keys-map (make-sparse-keymap) "Keymap for arrow keys")
-              (define-key esc-map "O" arrow-keys-map)
-              (define-key arrow-keys-map "A" 'previous-line)
-              (define-key arrow-keys-map "B" 'next-line)
-              (define-key arrow-keys-map "C" 'forward-char)
-              (define-key arrow-keys-map "D" 'backward-char))))
+(defun fix-arrow-keys (&optional frame)
+  (interactive)
+  (when (not (display-graphic-p frame))		;; Only use in tty-sessions.
+    (defvar arrow-keys-map (make-sparse-keymap) "Keymap for arrow keys")
+    (define-key esc-map "O" arrow-keys-map)
+    (define-key arrow-keys-map "A" 'previous-line)
+    (define-key arrow-keys-map "B" 'next-line)
+    (define-key arrow-keys-map "C" 'forward-char)
+    (define-key arrow-keys-map "D" 'backward-char)))
+
+(if (daemonp)
+    (add-hook 'after-make-frame-functions
+              #'fix-arrow-keys)
+  (fix-arrow-keys))
 
 ;; Fix GPG pinentry issues in Emacs (prevents hangs during auth)
 (setq epa-pinentry-mode 'loopback)

@@ -290,10 +290,7 @@ Missing packages are installed automatically."
     (let ((background "#a60022")
           (foreground "white"))
       (when (< (tty-display-color-cells frame) 256)
-        (setq background "blue"))
-      (set-face-attribute 'helm-selection frame
-                          :background background
-                          :foreground foreground))))
+        (setq background "dodger blue")))))
 
 (defun lerax-comment-or-uncomment-region-or-line ()
   "Comments or uncomments the region or the current line if there's no active region.
@@ -331,12 +328,12 @@ Missing packages are installed automatically."
 
 (defun lerax-load-init-env-if-exists ()
   "Used to load  emacs.d/.env if exists."
-  (require 'load-env-vars)
+  (with-eval-after-load 'load-env-vars
   (let ((env-file-path (expand-file-name ".env" user-emacs-directory)))
     (if (file-exists-p env-file-path)
         (progn
           (message "Loading %s env file..." env-file-path)
-          (load-env-vars env-file-path)))))
+          (load-env-vars env-file-path))))))
 
 (defun lerax-open-pull-request ()
   (interactive)
