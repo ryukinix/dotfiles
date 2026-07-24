@@ -3,8 +3,6 @@
 
 (require 'lerax)
 
-;; C-x C-d from helm needs replacement for Vertico, map to project-find-dir
-(global-set-key (kbd "C-x C-d") 'project-find-dir)
 
 ;;; UI & Editing
 
@@ -54,6 +52,7 @@
 
 (use-package emacs
   :demand t
+  :bind (("C-x C-d" . project-find-dir))
   :hook (after-make-frame-functions . lerax-set-emoji-font)
   :config
   (defun lerax-set-emoji-font (frame)
@@ -131,7 +130,7 @@
   :hook (magit-mode . magit-delta-mode))
 
 (use-package yasnippet
-  :demand t
+  :defer t
   :config (yas-global-mode +1)
   :bind (:map yas-minor-mode-map
          ("C-<return>" . yas-expand)
@@ -151,6 +150,11 @@
   :config (xclip-mode +1))
 
 ;;; Languages & Development
+
+(defun lerax-text-mode-setup ()
+  "Standard setup for text modes."
+  (whitespace-toggle-options 'lines-tail)
+  (auto-fill-mode 1))
 
 (use-package python
   :bind (:map inferior-python-mode-map
@@ -195,9 +199,10 @@
   (setq sbt:program-options '("-Dsbt.supershell=false")))
 
 (use-package geiser
+  :custom
+  (geiser-chicken-binary "chicken-csi")
+  (geiser-active-implementations '(chicken racket guile chez mit chibi))
   :config
-  (setq-default geiser-chicken-binary "chicken-csi")
-  (setq-default geiser-active-implementations '(chicken racket guile chez mit chibi))
   (add-hook 'geiser-repl-mode-hook #'smartparens-mode))
 
 (use-package slime
@@ -218,8 +223,6 @@
   :bind (:map lisp-interaction-mode-map
          ("C-c C-z" . prelude-visit-ielm)))
 
-;; C-x C-d from helm needs replacement for Vertico, map to project-find-dir
-(global-set-key (kbd "C-x C-d") 'project-find-dir)
 
 (use-package gud
   :defer t)
@@ -247,9 +250,7 @@
 
 (use-package markdown-mode
   :defer t
-  :hook (markdown-mode . (lambda ()
-                           (whitespace-toggle-options 'lines-tail)
-                           (auto-fill-mode))))
+  :hook (markdown-mode . lerax-text-mode-setup))
 
 ;;; Applications (Org, Mail, Chat, AI)
 
@@ -261,9 +262,7 @@
                              (end-of-buffer)
                              (org-insert-heading)
                              (crux-insert-date))))
-  :hook (org-mode . (lambda ()
-                      (whitespace-toggle-options 'lines-tail)
-                      (auto-fill-mode)))
+  :hook (org-mode . lerax-text-mode-setup)
   :config
   ;; Base requires
   (require 'org-mouse)
@@ -279,18 +278,21 @@
   (setq org-src-fontify-natively t)
   (setq org-todo-keywords '((sequence "TODO" "IN-PROGRESS" "WAITING" "DONE")))
 
-  ;; LaTeX and Exporting Overrides
-  (require 'ox-latex)
-  (require 'oc-biblatex)
-  (require 'oc-natbib)
-  (require 'oc-csl)
-  (require 'ob-latex)
-  (require 'ox-gfm nil t)
-  (setq org-latex-listings (or (bound-and-true-p lerax-latex-listing) 'minted))
-  (setq org-latex-minted-options '(("frame" "lines")
-                                   ("linenos" "true"))
-        org-preview-latex-default-process 'imagemagick)
-  (plist-put org-format-latex-options :scale 1.2)
+  ;; LaTeX and Exporting Overrides deferred to when ox is loaded
+  (with-eval-after-load 'ox
+    (require 'ox-latex)
+    (require 'oc-biblatex)
+    (require 'oc-natbib)
+    (require 'oc-csl)
+    (require 'ox-gfm nil t)
+    (setq org-latex-listings (or (bound-and-true-p lerax-latex-listing) 'minted))
+    (setq org-latex-minted-options '(("frame" "lines")
+                                     ("linenos" "true"))
+          org-preview-latex-default-process 'imagemagick)
+    (plist-put org-format-latex-options :scale 1.2))
+
+  (with-eval-after-load 'ob-core
+    (require 'ob-latex))
 
   ;; Jekyll Custom Links Overrides
   (defun org-custom-link-img-follow (path)
@@ -446,7 +448,7 @@
     (visual-line-mode 0)))
 
 (use-package notmuch
-  :demand t
+  :defer t
   :config
   (setq-default notmuch-search-oldest-first nil)
   (setq mail-user-agent 'message-user-agent
