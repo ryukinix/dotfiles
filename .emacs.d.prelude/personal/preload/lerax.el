@@ -41,14 +41,9 @@
 ;; fallback to http there
 
 (defun lerax-init-melpa ()
-  (if (eq system-type 'windows-nt)
-      (add-to-list 'package-archives
-                   '("melpa" . "http://melpa.org/packages/") t)
-    (add-to-list 'package-archives
-                 '("melpa" . "https://melpa.org/packages/") t))
-
-  (package-initialize)
-  (setq package--initialized nil))
+  (add-to-list 'package-archives
+               '("melpa" . "https://melpa.org/packages/") t)
+  (package-initialize))
 
 (defgroup lerax nil
   "My variable group collection"
@@ -148,6 +143,9 @@ BODY is the rest of eval forms to be used FUNC memoized."
   "Install PACKAGE unless already installed."
   (push package package-selected-packages)
   (unless (package-installed-p package)
+    ;; lazy melpa init
+    (unless package--initialized
+      (lerax-init-melpa))
     (package-refresh-contents-once)
     (package-install package)))
 

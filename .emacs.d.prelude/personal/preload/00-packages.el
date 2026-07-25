@@ -6,7 +6,7 @@
 (require 'lerax)
 (require 'use-package) ; Native in 29.1+
 
-; (lerax-init-melpa)
+
 
 (defun lerax-require-packages-run ()
   (lerax-require-packages
