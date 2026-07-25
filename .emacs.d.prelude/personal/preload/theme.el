@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t -*-
 ;; configuration about my personal theme
 ;; theme
 
@@ -80,14 +81,14 @@
 (defun lerax-theme-light-dark-toggle ()
   (interactive)
   (setq lerax-theme-base (lerax-get-theme-to-toggle))
-  (lerax-theme-reload))
+  (when (not noninteractive) (lerax-theme-reload)))
 
 (defun lerax-setup-frame-theme (frame)
   (select-frame frame)
   (unless (display-graphic-p frame)
     (winner-mode -1))
   (if (not lerax-theme-window-loaded)
-      (progn (lerax-theme-reload)
+      (progn (when (not noninteractive) (lerax-theme-reload))
              (setq lerax-theme-window-loaded t))
     ;; force font reload to fix potential issues
     (lerax-theme-set-font)))
@@ -96,7 +97,7 @@
     (add-hook 'after-make-frame-functions
               #'lerax-setup-frame-theme)
   (progn
-    (lerax-theme-reload)
+    (when (not noninteractive) (lerax-theme-reload))
     (if (display-graphic-p)
         (setq lerax-theme-window-loaded t)
       (setq lerax-theme-terminal-loaded t))))

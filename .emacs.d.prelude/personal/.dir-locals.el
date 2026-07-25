@@ -2,4 +2,6 @@
 ;; forced through the emacs-lisp-checkdoc flychecker. That's a great
 ;; checker for real modules, but these are just config files, and you
 ;; deserve not to get warnings all the time
-((emacs-lisp-mode . ((flycheck-disabled-checkers . (emacs-lisp-checkdoc emacs-lisp)))))
+((emacs-lisp-mode . ((flycheck-disabled-checkers . (emacs-lisp-checkdoc))
+                      (outline-minor-mode-cycle . t)
+                      (eval . (outline-minor-mode 1)))))
