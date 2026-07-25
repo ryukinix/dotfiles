@@ -119,12 +119,8 @@
        (push (format "GIT_WORK_TREE=%s" work-tree) env)
        (push (format "GIT_DIR=%s" git-dir) env)))
     env)
-  (advice-add 'magit-process-environment :filter-return #'lerax-magit-process-environment))
-
-(use-package git-commit
-  :demand t
-  :config (global-git-commit-mode +1))
-
+  (advice-add 'magit-process-environment :filter-return #'lerax-magit-process-environment)
+  (global-git-commit-mode +1))
 (use-package magit-delta
   :if (executable-find "delta")
   :hook (magit-mode . magit-delta-mode))
