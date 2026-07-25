@@ -96,7 +96,8 @@
   :demand t
   :config
   (custom-set-default 'projectile-keymap-prefix (kbd "C-c p"))
-
+  (add-to-list 'projectile-globally-ignored-directories ".venv")
+  (setq projectile-indexing-method 'hybrid)
   (defun projectile-todo ()
     (interactive)
     (projectile-ripgrep "\\b(TODO|FIXME)\\b" t))
@@ -155,12 +156,12 @@
 (use-package python
   :bind (:map inferior-python-mode-map
               ("C-c C-z" . other-window))
-  :hook ((python-mode . lerax-python-venv-auto-activate)
-         (python-mode . pyvenv-mode))
+  :hook (((python-mode python-ts-mode) . lerax-python-venv-auto-activate)
+         ((python-mode python-ts-mode) . pyvenv-mode))
   :config
-  (setq python-shell-completion-native-enable nil)
-  (when (package-installed-p 'python-black)
-    (define-key python-mode-map (kbd "C-c C-f") 'python-black-buffer)))
+  (setq python-shell-completion-native-enable nil))
+
+
 (use-package go-mode
   :defer t
   :bind (:map go-mode-map
